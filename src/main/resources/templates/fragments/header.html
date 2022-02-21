@@ -7,7 +7,19 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	</head>
 	
 	<header th:fragment="headerFragment">
-		<h1>sdfdsdf</h1>
+
+		<header id="header">
+			<h1 id="logo"><a href="/">MySimpleWebApp</a></h1>
+			<nav id="nav">
+				<ul>
+					<li><a href="/">Home</a></li>
+					<li><a href="/myPage">MyPage</a></li>
+					<li><a href="/chat" class="button primary">Chat</a></li>
+					<li></li>
+				</ul>
+			</nav>
+		</header>
+
 	</header>
 	
 </html>
