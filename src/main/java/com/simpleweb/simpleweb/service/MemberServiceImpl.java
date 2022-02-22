@@ -14,9 +14,27 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	public int insertMember(Member member) {
-		membermapper.insertMember(member);
+		validateDuplicateMember(member);
+		int memberPK = membermapper.insertMember(member);
 		
-		return 1;
+		return memberPK;
+	}
+	private String validateDuplicateMember(Member member) {
+		String res = null;
+		
+		membermapper.getById(member.getMember_id())
+		.ifPresent(m -> {
+			throw new IllegalStateException("이미 존재하는 아이디 입니다.");
+		});
+		res = "이미 존재하는 아이디 입니다.";
+		
+		membermapper.getByEmail(member.getMember_email())
+		.ifPresent(m -> {
+			throw new IllegalStateException("이미 존재하는 이메일 입니다.");
+		});
+		res = "이미 존재하는 이메일 입니다.";
+		
+		return res;
 	}
 
 }
