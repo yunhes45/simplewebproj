@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.simpleweb.simpleweb.mapper.MemberMapper">
+	<insert id="insertMember" parameterType="com.simpleweb.simpleweb.model.Member" useGeneratedKeys="true" keyProperty="member_no">
+			insert into member(member_id, member_pwd, member_email, member_job, member_mobile, member_gender, member_introduce)
+			
+			values (  #{member.member_id} ,
+			          #{member.member_pwd} ,
+			          #{member.member_email} , 
+			          #{member.member_job} , 
+			          #{member.member_mobile} ,
+			          #{member.member_gender} ,
+			          #{member.member_introduce}   )		
+	</insert>
+</mapper>
