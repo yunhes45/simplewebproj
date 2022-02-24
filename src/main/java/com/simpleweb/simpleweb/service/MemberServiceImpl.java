@@ -1,5 +1,8 @@
 package com.simpleweb.simpleweb.service;
 
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +38,31 @@ public class MemberServiceImpl implements MemberService{
 		res = "이미 존재하는 이메일 입니다.";
 		
 		return res;
+	}
+	
+	@Override
+	public String getMemberLogin(Member member) {
+		String res = LoginCheck(member);
+		
+		return res;
+	}
+	private String LoginCheck(Member member) {
+		Optional<Member> checkId = membermapper.getById(member.getMember_id());
+		String res = null;
+		
+		try {
+			if(member.getMember_id().equals(checkId.get().getMember_id()) && 
+			   member.getMember_pwd().equals(checkId.get().getMember_pwd())) {
+				res = "success";
+			}else {
+				res = "fail";
+			}
+		}catch(NoSuchElementException e) {
+			res = "fail";
+		}
+		
+		return res;
+		
 	}
 
 }

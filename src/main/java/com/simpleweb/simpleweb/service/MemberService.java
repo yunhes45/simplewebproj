@@ -5,5 +5,6 @@ import com.simpleweb.simpleweb.model.Member;
 public interface MemberService {
 
 	int insertMember(Member member);
+	String getMemberLogin(Member member);
 
 }

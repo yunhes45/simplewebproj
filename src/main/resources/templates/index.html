@@ -4,24 +4,78 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 layout:decorate="layout/layout">
 	
 	<div layout:fragment="content">
+		<meta charset="utf-8" />
 
-	<body class="is-preload landing">
-		<div id="page-wrapper">
-
-				<section id="banner">
-					<div class="content">
-						<header>
-							<h2>The future has landed</h2>
-							<p>And there are no hoverboards or flying cars.<br />
-							Just apps. Lots of mother flipping apps.</p>
-						</header>
-						<span class="image"><img src="images/pic01.jpg" alt="" /></span>
-					</div>
-					<a href="#one" class="goto-next scrolly">Next</a>
-				</section>
-
-		</div>
-	</body>
+			<!-- Script -->
+				<script th:inline="javascript">
+					window.addEventListener("DOMContentLoaded", function(){
+							if([[${param.message}]] == "failed"){
+								setErrorMessage("member_id_error", "입력하신 정보를 확인해 주세요.");
+							}
+					});
+				</script>
+		
+			<body class="is-preload landing">
+				<div id="page-wrapper">		
+					<!-- Banner -->
+						<section id="banner">
+							<div class="content">
+								<header>
+									<h2>Welcome ,</h2>
+									<p>SimpleWebProj<br />
+									Just apps. Lots of mother flipping apps.</p>
+								</header>
+								<span class="image"><img src="images/pic01.jpg" alt="" /></span>
+							</div>
+							<a href="#one" class="goto-next scrolly">Next</a>
+						</section>
+						
+					<!-- One -->
+						<section id="one" class="spotlight style1 bottom">
+							<div class="content">
+							<!-- signinForm -->
+								<div id="main" class="wrapper style1 bottom">
+									<div class="container">
+										<header class="major">
+											<h2>Log in</h2>
+											<p>Ipsum dolor feugiat aliquam tempus sed magna lorem consequat accumsan</p>
+										</header>
+										<!-- Form -->
+											<section>
+												<form method="post" action="/signin">
+													<div class="row gtr-uniform gtr-50">
+														<div class="col-6 col-6-xsmall">
+															<input type="text" name="member_id" id="member_id" value="" placeholder="아이디" />
+															<div id="member_id_error" class="error"></div>
+														</div>
+														<div class="col-6 col-6-xsmall">
+															<input type="password" name="member_pwd" id="member_pwd" value="" placeholder="비밀번호" />
+															<div id="member_pwd_error" class="error"></div>
+														</div>
+														<div class="col-12">
+															<ul class="actions">
+																<li><input id="login_btn" type="submit" value="Sign In" class="primary" /></li>
+																<li><input id="reset_btn" type="reset" value="Cancel" /></li>
+															</ul>
+														</div>
+													</div>
+												</form>
+											</section>
+				
+									</div>
+								</div>
+		
+							</div>
+							<a href="#two" class="goto-next scrolly">Next</a>
+						</section>
+		
+					<!-- two -->			
+						<section id="two" class="wrapper style2 special fade">
+							<div class="container">
+							</div>
+						</section>
+				</div>
+			</body>
 
 	</div>
 	

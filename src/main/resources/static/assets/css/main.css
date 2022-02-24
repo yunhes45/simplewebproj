@@ -751,6 +751,10 @@ input, select, textarea {
 		.row > .col-4 {
 			width: 33.33333%;
 		}
+		
+		.row > .col-4 #sidebar_responsive {
+			display: none;
+		}
 
 		.row > .off-4 {
 			margin-left: 33.33333%;
@@ -3659,6 +3663,14 @@ input, select, textarea {
 /* Medium */
 
 	@media screen and (max-width: 980px) {
+	
+		.row > .col-4 #sidebar_side {
+			display: none;
+		}
+		
+		.row > .col-4 #sidebar_responsive {
+			display: flex;
+		}
 
 		/* Basic */
 

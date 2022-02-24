@@ -1,9 +1,14 @@
 package com.simpleweb.simpleweb.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.service.MemberService;
@@ -15,17 +20,17 @@ public class MemberController {
 	private MemberService memberservice;
 	
 	@RequestMapping("/")
-	public String test() {
+	public String test(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String session_id = (String) session.getAttribute("session_id");
 		
-		return "index";
+		if(session_id != null) {
+			return "mainBoard";
+		}else {
+			return "index";
+		}
 	}
-	
-	@RequestMapping("/welcomepage")
-	public String notest() {
-		
-		return "welcomepage";
-	}
-	
+
 	@RequestMapping("/signup")
 	public String signup() {
 		
@@ -54,19 +59,29 @@ public class MemberController {
 		}
 		
 		
-		return "redirect:welcomepage#one";
+		return "redirect:/#one";
 	}
 	
 	@PostMapping("/signin")
-	public String post_signin(Member member_form) {
+	public String post_signin(RedirectAttributes redirectattributes, Member member_form, HttpServletRequest request) {
 		Member member = new Member();
 		
 		member.setMember_id    (member_form.getMember_id());
 		member.setMember_pwd   (member_form.getMember_pwd());
 		
+		String res = memberservice.getMemberLogin(member);
 		
-		
-		return "redirect:/";
+		if(res.equals("fail")) {
+			return "redirect:/?message=failed#one";
+		}else {
+			String session_id   = member_form.getMember_id();
+			HttpSession session = request.getSession();
+			session.setAttribute("session_id", session_id);
+			
+			return "redirect:mainBoard";
+		}
 	}
+	
+	
 	
 }

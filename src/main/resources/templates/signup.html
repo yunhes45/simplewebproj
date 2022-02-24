@@ -5,12 +5,25 @@ layout:decorate="layout/layout">
 	
 	<div layout:fragment="content">
 		<meta charset="utf-8" />
+		
+			<!-- Script -->
+			<script th:inline="javascript">
+				if([[ ${param.message} ]] == "duplicateId"){
+					alert("이미 존재하는 아이디 입니다.");
+				}
+				
+				if([[ ${param.message} ]] == "duplicateEmail"){
+					alert("이미 존재하는 이메일 입니다.");
+				}
+			</script>
+					
 			<div id="main" class="wrapper style1">
 				<div class="container">
 					<header class="major">
 						<h2>Join</h2>
 						<p>Ipsum dolor feugiat aliquam tempus sed magna lorem consequat accumsan</p>
 					</header>
+
 					<!-- Form -->
 						<section>
 							<form method="post" action="#">
@@ -71,6 +84,8 @@ layout:decorate="layout/layout">
 								</div>
 							</form>
 						</section>
+					
+					</div>	
 				</div>
 			</div>
 		<script src="assets/js/signup.js"></script>

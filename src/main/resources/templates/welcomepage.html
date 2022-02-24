@@ -9,9 +9,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 </head>
 
-<!-- header -->
-	<body class="is-preload landing">
-		<div id="page-wrapper">
 		
 		<header id="header">
 			<h1 id="logo"><a href="/">MySimpleWebApp</a></h1>
@@ -24,6 +21,17 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 				</ul>
 			</nav>
 		</header>
+<!-- header -->
+	<body class="is-preload landing">
+		<div id="page-wrapper">		
+			<!-- Script -->
+				<script th:inline="javascript">
+					window.addEventListener("DOMContentLoaded", function(){
+							if([[${param.message}]] == "failed"){
+								setErrorMessage("member_id_error", "아이디는 영어와 숫자의 조합만 가능합니다.");
+							}
+					});
+				</script>
 		
 			<!-- Banner -->
 				<section id="banner">
@@ -50,7 +58,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 								</header>
 								<!-- Form -->
 									<section>
-										<form method="post" action="#">
+										<form method="post" action="/signin">
 											<div class="row gtr-uniform gtr-50">
 												<div class="col-6 col-6-xsmall">
 													<input type="text" name="member_id" id="member_id" value="" placeholder="아이디" />
@@ -99,7 +107,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 		</div>
 	</body>
-			
+		<script src="assets/js/common/additional.js"></script>	
 		<script src="assets/js/common/jquery.min.js"></script>
 		<script src="assets/js/common/jquery.scrolly.min.js"></script>
 		<script src="assets/js/common/jquery.dropotron.min.js"></script>
