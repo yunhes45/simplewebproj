@@ -78,7 +78,7 @@ public class MemberController {
 			HttpSession session = request.getSession();
 			session.setAttribute("session_id", session_id);
 			
-			return "redirect:mainBoard";
+			return "redirect:mainboard";
 		}
 	}
 	

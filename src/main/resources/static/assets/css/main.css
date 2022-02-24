@@ -4132,3 +4132,37 @@ input, select, textarea {
 					}
 
 	}
+	
+	/* mypage */
+	
+	#mypage_profile {
+ 		text-align: center;
+ 		margin: 5%;
+	}
+	
+	.profile_myimage .img{
+		width: 200px;
+		height: 200px;
+		border-radius: 50%;
+	}
+	
+	.profile_menu {
+		font-size: 20px;
+	}
+	.profile_menu .member_id {
+		margin-top: 10px;
+		margin-bottom: 20px;
+	}
+	.profile_menu .menu_elem {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	
+	.col-4 .my_post_page {
+		margin-bottom: 50px;
+	}
+	
+	.row > .col-4 #my_post {
+		display: flex;
+	}
+	
