@@ -752,7 +752,11 @@ input, select, textarea {
 			width: 33.33333%;
 		}
 		
-		.row > .col-4 #sidebar_responsive {
+		.row > .col-4 #sidebar_side {
+			
+		}
+		
+		.row > .col-4 #sidebar_responsive{
 			display: none;
 		}
 
