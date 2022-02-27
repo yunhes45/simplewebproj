@@ -4207,6 +4207,56 @@ input, select, textarea {
 		display: none;
 	}
 	
+	#slideToggle {
+		width: 180px;
+		margin-left: 290px;
+		background-color: rgba(39, 40, 51, 0.965);
+		z-index: 1;
+		position: absolute;
+		display: none;
+		transform: translateX(-100%);
+		border: 2px solid #e44c65;
+	}
+	
+	#slideToggle:hover {
+		outline: none;
+	}
+	
+	#slideToggle form {
+		all: unset;
+	}
+	
+	#slideToggle input {
+		all: unset;
+	}
+	
+ 	#slideToggle .headerprofilemenu {
+		margin: 0px;
+		padding: 0px;		
+	} 
+	
+	.headerprofilemenu:hover {
+		background: #4e4e4f;
+	}
+	
+	.headerprofilemenu #headerprofilemenu_elem {
+		width: 180px;
+		margin-left: 20px;
+	}
+	
+	@media screen and (max-width: 1280px) {
+		#slideToggle {
+			width: 180px;
+			margin-left: 260px;
+			background-color: rgba(39, 40, 51, 0.965);
+			z-index: 1;
+			position: absolute;
+			display: none;
+			transform: translateX(-100%);
+			border: 2px solid #e44c65;
+		}		
+	}
+	
 	@media screen and (max-width: 500px) {
 		#my_post {
 			display: none;

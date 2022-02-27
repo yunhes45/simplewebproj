@@ -7,6 +7,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	
 	<header th:fragment="headerFragment">
 		<meta charset="utf-8" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>	
 		
 			<header id="header">
 				<h1 id="logo"><a href="/">MySimpleWebApp</a></h1>
@@ -17,15 +18,37 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						<li><a href="/signup" class="button primary">SignUp</a></li>
 						<li></li>
 					</ul>
-					<ul th:unless="${session.session_info == null}">
+					<ul th:unless="${session.session_info == null}">	
 						<li><img class="header_profileimg" th:src="| /filestorage/memberimg/${session.session_info.get().getMember_profileimg().getMember_profileimg_filename()} |"></li>
-						<li><a th:text="| ${session.session_info.get().getMember_nickname()} 님 반갑습니다. |"></a></li>
-						<li><a th:src="${savePath}" ></a></li>
+						<li><a id="myPanel" href="">[[ ${session.session_info.get().getMember_nickname()} ]] 님 반갑습니다.&nbsp;&nbsp;▼</a></li>
 						<li><a href="/">Home</a></li>
-						<li><a href="/mypage">MyPage</a></li>
-						<li><a href="/chat" class="button primary">Chat</a></li>					
+						<li><a th:href="| /mypage?member=${session.session_info.get().getMember_id()} |">MyPage</a></li>
+						<li><a href="/chat" class="button primary">Chat</a></li>				
 					</ul>
+
+					<div id="slideToggle" class="slideToggle">
+							<div  class="headerprofilemenu">
+								<form method="post" action="/modifymember">
+									<input type="submit" id="headerprofilemenu_elem" value="Modify" class="headerprofilemenu_elem">
+								</form>
+							</div>
+							<div  class="headerprofilemenu">
+								<form method="post" action="/signout">
+									<input type="submit" id="headerprofilemenu_elem" value="SignOut" class="headerprofilemenu_elem">
+								</form>
+							</div>
+					</div>
+
 				</nav>
+
+				
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$("#myPanel").click(function(){
+						$("#slideToggle").animate({width: 'toggle'}, 400);
+					})
+				})
+			</script>				
 			</header>
 
 	</header>
