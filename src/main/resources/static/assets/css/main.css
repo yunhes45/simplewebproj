@@ -4133,11 +4133,25 @@ input, select, textarea {
 
 	}
 	
+	.header_profileimg {
+		width: 40px;
+		height: 40px;
+		border: 1px solid black;
+		border-radius: 50%;
+		vertical-align: middle;
+	}
+
+	#imagecanvas {
+		width: 200px;
+		height: 200px;
+		border: 2px solid white;
+		border-radius: 50%;
+	}
+
 	/* mypage */
 	
 	#mypage_profile {
  		text-align: center;
- 		margin: 5%;
 	}
 	
 	.profile_myimage .img{
@@ -4153,11 +4167,15 @@ input, select, textarea {
 		margin-top: 10px;
 		margin-bottom: 20px;
 	}
+	
 	.profile_menu .menu_elem {
+		display: inline-block;
 		margin-left: 10px;
 		margin-right: 10px;
+		margin-bottom: 30px;
+
 	}
-	
+
 	.col-4 .my_post_page {
 		margin-bottom: 50px;
 	}

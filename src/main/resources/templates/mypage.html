@@ -14,12 +14,10 @@ layout:decorate="layout/layout">
 			<div id="main" class="wrapper style1">
 				<div class="container">
 					<!-- main -->
-						<div id="main" class="wrapper style1">
-							<div class="container">
-								<header class="major">
-									<h2>Right Sidebar</h2>
-									<p>Ipsum dolor feugiat aliquam tempus sed magna lorem consequat accumsan</p>
-								</header>
+							<header class="major">
+								<h2>Right Sidebar</h2>
+								<p>Ipsum dolor feugiat aliquam tempus sed magna lorem consequat accumsan</p>
+							</header>
 								
 								<section id="mypage_profile">
 									<div class="profile_wrap">
@@ -31,8 +29,19 @@ layout:decorate="layout/layout">
 									<div class="profile_menu">
 										<div class="top">
 											<div class="member_id">Hi</div>
-											<a href="#" class="menu_elem">프로필 편집</a>
-											<a href="#" class="menu_elem">로그 아웃</a>
+											
+											<div class="menu_elem">
+												<form method="post" action="/modifymember">
+													<input type="submit" id="modifymember" value="프로필 편집" class="menu_elem_elem">
+												</form>
+											</div>
+											
+											<div class="menu_elem">
+												<form method="post" action="/signout">
+													<input type="submit" id="signout" value="로그아웃" class="menu_elem_elem">
+												</form>
+											</div>
+											
 										</div>
 									</div>
 								</section>
@@ -73,7 +82,62 @@ layout:decorate="layout/layout">
 															<li><a href="#" class="button">Learn More</a></li>
 														</ul>
 													</footer>
-												</section>										
+												</section>		
+												
+												<section id="sidebar_element">
+													<a href="#" class="image fit"><img src="images/pic07.jpg" alt=""></a>
+													<h3>Amet Lorem Tempus</h3>
+													<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper sed blandit lorem ipsum dolore.</p>
+													<footer>
+														<ul class="actions">
+															<li><a href="#" class="button">Learn More</a></li>
+														</ul>
+													</footer>
+												</section>
+												
+												<section id="sidebar_element">
+													<a href="#" class="image fit"><img src="images/pic07.jpg" alt=""></a>
+													<h3>Amet Lorem Tempus</h3>
+													<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper sed blandit lorem ipsum dolore.</p>
+													<footer>
+														<ul class="actions">
+															<li><a href="#" class="button">Learn More</a></li>
+														</ul>
+													</footer>
+												</section>
+												
+												<section id="sidebar_element">
+													<a href="#" class="image fit"><img src="images/pic07.jpg" alt=""></a>
+													<h3>Amet Lorem Tempus</h3>
+													<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper sed blandit lorem ipsum dolore.</p>
+													<footer>
+														<ul class="actions">
+															<li><a href="#" class="button">Learn More</a></li>
+														</ul>
+													</footer>
+												</section>
+												
+												<section id="sidebar_element">
+													<a href="#" class="image fit"><img src="images/pic07.jpg" alt=""></a>
+													<h3>Amet Lorem Tempus</h3>
+													<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper sed blandit lorem ipsum dolore.</p>
+													<footer>
+														<ul class="actions">
+															<li><a href="#" class="button">Learn More</a></li>
+														</ul>
+													</footer>
+												</section>
+												
+												<section id="sidebar_element">
+													<a href="#" class="image fit"><img src="images/pic07.jpg" alt=""></a>
+													<h3>Amet Lorem Tempus</h3>
+													<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper sed blandit lorem ipsum dolore.</p>
+													<footer>
+														<ul class="actions">
+															<li><a href="#" class="button">Learn More</a></li>
+														</ul>
+													</footer>
+												</section>								
 											</section>											
 									</div>
 									
@@ -81,9 +145,8 @@ layout:decorate="layout/layout">
 								</div>
 							</div>
 						</div>
+					
 						
 				</div>
 			</div>
-		</div>
-	<script src="assets/js/signup.js"></script>
 </html>

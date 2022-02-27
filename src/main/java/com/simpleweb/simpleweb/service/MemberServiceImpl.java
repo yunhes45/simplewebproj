@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.simpleweb.simpleweb.mapper.MemberMapper;
 import com.simpleweb.simpleweb.model.Member;
+import com.simpleweb.simpleweb.model.Member_profileimg;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -41,6 +42,12 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
+	public void insertMemberImg(Member_profileimg memberimg) {
+		
+		membermapper.insertMemberImg(memberimg);
+	}
+	
+	@Override
 	public String getMemberLogin(Member member) {
 		String res = LoginCheck(member);
 		
@@ -64,5 +71,12 @@ public class MemberServiceImpl implements MemberService{
 		return res;
 		
 	}
-
+	
+	@Override
+	public Optional<Member> getMyInfo(int member_no) {
+		Optional<Member> session = membermapper.getMyInfo(member_no);
+		
+		return session;
+	}
+	
 }

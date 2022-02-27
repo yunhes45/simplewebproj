@@ -1,11 +1,30 @@
 window.addEventListener("DOMContentLoaded", function(){
 	
-	var member_id        = document.getElementById('member_id');
+	/* canvas */
+	const canvas   = document.getElementById('imagecanvas');
+	const context  = canvas.getContext('2d');
+	
+	const filechange   = document.getElementById('memberimg');
+	filechange.addEventListener('change', function(evt){
+		let reader      = new FileReader();
+		reader.onload   = function(e){
+			memberimg          = new Image();
+			memberimg.src      = e.target.result;
+			memberimg.onload   = function(){
+				context.drawImage(memberimg, 0, 0, 300, 150);
+				context.restore();
+			}
+		};
+		reader.readAsDataURL(evt.target.files[0]);
+	});
+	
+	var member_id          = document.getElementById('member_id');
 	var member_email       = document.getElementById('member_email');
 	var member_pwd         = document.getElementById('member_pwd');
 	var member_pwd_check   = document.getElementById('member_pwd_check');
-	var member_job         = document.getElementById('member_job');
+	var member_nickname    = document.getElementById('member_nickname');
 	var member_mobile      = document.getElementById('member_mobile');
+	var member_job         = document.getElementById('member_job');
 	var copy               = document.getElementById('member_copy');
 	
 	member_id.addEventListener('keyup', function(){
@@ -60,14 +79,14 @@ window.addEventListener("DOMContentLoaded", function(){
 			removeErrorMessage("member_pwd_check_error");
 		}
 	});
-	
-	member_job.addEventListener('keyup', function(){
-		if(member_job.value == ""){
-			setErrorMessage("member_job_error", "직업을 선택하세요.");
+
+	member_nickname.addEventListener('keyup', function(){
+		if(member_nickname.value == ""){
+			setErrorMessage("member_nickname_error", "이름을 입력해 주세요.");
 		}else{
-			removeErrorMessage("member_job_error");
+			removeErrorMessage("member_nickname_error");
 		}
-	});
+	});	
 	
 	member_mobile.addEventListener('keyup', function(){
 		var pattern = /^(?:(010-\d{4})|(01[1|6|7|8|9]-\d{3,4}))-(\d{4})$/;
@@ -76,7 +95,15 @@ window.addEventListener("DOMContentLoaded", function(){
 			}else{
 				removeErrorMessage("member_mobile_error");
 			}
-	})
+	});
+
+	member_job.addEventListener('keyup', function(){
+		if(member_job.value == ""){
+			setErrorMessage("member_job_error", "직업을 선택하세요.");
+		}else{
+			removeErrorMessage("member_job_error");
+		}
+	});
 	
 	member_copy.addEventListener('keyup', function(){
 		if(!member_copy.checked){
@@ -128,14 +155,19 @@ window.addEventListener("DOMContentLoaded", function(){
 			setErrorMessage("member_pwd_check", "비밀번호를 확인해 주세요.");
 		}
 		
-		if(member_job.value == ""){
-			evt.preventDefault();
-			setErrorMessage("member_job_error", "직업을 선택하세요.");
-		}
-		
 		if(member_mobile.value == ""){
 			evt.preventDefault();
 			setErrorMessage("member_mobile_error", "휴대폰 번호를 입력해 주세요.");
+		}
+		
+		if(member_nickname.value == ""){
+			evt.preventDefault();
+			setErrorMessage("member_nickname_error", "이름을 입력해 주세요.");
+		}
+
+		if(member_job.value == ""){
+			evt.preventDefault();
+			setErrorMessage("member_job_error", "직업을 선택하세요.");
 		}
 		
 		if(!member_copy.checked){

@@ -6,22 +6,27 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	</head>
 	
 	<header th:fragment="headerFragment">
-		<header id="header">
-			<h1 id="logo"><a href="/">MySimpleWebApp</a></h1>
-			<nav id="nav">
-				<ul th:if="${session.session_id == null}">
-					<li><a href="/">Home</a></li>
-					<li><a href="/#one" class="scrolly">SignIn</a></li>
-					<li><a href="/signup" class="button primary">SignUp</a></li>
-					<li></li>
-				</ul>
-				<ul th:unless="${session.session_id == null}">
-					<li><a href="/">Home</a></li>
-					<li><a href="/mypage">MyPage</a></li>
-					<li><a href="/chat" class="button primary">Chat</a></li>					
-				</ul>
-			</nav>
-		</header>
+		<meta charset="utf-8" />
+		
+			<header id="header">
+				<h1 id="logo"><a href="/">MySimpleWebApp</a></h1>
+				<nav id="nav">
+					<ul th:if="${session.session_info == null}">
+						<li><a href="/">Home</a></li>
+						<li><a href="/#one" class="scrolly">SignIn</a></li>
+						<li><a href="/signup" class="button primary">SignUp</a></li>
+						<li></li>
+					</ul>
+					<ul th:unless="${session.session_info == null}">
+						<li><img class="header_profileimg" th:src="| /filestorage/memberimg/${session.session_info.get().getMember_profileimg().getMember_profileimg_filename()} |"></li>
+						<li><a th:text="| ${session.session_info.get().getMember_nickname()} 님 반갑습니다. |"></a></li>
+						<li><a th:src="${savePath}" ></a></li>
+						<li><a href="/">Home</a></li>
+						<li><a href="/mypage">MyPage</a></li>
+						<li><a href="/chat" class="button primary">Chat</a></li>					
+					</ul>
+				</nav>
+			</header>
 
 	</header>
 	

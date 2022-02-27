@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.simpleweb.simpleweb.model.Member;
+import com.simpleweb.simpleweb.model.Member_profileimg;
 
 @Mapper
 public interface MemberMapper {
@@ -14,5 +15,9 @@ public interface MemberMapper {
 
 	Optional<Member> getById(@Param("member_id") String member_id);
 	Optional<Member> getByEmail(@Param("member_email") String member_email);
+
+	void insertMemberImg(@Param("member_profileimg") Member_profileimg memberimg);
+	
+	Optional<Member> getMyInfo(@Param("member_no") int member_no);
 	
 }

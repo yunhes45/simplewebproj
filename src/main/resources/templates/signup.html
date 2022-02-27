@@ -26,7 +26,23 @@ layout:decorate="layout/layout">
 
 					<!-- Form -->
 						<section>
-							<form method="post" action="#">
+							<form method="post" action="/signup" enctype="multipart/form-data">
+								<section id="mypage_profile">
+									<div class="profile_wrap">
+										<div class="profile_img">
+											<canvas id="imagecanvas"></canvas>
+										</div>
+									</div>
+									
+									<div class="profile_menu">
+										<div class="top">
+											<div class="menu_elem">
+												<input type="file" name="memberimg" id="memberimg" maxlength="40">
+											</div>
+											
+										</div>
+									</div>
+								</section>
 								<div class="row gtr-uniform gtr-50">
 									<div class="col-6 col-12-xsmall">
 										<input type="text" name="member_id" id="member_id" value="" placeholder="아이디" />
@@ -45,6 +61,14 @@ layout:decorate="layout/layout">
 										<div id="member_pwd_check_error" class="error"></div>
 									</div>
 									<div class="col-6 col-12-xsmall">
+										<input type="text" name="member_nickname" id="member_nickname" value="" placeholder="이름" />
+										<div id="member_nickname_error" class="error"></div>
+									</div>
+									<div class="col-6 col-12-xsmall">
+										<input type="text" name="member_mobile" id="member_mobile" value="" placeholder="휴대폰 번호" />
+										<div id="member_mobile_error" class="error"></div>
+									</div>
+									<div class="col-12">
 										<select name="member_job" id="member_job">
 											<option value="">- 직업 -</option>
 											<option value="학생">학생</option>
@@ -53,10 +77,6 @@ layout:decorate="layout/layout">
 											<option value="디자이너">디자이너</option>
 										</select>
 										<div id="member_job_error" class="error"></div>
-									</div>
-									<div class="col-6 col-12-xsmall">
-										<input type="text" name="member_mobile" id="member_mobile" value="" placeholder="휴대폰 번호" />
-										<div id="member_mobile_error" class="error"></div>
 									</div>
 									<div class="col-4 col-12-medium">
 										<input type="radio" id="priority-low" name="member_gender" value="남" checked>
@@ -87,6 +107,8 @@ layout:decorate="layout/layout">
 					
 					</div>	
 				</div>
+				
+				<!-- script -->
+				<script src="assets/js/signup.js"></script>
 			</div>
-		<script src="assets/js/signup.js"></script>
 </html>

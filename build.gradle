@@ -23,6 +23,9 @@ dependencies {
 	implementation 'mysql:mysql-connector-java'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
 	
+	implementation group: 'commons-io', name: 'commons-io', version: '2.6' // img 
+	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0' // img randomstring
+	
 }
 
 tasks.named('test') {
