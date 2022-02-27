@@ -70,6 +70,7 @@ public class MemberController {
 		member.setMember_id          (member_form.getMember_id());
 		member.setMember_pwd         (member_form.getMember_pwd());
 		member.setMember_email       (member_form.getMember_email());
+		member.setMember_nickname    (member_form.getMember_nickname());
 		member.setMember_job         (member_form.getMember_job());
 		member.setMember_mobile      (member_form.getMember_mobile());
 		member.setMember_gender      (member_form.getMember_gender());
@@ -118,8 +119,6 @@ public class MemberController {
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("session_info", session_info);
-			
-			System.out.println("dddddddddddddddddd : " + session_info.get().getMember_profileimg().getMember_profileimg_filename());
 			
 			return "redirect:mainboard";
 		}

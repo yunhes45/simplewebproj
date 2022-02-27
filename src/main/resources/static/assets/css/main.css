@@ -4180,7 +4180,52 @@ input, select, textarea {
 		margin-bottom: 50px;
 	}
 	
-	.row > .col-4 #my_post {
-		display: flex;
+	#my_post {
+		max-width: 100%;
+		display: inline-block;
+	}
+	
+	#my_post #my_post_element {	
+		max-width: 20%;	
+		height: 250px;
+		float: left;
+		padding: 1%;
+		margin-bottom: 30px;
+	}
+	
+	#my_post #my_post_element:hover {
+		opacity: 0.7;
+	}
+	
+
+	#my_post_element .pic{	
+		width: 100%;
+		height: 80%;
+	}
+	
+	#my_post_responsive #content {
+		display: none;
+	}
+	
+	@media screen and (max-width: 500px) {
+		#my_post {
+			display: none;
+		}
+		
+		#my_post_responsive #content {
+			display: flex;
+			max-width: 100%;
+			height: 400px;
+		}
+		
+		#my_post_responsive .pic{	
+			width: 100%;
+			height: 300px;
+		}
+		
+		#my_post_responsive h3 {
+			text-align: center;
+		}
+		
 	}
 	
