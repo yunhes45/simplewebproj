@@ -1,14 +1,21 @@
 package com.simpleweb.simpleweb.controller;
 
+import java.net.MalformedURLException;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Post;
@@ -18,6 +25,13 @@ import com.simpleweb.simpleweb.service.CommonService;
 
 @Controller
 public class BoardController {
+	
+	@Value("${spring.servlet.multipart.location}")
+	private String fileDir;
+	
+	public String getFullPath(String filename) {
+		return fileDir + filename;
+	}
 	
 	@Autowired
 	BoardService boardservice;
@@ -88,6 +102,14 @@ public class BoardController {
 		}
 		
 		return "redirect:mypage";
+	}
+	
+	@ResponseBody
+	@GetMapping("/images1/{filename}")
+	public Resource downloadImage(@PathVariable String filename) throws MalformedURLException{
+		String fileurl    = "\\memberimg\\";
+		return new UrlResource("file:///" + getFullPath(filename));
+		
 	}
 	
 }

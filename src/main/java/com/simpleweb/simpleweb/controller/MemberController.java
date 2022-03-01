@@ -31,17 +31,8 @@ public class MemberController {
 	@Autowired
 	private CommonService commonservice;
 	
-	@Autowired
-	ServletContext application;
-	
 	@RequestMapping("/welcomepage")
 	public String wel(Model model) throws IOException {
-		String fileurl    = "/filestorage/memberimg/NEWjBoVKGBtNRwiIQKwGJyDwOn0jONkA.jpg";
-		String savePath = application.getRealPath(fileurl);
-		
-		System.out.println("sdfsfsd : " + savePath);
-		
-		model.addAttribute("savePath", savePath);
 		
 		return "welcomepage";
 	}
@@ -54,6 +45,7 @@ public class MemberController {
 		if(session_info != null) {
 			return "mainBoard";
 		}else {
+
 			return "index";
 		}
 	}
