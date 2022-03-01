@@ -88,14 +88,14 @@ public class MemberController {
 		}
 		
 		int memberPK = member.getMember_no();
-		Member_profileimg memberimg = new Member_profileimg();
+		Member_profileimg member_img = new Member_profileimg();
 		
 		if(member_profileimg_form.getMemberimg().getOriginalFilename().equals("")) {
-			memberimg = commonservice.normalimglogic(memberPK);
-			memberservice.insertMemberImg(memberimg);
+			member_img = commonservice.normalimglogic(memberPK);
+			memberservice.insertMemberImg(member_img);
 		}else {
-			memberimg = commonservice.imglogic(memberPK, member_profileimg_form.getMemberimg());
-			memberservice.insertMemberImg(memberimg);
+			member_img = commonservice.imglogic(memberPK, member_profileimg_form.getMemberimg());
+			memberservice.insertMemberImg(member_img);
 		}
 		
 		

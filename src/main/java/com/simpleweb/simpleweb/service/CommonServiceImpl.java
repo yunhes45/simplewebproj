@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.simpleweb.simpleweb.mapper.MemberMapper;
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Member_profileimg;
+import com.simpleweb.simpleweb.model.Post_img;
 
 @Service
 public class CommonServiceImpl implements CommonService{
@@ -97,6 +98,41 @@ public class CommonServiceImpl implements CommonService{
 		memberimg.setMember_profileimg_date                (nowTime());
 		
 		return memberimg;
+	}
+
+	@Override
+	public Post_img post_imglogic(int postPK, @RequestPart MultipartFile files) throws Exception {
+		Post_img post_img = new Post_img();
+		
+		String originalfilename            = files.getOriginalFilename();
+		String originalfilenameExtension   = FilenameUtils.getExtension(originalfilename).toLowerCase();
+		File destinationfile;
+		String destinationfilename;
+		String fileurl    = "/filestorage/postimg/";
+		String savePath   = application.getRealPath(fileurl);
+//		String savePath = new ClassPathResource(fileurl).getFile().getAbsolutePath();
+//		String savePath = System.getProperty("user.dir");
+//		String savePath = ServletUriComponentsBuilder.fromCurrentContextPath()
+//				.path(fileurl).toUriString();
+		
+		do {
+			destinationfilename   = RandomStringUtils.randomAlphanumeric(32) + "." + originalfilenameExtension;
+			destinationfile       = new File(savePath, destinationfilename);
+		}while(destinationfile.exists());
+		
+		try {
+			files.transferTo(destinationfile);
+		}catch(IOException e) {
+			
+		}
+		
+		post_img.setPost_img_filename            (destinationfilename);
+		post_img.setPost_img_original_filename   (originalfilename);
+		post_img.setPost_img_url                 (savePath);
+		post_img.setPost_no                      (postPK);
+		post_img.setPost_img_date                (nowTime());
+		
+		return post_img;
 	}
 	
 }

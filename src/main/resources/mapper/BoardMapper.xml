@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.simpleweb.simpleweb.mapper.BoardMapper">
+	<insert id="insertPost" parameterType="com.simpleweb.simpleweb.model.Post" useGeneratedKeys="true" keyProperty="post_no">
+			insert into post(post_title, post_subtitle, post_contents, member_no, post_date)
+			
+			values (  #{post.post_title} ,
+			          #{post.post_subtitle} ,
+			          #{post.post_contents} ,
+			          #{post.member_no} , 
+			          #{post.post_date}        )		
+	</insert>
+	<insert id="insertPostImg" parameterType="com.simpleweb.simpleweb.model.Post_img">
+		insert into post_img(post_no, post_img_filename, post_img_original_filename, post_img_url, post_img_date) 
+		
+		values (  #{post_img.post_no} ,
+				  #{post_img.post_img_filename} ,
+		          #{post_img.post_img_original_filename} ,
+		          #{post_img.post_img_url} ,
+		          #{post_img.post_img_date}                )
+	</insert>
+</mapper>

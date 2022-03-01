@@ -4147,6 +4147,23 @@ input, select, textarea {
 		border: 2px solid white;
 		border-radius: 50%;
 	}
+	
+	.writepost_layout {
+		width: 100%;
+		text-align: center;
+	}
+	
+	.writepost_layout .writepost_form {
+		width: 100%;
+		display: inline-block;
+	}
+	
+	#writepost_imagecanvas {
+		width: 400px;
+		height: 400px;
+		border: 2px solid white;
+		display: inline-block;
+	}
 
 	/* mypage */
 	
