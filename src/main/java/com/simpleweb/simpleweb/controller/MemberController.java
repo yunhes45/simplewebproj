@@ -2,6 +2,7 @@ package com.simpleweb.simpleweb.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Paths;
 import java.util.Optional;
 
@@ -10,11 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.simpleweb.simpleweb.model.Member;
@@ -30,6 +37,21 @@ public class MemberController {
 	
 	@Autowired
 	private CommonService commonservice;
+	
+	@Value("${spring.servlet.multipart.location}")
+	private String fileDir;
+	
+	public String getFullPath(String fileurl, String filename) {
+		return fileDir + fileurl + filename;
+	}
+	
+	@ResponseBody
+	@GetMapping("/memberimg/{filename}")
+	public Resource downloadImage(@PathVariable String filename) throws MalformedURLException{
+		String fileurl    = "memberimg\\";
+		return new UrlResource("file:///" + getFullPath(fileurl, filename));
+		
+	}
 	
 	@RequestMapping("/welcomepage")
 	public String wel(Model model) throws IOException {
@@ -111,7 +133,7 @@ public class MemberController {
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("session_info", session_info);
-			
+	
 			return "redirect:mainboard";
 		}
 	}

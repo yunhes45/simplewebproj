@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.simpleweb.simpleweb.mapper.BoardMapper">
 	<insert id="insertPost" parameterType="com.simpleweb.simpleweb.model.Post" useGeneratedKeys="true" keyProperty="post_no">
-			insert into post(post_title, post_subtitle, post_contents, member_no, post_date)
-			
-			values (  #{post.post_title} ,
-			          #{post.post_subtitle} ,
-			          #{post.post_contents} ,
-			          #{post.member_no} , 
-			          #{post.post_date}        )		
+		insert into post(post_title, post_subtitle, post_contents, member_no, post_date)
+		
+		values (  #{post.post_title} ,
+		          #{post.post_subtitle} ,
+		          #{post.post_contents} ,
+		          #{post.member_no} , 
+		          #{post.post_date}        )		
 	</insert>
 	<insert id="insertPostImg" parameterType="com.simpleweb.simpleweb.model.Post_img">
 		insert into post_img(post_no, post_img_filename, post_img_original_filename, post_img_url, post_img_date) 
@@ -19,4 +19,46 @@
 		          #{post_img.post_img_url} ,
 		          #{post_img.post_img_date}                )
 	</insert>
+	
+	<select id="getTotal_fileList" resultType="int">
+		select count(*)
+		
+		from post
+		
+		where member_no=#{member_no}
+	</select>
+	
+	<resultMap id="JoinPostRM" type="com.simpleweb.simpleweb.model.Post">
+		<id property="post_no" column="post_no" />
+		<result property="member_no" column="member_no" />
+		<result property="post_title" column="post_title" />
+		<result property="post_subtitle" column="post_subtitle" />
+		<result property="post_contents" column="post_contents" />
+		<result property="post_date" column="post_date" />
+		
+		<!-- 1 : 1 -->
+			<association javaType="Post_img" property="post_img">
+				<id property="post_img_no" column="post_img_no" />
+				<result property="post_no" column="post_no" />
+				<result property="post_img_filename" column="post_img_filename" />
+				<result property="post_img_original_filename" column="post_img_original_filename" />
+				<result property="post_img_url" column="post_img_url" />
+				<result property="post_img_date" column="post_img_date" />
+			</association>
+	</resultMap>
+	
+	<select id="getPost_list" resultMap="JoinPostRM">
+		select m.post_no, m.member_no, m.post_subtitle, m.post_contents, m.post_date,
+			   n.post_img_no, n.post_img_filename, n.post_img_original_filename, n.post_img_url, n.post_img_date
+		       
+		from post as m left join post_img as n
+		
+		on m.post_no = n.post_no
+		
+		where m.member_no=#{member_no}
+		
+		order by m.post_no desc
+		limit #{startPage}, #{onePageCnt}
+	</select>
+	
 </mapper>

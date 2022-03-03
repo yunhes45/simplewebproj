@@ -27,7 +27,7 @@ import com.simpleweb.simpleweb.model.Post_img;
 public class CommonServiceImpl implements CommonService{
 	
 	@Value("${spring.servlet.multipart.location}")
-	private String test;
+	private String fileDir;
 	
 	@Autowired
 	MemberMapper membermapper;
@@ -55,11 +55,12 @@ public class CommonServiceImpl implements CommonService{
 		Member_profileimg memberimg = new Member_profileimg();
 		
 		String originalfilename   = "normal_img.png";
-		String fileurl            = "/filestorage/";
+		String fileurl    = "memberimg\\";
+		String savePath   = fileDir + fileurl;
 		
 		memberimg.setMember_profileimg_filename            (originalfilename);
 		memberimg.setMember_profileimg_original_filename   (originalfilename);
-		memberimg.setMember_profileimg_url                 (fileurl);
+		memberimg.setMember_profileimg_url                 (savePath);
 		memberimg.setMember_no                             (memberPK);
 		memberimg.setMember_profileimg_date                (nowTime());
 		
@@ -74,22 +75,9 @@ public class CommonServiceImpl implements CommonService{
 		String originalfilenameExtension   = FilenameUtils.getExtension(originalfilename).toLowerCase();
 		File destinationfile;
 		String destinationfilename;
-		String fileurl    = "\\memberimg\\";
-//		String savePath   = test + fileurl;
-		String savePath   = test;
-		
-		System.out.println("path : " + savePath);
-//		String savePath   = application.getRealPath(fileurl);
-//		String savePath = new ClassPathResource(fileurl).getFile().getAbsolutePath();
-//		String savePath = System.getProperty("user.dir");
-//		String savePath = ServletUriComponentsBuilder.fromCurrentContextPath()
-//				.path(fileurl).toUriString();
-//		
-//		System.out.println("11111111111 : " + application.getRealPath(savePath));
-//		System.out.println("11111111111 : " + new ClassPathResource(fileurl).getFile().getAbsolutePath());
-//		System.out.println("11111111111 : " + System.getProperty("user.dir"));
-//		System.out.println("11111111111 : " + ServletUriComponentsBuilder.fromCurrentContextPath().path(fileurl).toUriString());
-		
+		String fileurl    = "memberimg\\";
+		String savePath   = fileDir + fileurl;
+
 		do {
 			destinationfilename   = RandomStringUtils.randomAlphanumeric(32) + "." + originalfilenameExtension;
 			destinationfile       = new File(savePath, destinationfilename);
@@ -118,12 +106,8 @@ public class CommonServiceImpl implements CommonService{
 		String originalfilenameExtension   = FilenameUtils.getExtension(originalfilename).toLowerCase();
 		File destinationfile;
 		String destinationfilename;
-		String fileurl    = "/filestorage/postimg/";
-		String savePath   = test;
-//		String savePath = new ClassPathResource(fileurl).getFile().getAbsolutePath();
-//		String savePath = System.getProperty("user.dir");
-//		String savePath = ServletUriComponentsBuilder.fromCurrentContextPath()
-//				.path(fileurl).toUriString();
+		String fileurl    = "postimg\\";
+		String savePath   = fileDir + fileurl;
 		do {
 			destinationfilename   = RandomStringUtils.randomAlphanumeric(32) + "." + originalfilenameExtension;
 			destinationfile       = new File(savePath, destinationfilename);

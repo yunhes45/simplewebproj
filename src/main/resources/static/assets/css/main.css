@@ -4198,7 +4198,7 @@ input, select, textarea {
 	}
 	
 	#my_post {
-		max-width: 100%;
+		width: 100%;
 		display: inline-block;
 	}
 	

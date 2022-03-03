@@ -55,84 +55,24 @@ layout:decorate="layout/layout">
 								
 							<!-- my_post -->								
 								<div class="col-4 col-12-medium">
-										<div style="text-align: center" class="my_post_page">
-											<a href="#">&lt;</a>&nbsp;&nbsp;&nbsp;
+										<div style="text-align: center" class="my_post_page"
+										 th:each="count : ${count}">
+											<!-- <a href="#">&lt;</a>&nbsp;&nbsp;&nbsp;
 											1&nbsp;&nbsp;&nbsp;
 											<a href="#">2</a>&nbsp;&nbsp;&nbsp;
 											<a href="#">3</a>&nbsp;&nbsp;&nbsp;
 											<a href="#">4</a>&nbsp;&nbsp;&nbsp;
 											<a href="#">5</a>&nbsp;&nbsp;&nbsp;
-											<a href="#">&gt;</a>
+											<a href="#">&gt;</a> -->
+											<a th:href="| mypage?page=${count} |">[[ ${count} ]]</a>
 										</div>
 								</div>
-
 											<section id="my_post">
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="images/pic07.jpg" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>		
-												
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="images/pic07.jpg" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>
-												
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="images/pic07.jpg" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>
-												
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="images/pic07.jpg" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>
-												
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="images/pic07.jpg" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>
-												
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="images/pic07.jpg" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>
-												
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="images/pic07.jpg" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>
-												
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="images/pic07.jpg" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>
-												
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="images/pic07.jpg" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>
-												
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="#" alt="">
+											
+												<section id="my_post_element"
+												th:each="post_list : ${post_list}">
+													<a href="#" class="pic">            <!-- post_list.get(i).getPost_img() -> post_list.getPost_img() -->
+														<img class="pic" th:src="| /postimg/${post_list.getPost_img().getPost_img_filename()} |" alt="">
 														<h3>Amet Lorem Tempus</h3>
 													</a>	
 												</section>	
@@ -153,158 +93,31 @@ layout:decorate="layout/layout">
 								</div>
 
 											<section id="my_post">
+											
 												<section id="my_post_element">
 													<a href="#" class="pic">
 														<img class="pic" src="images/pic07.jpg" alt="">
 														<h3>Amet Lorem Tempus</h3>
 													</a>	
-												</section>		
-												
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="images/pic07.jpg" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>
-												
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="images/pic07.jpg" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>
-												
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="images/pic07.jpg" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>
-												
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="images/pic07.jpg" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>
-												
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="images/pic07.jpg" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>
-												
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="images/pic07.jpg" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>
-												
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="images/pic07.jpg" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>
-												
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="images/pic07.jpg" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>
-												
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="#" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>	
+												</section>			
 				
 											</section>				 -->			
 											
-											<!-- 반응형 -->
-																														
-											<section id="my_post_responsive">
-												<section id="content">
-													<a href="#" class="pic">
-														<img class="pic" src="#" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>	
-												
-												<section id="content">
-													<a href="#" class="pic">
-														<img class="pic" src="#" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>	
-												
-												<section id="content">
-													<a href="#" class="pic">
-														<img class="pic" src="#" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>	
-												
-												<section id="content">
-													<a href="#" class="pic">
-														<img class="pic" src="#" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>	
-												
-												<section id="content">
-													<a href="#" class="pic">
-														<img class="pic" src="#" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>	
-												
-												<section id="content">
-													<a href="#" class="pic">
-														<img class="pic" src="#" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>	
-												
-												<section id="content">
-													<a href="#" class="pic">
-														<img class="pic" src="#" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>	
-												
-												<section id="content">
-													<a href="#" class="pic">
-														<img class="pic" src="#" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>	
-												
-												<section id="content">
-													<a href="#" class="pic">
-														<img class="pic" src="#" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>	
-												
-												<section id="content">
-													<a href="#" class="pic">
-														<img class="pic" src="#" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>
-											
-											</section>
+									<!-- 반응형 -->
+																												
+									<section id="my_post_responsive">
+									
+										<section id="content">
+											<a href="#" class="pic">
+												<img class="pic" src="images/pic07.jpg" alt="">
+												<h3>Amet Lorem Tempus</h3>
+											</a>	
+										</section>	
+									
+									</section>
 
-									</div>
-									
-									
-								</div>
-							</div>
-						</div>
+				</div>							
+		</div>
+	</div>
 
 </html>

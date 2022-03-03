@@ -45,7 +45,7 @@ public class Post {
 		this.post_date = post_date;
 	}
 	
-	public Post_img post_img;
+	private Post_img post_img;
 
 	public Post_img getPost_img() {
 		return post_img;
