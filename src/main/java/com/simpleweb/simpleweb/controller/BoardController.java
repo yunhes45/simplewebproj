@@ -1,6 +1,7 @@
 package com.simpleweb.simpleweb.controller;
 
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,12 +72,23 @@ public class BoardController {
 			int count       = (int)Math.ceil((double)file_listtotalcount/(double)onePageCnt);
 		
 			model.addAttribute("file_listtotalcount", file_listtotalcount);
-			model.addAttribute("count", count);
+			
+//			int page_count[] = new int[count+1];
+//			for(int i=1; i<=count; i++) {
+//				page_count[i] += i;
+//				System.out.println("page_count : " + page_count[i]);
+//			}
+
+			List<Integer> page_count = new ArrayList<>();
+			
+			for(int i=1; i<=count; i++) {
+				page_count.add(i);
+			}
+			
+			model.addAttribute("page_count", page_count);
 			
 			if(page != null) {			
 				startPage = (Integer.parseInt(page) - 1)*onePageCnt;
-				System.out.println("start : " + startPage);
-				System.out.println("end : " + onePageCnt);
 				List<Post> post_list = boardservice.getPost_list(session_info.get().getMember_no(), startPage, onePageCnt); 
 				model.addAttribute("post_list", post_list);
 			}else {
