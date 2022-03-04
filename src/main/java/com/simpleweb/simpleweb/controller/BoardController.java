@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Post;
@@ -60,7 +61,9 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/mypage")
-	public String mypage(Model model, HttpServletRequest request, @RequestParam(value="page" , required=false) String page ) {
+	public String mypage(Model model, HttpServletRequest request,
+			@RequestParam(value="member") String member_id ,
+			@RequestParam(value="page" , required=false) String page ) {
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
@@ -96,6 +99,8 @@ public class BoardController {
 				model.addAttribute("post_list", post_list);
 			}
 			
+			model.addAttribute("member_id", member_id);
+			
 			return "mypage";
 		}else {
 			
@@ -105,13 +110,13 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/writepost")
-	public String writepost(HttpServletRequest request) {
+	public String writepost(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
 		if(session_info != null) {
-
 			
+			model.addAttribute("session_info", session_info);
 		}else {
 			return "redirect:/";
 		}
@@ -120,7 +125,7 @@ public class BoardController {
 	}
 	
 	@PostMapping("/writepost")
-	public String post_writepost(Post post_form, Post_img post_img_form, HttpServletRequest request) throws Exception {
+	public String post_writepost(Post post_form, Post_img post_img_form, RedirectAttributes redirectattributes, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
@@ -145,6 +150,7 @@ public class BoardController {
 			return "redirect:/";
 		}
 		
+		redirectattributes.addAttribute("member", session_info.get().getMember_id());
 		return "redirect:mypage";
 	}
 	
