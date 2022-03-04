@@ -39,18 +39,13 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<Post> getPost_list(int member_no, int startPage, int onePageCnt) {
 		
-		List<Post> ex = boardmapper.getPost_list(member_no, startPage, onePageCnt);
-		
-		for(int i=0; i<ex.size(); i++) {
-			System.out.println("id : " + ex.get(i).getPost_title());
-			System.out.println("id : " + ex.get(i).getPost_img().getPost_img_filename());
-		}
-		
-		System.out.println("ssss : " + member_no);
-		System.out.println("ssss : " + startPage);
-		System.out.println("ssss : " + onePageCnt);
-		
 		return boardmapper.getPost_list(member_no, startPage, onePageCnt);
+	}
+
+	@Override
+	public List<Post> getPost_listAll(int startPage, int onePageCnt) {
+		
+		return boardmapper.getPost_listAll(startPage, onePageCnt);
 	}
 
 }

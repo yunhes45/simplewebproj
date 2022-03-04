@@ -74,7 +74,7 @@ layout:decorate="layout/layout">
 													<a href="#" class="pic">            <!-- post_list.get(i).getPost_img() -> post_list.getPost_img() -->
 														<a th:text="${num.count}"></a>
 														<img class="pic" th:src="| /postimg/${post_list.getPost_img().getPost_img_filename()} |" alt="">
-														<h3>Amet Lorem Tempus</h3>
+														<h3>[[ ${post_list.getPost_title()} ]]</h3>
 													</a>	
 												</section>	
 				
@@ -108,9 +108,11 @@ layout:decorate="layout/layout">
 																												
 									<section id="my_post_responsive">
 									
-										<section id="content">
-											<a href="#" class="pic">
-												<img class="pic" src="images/pic07.jpg" alt="">
+										<section id="content1"
+										th:each="post_list, num : ${post_list}">
+											<a href="#" class="pic">            <!-- post_list.get(i).getPost_img() -> post_list.getPost_img() -->
+												<a th:text="${num.count}"></a>
+												<img class="pic" th:src="| /postimg/${post_list.getPost_img().getPost_img_filename()} |" alt="">
 												<h3>Amet Lorem Tempus</h3>
 											</a>	
 										</section>	

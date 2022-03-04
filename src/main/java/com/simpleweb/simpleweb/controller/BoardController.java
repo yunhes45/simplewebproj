@@ -53,9 +53,23 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/mainboard")
-	public String mainboard(HttpServletRequest request) {
+	public String mainboard(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
+		
+		if(session_info != null) {
+			int file_listtotalcount = boardservice.getTotal_fileList(session_info.get().getMember_no());
+			int startPage   = 0;
+			int onePageCnt  = 5;
+			int count       = (int)Math.ceil((double)file_listtotalcount/(double)onePageCnt);
+			
+			List<Post> post_list = boardservice.getPost_listAll(startPage, onePageCnt);
+			System.out.println(post_list.get(0).getPost_subtitle());
+			model.addAttribute("post_list", post_list);
+			
+		}else {
+			return "redirect:/";
+		}
 		
 		return "mainboard";
 	}
@@ -152,6 +166,12 @@ public class BoardController {
 		
 		redirectattributes.addAttribute("member", session_info.get().getMember_id());
 		return "redirect:mypage";
+	}
+	
+	@RequestMapping("/detailpost")
+	public String detailpost() {
+		
+		return "detailpost";
 	}
 	
 }

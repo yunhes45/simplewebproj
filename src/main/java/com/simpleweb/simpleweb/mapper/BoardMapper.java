@@ -17,5 +17,6 @@ public interface BoardMapper {
 	List<Post> getPost_list(@Param("member_no") int member_no,
 			@Param("startPage") int startPage, 
 			@Param("onePageCnt") int onePageCnt);
+	List<Post> getPost_listAll(@Param("startPage") int startPage, @Param("onePageCnt") int onePageCnt);
 
 }
