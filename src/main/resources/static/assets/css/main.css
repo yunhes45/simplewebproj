@@ -4148,7 +4148,19 @@ input, select, textarea {
 		border-radius: 50%;
 	}
 	
-	#maincontent {
+	#sidebar_fix {
+		clear: both;
+  		height: 400px;
+	}
+	
+	#sidebar_fix #sidebar_side {
+		clear: both;
+		position: sticky;
+		height: 400px;
+	}
+	
+	#sidebar_side #sidebar_element {
+		clear: both;
 	}
 	
 	#maincontent #content1 {
