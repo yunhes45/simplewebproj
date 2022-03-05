@@ -53,15 +53,20 @@ layout:decorate="layout/layout">
 									<div class="col-8 col-12-medium">
 										<!-- Content -->
 											<div id="maincontent">
-											<section id="content1"
-											th:each="post_list, num : ${post_list}">
-												<a href="#" class="image fit">
-													<img class="imagefit" th:src="| /postimg/${post_list.getPost_img().getPost_img_filename()} |" alt="">
-												</a>
-												<h3>[[ ${post_list.getPost_title()} ]]</h3>
-												<h5>[[ ${post_list.getPost_subtitle()} ]]</h5>
-												<p>[[ ${post_list.getPost_contents()} ]]</p>
-											</section>
+											
+												<section id="content1"
+												th:each="post_list, num : ${post_list}">
+													<a href="#" class="image fit">
+														<img class="imagefit" th:src="| /postimg/${post_list.getPost_img().getPost_img_filename()} |" alt="">
+													</a>
+													<h3>[[ ${post_list.getPost_title()} ]]</h3>
+													<h5>[[ ${post_list.getPost_subtitle()} ]]</h5>
+													<p>[[ ${post_list.getPost_contents()} ]]</p>
+												</section>
+																							
+												<div id="maincontent_list_ajax"></div>
+												<input type="hidden" id="page" value="3">
+																					
 											</div>
 									<hr>
 									</div>
@@ -108,8 +113,7 @@ layout:decorate="layout/layout">
 							</div>
 						</div>
 						
-				</div>
-			</div>
+			<!-- script -->
+			<script src="assets/js/infinitescroll.js"></script>
 		</div>
-	<script src="assets/js/signup.js"></script>
 </html>

@@ -73,6 +73,13 @@ public class BoardController {
 		
 		return "mainboard";
 	}
+	@PostMapping("/mainboard")
+	public String post_mainboard(@RequestParam(value="page", required=false) String page) {
+		
+		System.out.println("exexexexexex : " + page);
+		
+		return "mainboard";
+	}
 	
 	@RequestMapping("/mypage")
 	public String mypage(Model model, HttpServletRequest request,
