@@ -63,8 +63,8 @@ public class BoardController {
 			int onePageCnt  = 5;
 			int count       = (int)Math.ceil((double)file_listtotalcount/(double)onePageCnt);
 			
-			List<Post> post_list = boardservice.getPost_listAll(startPage, onePageCnt);
-			System.out.println(post_list.get(0).getPost_subtitle());
+			List<Post> post_list = boardservice.getPost_list_algo(startPage, onePageCnt);
+			
 			model.addAttribute("post_list", post_list);
 			
 		}else {
@@ -74,11 +74,24 @@ public class BoardController {
 		return "mainboard";
 	}
 	@PostMapping("/mainboard")
-	public String post_mainboard(@RequestParam(value="page", required=false) String page) {
+	public String post_mainboard(Model model,
+			@RequestParam(value="page", required=false) String page,
+			@RequestParam(value="count", required=false) String count) {
 		
-		System.out.println("exexexexexex : " + page);
+		int startPage   = 5;
+		int onePageCnt  = Integer.parseInt(page);
 		
-		return "mainboard";
+		int page_postlist_algo = (startPage * Integer.parseInt(count)) - ((Integer.parseInt(count)-1) * 2); 
+		
+		List<Post> post_list = boardservice.getPost_list_algo(page_postlist_algo, onePageCnt);
+
+		for(int i=0; i<post_list.size(); i++) {
+			System.out.println(post_list.get(i).getPost_no());
+		}
+		
+		model.addAttribute("post_list", post_list);
+		
+		return "maincontent_list_ajax";
 	}
 	
 	@RequestMapping("/mypage")

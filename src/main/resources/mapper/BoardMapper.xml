@@ -61,7 +61,7 @@
 		limit #{startPage}, #{onePageCnt}
 	</select>
 	
-	<select id="getPost_listAll" resultMap="JoinPostRM">
+	<select id="getPost_list_algo" resultMap="JoinPostRM">
 		select m.post_no, m.member_no, m.post_title, m.post_subtitle, m.post_contents, m.post_date,
 			   n.post_img_no, n.post_img_filename, n.post_img_original_filename, n.post_img_url, n.post_img_date
 		       

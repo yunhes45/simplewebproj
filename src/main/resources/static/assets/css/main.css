@@ -4149,10 +4149,6 @@ input, select, textarea {
 	}
 	
 	#maincontent {
-		padding-right: 10px;
-		overflow-y: auto;
-		overflow-x: hidden;
-		height: 1000px;
 	}
 	
 	#maincontent #content1 {

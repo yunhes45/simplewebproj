@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+	<div class="col-8 col-12-medium">
+		<!-- Content -->
+			<div id="maincontent">
+
+				<section id="content1"
+				th:each="post_list, num : ${post_list}">
+					<a href="#" class="image fit">
+						<img class="imagefit" th:src="| /postimg/${post_list.getPost_img().getPost_img_filename()} |" alt="">
+					</a>
+					<h3>[[ ${post_list.getPost_title()} ]]</h3>
+					<h5>[[ ${post_list.getPost_subtitle()} ]]</h5>
+					<p>[[ ${post_list.getPost_contents()} ]]</p>
+				</section>
+						
+			</div>
+	<hr>
+	</div>
+	
+</html>
