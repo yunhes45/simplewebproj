@@ -4164,9 +4164,33 @@ input, select, textarea {
 	}
 	
 	#maincontent #content1 {
+		border: 1px solid white;
 		width: 100%;
 		display: block;
 		margin: 0 0 2em 0;
+		padding: 10px;
+	}
+	
+	#content1 #post_header {
+		margin-bottom: 20px;
+		height: 50px;
+		display: flex;
+		justify-content: space-between;	
+	}
+	
+	#post_header #post_header_element {
+		vertical-align: middle;
+	}
+	
+	#post_header_element .post_title {
+		margin-left: 30px;
+		margin-top: 10px;	
+	}
+	
+	#post_header_element .menu_icon {
+		width: 50px;
+		height: 50px;
+		cursor: pointer;
 	}
 	
 	#maincontent #content1 .imagefit {
@@ -4249,6 +4273,8 @@ input, select, textarea {
 		display: none;
 	}
 	
+	/* header Toggle */
+	
 	#slideToggle {
 		width: 180px;
 		margin-left: 290px;
@@ -4273,6 +4299,45 @@ input, select, textarea {
 	}
 	
  	#slideToggle .headerprofilemenu {
+		margin: 0px;
+		padding: 0px;		
+	} 
+	
+	.headerprofilemenu:hover {
+		background: #4e4e4f;
+	}
+	
+	.headerprofilemenu #headerprofilemenu_elem {
+		width: 180px;
+		margin-left: 20px;
+	}
+	
+	/* post_slideToggle */
+	
+	#post_slideToggle {
+		display: none;
+		width: 180px;
+		margin-left: 30px;
+		background-color: rgba(39, 40, 51, 0.965);
+		z-index: 3;
+		position: absolute;
+		transform: translateX(-100%);
+		border: 2px solid #e44c65;
+	}
+
+	#post_slideToggle:hover {
+		outline: none;
+	}
+	
+	#post_slideToggle form {
+		all: unset;
+	}
+	
+	#post_slideToggle input {
+		all: unset;
+	}
+	
+ 	#post_slideToggle .headerprofilemenu {
 		margin: 0px;
 		padding: 0px;		
 	} 

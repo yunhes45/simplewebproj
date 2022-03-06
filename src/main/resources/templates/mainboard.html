@@ -56,17 +56,58 @@ layout:decorate="layout/layout">
 											
 												<section id="content1"
 												th:each="post_list, num : ${post_list}">
+													<div id="post_header">
+														<div id="post_header_element"><h3 class="post_title">[[ ${post_list.getPost_title()} ]]</h3></div>
+														
+														<div id="post_header_element">
+															<button th:id="${post_list.getPost_no()}" class="post_slideToggleBtn" onClick="post_slideToggleFunc(this.id)">
+																<img class="menu_icon" th:src="| /images/menu_icon.png |" >
+															</button>
+																											
+																<div th:id="post_slideToggle" th:class="${post_list.getPost_no()}">
+																	<div th:if="${post_list.getMember_no()} == ${session.session_info.get().getMember_no()}">
+																		<a>같아</a>
+																	</div>
+																	<div th:unless="${post_list.getMember_no()} == ${session.session_info.get().getMember_no()}">
+																		<a>달라</a>
+																	</div>
+																</div>
+														</div>
+														
+													</div>
+													
 													<a href="#" class="image fit">
 														<img class="imagefit" th:src="| /postimg/${post_list.getPost_img().getPost_img_filename()} |" alt="">
 													</a>
-													<h3>[[ ${post_list.getPost_title()} ]]</h3>
 													<h5>[[ ${post_list.getPost_subtitle()} ]]</h5>
 													<p>[[ ${post_list.getPost_contents()} ]]</p>
+													
+													<hr>
+													
+													<section id="bottom_menu">
+														<div id="bottom_menu_icon">
+															
+														</div>
+														<div id="bottom_menu_text">
+														
+														</div>
+														<div id="comment">
+														
+														</div>
+														
+														<hr>
+														
+														<div id="comment_new">
+														
+														</div>
+														
+													</section>
+													
 												</section>
 																							
 												<div id="maincontent_list_ajax"></div>
 												<input type="hidden" id="page" value="3">
-																					
+								
 											</div>
 									<hr>
 									</div>
@@ -106,5 +147,19 @@ layout:decorate="layout/layout">
 						
 			<!-- script -->
 			<script src="assets/js/infinitescroll.js"></script>
+			<script>
+				function post_slideToggleFunc(id){
+					$("." + id).animate({width: 'toggle'}, 400);
+				}
+			</script>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$(".menu_icon").click(function(){
+					
+						/* $("#post_slideToggle").animate({width: 'toggle'}, 400); */
+/* 						$("#post_slideToggle").toggle('on'); */
+					})
+				})
+			</script>			
 		</div>
 </html>

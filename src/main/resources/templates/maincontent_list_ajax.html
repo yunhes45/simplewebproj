@@ -7,10 +7,13 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 				<section id="content1"
 				th:each="post_list, num : ${post_list}">
+					<div id="post_header">
+						<div id="post_header_element"><h3 class="post_title">[[ ${post_list.getPost_title()} ]]</h3></div>
+						<div id="post_header_element"><img class="menu_icon" th:src="| /images/menu_icon.png |" ></div>
+					</div>
 					<a href="#" class="image fit">
 						<img class="imagefit" th:src="| /postimg/${post_list.getPost_img().getPost_img_filename()} |" alt="">
 					</a>
-					<h3>[[ ${post_list.getPost_title()} ]]</h3>
 					<h5>[[ ${post_list.getPost_subtitle()} ]]</h5>
 					<p>[[ ${post_list.getPost_contents()} ]]</p>
 				</section>
