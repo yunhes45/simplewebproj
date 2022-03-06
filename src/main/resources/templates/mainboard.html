@@ -83,12 +83,12 @@ layout:decorate="layout/layout">
 													<section id="bottom_menu">
 														<hr class="line_unset">
 														<div id="bottom_menu_icon">
-															<div class="icon_heart_sprite"></div>
-															<div class="icon_bookmark_sprite"></div>
-															<div class="icon_download_sprite"></div>
+															<div th:id="| ${post_list.getPost_no()} |" th:name="${post_list.getPost_no()}" class="icon_heart_sprite" onClick="like(this.id)"></div>
+															<div th:id="${post_list.getPost_no()}" class="icon_bookmark_sprite"></div>
+															<div th:id="${post_list.getPost_no()}" class="icon_download_sprite"></div>
 														</div>
 														<div id="bottom_menu_text">
-															<h5 class="like_count">좋아요 0 개</h5>
+															<h5 th:id="| likecount_${post_list.getPost_no()} |" class="like_count">좋아요 [[ ${post_list.getLike_stat().getLike_stat_count()} ]] 개</h5>
 														</div>
 														<div id="comment">
 															<div class="comment_list">
@@ -152,6 +152,7 @@ layout:decorate="layout/layout">
 						
 			<!-- script -->
 			<script src="assets/js/infinitescroll.js"></script>
+			<script src="assets/js/like.js"></script>
 			<script>
 				function post_slideToggleFunc(id){
 					$("." + id).animate({width: 'toggle'}, 400);

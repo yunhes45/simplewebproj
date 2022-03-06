@@ -46,12 +46,20 @@ public class Post {
 	}
 	
 	private Post_img post_img;
-
+	private Like_stat like_stat;
+	
 	public Post_img getPost_img() {
 		return post_img;
 	}
 	public void setPost_img(Post_img post_img) {
 		this.post_img = post_img;
 	}
+	public Like_stat getLike_stat() {
+		return like_stat;
+	}
+	public void setLike_stat(Like_stat like_stat) {
+		this.like_stat = like_stat;
+	}
+	
 	
 }

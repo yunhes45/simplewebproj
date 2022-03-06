@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.simpleweb.simpleweb.mapper.BoardFuncMapper">
+	<select id="validlikecheck" resultType="com.simpleweb.simpleweb.model.Like_stat">
+		select like_stat_no, member_no, post_no, like_stat_check
+		
+		from like_stat
+		
+		where member_no = #{member_no} and post_no = #{post_no} and like_stat_check = #{like_stat_check}
+	</select>
+
+	<insert id="insertLike_stat" parameterType="com.simpleweb.simpleweb.model.Like_stat">
+		insert into like_stat(member_no, post_no, like_stat_check)
+		
+		values (  #{member_no} ,
+		          #{post_no} ,
+		          #{like_stat_check}  )		
+	</insert>
+	
+	<delete id="deleteLike_stat"  parameterType="com.simpleweb.simpleweb.model.Like_stat">
+		delete from like_stat
+		
+		where member_no = #{member_no} and post_no = #{post_no} and like_stat_check = #{like_stat_check}
+	</delete>
+</mapper>

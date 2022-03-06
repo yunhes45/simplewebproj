@@ -45,17 +45,32 @@
 				<result property="post_img_url" column="post_img_url" />
 				<result property="post_img_date" column="post_img_date" />
 			</association>
+		<!-- 1 : n -->
+			<collection javaType="Like_stat" property="like_stat">
+				<id property="like_stat_no" column="like_stat_no" />
+				<result property="member_no" column="member_no" />
+				<result property="post_no" column="post_no" />
+				<result property="like_stat_check" column="like_stat_check" />	
+				<result property="like_stat_count" column="like_stat_count" />			
+			</collection>
 	</resultMap>
 	
 	<select id="getPost_list" resultMap="JoinPostRM">
 		select m.post_no, m.member_no, m.post_title, m.post_subtitle, m.post_contents, m.post_date,
-			   n.post_img_no, n.post_img_filename, n.post_img_original_filename, n.post_img_url, n.post_img_date
+			   n.post_img_no, n.post_img_filename, n.post_img_original_filename, n.post_img_url, n.post_img_date,
+			   count(p.post_no) as like_stat_count
 		       
-		from post as m left join post_img as n
+		from post as m 
 		
+		left join post_img as n
 		on m.post_no = n.post_no
 		
+		left join like_stat as p
+		on m.post_no = p.post_no
+		
 		where m.member_no=#{member_no}
+		
+		group by m.post_no
 		
 		order by m.post_no desc
 		limit #{startPage}, #{onePageCnt}
@@ -63,11 +78,18 @@
 	
 	<select id="getPost_list_algo" resultMap="JoinPostRM">
 		select m.post_no, m.member_no, m.post_title, m.post_subtitle, m.post_contents, m.post_date,
-			   n.post_img_no, n.post_img_filename, n.post_img_original_filename, n.post_img_url, n.post_img_date
+			   n.post_img_no, n.post_img_filename, n.post_img_original_filename, n.post_img_url, n.post_img_date,
+			   count(p.post_no) as like_stat_count
 		       
-		from post as m left join post_img as n
+		from post as m 
 		
+		left join post_img as n
 		on m.post_no = n.post_no
+		
+		left join like_stat as p
+		on m.post_no = p.post_no
+		
+		group by m.post_no
 		
 		order by m.post_no desc
 		limit #{startPage}, #{onePageCnt}

@@ -22,9 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Post;
 import com.simpleweb.simpleweb.model.Post_img;
+import com.simpleweb.simpleweb.service.BoardFuncService;
 import com.simpleweb.simpleweb.service.BoardService;
 import com.simpleweb.simpleweb.service.CommonService;
 
@@ -33,6 +35,8 @@ public class BoardController {
 	
 	@Autowired
 	BoardService boardservice;
+	@Autowired
+	BoardFuncService boardfuncservice;
 	
 	@Autowired
 	CommonService commonservice;
@@ -65,7 +69,7 @@ public class BoardController {
 			
 			List<Post> post_list = boardservice.getPost_list_algo(startPage, onePageCnt);
 			
-			model.addAttribute("post_list", post_list);
+			model.addAttribute("post_list", post_list);		
 			
 		}else {
 			return "redirect:/";
@@ -90,6 +94,8 @@ public class BoardController {
 		}
 		
 		model.addAttribute("post_list", post_list);
+		
+		
 		
 		return "maincontent_list_ajax";
 	}
