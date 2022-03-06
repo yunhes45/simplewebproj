@@ -1,0 +1,37 @@
+.icon_heart_sprite {
+	background: url('images/background01.png') no-repeat -52px -261px;
+	width: 24px;
+	height: 22px;
+	filter: invert(100%) brightness(150%) contrast(150%);
+	cursor: pointer;
+}
+
+
+.icon_heart_sprite on {
+	background: url('imgs/background01.png') no-repeat -26px -261px;
+	width: 24px;
+	height: 22px;
+}
+
+.icon_bookmark_sprite {
+	background: url('images/background01.png') no-repeat -237px -286px;
+	width: 19px;
+	height: 24px;
+	filter: invert(100%) brightness(150%) contrast(150%);
+	cursor: pointer;
+}
+
+.icon_download_sprite {
+	background: url('images/background01.png') no-repeat -324px -52px;
+	width: 21px;
+	height: 24px;
+	filter: invert(100%) brightness(150%) contrast(150%);
+	cursor: pointer;
+}
+
+.icon_comment_del_sprite {
+	background: url('images/background02.png') no-repeat -156px -399px;
+	width: 22px;
+	height: 22px;
+	cursor: pointer;
+}

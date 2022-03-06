@@ -82,23 +82,30 @@ layout:decorate="layout/layout">
 													<h5>[[ ${post_list.getPost_subtitle()} ]]</h5>
 													<p>[[ ${post_list.getPost_contents()} ]]</p>
 													
-													<hr>
-													
 													<section id="bottom_menu">
+														<hr class="line_unset">
 														<div id="bottom_menu_icon">
-															
+															<div class="icon_heart_sprite"></div>
+															<div class="icon_bookmark_sprite"></div>
+															<div class="icon_download_sprite"></div>
 														</div>
 														<div id="bottom_menu_text">
-														
+															<h5 class="like_count">좋아요 0 개</h5>
 														</div>
 														<div id="comment">
-														
+															<div class="comment_list">
+																<h6 class="comment_elem">댓글입니다.</h6>
+																<div class="icon_comment_del_sprite"></div>
+															</div>
+															
+															<div class="comment_date">
+																<h6>2022-11-22 10:20:04</h6>
+															</div>
 														</div>
 														
-														<hr>
-														
 														<div id="comment_new">
-														
+															<hr class="line_unset">
+															<input type="text" class="comment_new_input" placeholder="댓글달기">
 														</div>
 														
 													</section>
