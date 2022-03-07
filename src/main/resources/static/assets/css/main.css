@@ -4226,6 +4226,11 @@ input, select, textarea {
 	#bottom_menu_icon .icon_heart_sprite {
 		margin-right: 10px;
 	}
+	
+	#bottom_menu_icon .icon_heart_sprite_on {
+		margin-right: 10px;
+	}
+	
 	#bottom_menu_icon .icon_bookmark_sprite {
 		margin-right: 10px;
 	}

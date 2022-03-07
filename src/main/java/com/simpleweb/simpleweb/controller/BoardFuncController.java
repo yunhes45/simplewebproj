@@ -1,5 +1,7 @@
 package com.simpleweb.simpleweb.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.service.BoardFuncService;
 import com.simpleweb.simpleweb.service.CommonService;
@@ -27,7 +30,7 @@ public class BoardFuncController {
 
 	@ResponseBody
 	@PostMapping("/like")
-	public String post_like(HttpServletRequest request,
+	public Map post_like(HttpServletRequest request,
 			@RequestParam("post_no") String post_no) {
 		
 		HttpSession session = request.getSession();
@@ -35,9 +38,10 @@ public class BoardFuncController {
 		
 		String trim_post_no = post_no.trim();
 		
-		boardfuncservice.LikeLogic(session_info.get().getMember_no(), Integer.parseInt(trim_post_no), 1);
-		
-		return null;
+		Map<String, Integer> likelogic = new HashMap<String, Integer>(); 
+		likelogic = boardfuncservice.LikeLogic(session_info.get().getMember_no(), Integer.parseInt(trim_post_no), 1);
+
+		return likelogic;
 	}
 
 }

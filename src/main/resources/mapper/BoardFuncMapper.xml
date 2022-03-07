@@ -22,4 +22,12 @@
 		
 		where member_no = #{member_no} and post_no = #{post_no} and like_stat_check = #{like_stat_check}
 	</delete>
+	
+	<select id="getLikeCount" resultType="int">
+		select count(*) as like_stat_count
+		
+		from like_stat
+		
+		where post_no = #{post_no}
+	</select>
 </mapper>

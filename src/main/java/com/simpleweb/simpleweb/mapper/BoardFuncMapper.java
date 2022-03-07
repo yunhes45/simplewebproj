@@ -25,4 +25,6 @@ public interface BoardFuncMapper {
 			@Param("post_no") int post_no,
 			@Param("like_stat_check")int i);
 
+	int getLikeCount(@Param("post_no") int post_no);
+
 }

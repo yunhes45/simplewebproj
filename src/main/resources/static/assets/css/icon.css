@@ -15,10 +15,12 @@
 }
 
 
-.icon_heart_sprite on {
-	background: url('imgs/background01.png') no-repeat -26px -261px;
+.icon_heart_sprite_on {
+	background: url('images/background01.png') no-repeat -26px -261px;
 	width: 24px;
 	height: 22px;
+	filter: brightness(150%) contrast(150%);
+	cursor: pointer;
 }
 
 .icon_bookmark_sprite {
