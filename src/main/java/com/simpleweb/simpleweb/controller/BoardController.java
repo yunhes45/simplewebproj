@@ -2,7 +2,9 @@ package com.simpleweb.simpleweb.controller;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,7 +71,20 @@ public class BoardController {
 			
 			List<Post> post_list = boardservice.getPost_list_algo(startPage, onePageCnt);
 			
-			model.addAttribute("post_list", post_list);		
+			model.addAttribute("post_list", post_list);
+			
+			// get post_no
+			List<Integer> post_list_no = new ArrayList<Integer>();
+			for(int i = 0; i < post_list.size(); i++) {
+				post_list_no.add(post_list.get(i).getPost_no());
+			}
+			
+			// like logic
+			List<List<String>> Post_Like_list = boardservice.getPost_Like_list(post_list_no);
+			model.addAttribute("Post_Like_list", Post_Like_list);
+			// like check logic
+			List<String> like_check = boardservice.getLike_check(Post_Like_list, session_info.get().getMember_id());
+			model.addAttribute("like_check", like_check);
 			
 		}else {
 			return "redirect:/";

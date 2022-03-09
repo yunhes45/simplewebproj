@@ -38,6 +38,14 @@ public class Like_stat {
 		this.like_stat_count = like_stat_count;
 	}
 	
+	private Member member;
 
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	
 	
 }
