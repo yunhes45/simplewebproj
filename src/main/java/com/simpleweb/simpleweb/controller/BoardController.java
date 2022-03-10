@@ -93,9 +93,11 @@ public class BoardController {
 		return "mainboard";
 	}
 	@PostMapping("/mainboard")
-	public String post_mainboard(Model model,
+	public String post_mainboard(Model model, HttpServletRequest request,
 			@RequestParam(value="page", required=false) String page,
 			@RequestParam(value="count", required=false) String count) {
+		HttpSession session = request.getSession();
+		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
 		int startPage   = 5;
 		int onePageCnt  = Integer.parseInt(page);
@@ -109,6 +111,19 @@ public class BoardController {
 		}
 		
 		model.addAttribute("post_list", post_list);
+		
+		// get post_no
+		List<Integer> post_list_no = new ArrayList<Integer>();
+		for(int i = 0; i < post_list.size(); i++) {
+			post_list_no.add(post_list.get(i).getPost_no());
+		}
+		
+		// like logic
+		List<List<String>> Post_Like_list = boardservice.getPost_Like_list(post_list_no);
+		model.addAttribute("Post_Like_list", Post_Like_list);
+		// like check logic
+		List<String> like_check = boardservice.getLike_check(Post_Like_list, session_info.get().getMember_id());
+		model.addAttribute("like_check", like_check);
 		
 		
 		
