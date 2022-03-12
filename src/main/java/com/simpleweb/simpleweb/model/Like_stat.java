@@ -39,6 +39,8 @@ public class Like_stat {
 	}
 	
 	private Member member;
+	private Member_profileimg member_profileimg;
+	private Post post;
 
 	public Member getMember() {
 		return member;
@@ -46,6 +48,19 @@ public class Like_stat {
 	public void setMember(Member member) {
 		this.member = member;
 	}
+	public Member_profileimg getMember_profileimg() {
+		return member_profileimg;
+	}
+	public void setMember_profileimg(Member_profileimg member_profileimg) {
+		this.member_profileimg = member_profileimg;
+	}
+	public Post getPost() {
+		return post;
+	}
+	public void setPost(Post post) {
+		this.post = post;
+	}
+
 	
 	
 }

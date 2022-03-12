@@ -100,5 +100,11 @@ public class BoardServiceImpl implements BoardService{
 		return ex1;
 	}
 
+	@Override
+	public List<Like_stat> ex(int post_list_no) {
+
+		return boardmapper.ex(post_list_no);
+	}
+
 
 }

@@ -99,11 +99,29 @@ layout:decorate="layout/layout">
 															<h5 th:id="|likeCount_${post_list.getPost_no()}|" class="like_count">좋아요 [[ ${post_list.getLike_stat().getLike_stat_count()} ]] 개</h5>
 														
 															<!-- like_list -->
-																
-															<div>
-																[[ ${Post_Like_list.get(num.index)} ]]
+															
+															[[${cnt.get(num.index)}]]	
+															
+															
+														<!-- 	<div th:if="${cnt.get(num.index) != 0}">
+															<div th:each="ee : ${#numbers.sequence(1, cnt.get(num.index))}"> 
+																o
 															</div>
-														
+															</div>
+															<div th:unless="${cnt.get(num.index) != 0}">
+																x
+															</div> -->
+																	
+															
+															<div th:if="${ !ex.get(num.index).empty }">
+															<div th:each="num3 : ${#numbers.sequence(1, cnt.get(num.index))}">
+																[[|y2 ${ex.get(num.index).get(num3-1).getMember_no()} |]]
+															</div>
+															</div>
+															<div th:unless="${ !ex.get(num.index).empty }">                                                               
+																X
+															</div>
+
 														</div>
 														<div id="comment">
 															<div class="comment_list">

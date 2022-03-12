@@ -18,5 +18,6 @@ public interface BoardService {
 	List<Like_stat> getLike_list(int post_no);
 	List<List<String>> getPost_Like_list(List<Integer> post_list_no);
 	List<String> getLike_check(List<List<String>> post_Like_list, String member_id);
+	List<Like_stat> ex(int post_list_no);
 
 }

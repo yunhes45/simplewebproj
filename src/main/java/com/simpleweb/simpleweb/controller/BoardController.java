@@ -86,6 +86,58 @@ public class BoardController {
 			List<String> like_check = boardservice.getLike_check(Post_Like_list, session_info.get().getMember_id());
 			model.addAttribute("like_check", like_check);
 			
+
+
+//				for(int i = 0; i < post_list.size(); i++) {
+//					List<Like_stat> ex = boardservice.ex(post_list_no.get(i));
+//
+//					for(int j = 0; j < ex.size(); j++) {
+//						ex1.put(post_list.get(i).getPost_no(), ex.get(j).getMember_no());
+//						
+//					}
+//					System.out.println(ex1.get(i));
+//				}
+				
+//				List<List<Like_stat>> ex = new ArrayList<>();
+//				try {
+//					for(int i = 0; i < post_list_no.size(); i++) {
+//						// get post like list
+//						List<Like_stat> ex1 = boardservice.ex(post_list_no.get(i));
+//						List<Like_stat> ex2 = new ArrayList<Like_stat>();
+//						
+//						for(int j = 0; j < ex1.size(); j++) {
+//							// get post one like list
+//							ex2.addAll(ex1);	
+//						}
+//						
+//						ex.add(ex2);
+//						model.addAttribute("ex", ex);
+//						System.out.println(post_list_no.get(i) + " : " + ex.get(i));
+//					}
+//				}catch(IndexOutOfBoundsException e) {
+//			
+//				}
+			
+			List<List<Like_stat>> ex = new ArrayList<>();
+			List<Integer> cntlist = new ArrayList<>();
+			try {
+				for(int i = 0; i < post_list_no.size(); i++) {
+					// get post like list
+					List<Like_stat> ex1 = boardservice.ex(post_list_no.get(i));
+					List<Like_stat> ex2 = new ArrayList<Like_stat>();
+					
+					ex.add(ex1);
+
+					model.addAttribute("ex", ex);
+					cntlist.add(ex.get(i).size());
+					model.addAttribute("cnt", cntlist);
+					System.out.println(cntlist);
+
+				}
+			}catch(IndexOutOfBoundsException e) {
+		
+			}
+			
 		}else {
 			return "redirect:/";
 		}
