@@ -60,5 +60,16 @@ public class BoardFuncController {
 		
 		return "ajaxtemplates/comment_ajax";
 	}
+	
+	@ResponseBody
+	@PostMapping("/delcomment")
+	public String post_delcomment(@RequestParam("comment_no") String comment_no) {
+		
+		String trim_comment_no = comment_no.trim();
+		
+		int delcomment = boardfuncservice.delcomment(Integer.parseInt(trim_comment_no));
+		
+		return comment_no;
+	}
 
 }

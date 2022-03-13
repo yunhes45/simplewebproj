@@ -87,4 +87,10 @@
 		where m.comment_no = #{comment_no}	
 	</select>
 	
+	<delete id="delcomment"  parameterType="com.simpleweb.simpleweb.model.Comment">
+		delete from comment
+		
+		where comment_no = #{comment_no}
+	</delete>
+	
 </mapper>

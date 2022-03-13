@@ -10,5 +10,6 @@ public interface BoardFuncService {
 
 	Map<String, Integer> LikeLogic(int member_no, int post_no, int i);
 	Optional<Comment> CommentLogic(int member_no, int post_no, String comment_text, String common_date);
+	int delcomment(int comment_no);
 
 }

@@ -54,3 +54,23 @@ function comment(id, comment_value){
 		});	
 		
 }
+
+function delcomment(id){
+	$.ajax({
+		type: "POST",
+		url:  "/delcomment",
+		data: {
+			comment_no :  id,
+		},
+		success: function(response){
+			var comment_item       = 'comment_item_'+response;
+			var trim_comment_item  = comment_item.trim(); 
+			
+			$("#"+trim_comment_item).remove();
+			
+		},
+		error: function(data){
+			
+		}		
+	});	
+}

@@ -69,5 +69,10 @@ public class BoardFuncServiceImpl implements BoardFuncService{
 		
 		return comment_list;
 	}
+	@Override
+	public int delcomment(int comment_no) {
+		
+		return boardfuncmapper.delcomment(comment_no);
+	}
 
 }

@@ -31,5 +31,6 @@ public interface BoardFuncMapper {
 
 	int insertComment(@Param("comment") Comment comment);
 	Optional<Comment> getComment_list(@Param("comment_no") int commentPK);
+	int delcomment(@Param("comment_no") int comment_no);
 
 }
