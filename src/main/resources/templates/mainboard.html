@@ -96,31 +96,20 @@ layout:decorate="layout/layout">
 															<div th:id="${post_list.getPost_no()}" class="icon_download_sprite"></div>
 														</div>
 														<div id="bottom_menu_text">
-															<h5 th:id="|likeCount_${post_list.getPost_no()}|" class="like_count">좋아요 [[ ${post_list.getLike_stat().getLike_stat_count()} ]] 개</h5>
-														
-															<!-- like_list -->
+															<div th:id="like_slideToggle" th:class="| likeCount_${post_list.getPost_no()} |">
+																<!-- like_list -->
+																<div th:if="${ !Post_Like_list.get(num.index).empty }">
+																<div th:each="num3 : ${#numbers.sequence(1, Like_cnt.get(num.index))}">
+																	<img class="header_profileimg" th:src="| /memberimg/${Post_Like_list.get(num.index).get(num3-1).getMember_profileimg().getMember_profileimg_filename()} |">
+																	[[| ${Post_Like_list.get(num.index).get(num3-1).getMember().getMember_id()} |]]
+																</div>
+																</div>
+																<div th:unless="${ !Post_Like_list.get(num.index).empty }">                                                               
+																	X
+																</div>																	
+															</div>
 															
-															[[${cnt.get(num.index)}]]	
-															
-															
-														<!-- 	<div th:if="${cnt.get(num.index) != 0}">
-															<div th:each="ee : ${#numbers.sequence(1, cnt.get(num.index))}"> 
-																o
-															</div>
-															</div>
-															<div th:unless="${cnt.get(num.index) != 0}">
-																x
-															</div> -->
-																	
-															
-															<div th:if="${ !ex.get(num.index).empty }">
-															<div th:each="num3 : ${#numbers.sequence(1, cnt.get(num.index))}">
-																[[|y2 ${ex.get(num.index).get(num3-1).getMember_no()} |]]
-															</div>
-															</div>
-															<div th:unless="${ !ex.get(num.index).empty }">                                                               
-																X
-															</div>
+															<h5 th:id="|likeCount_${post_list.getPost_no()}|" class="like_count" onClick="like_listFunc(this.id)">좋아요 [[ ${post_list.getLike_stat().getLike_stat_count()} ]] 개</h5>
 
 														</div>
 														<div id="comment">
@@ -140,9 +129,7 @@ layout:decorate="layout/layout">
 														</div>
 														
 													</section>
-																	
-						<!-- dd -->
-														
+										
 												</section>
 																							
 												<div id="maincontent_list_ajax"></div>
@@ -192,6 +179,11 @@ layout:decorate="layout/layout">
 				function post_slideToggleFunc(id){
 					$("." + id).animate({width: 'toggle'}, 400);
 				}
-			</script>		
+			</script>	
+			<script>
+				function like_listFunc(id){
+					$("." + id).animate({width: 'toggle'}, 400);
+				}
+			</script>	
 		</div>
 </html>

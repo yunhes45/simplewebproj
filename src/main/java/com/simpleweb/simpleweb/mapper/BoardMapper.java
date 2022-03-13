@@ -20,7 +20,5 @@ public interface BoardMapper {
 			@Param("onePageCnt") int onePageCnt);
 	List<Post> getPost_list_algo(@Param("startPage") int startPage, @Param("onePageCnt") int onePageCnt);
 	List<Like_stat> getLike_list(@Param("post_no") int post_no);
-	List<Like_stat> getLike_stat(@Param("post_list_no") int post_list_no);
-	List<Like_stat> ex(@Param("post_no") int post_list_no);
 
 }

@@ -53,58 +53,49 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Like_stat> getLike_list(int post_no) {
-
-		return boardmapper.getLike_list(post_no);
-	}
-
-	@Override
-	public List<List<String>> getPost_Like_list(List<Integer> post_list_no) {
-		List<List<String>> like_list_id = new ArrayList<>();
+	public List<List<Like_stat>> getPost_Like_list(List<Integer> post_list_no) {
+		
+		List<List<Like_stat>> getpost_like_list = new ArrayList<>();
 		try {
 			for(int i = 0; i < post_list_no.size(); i++) {
-				// get post like list
-				List<Like_stat> likestat = boardmapper.getLike_stat(post_list_no.get(i));
-				List<String> post_like_list = new ArrayList<>();
+				List<Like_stat> likestat = boardmapper.getLike_list(post_list_no.get(i));
+			
+				getpost_like_list.add(likestat);
 				
-				for(int j = 0; j < likestat.size(); j++) {
-					// get post one like list
-					post_like_list.add(likestat.get(j).getMember().getMember_id());
-					
-				}
-				
-				like_list_id.add(post_like_list);
-
 			}
 		}catch(IndexOutOfBoundsException e) {
 	
 		}
-		
-		return like_list_id;
+		return getpost_like_list;
 	}
 
 	@Override
-	public List<String> getLike_check(List<List<String>> post_Like_list, String member_id) {
-		List<String> ex1 = new ArrayList<String>();
+	public List<Integer> getLike_cnt(List<List<Like_stat>> post_Like_list) {
+		List<Integer> Like_cnt = new ArrayList<Integer>();
 		for(int i = 0; i < post_Like_list.size(); i++) {
-			String ex = null;
+			Like_cnt.add(post_Like_list.get(i).size());
+		}
+		
+		return Like_cnt;
+	}
+	
+	@Override
+	public List<String> getLike_check(List<Integer> like_cnt, List<List<Like_stat>> post_Like_list, String member_id) {
+		List<String> like_check    = new ArrayList<String>();
+		
+		for(int i = 0; i < like_cnt.size(); i++) {
+			String check = null;
+			
 			for(int j = 0; j < post_Like_list.get(i).size(); j++) {
-				if(post_Like_list.get(i).get(j).contains(member_id)) {
-					ex = "O";
+				if(post_Like_list.get(i).get(j).getMember().getMember_id().contains(member_id)) {
+					check = "O";
 				}
 			}
-			ex1.add(ex);
-			System.out.println(ex1);
+			like_check.add(check);
+			System.out.println("like_check : " + like_check);
 		}
 			
-		return ex1;
+		return like_check;
 	}
-
-	@Override
-	public List<Like_stat> ex(int post_list_no) {
-
-		return boardmapper.ex(post_list_no);
-	}
-
 
 }
