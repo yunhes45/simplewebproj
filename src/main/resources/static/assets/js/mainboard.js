@@ -2,6 +2,7 @@ function like(id){
 	var post_no = id.split('_');
 	console.log(post_no[0]);
 	console.log("1 : " + post_no[1]);
+	
 		$.ajax({
 			type: "POST",
 			url:  "/like",
@@ -26,6 +27,30 @@ function like(id){
 			error: function(data){
 				alert("code: " + request.status + "\n" + "message: " + request.responseText + "\n" + "error: " + error);
 			}		
-		});
+		});	
+}
+
+function comment(id, comment_value){
+	var comment_text = comment_value.value;
+	var resetValue = comment_value;
+	resetValue.value = null;
+	
+		$.ajax({
+			type: "POST",
+			url:  "/comment",
+			data: {
+				post_no        :  id,
+				comment_text   :  comment_text,	
+			},
+			dataType: "html",
+			success: function(response){
+				console.log(id);
+				let comment = document.querySelector("#comment_"+id);
+				comment.insertAdjacentHTML("beforeend", response);
+			},
+			error: function(data){
+				alert("code: " + request.status + "\n" + "message: " + request.responseText + "\n" + "error: " + error);
+			}		
+		});	
 		
 }

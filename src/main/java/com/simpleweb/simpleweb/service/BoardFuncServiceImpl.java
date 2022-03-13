@@ -1,6 +1,7 @@
 package com.simpleweb.simpleweb.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.simpleweb.simpleweb.mapper.BoardFuncMapper;
+import com.simpleweb.simpleweb.model.Comment;
 import com.simpleweb.simpleweb.model.Like_stat;
 
 @Service
@@ -49,6 +51,23 @@ public class BoardFuncServiceImpl implements BoardFuncService{
 		int getlikecount = boardfuncmapper.getLikeCount(post_no);
 		
 		return getlikecount;
+	}
+	
+	@Override
+	public Optional<Comment> CommentLogic(int member_no, int post_no, String comment_text, String comment_date) {
+		Comment comment = new Comment();
+		comment.setMember_no(member_no);
+		comment.setPost_no(post_no);
+		comment.setComment_text(comment_text);
+		comment.setComment_date(comment_date);
+		
+		boardfuncmapper.insertComment(comment);
+
+		int commentPK = comment.getComment_no();
+		
+		Optional<Comment> comment_list = boardfuncmapper.getComment_list(commentPK);
+		
+		return comment_list;
 	}
 
 }

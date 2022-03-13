@@ -129,6 +129,7 @@ public class BoardController {
 		
 		// like cnt
 		List<Integer> Like_cnt = boardservice.getLike_cnt(Post_Like_list);
+		model.addAttribute("Like_cnt", Like_cnt);
 		
 		// like check logic
 		List<String> like_check = boardservice.getLike_check(Like_cnt, Post_Like_list, session_info.get().getMember_id());
@@ -154,12 +155,6 @@ public class BoardController {
 			int count       = (int)Math.ceil((double)file_listtotalcount/(double)onePageCnt);
 		
 			model.addAttribute("file_listtotalcount", file_listtotalcount);
-			
-//			int page_count[] = new int[count+1];
-//			for(int i=1; i<=count; i++) {
-//				page_count[i] += i;
-//				System.out.println("page_count : " + page_count[i]);
-//			}
 
 			List<Integer> page_count = new ArrayList<>();
 			

@@ -48,14 +48,21 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 							<div th:id="${post_list.getPost_no()}" class="icon_download_sprite"></div>
 						</div>
 						<div id="bottom_menu_text">
-							<h5 th:id="|likeCount_${post_list.getPost_no()}|" class="like_count">좋아요 [[ ${post_list.getLike_stat().getLike_stat_count()} ]] 개</h5>
-						
-							<!-- like_list -->
-								
-							<div>
-								[[ ${Post_Like_list.get(num.index)} ]]
+							<div th:id="like_slideToggle" th:class="| likeCount_${post_list.getPost_no()} |">
+								<!-- like_list -->
+								<div th:if="${ !Post_Like_list.get(num.index).empty }">
+								<div th:each="num3 : ${#numbers.sequence(1, Like_cnt.get(num.index))}">
+									<img class="header_profileimg" th:src="| /memberimg/${Post_Like_list.get(num.index).get(num3-1).getMember_profileimg().getMember_profileimg_filename()} |">
+									[[| ${Post_Like_list.get(num.index).get(num3-1).getMember().getMember_id()} |]]
+								</div>
+								</div>
+								<div th:unless="${ !Post_Like_list.get(num.index).empty }">                                                               
+									X
+								</div>																	
 							</div>
-						
+							
+							<h5 th:id="|likeCount_${post_list.getPost_no()}|" class="like_count" onClick="like_listFunc(this.id)">좋아요 [[ ${post_list.getLike_stat().getLike_stat_count()} ]] 개</h5>
+
 						</div>
 						<div id="comment">
 							<div class="comment_list">
@@ -74,9 +81,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						</div>
 						
 					</section>
-									
-<!-- dd -->
-						
+		
 				</section>
 						
 			</div>

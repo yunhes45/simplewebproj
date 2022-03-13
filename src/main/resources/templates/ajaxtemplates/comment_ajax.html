@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+	<div class="col-8 col-12-medium">
+	<meta charset="utf-8" />
+		<!-- Comment -->
+		<div id="comment">
+			<div class="comment_list">
+				<h6 class="comment_elem">[[ ${commentlogic.get().getComment_text()} ]]</h6>
+				<div class="icon_comment_del_sprite"></div>
+			</div>
+			
+			<div class="comment_date">
+				<h6>[[ ${commentlogic.get().getComment_date()} ]]</h6>
+			</div>
+		</div>
+	</div>
+	<script src="assets/js/mainboard.js"></script>
+</html>

@@ -112,22 +112,16 @@ layout:decorate="layout/layout">
 															<h5 th:id="|likeCount_${post_list.getPost_no()}|" class="like_count" onClick="like_listFunc(this.id)">좋아요 [[ ${post_list.getLike_stat().getLike_stat_count()} ]] 개</h5>
 
 														</div>
-														<div id="comment">
-															<div class="comment_list">
-																<h6 class="comment_elem">댓글입니다.</h6>
-																<div class="icon_comment_del_sprite"></div>
-															</div>
-															
-															<div class="comment_date">
-																<h6>2022-11-22 10:20:04</h6>
-															</div>
-														</div>
 														
-														<div id="comment_new">
-															<hr class="line_unset">
-															<input type="text" class="comment_new_input" placeholder="댓글달기">
-														</div>
-														
+														<!-- comment ajax -->
+														<div th:id="|comment_${post_list.getPost_no()}|"></div>
+
+															<div id="comment_new">
+																<hr class="line_unset">
+																<input type="text" th:id="|comment_text_${post_list.getPost_no()}|" th:name="${post_list.getPost_no()}" class="comment_new_input" placeholder="댓글달기">
+																<a  th:id="${post_list.getPost_no()}"  class="" th:onClick="comment(this.id, comment_text_[[${post_list.getPost_no()}]] )">등록</a>
+															</div>
+
 													</section>
 										
 												</section>
@@ -174,7 +168,7 @@ layout:decorate="layout/layout">
 						
 			<!-- script -->
 			<script src="assets/js/infinitescroll.js"></script>
-			<script src="assets/js/like.js"></script>
+			<script src="assets/js/mainboard.js"></script>
 			<script>
 				function post_slideToggleFunc(id){
 					$("." + id).animate({width: 'toggle'}, 400);
