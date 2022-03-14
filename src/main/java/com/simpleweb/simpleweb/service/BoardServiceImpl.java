@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.simpleweb.simpleweb.mapper.BoardMapper;
+import com.simpleweb.simpleweb.model.Comment;
 import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Post;
 import com.simpleweb.simpleweb.model.Post_img;
@@ -96,6 +97,33 @@ public class BoardServiceImpl implements BoardService{
 		}
 			
 		return like_check;
+	}
+
+	@Override
+	public List<List<Comment>> getPost_Comment_list(List<Integer> post_list_no) {
+		
+		List<List<Comment>> getpost_comment_list = new ArrayList<>();
+		try {
+			for(int i = 0; i < post_list_no.size(); i++) {
+				List<Comment> comment = boardmapper.getComment_list(post_list_no.get(i));
+			
+				getpost_comment_list.add(comment);
+				
+			}
+		}catch(IndexOutOfBoundsException e) {
+	
+		}
+		return getpost_comment_list;
+	}
+
+	@Override
+	public List<Integer> getComment_cnt(List<List<Comment>> Post_Comment_list) {
+		List<Integer> Comment_cnt = new ArrayList<Integer>();
+		for(int i = 0; i < Post_Comment_list.size(); i++) {
+			Comment_cnt.add(Post_Comment_list.get(i).size());
+		}
+		
+		return Comment_cnt;
 	}
 
 }

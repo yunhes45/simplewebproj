@@ -113,6 +113,28 @@ layout:decorate="layout/layout">
 
 														</div>
 														
+														<!-- Comment -->
+
+														<div th:if="${ !Post_Comment_list.get(num.index).empty }">
+														<div th:each="num4 : ${#numbers.sequence(1, Comment_cnt.get(num.index))}">
+															<div th:id="|comment_item_${Post_Comment_list.get(num.index).get(num4-1).getComment_no()}|">
+																<div id="comment">
+																	<div class="comment_list">
+																		<h6 class="comment_elem">[[ ${Post_Comment_list.get(num.index).get(num4-1).getComment_text()} ]]</h6>
+																		<div th:id="${Post_Comment_list.get(num.index).get(num4-1).getComment_no()}" class="icon_comment_del_sprite" onclick="delcomment(this.id)"></div>
+																	</div>
+																	
+																	<div class="comment_date">
+																		<h6>[[ ${Post_Comment_list.get(num.index).get(num4-1).getComment_date()} ]]</h6>
+																	</div>
+																</div>	
+															</div>
+														</div>
+														</div>
+														<div th:unless="${ !Post_Comment_list.get(num.index).empty }">
+															X
+														</div> 
+														
 														<!-- comment ajax -->
 														<div th:id="|comment_${post_list.getPost_no()}|"></div>
 

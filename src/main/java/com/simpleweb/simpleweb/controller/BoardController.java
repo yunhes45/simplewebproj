@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.simpleweb.simpleweb.model.Comment;
 import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Post;
@@ -90,6 +91,20 @@ public class BoardController {
 			// like check logic
 			List<String> like_check = boardservice.getLike_check(Like_cnt, Post_Like_list, session_info.get().getMember_id());
 			model.addAttribute("like_check", like_check);
+			
+			// comment logic
+			List<List<Comment>> Post_Comment_list = boardservice.getPost_Comment_list(post_list_no);
+			model.addAttribute("Post_Comment_list", Post_Comment_list);
+			
+			// comment cnt
+			List<Integer> Comment_cnt = boardservice.getComment_cnt(Post_Comment_list);
+			model.addAttribute("Comment_cnt", Comment_cnt);
+			
+			for(int i = 0; i < post_list_no.size(); i++) {
+				for(int j = 0; j < Comment_cnt.get(i); j++) {
+					System.out.println("fsdfds : " + Post_Comment_list.get(i).get(j).getComment_no());
+				}
+			}
 					
 		}else {
 			return "redirect:/";
@@ -135,7 +150,19 @@ public class BoardController {
 		List<String> like_check = boardservice.getLike_check(Like_cnt, Post_Like_list, session_info.get().getMember_id());
 		model.addAttribute("like_check", like_check);
 		
+		// comment logic
+		List<List<Comment>> Post_Comment_list = boardservice.getPost_Comment_list(post_list_no);
+		model.addAttribute("Post_Comment_list", Post_Comment_list);
 		
+		// comment cnt
+		List<Integer> Comment_cnt = boardservice.getComment_cnt(Post_Comment_list);
+		model.addAttribute("Comment_cnt", Comment_cnt);
+		
+		for(int i = 0; i < post_list_no.size(); i++) {
+			for(int j = 0; j < Comment_cnt.get(i); j++) {
+				System.out.println("fsdfds : " + Post_Comment_list.get(i).get(j).getComment_no());
+			}
+		}
 		
 		return "maincontent_list_ajax";
 	}

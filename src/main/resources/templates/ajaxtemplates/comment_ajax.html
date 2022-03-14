@@ -4,7 +4,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<div class="col-8 col-12-medium">
 	<meta charset="utf-8" />
 		<!-- Comment -->
-		<div th:id="|comment_item_${commentlogic.get().getComment_no()}|" class="ex12">
+		<div th:id="|comment_item_${commentlogic.get().getComment_no()}|">
 			<div id="comment">
 				<div class="comment_list">
 					<h6 class="comment_elem">[[ ${commentlogic.get().getComment_text()} ]]</h6>
