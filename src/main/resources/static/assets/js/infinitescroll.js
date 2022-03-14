@@ -2,7 +2,8 @@ var count = 0;
 
 $(window).scroll(function(){
 	var page = document.querySelector("#page").value;
-	
+
+	console.log($(window).scrollTop() == $(document).height() - $(window).height());	
 	if($(window).scrollTop() == $(document).height() - $(window).height()) {
 		count++;
 		

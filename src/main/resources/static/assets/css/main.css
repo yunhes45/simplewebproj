@@ -4147,7 +4147,7 @@ input, select, textarea {
 		border: 2px solid white;
 		border-radius: 50%;
 	}
-	
+/* 	
 	#sidebar_fix {
 		clear: both;
   		height: 400px;
@@ -4162,7 +4162,7 @@ input, select, textarea {
 	#sidebar_side #sidebar_element {
 		clear: both;
 	}
-	
+	 */
 	#maincontent #content1 {
 		border: 1px solid white;
 		width: 100%;
