@@ -7,6 +7,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 		<div th:id="|comment_item_${commentlogic.get().getComment_no()}|">
 			<div id="comment">
 				<div class="comment_list">
+					<img class="header_profileimg" th:src="| /memberimg/${commentlogic.get().getMember_profileimg().getMember_profileimg_filename()} |">
+					[[| ${commentlogic.get().getMember().getMember_id()} |]]
 					<h6 class="comment_elem">[[ ${commentlogic.get().getComment_text()} ]]</h6>
 					<div th:id="${commentlogic.get().getComment_no()}" class="icon_comment_del_sprite" onclick="delcomment(this.id)"></div>
 				</div>

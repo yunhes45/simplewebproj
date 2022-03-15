@@ -120,8 +120,13 @@ layout:decorate="layout/layout">
 															<div th:id="|comment_item_${Post_Comment_list.get(num.index).get(num4-1).getComment_no()}|">
 																<div id="comment">
 																	<div class="comment_list">
+																		<img class="header_profileimg" th:src="| /memberimg/${Post_Comment_list.get(num.index).get(num4-1).getMember_profileimg().getMember_profileimg_filename()} |">
+																		[[| ${Post_Comment_list.get(num.index).get(num4-1).getMember().getMember_id()} |]]
 																		<h6 class="comment_elem">[[ ${Post_Comment_list.get(num.index).get(num4-1).getComment_text()} ]]</h6>
+																		<div th:if="${Post_Comment_list.get(num.index).get(num4-1).getMember_no()} == ${session.session_info.get().getMember_no()}">
 																		<div th:id="${Post_Comment_list.get(num.index).get(num4-1).getComment_no()}" class="icon_comment_del_sprite" onclick="delcomment(this.id)"></div>
+																		</div>
+																		
 																	</div>
 																	
 																	<div class="comment_date">
