@@ -3,6 +3,7 @@ package com.simpleweb.simpleweb.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.simpleweb.simpleweb.model.Comment;
 import com.simpleweb.simpleweb.model.Like_stat;
@@ -23,5 +24,7 @@ public interface BoardService {
 	
 	List<List<Comment>> getPost_Comment_list(List<Integer> post_list_no);
 	List<Integer> getComment_cnt(List<List<Comment>> Post_Comment_list);
+	
+	Optional<Post> getMemberPost(int post_no, int member_no);
 
 }

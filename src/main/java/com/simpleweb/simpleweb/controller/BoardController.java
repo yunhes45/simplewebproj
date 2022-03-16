@@ -71,7 +71,7 @@ public class BoardController {
 			int count       = (int)Math.ceil((double)file_listtotalcount/(double)onePageCnt);
 			
 			List<Post> post_list = boardservice.getPost_list_algo(startPage, onePageCnt);
-			
+			System.out.println(post_list.get(0).getMember().getMember_id());
 			model.addAttribute("post_list", post_list);
 			
 			// get post_no
@@ -129,7 +129,6 @@ public class BoardController {
 		for(int i=0; i<post_list.size(); i++) {
 			System.out.println(post_list.get(i).getPost_no());
 		}
-		
 		model.addAttribute("post_list", post_list);
 		
 		// get post_no
@@ -256,9 +255,25 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/detailpost")
-	public String detailpost() {
+	public String detailpost(Model model, HttpServletRequest request,
+			@RequestParam("name") String member_id,
+			@RequestParam("post") String post_no) {
+		HttpSession session = request.getSession();
+		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
-		return "detailpost";
+		if(session_info != null) {
+			int member_no = commonservice.getMember_no(member_id);
+			
+			Optional<Post> memberPost = boardservice.getMemberPost(Integer.parseInt(post_no), member_no);
+			model.addAttribute("memberPost", memberPost);
+			
+			System.out.println(memberPost.get().getPost_contents());
+			
+			return "detailpost";
+		
+		}else {
+			return "redirect:/";
+		}
 	}
 	
 }

@@ -45,6 +45,21 @@
 				<result property="post_img_url" column="post_img_url" />
 				<result property="post_img_date" column="post_img_date" />
 			</association>
+			
+		<!-- 1 : 1 -->
+			<association javaType="Member" property="member">
+				<id property="member_no" column="member_no" />
+				<result property="member_id" column="member_id" />
+				<result property="member_pwd" column="member_pwd" />
+				<result property="member_email" column="member_email" />
+				<result property="member_nickname" column="member_nickname" />
+				<result property="member_mobile" column="member_mobile" />
+				<result property="member_job" column="member_job" />
+				<result property="member_gender" column="member_gender" />
+				<result property="member_introduce" column="member_introduce" />
+				<result property="member_date" column="member_date" />		
+			</association>
+			
 		<!-- 1 : n -->
 			<collection javaType="Like_stat" property="like_stat">
 				<id property="like_stat_no" column="like_stat_no" />
@@ -53,12 +68,14 @@
 				<result property="like_stat_check" column="like_stat_check" />	
 				<result property="like_stat_count" column="like_stat_count" />			
 			</collection>
+			
 	</resultMap>
 	
 	<select id="getPost_list" resultMap="JoinPostRM">
 		select m.post_no, m.member_no, m.post_title, m.post_subtitle, m.post_contents, m.post_date,
 			   n.post_img_no, n.post_img_filename, n.post_img_original_filename, n.post_img_url, n.post_img_date,
-			   count(p.post_no) as like_stat_count
+			   count(p.post_no) as like_stat_count,
+			   l.member_id
 		       
 		from post as m 
 		
@@ -67,6 +84,9 @@
 		
 		left join like_stat as p
 		on m.post_no = p.post_no
+		
+		left join member as l
+		on m.member_no = l.member_no
 		
 		where m.member_no=#{member_no}
 		
@@ -79,7 +99,8 @@
 	<select id="getPost_list_algo" resultMap="JoinPostRM">
 		select m.post_no, m.member_no, m.post_title, m.post_subtitle, m.post_contents, m.post_date,
 			   n.post_img_no, n.post_img_filename, n.post_img_original_filename, n.post_img_url, n.post_img_date,
-			   count(p.post_no) as like_stat_count
+			   count(p.post_no) as like_stat_count,
+			   l.member_id
 		       
 		from post as m 
 		
@@ -89,11 +110,36 @@
 		left join like_stat as p
 		on m.post_no = p.post_no
 		
+		left join member as l
+		on m.member_no = l.member_no
+		
 		group by m.post_no
 		
 		order by m.post_no desc
 		limit #{startPage}, #{onePageCnt}
 		
+	</select>
+	
+	<select id="getMemberPost" resultMap="JoinPostRM">
+		select m.post_no, m.member_no, m.post_title, m.post_subtitle, m.post_contents, m.post_date,
+			   n.post_img_no, n.post_img_filename, n.post_img_original_filename, n.post_img_url, n.post_img_date,
+			   count(p.post_no) as like_stat_count,
+			   l.member_id
+		       
+		from post as m 
+		
+		left join post_img as n
+		on m.post_no = n.post_no
+		
+		left join like_stat as p
+		on m.post_no = p.post_no
+		
+		left join member as l
+		on m.member_no = l.member_no
+		
+		where m.post_no=#{post_no} and m.member_no=#{member_no}
+
+		order by m.post_no desc	
 	</select>
 	
 	<resultMap id="JoinPostLikeRM" type="com.simpleweb.simpleweb.model.Like_stat">

@@ -27,7 +27,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						
 					</div>
 					
-					<a href="#" class="image fit">
+					<a th:href="| /detailpost?name=${post_list.getMember().getMember_id()} |" class="image fit">
 						<img class="imagefit" th:src="| /postimg/${post_list.getPost_img().getPost_img_filename()} |" alt="">
 					</a>
 					<h5>[[ ${post_list.getPost_subtitle()} ]]</h5>

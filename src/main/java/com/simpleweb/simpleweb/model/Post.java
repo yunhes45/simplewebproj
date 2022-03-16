@@ -45,9 +45,16 @@ public class Post {
 		this.post_date = post_date;
 	}
 	
+	private Member member;
 	private Post_img post_img;
 	private Like_stat like_stat;
 	
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
 	public Post_img getPost_img() {
 		return post_img;
 	}

@@ -74,8 +74,8 @@ layout:decorate="layout/layout">
 														</div>
 														
 													</div>
-													
-													<a href="#" class="image fit">
+													<!-- th:onclick="|location.href='@{| /detailpost?name=${post_list} |}'|" -->
+													<a th:href="| /detailpost?name=${post_list.getMember().getMember_id()}&post=${post_list.getPost_no()} |" class="image fit">
 														<img class="imagefit" th:src="| /postimg/${post_list.getPost_img().getPost_img_filename()} |" alt="">
 													</a>
 													<h5>[[ ${post_list.getPost_subtitle()} ]]</h5>

@@ -11,57 +11,94 @@ layout:decorate="layout/layout">
 				
 			</script>
 		
-			<!-- Main -->
+					<!-- main -->
 				<div id="main" class="wrapper style1">
 					<div class="container">
 						<header class="major">
-							<h2>게시판 작성</h2>
+							<h2>[[ ${memberPost.get().getPost_title()} ]]</h2>
 						</header>
-
-						<!-- Form -->
-							<section>
-								<form method="post" action="/writepost" enctype="multipart/form-data">
-									<div class="writepost_layout">
-										<div class="writepost_form">
-											<div class="writepost_img_profile_wrap">
-												<div class="writepost_img">
-													<canvas id="writepost_imagecanvas"></canvas>
+						<div class="row gtr-150">
+						
+						<!--  대체 왜?  -->
+						<div class="col-4 col-12-medium">
+						</div>
+						<div class="col-4 col-12-medium">
+						</div>
+						
+							<div class="col-8 col-12-medium">
+								<!-- Content -->
+								<div id="maincontent">
+									<section id="content1">
+									
+									<div id="post_header">
+										<div id="post_header_element">
+											<div th:id="${memberPost.get().getPost_no()}" class="icon_menu_sprite" onClick="post_slideToggleFunc(this.id)"></div>
+																							
+												<div th:id="post_slideToggle" th:class="${memberPost.get().getPost_no()}">
+													<div th:if="${memberPost.get().getMember_no()} == ${session.session_info.get().getMember_no()}">
+														<a>같아</a>
+													</div>
+													<div th:unless="${memberPost.get().getMember_no()} == ${session.session_info.get().getMember_no()}">
+														<a>달라</a>
+													</div>
 												</div>
-											</div>
-											<div class="col-6 col-12-xsmall">
-												<input type="file" name="postimg" id="postimg" value="" placeholder="이미지파일" />
-												<div id="postimg_error" class="error"></div>
-											</div>
-											<div class="col-6 col-12-xsmall">
-												<input type="text" name="post_title" id="post_title" value="" placeholder="제목" />
-												<div id="post_title_error" class="error"></div>
-											</div>
-											<div class="col-6 col-12-xsmall">
-												<input type="text" name="post_subtitle" id="post_subtitle" value="" placeholder="소제목" />
-												<div id="post_subtitle_error" class="error"></div>
-											</div>
-											<div class="col-6 col-12-xsmall">
-												<textarea name="post_contents" id="post_contents" placeholder="내용을 입력하세요." rows="6"></textarea>
-												<div id="post_contents_error" class="error"></div>
-											</div>
-											<div class="col-6 col-12-xsmall">
-												<ul class="actions">
-													<li><a href="/" class="button primary">목록</a></li>
-													<li></li>
-													<li></li>
-													<li><input id="save_btn" type="submit" value="저장" class="primary" /></li>
-													<li><input type="reset" value="작성취소" /></li>
-												</ul>
-											</div>
+										</div>
 									</div>
+													
+										<a class="image fit">
+										<img class="imagefit" th:src="| /postimg/${memberPost.get().getPost_img().getPost_img_filename()} |" alt="">
+										</a>
+										<h3>[[ ${memberPost.get().getPost_subtitle()} ]]</h3>
+										<p>[[ ${memberPost.get().getPost_contents()} ]]</p>
+									</section>
 								</div>
-							</form>
-						</section>
+							<hr>
+							
+															
+							<section id="sidebar_element_bottom">
+								<h3>Magna Feugiat</h3>
+								<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit..</p>
+								<footer>
+									<ul class="actions">
+										<li><a href="#" class="button">Learn More</a></li>
+									</ul>
+								</footer>
+							</section>
+							</div>
 
+							
+							<div class="col-4 col-12-medium">
+								<!-- Sidebar -->
+									<section id="sidebar_side">
+										<section id="sidebar_element">
+											<h3>Magna Feugiat</h3>
+											<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit..</p>
+											<footer>
+												<ul class="actions">
+													<li><a href="#" class="button">Learn More</a></li>
+												</ul>
+											</footer>
+										</section>
+										<hr>
+																					
+									</section>											
+							</div>
+							
+							
+						</div>
 					</div>
 				</div>
-				
-				<!-- script -->
-									
+			<!-- script -->
+			<script src="assets/js/mainboard.js"></script>
+			<script>
+				function post_slideToggleFunc(id){
+					$("." + id).animate({width: 'toggle'}, 400);
+				}
+			</script>	
+			<script>
+				function like_listFunc(id){
+					$("." + id).animate({width: 'toggle'}, 400);
+				}
+			</script>	
 		</div>
 </html>

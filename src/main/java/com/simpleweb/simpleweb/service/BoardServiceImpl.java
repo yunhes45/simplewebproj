@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -124,6 +125,12 @@ public class BoardServiceImpl implements BoardService{
 		}
 		
 		return Comment_cnt;
+	}
+
+	@Override
+	public Optional<Post> getMemberPost(int post_no, int member_no) {
+	
+		return boardmapper.getMemberPost(post_no, member_no);
 	}
 
 }

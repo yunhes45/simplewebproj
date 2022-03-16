@@ -1,6 +1,7 @@
 package com.simpleweb.simpleweb.mapper;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -22,5 +23,7 @@ public interface BoardMapper {
 	List<Post> getPost_list_algo(@Param("startPage") int startPage, @Param("onePageCnt") int onePageCnt);
 	List<Like_stat> getLike_list(@Param("post_no") int post_no);
 	List<Comment> getComment_list(@Param("post_no") int post_no);
+	
+	Optional<Post> getMemberPost(@Param("post_no") int post_no, @Param("member_no") int member_no);
 
 }
