@@ -252,4 +252,12 @@
 		where m.post_no = #{post_no}	
 	</select>
 	
+	<select id="getMemberLike_check" resultType="com.simpleweb.simpleweb.model.Like_stat">
+		select like_stat_no, member_no, post_no, like_stat_check
+		
+		from like_stat
+		
+		where post_no=#{post_no} and member_no=#{member_no}
+	</select>
+	
 </mapper>

@@ -71,13 +71,65 @@ layout:decorate="layout/layout">
 								<!-- Sidebar -->
 									<section id="sidebar_side">
 										<section id="sidebar_element">
-											<h3>Magna Feugiat</h3>
-											<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit..</p>
-											<footer>
-												<ul class="actions">
-													<li><a href="#" class="button">Learn More</a></li>
-												</ul>
-											</footer>
+											<section id="bottom_menu">
+												<hr class="line_unset">
+												<div id="bottom_menu_icon">
+												
+													<div th:if="${memberlike_check} == X">
+														<div th:id="| heart_${memberPost.get().getPost_no()} |" th:name="${memberPost.get().getPost_no()}" class="icon_heart_sprite" onClick="like(this.id)"></div>
+													</div>
+													<div th:unless="${memberlike_check} == X">
+														<div th:id="| heart_${memberPost.get().getPost_no()} |" th:name="${memberPost.get().getPost_no()}" class="icon_heart_sprite_on" onClick="like(this.id)"></div>
+													</div>
+													
+													<div th:id="${memberPost.get().getPost_no()}" class="icon_bookmark_sprite"></div>
+													<div th:id="${memberPost.get().getPost_no()}" class="icon_download_sprite"></div>
+												</div>
+												<div id="bottom_menu_text">
+													<div th:id="like_slideToggle" th:class="| likeCount_${memberPost.get().getPost_no()} |">
+														<!-- like_list -->
+														<div th:each="memberPost_Like_list : ${memberPost_Like_list}">
+															<img class="header_profileimg" th:src="| /memberimg/${memberPost_Like_list.getMember_profileimg().getMember_profileimg_filename()} |">
+															[[| ${memberPost_Like_list.getMember().getMember_id()} |]]
+														</div>																	
+													</div>
+													
+													<h5 th:id="|likeCount_${memberPost.get().getPost_no()}|" class="like_count" onClick="like_listFunc(this.id)">좋아요 [[ ${memberPost.get().getLike_stat().getLike_stat_count()} ]] 개</h5>
+
+												</div>
+												
+												<!-- Comment -->
+
+												<div th:each="memberPost_Comment_list : ${memberPost_Comment_list}">
+													<div th:id="|comment_item_${memberPost_Comment_list.getComment_no()}|">
+														<div id="comment">
+															<div class="comment_list">
+																<img class="header_profileimg" th:src="| /memberimg/${memberPost_Comment_list.getMember_profileimg().getMember_profileimg_filename()} |">
+																[[| ${memberPost_Comment_list.getMember().getMember_id()} |]]
+																<h6 class="comment_elem">[[ ${memberPost_Comment_list.getComment_text()} ]]</h6>
+																<div th:if="${memberPost_Comment_list.getMember_no()} == ${session.session_info.get().getMember_no()}">
+																<div th:id="${memberPost_Comment_list.getComment_no()}" class="icon_comment_del_sprite" onclick="delcomment(this.id)"></div>
+																</div>
+																
+															</div>
+															
+															<div class="comment_date">
+																<h6>[[ ${memberPost_Comment_list.getComment_date()} ]]</h6>
+															</div>
+														</div>	
+													</div>
+												</div>
+												
+												<!-- comment ajax -->
+											    <div th:id="|comment_${memberPost.get().getPost_no()}|"></div>
+ 
+												<div id="comment_new">
+													<hr class="line_unset">
+													<input type="text" th:id="|comment_text_${memberPost.get().getPost_no()}|" th:name="${memberPost.get().getPost_no()}" class="comment_new_input" placeholder="댓글달기">
+													<a  th:id="${memberPost.get().getPost_no()}"  class="" th:onClick="comment(this.id, comment_text_[[${memberPost.get().getPost_no()}]] )">등록</a>
+												</div> 
+
+											</section>
 										</section>
 										<hr>
 																					

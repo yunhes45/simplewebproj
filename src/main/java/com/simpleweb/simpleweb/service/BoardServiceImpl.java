@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,7 +95,6 @@ public class BoardServiceImpl implements BoardService{
 				}
 			}
 			like_check.add(check);
-			System.out.println("like_check : " + like_check);
 		}
 			
 		return like_check;
@@ -131,6 +131,34 @@ public class BoardServiceImpl implements BoardService{
 	public Optional<Post> getMemberPost(int post_no, int member_no) {
 	
 		return boardmapper.getMemberPost(post_no, member_no);
+	}
+
+	@Override
+	public List<Like_stat> getMemberPost_Like_list(int post_no) {
+
+		return boardmapper.getLike_list(post_no);
+	}
+
+	@Override
+	public String getMemberLike_check(int post_no, int member_no) {
+		
+		Optional<Like_stat> memberlike_check = boardmapper.getMemberLike_check(post_no, member_no);
+		String check = null;
+		
+		try {
+			System.out.println(memberlike_check.get().getPost_no());
+			check = "O";
+		}catch(NoSuchElementException e) {
+			check = "X";
+		}
+		
+		return check;
+	}
+
+	@Override
+	public List<Comment> getMemberPost_Comment_list(int post_no) {
+
+		return boardmapper.getComment_list(post_no);
 	}
 
 }

@@ -25,5 +25,8 @@ public interface BoardMapper {
 	List<Comment> getComment_list(@Param("post_no") int post_no);
 	
 	Optional<Post> getMemberPost(@Param("post_no") int post_no, @Param("member_no") int member_no);
+	Optional<Like_stat> getMemberLike_check(
+			@Param("post_no") int post_no,
+			@Param("member_no") int member_no);
 
 }

@@ -71,7 +71,6 @@ public class BoardController {
 			int count       = (int)Math.ceil((double)file_listtotalcount/(double)onePageCnt);
 			
 			List<Post> post_list = boardservice.getPost_list_algo(startPage, onePageCnt);
-			System.out.println(post_list.get(0).getMember().getMember_id());
 			model.addAttribute("post_list", post_list);
 			
 			// get post_no
@@ -99,12 +98,6 @@ public class BoardController {
 			// comment cnt
 			List<Integer> Comment_cnt = boardservice.getComment_cnt(Post_Comment_list);
 			model.addAttribute("Comment_cnt", Comment_cnt);
-			
-			for(int i = 0; i < post_list_no.size(); i++) {
-				for(int j = 0; j < Comment_cnt.get(i); j++) {
-					System.out.println("fsdfds : " + Post_Comment_list.get(i).get(j).getComment_no());
-				}
-			}
 					
 		}else {
 			return "redirect:/";
@@ -125,10 +118,6 @@ public class BoardController {
 		int page_postlist_algo = (startPage * Integer.parseInt(count)) - ((Integer.parseInt(count)-1) * 2); 
 		
 		List<Post> post_list = boardservice.getPost_list_algo(page_postlist_algo, onePageCnt);
-
-		for(int i=0; i<post_list.size(); i++) {
-			System.out.println(post_list.get(i).getPost_no());
-		}
 		model.addAttribute("post_list", post_list);
 		
 		// get post_no
@@ -156,12 +145,6 @@ public class BoardController {
 		// comment cnt
 		List<Integer> Comment_cnt = boardservice.getComment_cnt(Post_Comment_list);
 		model.addAttribute("Comment_cnt", Comment_cnt);
-		
-		for(int i = 0; i < post_list_no.size(); i++) {
-			for(int j = 0; j < Comment_cnt.get(i); j++) {
-				System.out.println("fsdfds : " + Post_Comment_list.get(i).get(j).getComment_no());
-			}
-		}
 		
 		return "maincontent_list_ajax";
 	}
@@ -267,7 +250,17 @@ public class BoardController {
 			Optional<Post> memberPost = boardservice.getMemberPost(Integer.parseInt(post_no), member_no);
 			model.addAttribute("memberPost", memberPost);
 			
-			System.out.println(memberPost.get().getPost_contents());
+			// like logic
+			List<Like_stat> memberPost_Like_list = boardservice.getMemberPost_Like_list(Integer.parseInt(post_no));
+			model.addAttribute("memberPost_Like_list", memberPost_Like_list);
+			
+			// like check logic
+			String memberlike_check = boardservice.getMemberLike_check(Integer.parseInt(post_no), session_info.get().getMember_no());
+			model.addAttribute("memberlike_check", memberlike_check);
+			
+			// comment logic
+			List<Comment> memberPost_Comment_list = boardservice.getMemberPost_Comment_list(Integer.parseInt(post_no));
+			model.addAttribute("memberPost_Comment_list", memberPost_Comment_list);
 			
 			return "detailpost";
 		
