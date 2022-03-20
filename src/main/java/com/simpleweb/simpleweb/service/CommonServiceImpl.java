@@ -2,6 +2,11 @@ package com.simpleweb.simpleweb.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
@@ -13,6 +18,12 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
@@ -126,6 +137,29 @@ public class CommonServiceImpl implements CommonService{
 		post_img.setPost_img_date                (nowTime());
 		
 		return post_img;
+	}
+
+	@Override
+	public ResponseEntity<Object> downloadFileLogic(Post_img post_img) throws IOException, URISyntaxException{	
+		String fileurl    = "postimg\\";
+		String savePath   = fileDir + fileurl + post_img.getPost_img_filename();
+		
+		System.out.println(savePath);
+		
+		try {
+			Path filePath = Paths.get(savePath);
+			Resource resource = new InputStreamResource(Files.newInputStream(filePath));
+			
+			String original_filename = post_img.getPost_img_original_filename();
+			
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentDisposition(ContentDisposition.builder("attachment").filename(original_filename, StandardCharsets.UTF_8).build());
+			
+			return new ResponseEntity<Object>(resource, headers, HttpStatus.OK);
+		}catch(Exception e) {
+			System.out.println("no");
+			return new ResponseEntity<Object>(null, HttpStatus.SEE_OTHER);
+		}
 	}
 	
 }

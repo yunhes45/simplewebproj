@@ -99,8 +99,15 @@ layout:decorate="layout/layout">
 																<div th:id="|bookmark_${post_list.getPost_no()}|" th:name="${post_list.getPost_no()}" class="icon_bookmark_sprite_on" onClick="bookmark(this.id)"></div>
 															</div>
 															
-															<div th:id="${post_list.getPost_no()}" class="icon_download_sprite"></div>
+															<form method='POST' action='/downloadFile'>
+																<input type="hidden" name="post_img_original_filename" th:value="${post_list.getPost_img().getPost_img_original_filename()}" >
+																<input type="hidden" name="post_img_filename" th:value="${post_list.getPost_img().getPost_img_filename()}" >
+																<div th:id="|download_${post_list.getPost_no()}|" th:name="${post_list.getPost_no()}" class="icon_download_sprite"></div>
+																<input type="submit">
+															</form>
+															
 														</div>
+														
 														<div id="bottom_menu_text">
 															<div th:id="like_slideToggle" th:class="| likeCount_${post_list.getPost_no()} |">
 																<!-- like_list -->
