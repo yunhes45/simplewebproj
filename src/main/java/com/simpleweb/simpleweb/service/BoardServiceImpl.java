@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.simpleweb.simpleweb.mapper.BoardMapper;
+import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
 import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Post;
@@ -98,6 +99,51 @@ public class BoardServiceImpl implements BoardService{
 		}
 			
 		return like_check;
+	}
+	
+	@Override
+	public List<List<Bookmark>> getPost_Bookmark_list(List<Integer> post_list_no) {
+		List<List<Bookmark>> getpost_bookmark_list = new ArrayList<>();
+		try {
+			for(int i = 0; i < post_list_no.size(); i++) {
+				List<Bookmark> bookmarkstat = boardmapper.getBookmark_list(post_list_no.get(i));
+			
+				getpost_bookmark_list.add(bookmarkstat);
+				
+			}
+		}catch(IndexOutOfBoundsException e) {
+	
+		}
+		return getpost_bookmark_list;
+	}
+
+	@Override
+	public List<Integer> getBookmark_cnt(List<List<Bookmark>> post_Bookmark_list) {
+		List<Integer> Bookmark_cnt = new ArrayList<Integer>();
+		for(int i = 0; i < post_Bookmark_list.size(); i++) {
+			Bookmark_cnt.add(post_Bookmark_list.get(i).size());
+		}
+		
+		return Bookmark_cnt;
+	}
+
+	@Override
+	public List<String> getBookmark_check(List<Integer> bookmark_cnt, List<List<Bookmark>> post_Bookmark_list,
+			String member_id) {
+		List<String> bookmark_check    = new ArrayList<String>();
+		
+		for(int i = 0; i < bookmark_cnt.size(); i++) {
+			String check = null;
+			
+			for(int j = 0; j < post_Bookmark_list.get(i).size(); j++) {
+				if(post_Bookmark_list.get(i).get(j).getMember().getMember_id().contains(member_id)) {
+					check = "O";
+				}
+			}
+			bookmark_check.add(check);
+		}
+			
+		return bookmark_check;
 	}
 
 	@Override

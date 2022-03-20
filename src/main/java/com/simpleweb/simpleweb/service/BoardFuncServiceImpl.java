@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.simpleweb.simpleweb.mapper.BoardFuncMapper;
+import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
 import com.simpleweb.simpleweb.model.Like_stat;
 
@@ -51,6 +52,39 @@ public class BoardFuncServiceImpl implements BoardFuncService{
 		int getlikecount = boardfuncmapper.getLikeCount(post_no);
 		
 		return getlikecount;
+	}
+	
+	@Override
+	public Map<String, Integer> BookmarkLogic(int member_no, int post_no, int i, String nowTime) {
+		Optional<Bookmark> validbookmarkcheck = boardfuncmapper.validbookmarkcheck(member_no, post_no, i);
+		Map<String, Integer> bookmarklogic = new HashMap<String, Integer>();
+		int bookmarkstat = -1;
+
+		try {
+			int excep = validbookmarkcheck.get().getBookmark_no();
+			boardfuncmapper.deleteBookmark(member_no, post_no, i);
+			
+			bookmarkstat = 1;
+			if(bookmarkstat == 1) {
+				bookmarklogic.put("bookmarkstat", bookmarkstat);
+				bookmarklogic.put("bookmarkcount", getBookmarkCount(post_no));
+			}
+		}catch(NoSuchElementException e) {
+			boardfuncmapper.insertBookmark(member_no, post_no, i, nowTime);			
+			
+			bookmarkstat = 0;
+			if(bookmarkstat == 0) {
+				bookmarklogic.put("bookmarkstat", bookmarkstat);
+				bookmarklogic.put("bookmarkcount", getBookmarkCount(post_no));
+			}
+		}
+		
+		return bookmarklogic;
+	}
+	private int getBookmarkCount(int post_no) {
+		int getbookmarkcount = boardfuncmapper.getBookmarkCount(post_no);
+		
+		return getbookmarkcount;		
 	}
 	
 	@Override

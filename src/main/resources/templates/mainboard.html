@@ -92,7 +92,13 @@ layout:decorate="layout/layout">
 																<div th:id="| heart_${post_list.getPost_no()} |" th:name="${post_list.getPost_no()}" class="icon_heart_sprite_on" onClick="like(this.id)"></div>
 															</div>
 															
-															<div th:id="${post_list.getPost_no()}" class="icon_bookmark_sprite"></div>
+															<div th:if="${bookmark_check.get(num.index)} == null">
+																<div th:id="|bookmark_${post_list.getPost_no()}|" th:name="${post_list.getPost_no()}" class="icon_bookmark_sprite" onClick="bookmark(this.id)"></div>
+															</div>
+															<div th:unless="${bookmark_check.get(num.index)} == null">
+																<div th:id="|bookmark_${post_list.getPost_no()}|" th:name="${post_list.getPost_no()}" class="icon_bookmark_sprite_on" onClick="bookmark(this.id)"></div>
+															</div>
+															
 															<div th:id="${post_list.getPost_no()}" class="icon_download_sprite"></div>
 														</div>
 														<div id="bottom_menu_text">
@@ -110,7 +116,8 @@ layout:decorate="layout/layout">
 															</div>
 															
 															<h5 th:id="|likeCount_${post_list.getPost_no()}|" class="like_count" onClick="like_listFunc(this.id)">좋아요 [[ ${post_list.getLike_stat().getLike_stat_count()} ]] 개</h5>
-
+															<h5 th:id="|bookmarkCount_${post_list.getPost_no()}|" class="bookmark_count" onClick="bookmark_listFunc(this.id)">북마크 [[ ${post_list.getBookmark().getBookmark_count()} ]] 개</h5>
+																
 														</div>
 														
 														<!-- Comment -->
@@ -124,7 +131,7 @@ layout:decorate="layout/layout">
 																		[[| ${Post_Comment_list.get(num.index).get(num4-1).getMember().getMember_id()} |]]
 																		<h6 class="comment_elem">[[ ${Post_Comment_list.get(num.index).get(num4-1).getComment_text()} ]]</h6>
 																		<div th:if="${Post_Comment_list.get(num.index).get(num4-1).getMember_no()} == ${session.session_info.get().getMember_no()}">
-																		<div th:id="${Post_Comment_list.get(num.index).get(num4-1).getComment_no()}" class="icon_comment_del_sprite" onclick="delcomment(this.id)"></div>
+																			<div th:id="${Post_Comment_list.get(num.index).get(num4-1).getComment_no()}" class="icon_comment_del_sprite" onclick="delcomment(this.id)"></div>
 																		</div>
 																		
 																	</div>
@@ -165,24 +172,12 @@ layout:decorate="layout/layout">
 										<div id="sidebar_fix">
 											<section id="sidebar_side">
 												<section id="sidebar_element">
-													<h3>Magna Feugiat</h3>
-													<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit..</p>
-													<footer>
-														<ul class="actions">
-															<li><a href="#" class="button">Learn More</a></li>
-														</ul>
-													</footer>
+													<img src="#">
+													<a>ㄴㄱㄴㄱ</a>
 												</section>
-												<hr>
 												<section id="sidebar_element">
-													<a href="#" class="image fit"><img src="images/pic07.jpg" alt=""></a>
-													<h3>Amet Lorem Tempus</h3>
-													<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper sed blandit lorem ipsum dolore.</p>
-													<footer>
-														<ul class="actions">
-															<li><a href="#" class="button">Learn More</a></li>
-														</ul>
-													</footer>
+													<img src="#">
+													<a>ㄴㄱㄴㄱ</a>
 												</section>																				
 											</section>	
 										</div>										

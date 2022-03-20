@@ -48,6 +48,7 @@ public class Post {
 	private Member member;
 	private Post_img post_img;
 	private Like_stat like_stat;
+	private Bookmark bookmark;
 	
 	public Member getMember() {
 		return member;
@@ -66,6 +67,12 @@ public class Post {
 	}
 	public void setLike_stat(Like_stat like_stat) {
 		this.like_stat = like_stat;
+	}
+	public Bookmark getBookmark() {
+		return bookmark;
+	}
+	public void setBookmark(Bookmark bookmark) {
+		this.bookmark = bookmark;
 	}
 	
 	

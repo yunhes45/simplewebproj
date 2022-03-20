@@ -4243,10 +4243,24 @@ input, select, textarea {
 		margin-right: 10px;
 	}
 	
+	#bottom_menu_icon .icon_bookmark_sprite_on {
+		margin-right: 10px;
+	}
+	
+	#bottom_menu_icon .icon_bookmark_sprite {
+		margin-right: 10px;
+	}
+	
 	#bottom_menu .like_count {
 		width: 100px;
 		margin-top: 10px;
 		margin-left: 30px;
+	}
+	
+	#bottom_menu .bookmark_count {
+		width: 100px;
+		margin-top: 10px;
+		margin-left: 30px;	
 	}
 	
 	#bottom_menu #comment {

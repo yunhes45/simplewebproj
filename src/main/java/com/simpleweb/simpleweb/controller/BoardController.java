@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
 import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Member;
@@ -73,6 +74,10 @@ public class BoardController {
 			List<Post> post_list = boardservice.getPost_list_algo(startPage, onePageCnt);
 			model.addAttribute("post_list", post_list);
 			
+			for(int i = 0; i < post_list.size(); i++) {
+				System.out.println("cnt : " + post_list.get(i).getLike_stat().getLike_stat_count());
+			}
+			
 			// get post_no
 			List<Integer> post_list_no = new ArrayList<Integer>();
 			for(int i = 0; i < post_list.size(); i++) {
@@ -90,6 +95,18 @@ public class BoardController {
 			// like check logic
 			List<String> like_check = boardservice.getLike_check(Like_cnt, Post_Like_list, session_info.get().getMember_id());
 			model.addAttribute("like_check", like_check);
+			
+			// bookmark logic
+			List<List<Bookmark>> Post_Bookmark_list = boardservice.getPost_Bookmark_list(post_list_no);
+			model.addAttribute("Post_Bookmark_list", Post_Bookmark_list);
+			
+			// bookmark cnt
+			List<Integer> Bookmark_cnt = boardservice.getBookmark_cnt(Post_Bookmark_list);
+			model.addAttribute("Bookmark_cnt", Bookmark_cnt);
+			
+			// bookmark check logic
+			List<String> bookmark_check = boardservice.getBookmark_check(Bookmark_cnt, Post_Bookmark_list, session_info.get().getMember_id());
+			model.addAttribute("bookmark_check", bookmark_check);
 			
 			// comment logic
 			List<List<Comment>> Post_Comment_list = boardservice.getPost_Comment_list(post_list_no);

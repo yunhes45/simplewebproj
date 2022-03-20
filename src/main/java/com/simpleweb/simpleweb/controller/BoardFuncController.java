@@ -45,6 +45,23 @@ public class BoardFuncController {
 		return likelogic;
 	}
 	
+	@ResponseBody
+	@PostMapping("/bookmark")
+	public Map post_bookmark(HttpServletRequest request,
+			@RequestParam("post_no") String post_no) {
+		
+		HttpSession session = request.getSession();
+		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
+		
+		String trim_post_no = post_no.trim();
+		
+		Map<String, Integer> bookmarklogic = new HashMap<String, Integer>();
+		bookmarklogic = boardfuncservice.BookmarkLogic(session_info.get().getMember_no(), 
+				Integer.parseInt(trim_post_no), 1, commonservice.nowTime());
+		
+		return bookmarklogic;
+	}
+	
 	@PostMapping("/comment")
 	public String post_comment(Model model, HttpServletRequest request,
 			@RequestParam("post_no") String post_no,

@@ -31,6 +31,14 @@
 	cursor: pointer;
 }
 
+.icon_bookmark_sprite_on {
+	background: url('images/background01.png') no-repeat -159px -286px;
+	width: 19px;
+	height: 24px;
+	filter: invert(100%) brightness(150%) contrast(150%);
+	cursor: pointer;
+}
+
 .icon_download_sprite {
 	background: url('images/background01.png') no-repeat -324px -52px;
 	width: 21px;

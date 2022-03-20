@@ -69,12 +69,23 @@
 				<result property="like_stat_count" column="like_stat_count" />			
 			</collection>
 			
+		<!-- 1 : n -->
+			<collection javaType="Bookmark" property="bookmark">
+				<id property="bookmark_no" column="bookmark_no" />
+				<result property="member_no" column="member_no" />
+				<result property="post_no" column="post_no" />
+				<result property="bookmark_check" column="bookmark_check" />
+				<result property="bookmark_date" column="bookmark_date" />	
+				<result property="bookmark_count" column="bookmark_count" />			
+			</collection>
+			
 	</resultMap>
 	
 	<select id="getPost_list" resultMap="JoinPostRM">
 		select m.post_no, m.member_no, m.post_title, m.post_subtitle, m.post_contents, m.post_date,
 			   n.post_img_no, n.post_img_filename, n.post_img_original_filename, n.post_img_url, n.post_img_date,
 			   count(p.post_no) as like_stat_count,
+			   count(o.post_no) as bookmark_count,
 			   l.member_id
 		       
 		from post as m 
@@ -84,6 +95,9 @@
 		
 		left join like_stat as p
 		on m.post_no = p.post_no
+		
+		left join bookmark as o
+		on m.post_no = o.post_no
 		
 		left join member as l
 		on m.member_no = l.member_no
@@ -204,6 +218,69 @@
 		
 		order by m.like_stat_no desc
 	</select>	
+	
+	<resultMap id="JoinPostBookmarkRM" type="com.simpleweb.simpleweb.model.Bookmark">
+		<id property="bookmark_no" column="bookmark_no" />
+		<result property="member_no" column="member_no" />
+		<result property="post_no" column="post_no" />
+		<result property="bookmark_check" column="bookmark_check" />	
+		<result property="bookmark_date" column="bookmark_date" />	
+		
+		<!-- 1 : 1 -->
+			<association javaType="Post" property="post">
+				<id property="post_no" column="post_no" />
+				<result property="member_no" column="member_no" />
+				<result property="post_title" column="post_title" />
+				<result property="post_subtitle" column="post_subtitle" />
+				<result property="post_contents" column="post_contents" />
+				<result property="post_date" column="post_date" />
+			</association>
+		<!-- 1 : 1 -->
+			<association javaType="Member" property="member">
+				<id property="member_no" column="member_no" />
+				<result property="member_id" column="member_id" />
+				<result property="member_pwd" column="member_pwd" />
+				<result property="member_email" column="member_email" />
+				<result property="member_nickname" column="member_nickname" />
+				<result property="member_mobile" column="member_mobile" />
+				<result property="member_job" column="member_job" />
+				<result property="member_gender" column="member_gender" />
+				<result property="member_introduce" column="member_introduce" />
+				<result property="member_date" column="member_date" />		
+			</association>
+			
+		<!-- 1 : 1 -->
+			<association javaType="Member_profileimg" property="member_profileimg">
+				<id property="member_profileimg_no" column="member_profileimg_no" />
+				<result property="member_no" column="member_no" />
+				<result property="member_profileimg_filename" column="member_profileimg_filename" />
+				<result property="member_profileimg_original_filename" column="member_profileimg_original_filename" />
+				<result property="member_profileimg_url" column="member_profileimg_url" />
+				<result property="member_profileimg_date" column="member_profileimg_date" />
+			</association>
+	</resultMap>
+	
+	<select id="getBookmark_list" resultMap="JoinPostBookmarkRM">
+		select m.post_no, m.member_no, m.post_no, m.bookmark_check, m.bookmark_date,
+			   n.member_id, p.member_no,
+			   p.member_profileimg_filename,
+			   l.post_no
+		
+		from bookmark as m
+		
+		left join member as n
+		on m.member_no = n.member_no
+		
+		left join member_profileimg as p
+		on n.member_no = p.member_no
+        
+        left join post as l
+        on m.post_no = l.post_no
+        
+        where m.post_no = #{post_no}
+		
+		order by m.bookmark_no desc	
+	</select>
 	
 	<resultMap id="JoinPostcommentRM" type="com.simpleweb.simpleweb.model.Comment">
 		<id property="comment_no" column="comment_no" />

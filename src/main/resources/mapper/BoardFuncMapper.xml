@@ -31,6 +31,37 @@
 		where post_no = #{post_no}
 	</select>
 	
+	<select id="validbookmarkcheck" resultType="com.simpleweb.simpleweb.model.Bookmark">
+		select bookmark_no, member_no, post_no, bookmark_check, bookmark_date
+		
+		from bookmark
+		
+		where member_no = #{member_no} and post_no = #{post_no} and bookmark_check = #{bookmark_check}
+	</select>
+	
+	<insert id="insertBookmark" parameterType="com.simpleweb.simpleweb.model.Bookmark">
+		insert into bookmark(member_no, post_no, bookmark_check, bookmark_date)
+		
+		values (  #{member_no} ,
+		          #{post_no} ,
+		          #{bookmark_check},
+		          #{bookmark_date}  )		
+	</insert>
+	
+	<delete id="deleteBookmark"  parameterType="com.simpleweb.simpleweb.model.Bookmark">
+		delete from bookmark
+		
+		where member_no = #{member_no} and post_no = #{post_no} and bookmark_check = #{bookmark_check}
+	</delete>
+	
+	<select id="getBookmarkCount" resultType="int">
+		select count(*) as bookmark_count
+		
+		from bookmark
+		
+		where post_no = #{post_no}
+	</select>
+	
 	<insert id="insertComment" parameterType="com.simpleweb.simpleweb.model.Comment" useGeneratedKeys="true" keyProperty="comment_no">
 		insert into comment(member_no, post_no, comment_text, comment_date)
 		
