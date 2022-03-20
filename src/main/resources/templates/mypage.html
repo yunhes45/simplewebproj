@@ -28,7 +28,7 @@ layout:decorate="layout/layout">
 									
 									<div class="profile_menu">
 										<div class="top">
-											<div class="member_id">Hi</div>
+											<div class="member_id">[[ ${member_info.get().getMember_id()} ]]</div>
 											
 											<div class="menu_elem">
 												<form method="post" action="/modifymember">
@@ -64,7 +64,7 @@ layout:decorate="layout/layout">
 											<a href="#">5</a>&nbsp;&nbsp;&nbsp;
 											<a href="#">&gt;</a> -->
 											
-											<a th:each="page_count : ${page_count}" th:href="| mypage?member=${member_id}&page=${page_count} |">[[ ${page_count} ]]&nbsp;&nbsp;&nbsp;</a>
+											<a th:each="page_count : ${page_count}" th:href="| ${member_info.get().getMember_id()}?page=${page_count} |">[[ ${page_count} ]]&nbsp;&nbsp;&nbsp;</a>
 										</div>
 								</div>
 											<section id="my_post">

@@ -33,10 +33,13 @@ import com.simpleweb.simpleweb.model.Post_img;
 import com.simpleweb.simpleweb.service.BoardFuncService;
 import com.simpleweb.simpleweb.service.BoardService;
 import com.simpleweb.simpleweb.service.CommonService;
+import com.simpleweb.simpleweb.service.MemberService;
 
 @Controller
 public class BoardController {
 	
+	@Autowired
+	MemberService memberservice;
 	@Autowired
 	BoardService boardservice;
 	@Autowired
@@ -73,11 +76,7 @@ public class BoardController {
 			
 			List<Post> post_list = boardservice.getPost_list_algo(startPage, onePageCnt);
 			model.addAttribute("post_list", post_list);
-			
-			for(int i = 0; i < post_list.size(); i++) {
-				System.out.println("cnt : " + post_list.get(i).getBookmark().getBookmark_count());
-			}
-			
+
 			// get post_no
 			List<Integer> post_list_no = new ArrayList<Integer>();
 			for(int i = 0; i < post_list.size(); i++) {
@@ -155,6 +154,18 @@ public class BoardController {
 		List<String> like_check = boardservice.getLike_check(Like_cnt, Post_Like_list, session_info.get().getMember_id());
 		model.addAttribute("like_check", like_check);
 		
+		// bookmark logic
+		List<List<Bookmark>> Post_Bookmark_list = boardservice.getPost_Bookmark_list(post_list_no);
+		model.addAttribute("Post_Bookmark_list", Post_Bookmark_list);
+		
+		// bookmark cnt
+		List<Integer> Bookmark_cnt = boardservice.getBookmark_cnt(Post_Bookmark_list);
+		model.addAttribute("Bookmark_cnt", Bookmark_cnt);
+		
+		// bookmark check logic
+		List<String> bookmark_check = boardservice.getBookmark_check(Bookmark_cnt, Post_Bookmark_list, session_info.get().getMember_id());
+		model.addAttribute("bookmark_check", bookmark_check);
+		
 		// comment logic
 		List<List<Comment>> Post_Comment_list = boardservice.getPost_Comment_list(post_list_no);
 		model.addAttribute("Post_Comment_list", Post_Comment_list);
@@ -166,16 +177,21 @@ public class BoardController {
 		return "maincontent_list_ajax";
 	}
 	
-	@RequestMapping("/mypage")
+	@RequestMapping("/mypage/{member}")
 	public String mypage(Model model, HttpServletRequest request,
-			@RequestParam(value="member") String member_id ,
+			@PathVariable(value="member") String member_id,
 			@RequestParam(value="page" , required=false) String page ) {
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
+		System.out.println(member_id);
+		
+		int member_no = commonservice.getMember_no(member_id);
+		Optional<Member> member_info = memberservice.getMyInfo(member_no); 
+		
 		if(session_info != null) {
 			// file list page
-			int file_listtotalcount = boardservice.getTotal_fileList(session_info.get().getMember_no());
+			int file_listtotalcount = boardservice.getTotal_fileList(member_info.get().getMember_no());
 			int startPage   = 0;
 			int onePageCnt  = 10;
 			int count       = (int)Math.ceil((double)file_listtotalcount/(double)onePageCnt);
@@ -192,14 +208,14 @@ public class BoardController {
 			
 			if(page != null) {			
 				startPage = (Integer.parseInt(page) - 1)*onePageCnt;
-				List<Post> post_list = boardservice.getPost_list(session_info.get().getMember_no(), startPage, onePageCnt); 
+				List<Post> post_list = boardservice.getPost_list(member_info.get().getMember_no(), startPage, onePageCnt); 
 				model.addAttribute("post_list", post_list);
 			}else {
-				List<Post> post_list = boardservice.getPost_list(session_info.get().getMember_no(), startPage, onePageCnt); 
+				List<Post> post_list = boardservice.getPost_list(member_info.get().getMember_no(), startPage, onePageCnt); 
 				model.addAttribute("post_list", post_list);
 			}
 			
-			model.addAttribute("member_id", member_id);
+			model.addAttribute("member_info", member_info);
 			
 			return "mypage";
 		}else {

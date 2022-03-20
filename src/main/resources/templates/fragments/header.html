@@ -22,7 +22,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						<li><img class="header_profileimg" th:src="| /memberimg/${session.session_info.get().getMember_profileimg().getMember_profileimg_filename()} |"></li>
 						<li><a id="myPanel" href="">[[ ${session.session_info.get().getMember_nickname()} ]] 님 반갑습니다.&nbsp;&nbsp;▼</a></li>
 						<li><a href="/mainboard">Home</a></li>
-						<li><a th:href="| /mypage?member=${session.session_info.get().getMember_id()} |">MyPage</a></li>
+						<li><a th:href="| /mypage/${session.session_info.get().getMember_id()} |">MyPage</a></li>
 						<li><a href="/chat" class="button primary">Chat</a></li>				
 					</ul>
 
