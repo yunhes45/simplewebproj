@@ -114,6 +114,7 @@
 		select m.post_no, m.member_no, m.post_title, m.post_subtitle, m.post_contents, m.post_date,
 			   n.post_img_no, n.post_img_filename, n.post_img_original_filename, n.post_img_url, n.post_img_date,
 			   count(p.post_no) as like_stat_count,
+			   count(o.post_no) as bookmark_count,
 			   l.member_id
 		       
 		from post as m 
@@ -123,6 +124,9 @@
 		
 		left join like_stat as p
 		on m.post_no = p.post_no
+		
+		left join bookmark as o
+		on m.post_no = o.post_no
 		
 		left join member as l
 		on m.member_no = l.member_no

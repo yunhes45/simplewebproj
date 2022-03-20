@@ -75,7 +75,7 @@ public class BoardController {
 			model.addAttribute("post_list", post_list);
 			
 			for(int i = 0; i < post_list.size(); i++) {
-				System.out.println("cnt : " + post_list.get(i).getLike_stat().getLike_stat_count());
+				System.out.println("cnt : " + post_list.get(i).getBookmark().getBookmark_count());
 			}
 			
 			// get post_no
