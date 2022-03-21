@@ -91,7 +91,8 @@ layout:decorate="layout/layout">
 							</div>
 										
 									<!-- 반응형 -->
-																												
+									
+									<!-- post_list -->																			
 									<section id="my_post_responsive">
 									
 										<section id="content1"
@@ -99,6 +100,20 @@ layout:decorate="layout/layout">
 											<a href="#" class="pic">            <!-- post_list.get(i).getPost_img() -> post_list.getPost_img() -->
 												<a th:text="${num.count}"></a>
 												<img class="pic" th:src="| /postimg/${post_list.getPost_img().getPost_img_filename()} |" alt="">
+												<h3>Amet Lorem Tempus</h3>
+											</a>	
+										</section>	
+									
+									</section>
+									
+									<!-- post_list -->																			
+									<section id="my_post_responsive">
+									
+										<section id="content1"
+										th:each="bookmark_list, num : ${bookmark_list}">
+											<a href="#" class="pic">            <!-- post_list.get(i).getPost_img() -> post_list.getPost_img() -->
+												<a th:text="${num.count}"></a>
+												<img class="pic" th:src="| /postimg/${bookmark_list.getPost_img().getPost_img_filename()} |" alt="">
 												<h3>Amet Lorem Tempus</h3>
 											</a>	
 										</section>	
