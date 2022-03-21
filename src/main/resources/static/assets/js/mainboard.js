@@ -106,3 +106,33 @@ function delcomment(id){
 		}		
 	});	
 }
+
+function follow(id){
+	var follow_member_no = id.split('_');
+	console.log(follow_member_no[0]);
+	console.log("1 : " + follow_member_no[1]);
+	
+		$.ajax({
+			type: "POST",
+			url:  "/follow",
+			data: {
+				follow_member_no : follow_member_no[1],	
+			},
+			dataType: "json",
+			success: function(response){
+				var Followstat_id       = 'follow_'+follow_member_no[1];
+				var trim_Followstat_id  = Followstat_id.trim(); 
+	
+				if(response.followcheck == 0){
+					document.getElementById(trim_Followstat_id).innerHTML = `<a>팔로잉</a>`;
+
+				}else{
+					document.getElementById(trim_Followstat_id).innerHTML = `<a>팔로우</a>`;
+				}
+				 
+			},
+			error: function(data){
+				alert("code: " + request.status + "\n" + "message: " + request.responseText + "\n" + "error: " + error);
+			}		
+		});			
+}

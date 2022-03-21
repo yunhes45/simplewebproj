@@ -124,4 +124,26 @@
 		where comment_no = #{comment_no}
 	</delete>
 	
+	<select id="validfollowcheck" resultType="com.simpleweb.simpleweb.model.Follow">
+		select follow_no, member_no, follow_member_no, follow_date
+		
+		from follow
+		
+		where member_no = #{Follow.member_no} and follow_member_no = #{Follow.follow_member_no}
+	</select>
+
+	<insert id="insertFollow" parameterType="com.simpleweb.simpleweb.model.Follow">
+		insert into follow(member_no, follow_member_no, follow_date)
+		
+		values (  #{Follow.member_no} ,
+		          #{Follow.follow_member_no} ,
+		          #{Follow.follow_date}   )		
+	</insert>
+	
+	<delete id="deleteFollow"  parameterType="com.simpleweb.simpleweb.model.Follow">
+		delete from follow
+		
+		where member_no = #{Follow.member_no} and follow_member_no = #{Follow.follow_member_no}
+	</delete>
+	
 </mapper>

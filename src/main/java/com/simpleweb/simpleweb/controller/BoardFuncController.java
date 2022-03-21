@@ -3,6 +3,7 @@ package com.simpleweb.simpleweb.controller;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,14 +24,19 @@ import com.simpleweb.simpleweb.model.Comment;
 import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Post_img;
+import com.simpleweb.simpleweb.model.Follow;
 import com.simpleweb.simpleweb.service.BoardFuncService;
 import com.simpleweb.simpleweb.service.CommonService;
+import com.simpleweb.simpleweb.service.MemberService;
 
 @Controller
 public class BoardFuncController {
 	
 	@Autowired
 	private BoardFuncService boardfuncservice;
+
+	@Autowired
+	private MemberService memberservice;
 	
 	@Autowired
 	private CommonService commonservice;
@@ -93,6 +99,27 @@ public class BoardFuncController {
 		int delcomment = boardfuncservice.delcomment(Integer.parseInt(trim_comment_no));
 		
 		return comment_no;
+	}
+	
+	@ResponseBody
+	@PostMapping("/follow")
+	public Map post_follow(Model model, HttpServletRequest request,
+			@RequestParam("follow_member_no") String follow_member_no) {
+		
+		HttpSession session = request.getSession();
+		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
+		
+		String trim_member_no = follow_member_no.trim();
+	
+		Map<String, Object> followlogic = new HashMap<>();
+		
+		int followcheck = boardfuncservice.FollowCheck(session_info.get().getMember_no(), Integer.parseInt(trim_member_no), commonservice.nowTime());
+		Optional<Member> follow_member_info = memberservice.getMyInfo(Integer.parseInt(trim_member_no));
+		
+		followlogic.put("followcheck", followcheck);
+		followlogic.put("follow_member_info", follow_member_info);
+		
+		return followlogic;
 	}
 	
 	@PostMapping("/downloadFile")

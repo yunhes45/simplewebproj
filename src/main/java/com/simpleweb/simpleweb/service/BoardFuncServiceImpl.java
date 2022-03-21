@@ -1,5 +1,6 @@
 package com.simpleweb.simpleweb.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import com.simpleweb.simpleweb.mapper.BoardFuncMapper;
 import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
 import com.simpleweb.simpleweb.model.Like_stat;
+import com.simpleweb.simpleweb.model.Follow;
 
 @Service
 public class BoardFuncServiceImpl implements BoardFuncService{
@@ -107,6 +109,30 @@ public class BoardFuncServiceImpl implements BoardFuncService{
 	public int delcomment(int comment_no) {
 		
 		return boardfuncmapper.delcomment(comment_no);
+	}
+	@Override
+	public int FollowCheck(int member_no, int follow_member_no, String nowTime) {
+		Follow follow = new Follow();
+		follow.setMember_no(member_no);
+		follow.setFollow_member_no(follow_member_no);
+		follow.setFollow_date(nowTime);
+		
+		Optional<Follow> validfollowcheck = boardfuncmapper.validfollowcheck(follow);
+
+		int followcheck = -1;
+
+		try {
+			int excep = validfollowcheck.get().getFollow_no();
+			boardfuncmapper.deleteFollow(follow);
+			
+			followcheck = 1;
+		}catch(NoSuchElementException e) {
+			boardfuncmapper.insertFollow(follow);			
+			
+			followcheck = 0;
+		}
+		
+		return followcheck;
 	}
 
 }
