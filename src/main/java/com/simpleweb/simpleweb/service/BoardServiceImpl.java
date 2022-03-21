@@ -43,17 +43,30 @@ public class BoardServiceImpl implements BoardService{
 		
 		return getTotal_fileList;
 	}
+	
+	@Override
+	public List<Post> getPost_list_algo(int startPage, int onePageCnt) {
+
+		return boardmapper.getPost_list_algo(startPage, onePageCnt);
+	}
 
 	@Override
 	public List<Post> getPost_list(int member_no, int startPage, int onePageCnt) {
 		
 		return boardmapper.getPost_list(member_no, startPage, onePageCnt);
 	}
-
+	
 	@Override
-	public List<Post> getPost_list_algo(int startPage, int onePageCnt) {
+	public int getTotal_bookmarkList(int member_no) {
+		int getTotal_bookmarkList = boardmapper.getTotal_bookmarkList(member_no);
+		
+		return getTotal_bookmarkList;
+	}
+	
+	@Override
+	public List<Bookmark> getBookmark_list(int member_no, int startPage, int onePageCnt) {
 
-		return boardmapper.getPost_list_algo(startPage, onePageCnt);
+		return boardmapper.getBookmark_list(member_no, startPage, onePageCnt);
 	}
 
 	@Override
@@ -106,7 +119,7 @@ public class BoardServiceImpl implements BoardService{
 		List<List<Bookmark>> getpost_bookmark_list = new ArrayList<>();
 		try {
 			for(int i = 0; i < post_list_no.size(); i++) {
-				List<Bookmark> bookmarkstat = boardmapper.getBookmark_list(post_list_no.get(i));
+				List<Bookmark> bookmarkstat = boardmapper.getPost_Bookmark_list(post_list_no.get(i));
 			
 				getpost_bookmark_list.add(bookmarkstat);
 				

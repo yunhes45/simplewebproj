@@ -48,6 +48,7 @@ public class Bookmark {
 	private Member member;
 	private Member_profileimg member_profileimg;
 	private Post post;
+	private Post_img post_img;
 
 	public Member getMember() {
 		return member;
@@ -66,6 +67,12 @@ public class Bookmark {
 	}
 	public void setPost(Post post) {
 		this.post = post;
+	}
+	public Post_img getPost_img() {
+		return post_img;
+	}
+	public void setPost_img(Post_img post_img) {
+		this.post_img = post_img;
 	}
 	
 	

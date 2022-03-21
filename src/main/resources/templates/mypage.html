@@ -31,79 +31,65 @@ layout:decorate="layout/layout">
 											<div class="member_id">[[ ${member_info.get().getMember_id()} ]]</div>
 											
 											<div class="menu_elem">
-												<form method="post" action="/modifymember">
-													<input type="submit" id="modifymember" value="게시물" class="menu_elem_elem">
-												</form>
+												<input type="button" id="postvisible_btn" onclick="postvisible()" value="게시물" class="menu_elem_elem">
 											</div>
 											
 											<div class="menu_elem">
-												<form method="post" action="/signout">
-													<input type="submit" id="signout" value="북마크" class="menu_elem_elem">
-												</form>
+												<input type="button" id="bookmarkvisible_btn" onclick="bookmarkvisible()" value="북마크" class="menu_elem_elem">
 											</div>
 											
 											<div class="menu_elem">
-												<a href="writepost">게시물 등록</a>
-												<form method="post" action="#">
-													<input type="submit" id="signout" value="게시물 등록" class="menu_elem_elem">
-												</form>
+												<input type="button" onclick="location.href='/writepost'" value="게시물 등록" class="menu_elem_elem">
 											</div>
 											
 										</div>
 									</div>
 								</section>
 								
-							<!-- my_post -->								
+							<!-- my_post -->	
+							<div id="postvisible" class="postvisible_on">							
 								<div class="col-4 col-12-medium">
 										<div style="text-align: center" class="my_post_page">
-											<!-- <a href="#">&lt;</a>&nbsp;&nbsp;&nbsp;
-											1&nbsp;&nbsp;&nbsp;
-											<a href="#">2</a>&nbsp;&nbsp;&nbsp;
-											<a href="#">3</a>&nbsp;&nbsp;&nbsp;
-											<a href="#">4</a>&nbsp;&nbsp;&nbsp;
-											<a href="#">5</a>&nbsp;&nbsp;&nbsp;
-											<a href="#">&gt;</a> -->
-											
-											<a th:each="page_count : ${page_count}" th:href="| ${member_info.get().getMember_id()}?page=${page_count} |">[[ ${page_count} ]]&nbsp;&nbsp;&nbsp;</a>
-										</div>
-								</div>
-											<section id="my_post">
-											
-												<section id="my_post_element"
-												th:each="post_list, num : ${post_list}">
-													<a href="#" class="pic">            <!-- post_list.get(i).getPost_img() -> post_list.getPost_img() -->
-														<a th:text="${num.count}"></a>
-														<img class="pic" th:src="| /postimg/${post_list.getPost_img().getPost_img_filename()} |" alt="">
-														<h3>[[ ${post_list.getPost_title()} ]]</h3>
-													</a>	
-												</section>	
-				
-											</section>
-											
-<!-- 							my_bookmark							
-								<div class="col-4 col-12-medium">
-										<div style="text-align: center" class="my_post_page">
-											<a href="#">&lt;</a>&nbsp;&nbsp;&nbsp;
-											1&nbsp;&nbsp;&nbsp;
-											<a href="#">2</a>&nbsp;&nbsp;&nbsp;
-											<a href="#">3</a>&nbsp;&nbsp;&nbsp;
-											<a href="#">4</a>&nbsp;&nbsp;&nbsp;
-											<a href="#">5</a>&nbsp;&nbsp;&nbsp;
-											<a href="#">&gt;</a>
+											<a th:each="page_count : ${page_count}" th:href="| ${member_info.get().getMember_id()}?postpage=${page_count} |">[[ ${page_count} ]]&nbsp;&nbsp;&nbsp;</a>
 										</div>
 								</div>
 
-											<section id="my_post">
+								<section id="my_post">
+								
+									<section id="my_post_element"
+									th:each="post_list, num : ${post_list}">
+										<a href="#" class="pic">            <!-- post_list.get(i).getPost_img() -> post_list.getPost_img() -->
+											<a th:text="${num.count}"></a>
+											<img class="pic" th:src="| /postimg/${post_list.getPost_img().getPost_img_filename()} |" alt="">
+											<h3>[[ ${post_list.getPost_title()} ]]</h3>
+										</a>	
+									</section>	
+	
+								</section>
+							</div>
 											
-												<section id="my_post_element">
-													<a href="#" class="pic">
-														<img class="pic" src="images/pic07.jpg" alt="">
-														<h3>Amet Lorem Tempus</h3>
-													</a>	
-												</section>			
-				
-											</section>				 -->			
-											
+							<!-- my_bookmark -->
+							<div id="bookmarkvisible" class="bookmarkvisible">								
+								<div class="col-4 col-12-medium">
+										<div style="text-align: center" class="my_post_page">
+											<a th:each="bookmark_page_count : ${bookmark_page_count}" th:href="| ${member_info.get().getMember_id()}?bookmarkpage=${bookmark_page_count} |">[[ ${bookmark_page_count} ]]&nbsp;&nbsp;&nbsp;</a>
+										</div>
+								</div>
+
+								<section id="my_post">
+								
+									<section id="my_post_element"
+									th:each="bookmark_list, num : ${bookmark_list}">
+										<a href="#" class="pic">            <!-- post_list.get(i).getPost_img() -> post_list.getPost_img() -->
+											<a th:text="${num.count}"></a>
+											<img class="pic" th:src="| /postimg/${bookmark_list.getPost_img().getPost_img_filename()} |" alt="">
+											<h3>[[ ${bookmark_list.getPost().getPost_title()} ]]</h3>
+										</a>	
+									</section>	
+	
+								</section>		
+							</div>
+										
 									<!-- 반응형 -->
 																												
 									<section id="my_post_responsive">
@@ -121,6 +107,8 @@ layout:decorate="layout/layout">
 
 				</div>							
 		</div>
+		<!-- script -->
+		<script src="/assets/js/mypage.js"></script>	
 	</div>
 
 </html>

@@ -16,8 +16,11 @@ public interface BoardService {
 	int insertPost(Post post);
 	void insertPostImg(Post_img post_img);
 	int getTotal_fileList(int member_no);
-	List<Post> getPost_list(int member_no, int startPage, int onePageCnt);
 	List<Post> getPost_list_algo(int startPage, int onePageCnt);
+	List<Post> getPost_list(int member_no, int startPage, int onePageCnt);
+	
+	int getTotal_bookmarkList(int member_no);
+	List<Bookmark> getBookmark_list(int member_no, int startPage, int onePageCnt);
 	
 	List<List<Like_stat>> getPost_Like_list(List<Integer> post_list_no);
 	List<Integer> getLike_cnt(List<List<Like_stat>> Post_Like_list);

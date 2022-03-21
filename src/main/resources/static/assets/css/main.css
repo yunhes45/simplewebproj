@@ -756,6 +756,22 @@ input, select, textarea {
 			
 		}
 		
+		.postvisible {
+			display:none;
+		}
+		
+		.postvisible_on {
+			display: block;
+		}
+		
+		.bookmarkvisible {
+			display: none;
+		}
+		
+		.bookmarkvisible_on {
+			display: block;
+		}
+		
 		.row > .col-4 #sidebar_responsive{
 			display: none;
 		}

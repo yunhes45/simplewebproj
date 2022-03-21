@@ -109,8 +109,6 @@ function delcomment(id){
 
 function follow(id){
 	var follow_member_no = id.split('_');
-	console.log(follow_member_no[0]);
-	console.log("1 : " + follow_member_no[1]);
 	
 		$.ajax({
 			type: "POST",
@@ -122,6 +120,8 @@ function follow(id){
 			success: function(response){
 				var Followstat_id       = 'follow_'+follow_member_no[1];
 				var trim_Followstat_id  = Followstat_id.trim(); 
+				
+				console.log(trim_Followstat_id);
 	
 				if(response.followcheck == 0){
 					document.getElementById(trim_Followstat_id).innerHTML = `<a>팔로잉</a>`;

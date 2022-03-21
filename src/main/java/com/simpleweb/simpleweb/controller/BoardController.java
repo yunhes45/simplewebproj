@@ -180,7 +180,8 @@ public class BoardController {
 	@RequestMapping("/mypage/{member}")
 	public String mypage(Model model, HttpServletRequest request,
 			@PathVariable(value="member") String member_id,
-			@RequestParam(value="page" , required=false) String page ) {
+			@RequestParam(value="postpage" , required=false) String page,
+			@RequestParam(value="bookmarkpage", required=false) String bookmarkpage) {
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
@@ -190,12 +191,12 @@ public class BoardController {
 		Optional<Member> member_info = memberservice.getMyInfo(member_no); 
 		
 		if(session_info != null) {
-			// file list page
 			int file_listtotalcount = boardservice.getTotal_fileList(member_info.get().getMember_no());
 			int startPage   = 0;
 			int onePageCnt  = 10;
 			int count       = (int)Math.ceil((double)file_listtotalcount/(double)onePageCnt);
 		
+			// file list page
 			model.addAttribute("file_listtotalcount", file_listtotalcount);
 
 			List<Integer> page_count = new ArrayList<>();
@@ -214,6 +215,31 @@ public class BoardController {
 				List<Post> post_list = boardservice.getPost_list(member_info.get().getMember_no(), startPage, onePageCnt); 
 				model.addAttribute("post_list", post_list);
 			}
+			
+			// bookmark list page
+			int bookmark_listtotalcount = boardservice.getTotal_bookmarkList(member_info.get().getMember_no());
+			int bookmark_startPage   = 0;
+			int bookmark_onePageCnt  = 10;
+			int bookmark_count       = (int)Math.ceil((double)bookmark_listtotalcount/(double)bookmark_onePageCnt);
+			
+			model.addAttribute("bookmark_listtotalcount", bookmark_listtotalcount);
+
+			List<Integer> bookmark_page_count = new ArrayList<>();
+			
+			for(int i=1; i<=bookmark_count; i++) {
+				bookmark_page_count.add(i);
+			}
+			
+			model.addAttribute("bookmark_page_count", bookmark_page_count);
+			
+			if(bookmarkpage != null) {			
+				bookmark_startPage = (Integer.parseInt(bookmarkpage) - 1)*bookmark_onePageCnt;
+				List<Bookmark> bookmark_list = boardservice.getBookmark_list(member_info.get().getMember_no(), bookmark_startPage, bookmark_onePageCnt); 
+				model.addAttribute("bookmark_list", bookmark_list);
+			}else {
+				List<Bookmark> bookmark_list = boardservice.getBookmark_list(member_info.get().getMember_no(), bookmark_startPage, bookmark_onePageCnt); 
+				model.addAttribute("bookmark_list", bookmark_list);
+			}			
 			
 			model.addAttribute("member_info", member_info);
 			

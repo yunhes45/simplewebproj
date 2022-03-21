@@ -18,12 +18,21 @@ public interface BoardMapper {
 	int insertPost(@Param("post") Post post);
 	void insertPostImg(@Param("post_img") Post_img post_img);
 	int getTotal_fileList(@Param("member_no") int member_no);
-	List<Post> getPost_list(@Param("member_no") int member_no,
+	List<Post> getPost_list_algo(@Param("startPage") int startPage, @Param("onePageCnt") int onePageCnt);
+	
+	List<Post> getPost_list(
+			@Param("member_no") int member_no,
 			@Param("startPage") int startPage, 
 			@Param("onePageCnt") int onePageCnt);
-	List<Post> getPost_list_algo(@Param("startPage") int startPage, @Param("onePageCnt") int onePageCnt);
+	
+	int getTotal_bookmarkList(@Param("member_no") int member_no);
+	List<Bookmark> getBookmark_list(
+			@Param("member_no") int member_no,
+			@Param("startPage") int startPage, 
+			@Param("onePageCnt") int onePageCnt);
+	
 	List<Like_stat> getLike_list(@Param("post_no") int post_no);
-	List<Bookmark> getBookmark_list(@Param("post_no") int post_no);
+	List<Bookmark> getPost_Bookmark_list(@Param("post_no") int post_no);
 	List<Comment> getComment_list(@Param("post_no") int post_no);
 	
 	Optional<Post> getMemberPost(@Param("post_no") int post_no, @Param("member_no") int member_no);

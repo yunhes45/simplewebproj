@@ -223,6 +223,14 @@
 		order by m.like_stat_no desc
 	</select>	
 	
+	<select id="getTotal_bookmarkList" resultType="int">
+		select count(*)
+		
+		from bookmark
+		
+		where member_no=#{member_no}
+	</select>
+	
 	<resultMap id="JoinPostBookmarkRM" type="com.simpleweb.simpleweb.model.Bookmark">
 		<id property="bookmark_no" column="bookmark_no" />
 		<result property="member_no" column="member_no" />
@@ -238,6 +246,15 @@
 				<result property="post_subtitle" column="post_subtitle" />
 				<result property="post_contents" column="post_contents" />
 				<result property="post_date" column="post_date" />
+			</association>
+		<!-- 1 : 1 -->
+			<association javaType="Post_img" property="post_img">
+				<id property="post_img_no" column="post_img_no" />
+				<result property="post_no" column="post_no" />
+				<result property="post_img_filename" column="post_img_filename" />
+				<result property="post_img_original_filename" column="post_img_original_filename" />
+				<result property="post_img_url" column="post_img_url" />
+				<result property="post_img_date" column="post_img_date" />
 			</association>
 		<!-- 1 : 1 -->
 			<association javaType="Member" property="member">
@@ -265,6 +282,34 @@
 	</resultMap>
 	
 	<select id="getBookmark_list" resultMap="JoinPostBookmarkRM">
+		select m.bookmark_no, m.member_no, m.post_no, m.bookmark_check, m.bookmark_date,
+			   n.post_title, n.post_subtitle, n.post_contents, n.post_date,
+			   o.post_img_no, o.post_img_filename, o.post_img_original_filename, o.post_img_url,
+			   p.like_stat_no, p.like_stat_check
+			      
+		from bookmark as m 
+		
+		left join post as n
+		on m.post_no = n.post_no
+		
+		left join post_img as o
+		on m.post_no = o.post_no
+		
+		left join like_stat as p
+		on m.post_no = p.post_no
+
+		left join member as l
+		on m.member_no = l.member_no
+		
+		where m.member_no=#{member_no}
+		
+		group by m.post_no
+		
+		order by m.post_no desc
+		limit #{startPage}, #{onePageCnt}
+	</select>
+	
+	<select id="getPost_Bookmark_list" resultMap="JoinPostBookmarkRM">
 		select m.post_no, m.member_no, m.post_no, m.bookmark_check, m.bookmark_date,
 			   n.member_id, p.member_no,
 			   p.member_profileimg_filename,
