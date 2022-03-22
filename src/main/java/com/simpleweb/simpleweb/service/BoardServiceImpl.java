@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.simpleweb.simpleweb.mapper.BoardMapper;
 import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
+import com.simpleweb.simpleweb.model.Follow;
 import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Post;
 import com.simpleweb.simpleweb.model.Post_img;
@@ -218,6 +219,18 @@ public class BoardServiceImpl implements BoardService{
 	public List<Comment> getMemberPost_Comment_list(int post_no) {
 
 		return boardmapper.getComment_list(post_no);
+	}
+
+	@Override
+	public List<Follow> getFollow_my_list(int member_no) {
+		
+		return boardmapper.getFollow_my_list(member_no);
+	}
+	
+	@Override
+	public List<Follow> getFollow_me_list(int member_no) {
+		
+		return boardmapper.getFollow_me_list(member_no);
 	}
 
 }

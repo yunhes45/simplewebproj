@@ -31,4 +31,20 @@ public class Follow {
 		this.follow_date = follow_date;
 	}
 	
+	private Member member;
+	private Member_profileimg member_profileimg;
+
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	public Member_profileimg getMember_profileimg() {
+		return member_profileimg;
+	}
+	public void setMember_profileimg(Member_profileimg member_profileimg) {
+		this.member_profileimg = member_profileimg;
+	}	
+	
 }

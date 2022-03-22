@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.simpleweb.simpleweb.model.Follow;
 import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
 import com.simpleweb.simpleweb.model.Like_stat;
@@ -37,5 +38,8 @@ public interface BoardService {
 	List<Like_stat> getMemberPost_Like_list(int post_no);
 	String getMemberLike_check(int post_no, int member_no);
 	List<Comment> getMemberPost_Comment_list(int post_no);
+	
+	List<Follow> getFollow_my_list(int member_no);
+	List<Follow> getFollow_me_list(int member_no);
 
 }

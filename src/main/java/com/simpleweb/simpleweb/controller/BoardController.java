@@ -26,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
+import com.simpleweb.simpleweb.model.Follow;
 import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Post;
@@ -114,7 +115,15 @@ public class BoardController {
 			// comment cnt
 			List<Integer> Comment_cnt = boardservice.getComment_cnt(Post_Comment_list);
 			model.addAttribute("Comment_cnt", Comment_cnt);
-					
+			
+			// follow my list
+			List<Follow> Follow_my_list = boardservice.getFollow_my_list(session_info.get().getMember_no());
+			model.addAttribute("Follow_my_list", Follow_my_list);
+
+			// follow me list
+			List<Follow> Follow_me_list = boardservice.getFollow_me_list(session_info.get().getMember_no());
+			model.addAttribute("Follow_me_list", Follow_me_list);
+			
 		}else {
 			return "redirect:/";
 		}
