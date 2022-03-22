@@ -68,7 +68,13 @@ layout:decorate="layout/layout">
 																		<a>같아</a>
 																	</div>
 																	<div th:unless="${post_list.getMember_no()} == ${session.session_info.get().getMember_no()}">
+																		<div th:if="${follow_check.get(num.index)} == X">
 																		<div th:id="|follow_${post_list.getMember_no()}|" th:name="${post_list.getPost_no()}" onclick="follow(this.id)"><a>팔로우</a></div>
+																		</div>
+																		<div th:unless="${follow_check.get(num.index)} == X">
+																		<div th:id="|follow_${post_list.getMember_no()}|" th:name="${post_list.getPost_no()}" onclick="follow(this.id)"><a>팔로우 취소</a></div>
+																		</div>
+																		
 																	</div>
 																</div>
 														</div>

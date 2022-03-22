@@ -41,5 +41,6 @@ public interface BoardService {
 	
 	List<Follow> getFollow_my_list(int member_no);
 	List<Follow> getFollow_me_list(int member_no);
+	List<String> getFollow_check(List<Post> post_list, int member_no);
 
 }

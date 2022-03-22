@@ -116,6 +116,10 @@ public class BoardController {
 			List<Integer> Comment_cnt = boardservice.getComment_cnt(Post_Comment_list);
 			model.addAttribute("Comment_cnt", Comment_cnt);
 			
+			// follow check logic
+			List<String> follow_check = boardservice.getFollow_check(post_list, session_info.get().getMember_no());
+			model.addAttribute("follow_check", follow_check);
+			
 			// follow my list
 			List<Follow> Follow_my_list = boardservice.getFollow_my_list(session_info.get().getMember_no());
 			model.addAttribute("Follow_my_list", Follow_my_list);

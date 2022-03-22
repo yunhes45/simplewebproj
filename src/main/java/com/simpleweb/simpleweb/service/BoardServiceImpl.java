@@ -233,4 +233,22 @@ public class BoardServiceImpl implements BoardService{
 		return boardmapper.getFollow_me_list(member_no);
 	}
 
+	@Override
+	public List<String> getFollow_check(List<Post> post_list, int member_no) {
+		List<String> follow_check = new ArrayList<String>();
+		
+		for(int i = 0; i < post_list.size(); i++) {
+			Optional<Follow> check = boardmapper.followcheck(member_no, post_list.get(i).getMember_no());
+			try {
+				System.out.println(check.get().getFollow_no());
+				follow_check.add("O");
+						
+			}catch(NoSuchElementException e) {
+				follow_check.add("X");
+			}
+		}
+			
+		return follow_check;
+	}
+
 }

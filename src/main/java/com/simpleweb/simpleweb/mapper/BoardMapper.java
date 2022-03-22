@@ -43,5 +43,6 @@ public interface BoardMapper {
 	
 	List<Follow> getFollow_my_list(@Param("member_no") int member_no);
 	List<Follow> getFollow_me_list(@Param("member_no") int member_no);
+	Optional<Follow> followcheck(@Param("member_no") int member_no, @Param("follow_member_no") int follow_member_no);
 
 }

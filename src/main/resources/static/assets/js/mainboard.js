@@ -120,14 +120,21 @@ function follow(id){
 			success: function(response){
 				var Followstat_id       = 'follow_'+follow_member_no[1];
 				var trim_Followstat_id  = Followstat_id.trim(); 
-				
-				console.log(trim_Followstat_id);
-	
-				if(response.followcheck == 0){
-					document.getElementById(trim_Followstat_id).innerHTML = `<a>팔로잉</a>`;
 
+				if(response.followcheck == 0){
+			//		document.getElementById(trim_Followstat_id).innerHTML = `<a>팔로우 취소</a>`;
+					var followcancel = document.querySelectorAll("#" + trim_Followstat_id);
+
+					for(var i = 0; i < followcancel.length; i++){
+						followcancel[i].innerHTML = `<a>팔로우 취소</a>`;
+					}
+					
 				}else{
-					document.getElementById(trim_Followstat_id).innerHTML = `<a>팔로우</a>`;
+					var followcancel = document.querySelectorAll("#" + trim_Followstat_id);
+
+					for(var i = 0; i < followcancel.length; i++){
+						followcancel[i].innerHTML = `<a>팔로우</a>`;
+					}
 				}
 				 
 			},

@@ -448,5 +448,13 @@
 				
 		where m.follow_member_no=#{member_no}
 	</select>
-	
+
+	<select id="followcheck" resultType="com.simpleweb.simpleweb.model.Follow">
+		select *
+		
+		from follow
+		
+		where member_no=#{member_no} and follow_member_no = #{follow_member_no}
+	</select>
+
 </mapper>
