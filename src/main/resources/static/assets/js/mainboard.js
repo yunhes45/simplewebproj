@@ -1,3 +1,5 @@
+
+
 function like(id){
 	var post_no = id.split('_');
 	console.log(post_no[0]);

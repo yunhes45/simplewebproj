@@ -15,21 +15,21 @@ layout:decorate="layout/layout">
 				<div class="container">
 					<!-- main -->
 							<header class="major">
-								<h2>Right Sidebar</h2>
-								<p>Ipsum dolor feugiat aliquam tempus sed magna lorem consequat accumsan</p>
+								<h2>[[ ${member_info.get().getMember_id()} ]]</h2>
+								<p>[[ ${member_info.get().getMember_introduce()} ]]</p>
 							</header>
 								
 								<section id="mypage_profile">
 									<div class="profile_wrap">
 										<div class="profile_img">
-											<div class="profile_myimage"><img class="img" src="images/pic01.jpg" alt="" /></div>
+										<a th:href="| /detailpost?name=${post_list.getMember()} |" class="image fit">
+											<div class="profile_myimage"><img class="img" th:src="| /memberimg/${member_info.get().getMember_profileimg().getMember_profileimg_filename()} |" alt="" /></div>
+										</a>
 										</div>
 									</div>
 									
 									<div class="profile_menu">
 										<div class="top">
-											<div class="member_id">[[ ${member_info.get().getMember_id()} ]]</div>
-											
 											<div class="menu_elem">
 												<input type="button" id="postvisible_btn" onclick="postvisible()" value="게시물" class="menu_elem_elem">
 											</div>
@@ -59,7 +59,6 @@ layout:decorate="layout/layout">
 									<section id="my_post_element"
 									th:each="post_list, num : ${post_list}">
 										<a href="#" class="pic">            <!-- post_list.get(i).getPost_img() -> post_list.getPost_img() -->
-											<a th:text="${num.count}"></a>
 											<img class="pic" th:src="| /postimg/${post_list.getPost_img().getPost_img_filename()} |" alt="">
 											<h3>[[ ${post_list.getPost_title()} ]]</h3>
 										</a>	
