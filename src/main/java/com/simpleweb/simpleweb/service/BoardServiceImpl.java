@@ -11,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.simpleweb.simpleweb.mapper.BoardMapper;
+import com.simpleweb.simpleweb.mapper.MemberMapper;
 import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
 import com.simpleweb.simpleweb.model.Follow;
 import com.simpleweb.simpleweb.model.Like_stat;
+import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Post;
 import com.simpleweb.simpleweb.model.Post_img;
 
@@ -23,6 +25,9 @@ public class BoardServiceImpl implements BoardService{
 
 	@Autowired
 	BoardMapper boardmapper;
+	
+	@Autowired
+	MemberMapper membermapper;
 	
 	@Override
 	public int insertPost(Post post) {
@@ -222,15 +227,32 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Follow> getFollow_my_list(int member_no) {
+	public List<Member> getFollow_my_list(int member_no) {
+		List<Follow> follow_my_list_no = boardmapper.getFollow_my_list(member_no);
+		List<Member> follow_my_list = new ArrayList<Member>();
+	
+		for(int i = 0; i < follow_my_list_no.size(); i++) {
+			Optional<Member> follow_my_list_info = membermapper.getMyInfo(follow_my_list_no.get(i).getFollow_member_no());
+			
+			follow_my_list.add(follow_my_list_info.get());
+		}
 		
-		return boardmapper.getFollow_my_list(member_no);
+		return follow_my_list;
 	}
 	
 	@Override
-	public List<Follow> getFollow_me_list(int member_no) {
+	public List<Member> getFollow_me_list(int member_no) {
+		List<Follow> follow_me_list_no = boardmapper.getFollow_me_list(member_no);
+		List<Member> follow_me_list = new ArrayList<Member>();
+	
+		for(int i = 0; i < follow_me_list_no.size(); i++) {
+			System.out.println(follow_me_list_no.get(i).getMember_no());
+			Optional<Member> follow_me_list_info = membermapper.getMyInfo(follow_me_list_no.get(i).getMember_no());
+			
+			follow_me_list.add(follow_me_list_info.get());
+		}
 		
-		return boardmapper.getFollow_me_list(member_no);
+		return follow_me_list;
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import com.simpleweb.simpleweb.model.Follow;
 import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
 import com.simpleweb.simpleweb.model.Like_stat;
+import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Post;
 import com.simpleweb.simpleweb.model.Post_img;
 
@@ -39,8 +40,8 @@ public interface BoardService {
 	String getMemberLike_check(int post_no, int member_no);
 	List<Comment> getMemberPost_Comment_list(int post_no);
 	
-	List<Follow> getFollow_my_list(int member_no);
-	List<Follow> getFollow_me_list(int member_no);
+	List<Member> getFollow_my_list(int member_no);
+	List<Member> getFollow_me_list(int member_no);
 	List<String> getFollow_check(List<Post> post_list, int member_no);
 
 }

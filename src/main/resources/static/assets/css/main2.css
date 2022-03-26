@@ -37,22 +37,41 @@
 	border-radius: 50%;
 }
 
-/* 	
-	#sidebar_fix {
-		clear: both;
-  		height: 400px;
-	}
-	
-	#sidebar_fix #sidebar_side {
-		clear: both;
-		position: sticky;
-		height: 400px;
-	}
-	
-	#sidebar_side #sidebar_element {
-		clear: both;
-	}
-	 */
+
+ 	
+#sidebar_fix {
+	position: relative;
+
+}
+
+#sidebar_side {
+	width: 400px;
+	position: fixed;
+}
+
+#sidebar_side #sidebar_element {
+	border: 1px solid white;
+	padding: 20px;
+}
+
+#sidebar_element #follow_list {
+	display: flex;
+	margin-left: 20px;
+}
+
+#follow_list .header_profileimg {
+	width: 50px; 
+	height: 50px;
+}
+
+#follow_list .follow_id {
+	margin-top: 5px;
+	margin-left: 15px;
+	margin-right: 10px;
+	font-weight: bold;	
+}
+
+	 
 #maincontent #content1 {
 	border: 1px solid white;
 	width: 100%;
