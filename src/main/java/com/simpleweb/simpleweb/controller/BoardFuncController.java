@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -134,6 +135,13 @@ public class BoardFuncController {
 		res = commonservice.downloadFileLogic(post_img);
 		
 		return res;
+	}
+	
+	@GetMapping("/search")
+	public String post_search(HttpServletRequest request) {
+		String search = request.getParameter("search");
+		
+		return "redirect:mainboard?search=" + search;
 	}
 
 }

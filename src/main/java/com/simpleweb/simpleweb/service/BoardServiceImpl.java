@@ -63,6 +63,12 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
+	public List<Post> getPost_list_algo_search(int startPage, int onePageCnt, String search) {
+
+		return boardmapper.getPost_list_algo_search(startPage, onePageCnt, search);
+	}
+	
+	@Override
 	public int getTotal_bookmarkList(int member_no) {
 		int getTotal_bookmarkList = boardmapper.getTotal_bookmarkList(member_no);
 		
@@ -272,5 +278,6 @@ public class BoardServiceImpl implements BoardService{
 			
 		return follow_check;
 	}
+
 
 }

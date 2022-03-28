@@ -21,6 +21,8 @@ public interface BoardService {
 	List<Post> getPost_list_algo(int startPage, int onePageCnt);
 	List<Post> getPost_list(int member_no, int startPage, int onePageCnt);
 	
+	List<Post> getPost_list_algo_search(int startPage, int onePageCnt, String search);
+	
 	int getTotal_bookmarkList(int member_no);
 	List<Bookmark> getBookmark_list(int member_no, int startPage, int onePageCnt);
 	

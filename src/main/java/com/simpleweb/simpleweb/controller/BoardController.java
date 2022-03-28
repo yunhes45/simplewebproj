@@ -65,7 +65,9 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/mainboard")
-	public String mainboard(Model model, HttpServletRequest request) {
+	public String mainboard(@RequestParam(value="search", required=false) String search,
+			Model model, HttpServletRequest request) {
+		
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
@@ -75,9 +77,145 @@ public class BoardController {
 			int onePageCnt  = 5;
 			int count       = (int)Math.ceil((double)file_listtotalcount/(double)onePageCnt);
 			
-			List<Post> post_list = boardservice.getPost_list_algo(startPage, onePageCnt);
-			model.addAttribute("post_list", post_list);
+			if(search == null) {
+				List<Post> post_list = boardservice.getPost_list_algo(startPage, onePageCnt);
+				model.addAttribute("post_list", post_list);
 
+				// get post_no
+				List<Integer> post_list_no = new ArrayList<Integer>();
+				for(int i = 0; i < post_list.size(); i++) {
+					post_list_no.add(post_list.get(i).getPost_no());
+				}
+				
+				// like logic
+				List<List<Like_stat>> Post_Like_list = boardservice.getPost_Like_list(post_list_no);
+				model.addAttribute("Post_Like_list", Post_Like_list);
+				
+				// like cnt
+				List<Integer> Like_cnt = boardservice.getLike_cnt(Post_Like_list);
+				model.addAttribute("Like_cnt", Like_cnt);
+				
+				// like check logic
+				List<String> like_check = boardservice.getLike_check(Like_cnt, Post_Like_list, session_info.get().getMember_id());
+				model.addAttribute("like_check", like_check);
+				
+				// bookmark logic
+				List<List<Bookmark>> Post_Bookmark_list = boardservice.getPost_Bookmark_list(post_list_no);
+				model.addAttribute("Post_Bookmark_list", Post_Bookmark_list);
+				
+				// bookmark cnt
+				List<Integer> Bookmark_cnt = boardservice.getBookmark_cnt(Post_Bookmark_list);
+				model.addAttribute("Bookmark_cnt", Bookmark_cnt);
+				
+				// bookmark check logic
+				List<String> bookmark_check = boardservice.getBookmark_check(Bookmark_cnt, Post_Bookmark_list, session_info.get().getMember_id());
+				model.addAttribute("bookmark_check", bookmark_check);
+				
+				// comment logic
+				List<List<Comment>> Post_Comment_list = boardservice.getPost_Comment_list(post_list_no);
+				model.addAttribute("Post_Comment_list", Post_Comment_list);
+				
+				// comment cnt
+				List<Integer> Comment_cnt = boardservice.getComment_cnt(Post_Comment_list);
+				model.addAttribute("Comment_cnt", Comment_cnt);
+				
+				// follow check logic
+				List<String> follow_check = boardservice.getFollow_check(post_list, session_info.get().getMember_no());
+				model.addAttribute("follow_check", follow_check);
+				
+				// follow my list
+				List<Member> Follow_my_list = boardservice.getFollow_my_list(session_info.get().getMember_no());
+				model.addAttribute("Follow_my_list", Follow_my_list);
+				
+				// follow me list
+				List<Member> Follow_me_list = boardservice.getFollow_me_list(session_info.get().getMember_no());
+				model.addAttribute("Follow_me_list", Follow_me_list);
+			}else {
+				List<Post> post_list = boardservice.getPost_list_algo_search(startPage, onePageCnt, search);
+				model.addAttribute("post_list", post_list);
+				
+				for(int i = 0; i < post_list.size(); i++) {
+					System.out.println(post_list.get(i).getPost_no());
+				}
+
+				// get post_no
+				List<Integer> post_list_no = new ArrayList<Integer>();
+				for(int i = 0; i < post_list.size(); i++) {
+					post_list_no.add(post_list.get(i).getPost_no());
+				}
+				
+				// like logic
+				List<List<Like_stat>> Post_Like_list = boardservice.getPost_Like_list(post_list_no);
+				model.addAttribute("Post_Like_list", Post_Like_list);
+				
+				// like cnt
+				List<Integer> Like_cnt = boardservice.getLike_cnt(Post_Like_list);
+				model.addAttribute("Like_cnt", Like_cnt);
+				
+				// like check logic
+				List<String> like_check = boardservice.getLike_check(Like_cnt, Post_Like_list, session_info.get().getMember_id());
+				model.addAttribute("like_check", like_check);
+				
+				// bookmark logic
+				List<List<Bookmark>> Post_Bookmark_list = boardservice.getPost_Bookmark_list(post_list_no);
+				model.addAttribute("Post_Bookmark_list", Post_Bookmark_list);
+				
+				// bookmark cnt
+				List<Integer> Bookmark_cnt = boardservice.getBookmark_cnt(Post_Bookmark_list);
+				model.addAttribute("Bookmark_cnt", Bookmark_cnt);
+				
+				// bookmark check logic
+				List<String> bookmark_check = boardservice.getBookmark_check(Bookmark_cnt, Post_Bookmark_list, session_info.get().getMember_id());
+				model.addAttribute("bookmark_check", bookmark_check);
+				
+				// comment logic
+				List<List<Comment>> Post_Comment_list = boardservice.getPost_Comment_list(post_list_no);
+				model.addAttribute("Post_Comment_list", Post_Comment_list);
+				
+				// comment cnt
+				List<Integer> Comment_cnt = boardservice.getComment_cnt(Post_Comment_list);
+				model.addAttribute("Comment_cnt", Comment_cnt);
+				
+				// follow check logic
+				List<String> follow_check = boardservice.getFollow_check(post_list, session_info.get().getMember_no());
+				model.addAttribute("follow_check", follow_check);
+				
+				// follow my list
+				List<Member> Follow_my_list = boardservice.getFollow_my_list(session_info.get().getMember_no());
+				model.addAttribute("Follow_my_list", Follow_my_list);
+				
+				// follow me list
+				List<Member> Follow_me_list = boardservice.getFollow_me_list(session_info.get().getMember_no());
+				model.addAttribute("Follow_me_list", Follow_me_list);				
+			}
+			
+		}else {
+			return "redirect:/";
+		}
+		
+		return "mainboard";
+	}
+	@PostMapping("/mainboard")
+	public String post_mainboard(Model model, HttpServletRequest request,
+			@RequestParam(value="param", required=false) String search,
+			@RequestParam(value="page", required=false) String page,
+			@RequestParam(value="count", required=false) String count) {
+		
+		System.out.println("search : " + search);
+		
+		HttpSession session = request.getSession();
+		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
+		
+		int startPage   = 5;
+		int onePageCnt  = Integer.parseInt(page);
+		
+		int page_postlist_algo = (startPage * Integer.parseInt(count)) - ((Integer.parseInt(count)-1) * 2); 
+		
+		if(search == null) {
+		
+			List<Post> post_list = boardservice.getPost_list_algo(page_postlist_algo, onePageCnt);
+			model.addAttribute("post_list", post_list);
+			
 			// get post_no
 			List<Integer> post_list_no = new ArrayList<Integer>();
 			for(int i = 0; i < post_list.size(); i++) {
@@ -116,6 +254,7 @@ public class BoardController {
 			List<Integer> Comment_cnt = boardservice.getComment_cnt(Post_Comment_list);
 			model.addAttribute("Comment_cnt", Comment_cnt);
 			
+			
 			// follow check logic
 			List<String> follow_check = boardservice.getFollow_check(post_list, session_info.get().getMember_no());
 			model.addAttribute("follow_check", follow_check);
@@ -127,79 +266,62 @@ public class BoardController {
 			// follow me list
 			List<Member> Follow_me_list = boardservice.getFollow_me_list(session_info.get().getMember_no());
 			model.addAttribute("Follow_me_list", Follow_me_list);
-			
 		}else {
-			return "redirect:/";
+			List<Post> post_list = boardservice.getPost_list_algo_search(page_postlist_algo, onePageCnt, search);
+			model.addAttribute("post_list", post_list);
+			
+			// get post_no
+			List<Integer> post_list_no = new ArrayList<Integer>();
+			for(int i = 0; i < post_list.size(); i++) {
+				post_list_no.add(post_list.get(i).getPost_no());
+			}
+			
+			// like logic
+			List<List<Like_stat>> Post_Like_list = boardservice.getPost_Like_list(post_list_no);
+			model.addAttribute("Post_Like_list", Post_Like_list);
+			
+			// like cnt
+			List<Integer> Like_cnt = boardservice.getLike_cnt(Post_Like_list);
+			model.addAttribute("Like_cnt", Like_cnt);
+			
+			// like check logic
+			List<String> like_check = boardservice.getLike_check(Like_cnt, Post_Like_list, session_info.get().getMember_id());
+			model.addAttribute("like_check", like_check);
+			
+			// bookmark logic
+			List<List<Bookmark>> Post_Bookmark_list = boardservice.getPost_Bookmark_list(post_list_no);
+			model.addAttribute("Post_Bookmark_list", Post_Bookmark_list);
+			
+			// bookmark cnt
+			List<Integer> Bookmark_cnt = boardservice.getBookmark_cnt(Post_Bookmark_list);
+			model.addAttribute("Bookmark_cnt", Bookmark_cnt);
+			
+			// bookmark check logic
+			List<String> bookmark_check = boardservice.getBookmark_check(Bookmark_cnt, Post_Bookmark_list, session_info.get().getMember_id());
+			model.addAttribute("bookmark_check", bookmark_check);
+			
+			// comment logic
+			List<List<Comment>> Post_Comment_list = boardservice.getPost_Comment_list(post_list_no);
+			model.addAttribute("Post_Comment_list", Post_Comment_list);
+			
+			// comment cnt
+			List<Integer> Comment_cnt = boardservice.getComment_cnt(Post_Comment_list);
+			model.addAttribute("Comment_cnt", Comment_cnt);
+			
+			
+			// follow check logic
+			List<String> follow_check = boardservice.getFollow_check(post_list, session_info.get().getMember_no());
+			model.addAttribute("follow_check", follow_check);
+			
+			// follow my list
+			List<Member> Follow_my_list = boardservice.getFollow_my_list(session_info.get().getMember_no());
+			model.addAttribute("Follow_my_list", Follow_my_list);
+			
+			// follow me list
+			List<Member> Follow_me_list = boardservice.getFollow_me_list(session_info.get().getMember_no());
+			model.addAttribute("Follow_me_list", Follow_me_list);
 		}
-		
-		return "mainboard";
-	}
-	@PostMapping("/mainboard")
-	public String post_mainboard(Model model, HttpServletRequest request,
-			@RequestParam(value="page", required=false) String page,
-			@RequestParam(value="count", required=false) String count) {
-		HttpSession session = request.getSession();
-		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
-		
-		int startPage   = 5;
-		int onePageCnt  = Integer.parseInt(page);
-		
-		int page_postlist_algo = (startPage * Integer.parseInt(count)) - ((Integer.parseInt(count)-1) * 2); 
-		
-		List<Post> post_list = boardservice.getPost_list_algo(page_postlist_algo, onePageCnt);
-		model.addAttribute("post_list", post_list);
-		
-		// get post_no
-		List<Integer> post_list_no = new ArrayList<Integer>();
-		for(int i = 0; i < post_list.size(); i++) {
-			post_list_no.add(post_list.get(i).getPost_no());
-		}
-		
-		// like logic
-		List<List<Like_stat>> Post_Like_list = boardservice.getPost_Like_list(post_list_no);
-		model.addAttribute("Post_Like_list", Post_Like_list);
-		
-		// like cnt
-		List<Integer> Like_cnt = boardservice.getLike_cnt(Post_Like_list);
-		model.addAttribute("Like_cnt", Like_cnt);
-		
-		// like check logic
-		List<String> like_check = boardservice.getLike_check(Like_cnt, Post_Like_list, session_info.get().getMember_id());
-		model.addAttribute("like_check", like_check);
-		
-		// bookmark logic
-		List<List<Bookmark>> Post_Bookmark_list = boardservice.getPost_Bookmark_list(post_list_no);
-		model.addAttribute("Post_Bookmark_list", Post_Bookmark_list);
-		
-		// bookmark cnt
-		List<Integer> Bookmark_cnt = boardservice.getBookmark_cnt(Post_Bookmark_list);
-		model.addAttribute("Bookmark_cnt", Bookmark_cnt);
-		
-		// bookmark check logic
-		List<String> bookmark_check = boardservice.getBookmark_check(Bookmark_cnt, Post_Bookmark_list, session_info.get().getMember_id());
-		model.addAttribute("bookmark_check", bookmark_check);
-		
-		// comment logic
-		List<List<Comment>> Post_Comment_list = boardservice.getPost_Comment_list(post_list_no);
-		model.addAttribute("Post_Comment_list", Post_Comment_list);
-		
-		// comment cnt
-		List<Integer> Comment_cnt = boardservice.getComment_cnt(Post_Comment_list);
-		model.addAttribute("Comment_cnt", Comment_cnt);
-		
-		
-		// follow check logic
-		List<String> follow_check = boardservice.getFollow_check(post_list, session_info.get().getMember_no());
-		model.addAttribute("follow_check", follow_check);
-		
-		// follow my list
-		List<Member> Follow_my_list = boardservice.getFollow_my_list(session_info.get().getMember_no());
-		model.addAttribute("Follow_my_list", Follow_my_list);
-		
-		// follow me list
-		List<Member> Follow_me_list = boardservice.getFollow_me_list(session_info.get().getMember_no());
-		model.addAttribute("Follow_me_list", Follow_me_list);
-		
+			
 		return "maincontent_list_ajax";
 	}
 	
