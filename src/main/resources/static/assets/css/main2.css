@@ -113,12 +113,18 @@
 
 }
 
-#sidebar_side {
+.sidebar_side {
 	width: 400px;
 	position: fixed;
 }
 
-#sidebar_side #sidebar_element {
+.sidebar_side_on {
+	top: 100px;
+	width: 400px;
+	position: fixed;
+}
+
+#sidebar_element {
 	border: 1px solid white;
 	padding: 20px;
 }
@@ -476,7 +482,7 @@
 
 
 @media screen and (max-width: 1680px) {
-	#sidebar_side {
+	.sidebar_side {
 		width: 300px;
 		position: fixed;
 	}

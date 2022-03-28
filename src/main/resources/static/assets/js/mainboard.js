@@ -1,4 +1,10 @@
-
+window.addEventListener('scroll', function(){
+	if(window.pageYOffset > 300){
+		document.getElementById('sidebar_side').className = "sidebar_side_on";
+	}else{
+		document.getElementById('sidebar_side').className = "sidebar_side";
+	}
+});
 
 function like(id){
 	var post_no = id.split('_');

@@ -117,7 +117,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						<div id="comment_new">
 							<hr class="line_unset">
 							<input type="text" th:id="|comment_text_${post_list.getPost_no()}|" th:name="${post_list.getPost_no()}" class="comment_new_input" placeholder="댓글달기">
-							<a  th:id="${post_list.getPost_no()}"  class="" th:onClick="comment(this.id, comment_text_[[${post_list.getPost_no()}]] )">등록</a>
+							<a  th:id="${post_list.getPost_no()}"  class="comment_btn" th:onClick="comment(this.id, comment_text_[[${post_list.getPost_no()}]] )">등록</a>
 						</div>
 						
 					</section>
