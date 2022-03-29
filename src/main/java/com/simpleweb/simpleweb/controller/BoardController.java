@@ -72,10 +72,8 @@ public class BoardController {
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
 		if(session_info != null) {
-			int file_listtotalcount = boardservice.getTotal_fileList(session_info.get().getMember_no());
 			int startPage   = 0;
 			int onePageCnt  = 5;
-			int count       = (int)Math.ceil((double)file_listtotalcount/(double)onePageCnt);
 			
 			if(search == null) {
 				List<Post> post_list = boardservice.getPost_list_algo(startPage, onePageCnt);
@@ -333,8 +331,6 @@ public class BoardController {
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
-		System.out.println(member_id);
-		
 		int member_no = commonservice.getMember_no(member_id);
 		Optional<Member> member_info = memberservice.getMyInfo(member_no); 
 		
@@ -357,10 +353,10 @@ public class BoardController {
 			
 			if(page != null) {			
 				startPage = (Integer.parseInt(page) - 1)*onePageCnt;
-				List<Post> post_list = boardservice.getPost_list(member_info.get().getMember_no(), startPage, onePageCnt); 
+				List<Post> post_list = boardservice.getMyPost_list(member_info.get().getMember_no(), startPage, onePageCnt); 
 				model.addAttribute("post_list", post_list);
 			}else {
-				List<Post> post_list = boardservice.getPost_list(member_info.get().getMember_no(), startPage, onePageCnt); 
+				List<Post> post_list = boardservice.getMyPost_list(member_info.get().getMember_no(), startPage, onePageCnt); 
 				model.addAttribute("post_list", post_list);
 			}
 			

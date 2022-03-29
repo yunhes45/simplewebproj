@@ -25,7 +25,7 @@ public interface BoardMapper {
 			@Param("onePageCnt") int onePageCnt,
 			@Param("search") String search);
 	
-	List<Post> getPost_list(
+	List<Post> getMyPost_list(
 			@Param("member_no") int member_no,
 			@Param("startPage") int startPage, 
 			@Param("onePageCnt") int onePageCnt);

@@ -57,9 +57,9 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Post> getPost_list(int member_no, int startPage, int onePageCnt) {
+	public List<Post> getMyPost_list(int member_no, int startPage, int onePageCnt) {
 		
-		return boardmapper.getPost_list(member_no, startPage, onePageCnt);
+		return boardmapper.getMyPost_list(member_no, startPage, onePageCnt);
 	}
 	
 	@Override

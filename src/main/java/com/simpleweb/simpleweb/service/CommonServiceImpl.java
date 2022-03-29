@@ -64,7 +64,6 @@ public class CommonServiceImpl implements CommonService{
 	@Override
 	public Member_profileimg normalimglogic(int memberPK) throws Exception{
 		Member_profileimg memberimg = new Member_profileimg();
-		
 		String originalfilename   = "normal_img.png";
 		String fileurl    = "memberimg\\";
 		String savePath   = fileDir + fileurl;
@@ -143,8 +142,6 @@ public class CommonServiceImpl implements CommonService{
 	public ResponseEntity<Object> downloadFileLogic(Post_img post_img) throws IOException, URISyntaxException{	
 		String fileurl    = "postimg\\";
 		String savePath   = fileDir + fileurl + post_img.getPost_img_filename();
-		
-		System.out.println(savePath);
 		
 		try {
 			Path filePath = Paths.get(savePath);

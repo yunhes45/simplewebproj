@@ -73,6 +73,6 @@
 		
 		on m.member_no = n.member_no
 		
-		where m.member_no=#{member_no} 
+		where m.member_no = #{member_no} 
 	</select>
 </mapper>

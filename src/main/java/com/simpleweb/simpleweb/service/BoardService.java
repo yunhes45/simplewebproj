@@ -19,7 +19,7 @@ public interface BoardService {
 	void insertPostImg(Post_img post_img);
 	int getTotal_fileList(int member_no);
 	List<Post> getPost_list_algo(int startPage, int onePageCnt);
-	List<Post> getPost_list(int member_no, int startPage, int onePageCnt);
+	List<Post> getMyPost_list(int member_no, int startPage, int onePageCnt);
 	
 	List<Post> getPost_list_algo_search(int startPage, int onePageCnt, String search);
 	

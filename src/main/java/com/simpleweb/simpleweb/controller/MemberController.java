@@ -52,13 +52,7 @@ public class MemberController {
 		return new UrlResource("file:///" + getFullPath(fileurl, filename));
 		
 	}
-	
-	@RequestMapping("/welcomepage")
-	public String wel(Model model) throws IOException {
-		
-		return "welcomepage";
-	}
-	
+
 	@RequestMapping("/")
 	public String test(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -106,10 +100,10 @@ public class MemberController {
 		
 		if(member_profileimg_form.getMemberimg().getOriginalFilename().equals("")) {
 			member_img = commonservice.normalimglogic(memberPK);
-			memberservice.insertMemberImg(member_img);
+			memberservice.insertMemberimg(member_img);
 		}else {
 			member_img = commonservice.imglogic(memberPK, member_profileimg_form.getMemberimg());
-			memberservice.insertMemberImg(member_img);
+			memberservice.insertMemberimg(member_img);
 		}
 		
 		

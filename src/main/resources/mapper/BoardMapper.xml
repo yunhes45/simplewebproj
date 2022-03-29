@@ -81,7 +81,7 @@
 			
 	</resultMap>
 	
-	<select id="getPost_list" resultMap="JoinPostRM">
+	<select id="getMyPost_list" resultMap="JoinPostRM">
 		select m.post_no, m.member_no, m.post_title, m.post_subtitle, m.post_contents, m.post_date,
 			   n.post_img_no, n.post_img_filename, n.post_img_original_filename, n.post_img_url, n.post_img_date,
 			   count(p.post_no) as like_stat_count,

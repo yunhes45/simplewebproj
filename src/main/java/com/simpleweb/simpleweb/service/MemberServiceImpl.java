@@ -42,7 +42,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public void insertMemberImg(Member_profileimg memberimg) {
+	public void insertMemberimg(Member_profileimg memberimg) {
 		
 		membermapper.insertMemberImg(memberimg);
 	}
