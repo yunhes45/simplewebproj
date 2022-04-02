@@ -28,26 +28,15 @@ layout:decorate="layout/layout">
 									<div class="col-4 col-12-medium">
 										<section id="sidebar_responsive">
 												<section id="sidebar_element">
-													<h3>Magna Feugiat</h3>
-													<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit..</p>
-													<footer>
-														<ul class="actions">
-															<li><a href="#" class="button">Learn More</a></li>
-														</ul>
-													</footer>
+													<div th:each="follow_my_list : ${Follow_my_list}">
+														<div id="follow_list">
+															<img class="header_profileimg" th:src="| /memberimg/${follow_my_list.getMember_profileimg().getMember_profileimg_filename()} |">
+															<h4 class="follow_id"><a th:href="| /mypage/${follow_my_list.getMember_id()} |">[[ ${follow_my_list.getMember_id()} ]]</a></h4>
+														</div>
+													</div>				
 												</section>
 												<hr>
-												<section id="sidebar_element">
-													<a href="#" class="image fit"><img src="images/pic07.jpg" alt=""></a>
-													<h3>Amet Lorem Tempus</h3>
-													<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper sed blandit lorem ipsum dolore.</p>
-													<footer>
-														<ul class="actions">
-															<li><a href="#" class="button">Learn More</a></li>
-														</ul>
-													</footer>
-												</section>
-											</section>
+										</section>
 									</div>
 								
 									<div class="col-8 col-12-medium">

@@ -115,13 +115,13 @@
 
 .sidebar_side {
 	width: 400px;
-	position: fixed;
+/* 	position: fixed; */
 }
 
 .sidebar_side_on {
 	top: 100px;
 	width: 400px;
-	position: fixed;
+/* 	position: fixed; */
 }
 
 #sidebar_element {
@@ -484,12 +484,22 @@
 @media screen and (max-width: 1680px) {
 	.sidebar_side {
 		width: 300px;
-		position: fixed;
+/* 		position: fixed; */
 	}
 }
 
 @media screen and (max-width: 1280px) {
 
+		#search {
+			width: 200px;
+			margin-top: 15px;
+			margin-left: 10%;
+		}
+		
+		#search #searchholder {
+			height: 30px;
+		}	
+	
 		#slideToggle {
 			width: 180px;
 			margin-left: 260px;
@@ -504,7 +514,29 @@
 }
 
 @media screen and (max-width: 980px) {
+		#search {
+			width: 70px;
+			margin-top: 15px;
+			margin-left: 15%;
+		}
 		
+		#search #searchholder {
+			height: 30px;
+		}	
+		
+		.row > .col-4 #sidebar_responsive{
+			display: block;
+		}
+		
+		#sidebar_responsive #sidebar_element {
+			display: flex;
+			height: 100px;
+			overflow-x: auto;
+		}
+		
+		#sidebar_side {
+			display: none;
+		}		
 }
 
 @media screen and (max-width: 736px) {

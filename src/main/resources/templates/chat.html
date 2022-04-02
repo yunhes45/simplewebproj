@@ -1,0 +1,101 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="layout/layout">
+	
+	<div layout:fragment="content">
+		<meta charset="utf-8" />
+		
+		<!-- Script -->
+			<script th:inline="javascript">
+				
+			</script>
+		
+			<!-- Main -->
+				<div id="main" class="wrapper style1">
+					<div class="container">
+						<header class="major">
+							<h2>chat</h2>
+						</header>
+
+						<!-- Form -->
+							<section>
+			<div id="main" class="wrapper style1">
+				<div class="container">
+					<!-- main -->
+								<div class="row gtr-150">
+								
+								<!--  대체 왜?  -->
+								<div class="col-4 col-12-medium">
+								</div>
+								
+								<!-- Sidebar_responsive -->
+									<div class="col-4 col-12-medium">
+										<section id="sidebar_responsive">
+												<section id="sidebar_element">
+													<h3>Magna Feugiat</h3>
+													<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit..</p>
+													<footer>
+														<ul class="actions">
+															<li><a href="#" class="button">Learn More</a></li>
+														</ul>
+													</footer>
+												</section>
+												<hr>
+												<section id="sidebar_element">
+													<a href="#" class="image fit"><img src="images/pic07.jpg" alt=""></a>
+													<h3>Amet Lorem Tempus</h3>
+													<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper sed blandit lorem ipsum dolore.</p>
+													<footer>
+														<ul class="actions">
+															<li><a href="#" class="button">Learn More</a></li>
+														</ul>
+													</footer>
+												</section>
+											</section>
+									</div>
+								
+									<div class="col-8 col-12-medium">
+										<!-- Content -->
+											<div id="maincontent">
+											
+												<section id="content1"
+												th:each="post_list, num : ${post_list}">
+
+										
+												</section>
+											</div>
+									<hr>
+									</div>
+									
+									<div class="col-4 col-12-medium">
+										<!-- Sidebar -->
+										<div id="sidebar_fix">
+											<section id="sidebar_side" class="sidebar_side">
+												<section id="sidebar_element">
+													<h3>Magna Feugiat</h3>
+													<p>Sed tristiq</p>
+													<footer>
+														<ul class="actions">
+															<li><a href="#" class="button">Learn More</a></li>
+														</ul>
+													</footer>
+												</section>
+																																
+											</section>	
+										</div>										
+									</div>
+									
+									
+								</div>
+							</div>
+						</div>
+						</section>
+
+					</div>
+				</div>
+				
+				<!-- script -->
+									
+		</div>
+</html>
