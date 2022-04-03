@@ -20,9 +20,6 @@ layout:decorate="layout/layout">
 
 						<!-- Form -->
 							<section>
-			<div id="main" class="wrapper style1">
-				<div class="container">
-					<!-- main -->
 								<div class="row gtr-150">
 								
 								<!--  대체 왜?  -->
@@ -59,9 +56,19 @@ layout:decorate="layout/layout">
 										<!-- Content -->
 											<div id="maincontent">
 											
-												<section id="content1"
-												th:each="post_list, num : ${post_list}">
-
+												<section id="chat_content1">
+													<div id="chat_header">
+														헤더
+													</div>
+													
+													<div id="chat_form">
+														폼
+													</div>
+													
+													<div id="chat_send">
+													<input type="text" class="chat_holder" placeholder="보내기...">
+													<a class="chat_btn">전송</a>
+													</div>
 										
 												</section>
 											</div>
