@@ -42,23 +42,10 @@ layout:decorate="layout/layout">
 								<!-- Sidebar_responsive -->
 									<div class="col-4 col-12-medium">
 										<section id="sidebar_responsive">
-												<section id="sidebar_element">
-													<div th:each="follow_my_list : ${Follow_my_list}">
-														<div id="follow_list">
-															<img class="header_profileimg" th:src="| /memberimg/${follow_my_list.getMember_profileimg().getMember_profileimg_filename()} |">
-															<h4 class="follow_id"><a th:href="| /mypage/${follow_my_list.getMember_id()} |">[[ ${follow_my_list.getMember_id()} ]]</a></h4>
-														</div>
-													</div>				
-												</section>
 											<hr>
 											<section id="sidebar_element">
-												<h3>Magna Feugiat</h3>
-												<p>Sed tristique purus vitae volutpat commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae volutpat commodo suscipit ullamcorper commodo suscipit amet sed nibh. Proin a ullamcorper sed blandit..</p>
-												<footer>
-													<ul class="actions">
-														<li><a href="#" class="button">Learn More</a></li>
-													</ul>
-												</footer>
+													<h4>채팅룸</h4>
+													
 											</section>
 											<hr>
 										</section>
@@ -93,13 +80,8 @@ layout:decorate="layout/layout">
 										<div id="sidebar_fix">
 											<section id="sidebar_side" class="sidebar_side">
 												<section id="sidebar_element">
-													<h4>내가 팔로우한 리스트</h4>
-													<div th:each="follow_my_list : ${Follow_my_list}">
-														<div id="follow_list">
-															<img class="header_profileimg" th:src="| /memberimg/${follow_my_list.getMember_profileimg().getMember_profileimg_filename()} |">
-															<h4 class="follow_id"><a th:href="| /chat?name=${follow_my_list.getMember_id()} |">[[ ${follow_my_list.getMember_id()} ]]</a></h4>
-														</div>
-													</div>
+													<h4>채팅룸</h4>
+													
 												</section>
 																																
 											</section>	
