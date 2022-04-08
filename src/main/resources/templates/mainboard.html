@@ -97,8 +97,9 @@ layout:decorate="layout/layout">
 															<form method='POST' action='/downloadFile'>
 																<input type="hidden" name="post_img_original_filename" th:value="${post_list.getPost_img().getPost_img_original_filename()}" >
 																<input type="hidden" name="post_img_filename" th:value="${post_list.getPost_img().getPost_img_filename()}" >
-																<div th:id="|download_${post_list.getPost_no()}|" th:name="${post_list.getPost_no()}" class="icon_download_sprite"></div>
-																<input type="submit">
+																<div class="icon_download_sprite">
+																<input type="submit" th:id="|download_${post_list.getPost_no()}|" th:name="${post_list.getPost_no()}" value="">
+																</div>
 															</form>
 															
 														</div>

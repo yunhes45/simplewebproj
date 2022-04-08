@@ -228,6 +228,17 @@
 	margin-right: 10px;
 }
 
+#bottom_menu_icon .icon_download_sprite {
+	padding: 0;
+}
+
+#bottom_menu_icon input {	
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	box-shadow: inset 0 0 0 0;
+}
+
 #bottom_menu #bottom_menu_text {
 	display: flex;
 }
