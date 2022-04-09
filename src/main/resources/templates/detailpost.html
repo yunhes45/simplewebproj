@@ -82,7 +82,13 @@ layout:decorate="layout/layout">
 														<div th:id="| heart_${memberPost.get().getPost_no()} |" th:name="${memberPost.get().getPost_no()}" class="icon_heart_sprite_on" onClick="like(this.id)"></div>
 													</div>
 													
-													<div th:id="${memberPost.get().getPost_no()}" class="icon_bookmark_sprite"></div>
+													<div th:if="${memberbookmark_check} == X">
+														<div th:id="| bookmark_${memberPost.get().getPost_no()} |" th:name="${memberPost.get().getPost_no()}" class="icon_bookmark_sprite" onClick="bookmark(this.id)"></div>
+													</div>
+													<div th:unless="${memberbookmark_check} == X">
+														<div th:id="| bookmark_${memberPost.get().getPost_no()} |" th:name="${memberPost.get().getPost_no()}" class="icon_bookmark_sprite_on" onClick="bookmark(this.id)"></div>
+													</div>
+													
 													<div th:id="${memberPost.get().getPost_no()}" class="icon_download_sprite"></div>
 													
 												</div>
@@ -96,6 +102,7 @@ layout:decorate="layout/layout">
 													</div>
 													
 													<h5 th:id="|likeCount_${memberPost.get().getPost_no()}|" class="like_count" onClick="like_listFunc(this.id)">좋아요 [[ ${memberPost.get().getLike_stat().getLike_stat_count()} ]] 개</h5>
+													<h5 th:id="|bookmarkCount_${memberPost.get().getPost_no()}|" class="bookmark_count" onClick="bookmark_listFunc(this.id)">북마크 [[ ${memberPost.get().getBookmark().getBookmark_count()} ]] 개</h5>
 
 												</div>
 												

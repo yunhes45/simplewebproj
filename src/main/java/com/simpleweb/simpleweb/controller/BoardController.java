@@ -461,6 +461,14 @@ public class BoardController {
 			String memberlike_check = boardservice.getMemberLike_check(Integer.parseInt(post_no), session_info.get().getMember_no());
 			model.addAttribute("memberlike_check", memberlike_check);
 			
+			// bookmark logic
+			List<Bookmark> memberPost_Bookmark_list = boardservice.getMemberPost_Bookmark_list(Integer.parseInt(post_no));
+			model.addAttribute("memberPost_Bookmark_list", memberPost_Bookmark_list);
+			
+			// bookmark check logic
+			String memberbookmark_check = boardservice.getMemberBookmark_check(Integer.parseInt(post_no), session_info.get().getMember_no());
+			model.addAttribute("memberbookmark_check", memberbookmark_check);
+			
 			// comment logic
 			List<Comment> memberPost_Comment_list = boardservice.getMemberPost_Comment_list(Integer.parseInt(post_no));
 			model.addAttribute("memberPost_Comment_list", memberPost_Comment_list);

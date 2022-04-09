@@ -45,6 +45,9 @@ public interface BoardMapper {
 	Optional<Like_stat> getMemberLike_check(
 			@Param("post_no") int post_no,
 			@Param("member_no") int member_no);
+	Optional<Bookmark> getMemberBookmark_check(
+			@Param("post_no") int post_no,
+			@Param("member_no") int member_no);
 	
 	List<Follow> getFollow_my_list(@Param("member_no") int member_no);
 	List<Follow> getFollow_me_list(@Param("member_no") int member_no);

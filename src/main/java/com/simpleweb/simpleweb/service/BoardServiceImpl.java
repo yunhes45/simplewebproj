@@ -225,6 +225,28 @@ public class BoardServiceImpl implements BoardService{
 		
 		return check;
 	}
+	
+	@Override
+	public List<Bookmark> getMemberPost_Bookmark_list(int post_no) {
+
+		return boardmapper.getPost_Bookmark_list(post_no);
+	}
+
+	@Override
+	public String getMemberBookmark_check(int post_no, int member_no) {
+		
+		Optional<Bookmark> memberbookmark_check = boardmapper.getMemberBookmark_check(post_no, member_no);
+		String check = null;
+		
+		try {
+			System.out.println(memberbookmark_check.get().getPost_no());
+			check = "O";
+		}catch(NoSuchElementException e) {
+			check = "X";
+		}
+		
+		return check;
+	}
 
 	@Override
 	public List<Comment> getMemberPost_Comment_list(int post_no) {
@@ -278,6 +300,5 @@ public class BoardServiceImpl implements BoardService{
 			
 		return follow_check;
 	}
-
 
 }

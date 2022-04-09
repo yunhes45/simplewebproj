@@ -40,6 +40,9 @@ public interface BoardService {
 	Optional<Post> getMemberPost(int post_no, int member_no);
 	List<Like_stat> getMemberPost_Like_list(int post_no);
 	String getMemberLike_check(int post_no, int member_no);
+	List<Bookmark> getMemberPost_Bookmark_list(int post_no);
+	String getMemberBookmark_check(int post_no, int member_no);
+	
 	List<Comment> getMemberPost_Comment_list(int post_no);
 	
 	List<Member> getFollow_my_list(int member_no);
