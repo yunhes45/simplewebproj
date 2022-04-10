@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.simpleweb.simpleweb.mapper.ChatMapper">
+
+	<insert id="insertChatroom" parameterType="com.simpleweb.simpleweb.model.Chatroom" useGeneratedKeys="true" keyProperty="chatroom_no">
+		insert into chatroom(chatroom_name)
+		
+		values (  #{chatroom.chatroom_name} )			
+	</insert>
+	
+	<insert id="insertChatroom_member" parameterType="com.simpleweb.simpleweb.model.Chatroom_member">
+		insert into chatroom_member(chatroom_no, member_no)
+		
+		values ( #{chatroom_member.chatroom_no},
+				 #{chatroom_member.member_no}    )
+	</insert>
+	
+</mapper>
