@@ -22,21 +22,7 @@ layout:decorate="layout/layout">
 							<section>
 								<div class="row gtr-150">
 
-								<div class="col-8 col-12-medium">
-									<!-- top bar -->
-									<div id="topbar">
-										<section id="topbar_side" class="topbar_side">
-											<section id="topbar_element">
-												<div th:each="follow_my_list : ${Follow_my_list}">
-													<div id="follow_list">
-														<img class="header_profileimg" th:src="| /memberimg/${follow_my_list.getMember_profileimg().getMember_profileimg_filename()} |">
-														<h4 class="follow_id"><a th:href="| /chat/m/${follow_my_list.getMember_id()} |">[[ ${follow_my_list.getMember_id()} ]]</a></h4>
-													</div>
-												</div>
-											</section>
-																															
-										</section>	
-									</div>										
+								<div class="col-8 col-12-medium">										
 								</div>
 							
 								<!-- Sidebar_responsive -->
@@ -80,7 +66,23 @@ layout:decorate="layout/layout">
 										<div id="sidebar_fix">
 											<section id="sidebar_side" class="sidebar_side">
 												<section id="sidebar_element">
-													<h4>채팅룸</h4>
+													<div id="sidebar_header">
+														<h4>채팅룸</h4>
+														<div id="newchatroom" class="newchatroom">
+															<div class="newchatroomimg" onclick="newchatroom()">
+																	<span></span>
+																	<span></span>
+															</div>
+															<div id="follow_list_form" class="follow_list_form">
+																<div th:each="follow_my_list : ${Follow_my_list}">
+																	<div id="follow_list">
+																		<img class="header_profileimg" th:src="| /memberimg/${follow_my_list.getMember_profileimg().getMember_profileimg_filename()} |">
+																		<h4 class="follow_id"><a th:href="| /chat/m/${follow_my_list.getMember_id()} |">[[ ${follow_my_list.getMember_id()} ]]</a></h4>
+																	</div>
+																</div>
+															</div>	
+														</div>
+													</div>
 													
 												</section>
 																																
@@ -91,13 +93,12 @@ layout:decorate="layout/layout">
 									
 								</div>
 							</div>
-						</div>
-						</section>
-
-					</div>
-				</div>
-				
-				<!-- script -->
-									
-		</div>
+						</div>												
+					<!-- script -->
+						<script>
+							function newchatroom(){
+								$("#follow_list_form").animate({width: 'toggle'}, 400);
+							}
+						</script>
+					</div>							
 </html>

@@ -447,7 +447,7 @@
 	all: unset;
 }
 
-	#post_slideToggle .headerprofilemenu {
+#post_slideToggle .headerprofilemenu {
 	margin: 0px;
 	padding: 0px;		
 } 
@@ -553,6 +553,67 @@
 #topbar_element #follow_list {
 	display: flex;
 	margin-left: 15px;
+}
+
+#sidebar_header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#sidebar_header h4 {
+	margin: 0;
+}
+
+.newchatroom {
+	background: #1c1d26;
+	border: 0;
+	outline: 0;
+}
+
+.newchatroom .newchatroomimg {
+	width: 30px;
+	height: 30px;
+	border: 1px solid white;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;	
+}
+
+.newchatroom span {
+	display: block;
+	width: 1px;
+	height: 10px;
+	background: white;
+}
+
+.newchatroom span:nth-child(2) {
+	transform: rotate(90deg);
+}
+
+#newchatroom .follow_list_form {
+	display: none;
+	width: 180px;
+	margin-left: 30px;
+	background-color: rgba(39, 40, 51, 0.965);
+	z-index: 3;
+	position: absolute;
+	transform: translateX(-100%);
+	border: 2px solid #e44c65;
+}
+
+#newchatroom .follow_list_form:hover {
+	outline: none;
+}
+
+#newchatroom .follow_list_form form {
+	all: unset;
+}
+
+#newchatroom .follow_list_form input {
+	all: unset;
 }
 
 @media screen and (max-width: 1280px) {
