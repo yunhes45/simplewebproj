@@ -77,10 +77,20 @@ layout:decorate="layout/layout">
 																<div th:each="follow_my_list : ${Follow_my_list}">
 																	<div id="follow_list">
 																		<img class="header_profileimg" th:src="| /memberimg/${follow_my_list.getMember_profileimg().getMember_profileimg_filename()} |">
-																		<h4 class="follow_id"><a th:href="| /chat/m/${follow_my_list.getMember_id()} |">[[ ${follow_my_list.getMember_id()} ]]</a></h4>
+																		<h4 class="follow_id">
+																		<form method="POST" action="/chat">
+																			<input type="submit" name="member_id" th:value="${follow_my_list.getMember_id()}" >
+																		</form>
+																		</h4>
 																	</div>
 																</div>
 															</div>	
+														</div>
+													</div>
+													
+													<div id="chatroom_list">
+														<div th:each="chatroom_list : ${chatroom_list}">
+														<h4 class="follow_id"><a th:href="| /chat/m/${chatroom_list.getChatroom_no()} |">[[ ${chatroom_list.getChatroom_no()} ]]</a></h4>
 														</div>
 													</div>
 													

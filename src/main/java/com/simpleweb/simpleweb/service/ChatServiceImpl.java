@@ -1,5 +1,6 @@
 package com.simpleweb.simpleweb.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,12 @@ public class ChatServiceImpl implements ChatService{
 	public void insertChatroom_member(Chatroom_member chatroom_member) {
 		chatmapper.insertChatroom_member(chatroom_member);
 		
+	}
+
+	@Override
+	public List<Chatroom_member> getChatroom_list(int member_no) {
+
+		return chatmapper.getChatroom_list(member_no);
 	}
 
 }

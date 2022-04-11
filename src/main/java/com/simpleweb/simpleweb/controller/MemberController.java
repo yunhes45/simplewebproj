@@ -59,7 +59,7 @@ public class MemberController {
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
 		if(session_info != null) {
-			return "mainBoard";
+			return "redirect:mainboard";
 		}else {
 
 			return "index";

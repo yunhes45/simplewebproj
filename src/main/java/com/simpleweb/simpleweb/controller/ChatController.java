@@ -34,45 +34,25 @@ public class ChatController {
 	CommonService commonservice;
 	
 	@RequestMapping("/chat")
-	public String chat(Model model, HttpServletRequest request) {
+	public String chat(Model model, HttpServletRequest request, Member member_form) {
 		
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
-		if(session_info != null) {
-			// follow my list
-			List<Member> Follow_my_list = boardservice.getFollow_my_list(session_info.get().getMember_no());
-			model.addAttribute("Follow_my_list", Follow_my_list);
-			
-		}else {
-			
-			return "redirect:/";
-		}
-		
-		return "chat";
-	}
-	
-	@RequestMapping("/chat/m/{chatroom_id}")
-	public String chatroom(Model model, HttpServletRequest request,
-			@PathVariable String chatroom_id) {
-		
-		HttpSession session = request.getSession();
-		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
+		System.out.println(member_form.getMember_id());
 		
 		if(session_info != null) {
-			// follow my list
-			List<Member> Follow_my_list = boardservice.getFollow_my_list(session_info.get().getMember_no());
-			model.addAttribute("Follow_my_list", Follow_my_list);
-
+			if(member_form.getMember_id() != null) {
+				
 				Chatroom chatroom = new Chatroom();
-				chatroom.setChatroom_name(chatroom_id);
+				chatroom.setChatroom_name(member_form.getMember_id());
 				
 				// insert chatroom
 				chatservice.insertChatroom(chatroom);			
 				int chatroom_no = chatroom.getChatroom_no();
 
 				// get invitemember id -> no
-				int invitemember_no = commonservice.getMember_no(chatroom_id);
+				int invitemember_no = commonservice.getMember_no(member_form.getMember_id());
 				
 				List<Integer> chatroom_member_belong = new ArrayList<>();
 				chatroom_member_belong.add(session_info.get().getMember_no());
@@ -85,6 +65,40 @@ public class ChatController {
 					
 					chatservice.insertChatroom_member(chatroom_member);
 				}
+				
+				return "redirect:chat";
+			}
+			
+			// follow my list
+			List<Member> Follow_my_list = boardservice.getFollow_my_list(session_info.get().getMember_no());
+			model.addAttribute("Follow_my_list", Follow_my_list);
+			
+			// get chatroom
+			List<Chatroom_member> chatroom_list = chatservice.getChatroom_list(session_info.get().getMember_no());
+			model.addAttribute("chatroom_list", chatroom_list);
+			
+			
+		}else {
+			
+			return "redirect:/";
+		}
+		
+		return "chat";
+	}
+	
+	@RequestMapping("/chat/m/{chatroom_no}")
+	public String chatroom(Model model, HttpServletRequest request,
+			@PathVariable String chatroom_no) {
+		
+		HttpSession session = request.getSession();
+		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
+		
+		if(session_info != null) {
+			
+				
+				// get chatroom
+				List<Chatroom_member> chatroom_list = chatservice.getChatroom_list(session_info.get().getMember_no());
+				model.addAttribute("chatroom_list", chatroom_list);
 			
 			return "chat";
 		

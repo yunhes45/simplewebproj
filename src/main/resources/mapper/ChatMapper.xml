@@ -15,4 +15,25 @@
 				 #{chatroom_member.member_no}    )
 	</insert>
 	
+	<resultMap id="JoinChatroom_listRM" type="com.simpleweb.simpleweb.model.Chatroom_member">
+		<id property="chatroom_member_no" column="chatroom_member_no" />
+		<result property="chatroom_no" column="chatroom_no" />
+		<result property="member_no" column="member_no" />
+		
+		<association javaType="Chatroom" property="chatroom">
+			<id property="chatroom_no" column="chatroom_no" />
+			<result property="chatroom_name" column="chatroom_name" />
+		</association>	
+	</resultMap>
+	
+	<select id="getChatroom_list" resultMap="JoinChatroom_listRM">
+		select m.chatroom_no, m.chatroom_member_no, m.member_no, n.chatroom_name
+		
+		from chatroom_member as m inner join chatroom as n
+		 
+		on m.chatroom_no = n.chatroom_no
+		
+		where member_no = #{member_no}
+	</select>
+	
 </mapper>

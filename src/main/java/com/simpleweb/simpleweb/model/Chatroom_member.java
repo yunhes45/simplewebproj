@@ -24,5 +24,14 @@ public class Chatroom_member {
 		this.member_no = member_no;
 	}
 	
+	private Chatroom chatroom;
+
+	public Chatroom getChatroom() {
+		return chatroom;
+	}
+	public void setChatroom(Chatroom chatroom) {
+		this.chatroom = chatroom;
+	}
+	
 	
 }
