@@ -95,10 +95,13 @@ public class ChatController {
 		
 		if(session_info != null) {
 			
-				
 				// get chatroom
 				List<Chatroom_member> chatroom_list = chatservice.getChatroom_list(session_info.get().getMember_no());
 				model.addAttribute("chatroom_list", chatroom_list);
+				
+				// get chatroom_member(except me)
+				List<Chatroom_member> chatroom_member_list = chatservice.getChatroom_member_list(session_info.get().getMember_no(), Integer.parseInt(chatroom_no));
+				model.addAttribute("chatroom_member_list", chatroom_member_list);
 			
 			return "chat";
 		

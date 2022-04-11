@@ -1,5 +1,6 @@
 package com.simpleweb.simpleweb.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +34,21 @@ public class ChatServiceImpl implements ChatService{
 	public List<Chatroom_member> getChatroom_list(int member_no) {
 
 		return chatmapper.getChatroom_list(member_no);
+	}
+
+	@Override
+	public List<Chatroom_member> getChatroom_member_list(int member_no, int chatroom_no) {
+		List<Chatroom_member> exceptmeList = new ArrayList<>();
+		
+		List<Chatroom_member> getChatroom_member_list = chatmapper.getChatroom_member_list(chatroom_no);
+		
+		for(int i = 0; i < getChatroom_member_list.size(); i++) {
+			if(getChatroom_member_list.get(i).getMember_no() != member_no) {
+				exceptmeList.add(getChatroom_member_list.get(i));
+			}
+		}
+		
+		return exceptmeList;
 	}
 
 }

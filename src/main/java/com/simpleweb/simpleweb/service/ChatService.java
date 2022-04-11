@@ -11,5 +11,6 @@ public interface ChatService {
 	int insertChatroom(Chatroom chatroom);
 	void insertChatroom_member(Chatroom_member chatroom_member);
 	List<Chatroom_member> getChatroom_list(int member_no);
+	List<Chatroom_member> getChatroom_member_list(int member_no, int chatroom_no);
 
 }

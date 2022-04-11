@@ -45,6 +45,9 @@ layout:decorate="layout/layout">
 												<section id="chat_content1">
 													<div id="chat_header">
 														헤더
+														<div th:each = "chatroom_member_list : ${chatroom_member_list}">
+														<a th:id="${chatroom_member_list.getMember_no()}" onclick="deliver_socket(this.id)">[[${chatroom_member_list.getMember().getMember_id()}]]</a>
+														</div>
 													</div>
 													
 													<div id="chat_form">
@@ -110,5 +113,6 @@ layout:decorate="layout/layout">
 								$("#follow_list_form").animate({width: 'toggle'}, 400);
 							}
 						</script>
+						<script type="text/javascript" th:src="@{/assets/js/socket.js}"></script>
 					</div>							
 </html>

@@ -18,4 +18,6 @@ public interface ChatMapper {
 
 	List<Chatroom_member> getChatroom_list(@Param("member_no") int member_no);
 
+	List<Chatroom_member> getChatroom_member_list(@Param("chatroom_no") int chatroom_no);
+
 }
