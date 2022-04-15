@@ -42,6 +42,10 @@ public class ChatController {
 		System.out.println(member_form.getMember_id());
 		
 		if(session_info != null) {
+			
+			// my info
+			model.addAttribute("session_info", session_info);
+			
 			if(member_form.getMember_id() != null) {
 				
 				Chatroom chatroom = new Chatroom();
@@ -94,6 +98,11 @@ public class ChatController {
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
 		if(session_info != null) {
+				// my info
+				model.addAttribute("session_info", session_info);
+				
+				// chatroom_no
+				model.addAttribute("chatroom_no", chatroom_no);
 			
 				// get chatroom
 				List<Chatroom_member> chatroom_list = chatservice.getChatroom_list(session_info.get().getMember_no());
