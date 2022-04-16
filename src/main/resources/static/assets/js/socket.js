@@ -29,6 +29,7 @@ function wsEvt(){
 		var getSocket_msg = msgarr[3];
 		var getSocket_nowTimes = msgarr[4];
 		var getSocket_chatroom_no = msgarr[5];
+		var getSocket_division = msgarr[6];
 		
 		console.log(getSocket_member_no);
 		console.log(getSocket_member_id);
@@ -36,6 +37,58 @@ function wsEvt(){
 		console.log(getSocket_msg);
 		console.log(getSocket_nowTimes);
 		console.log(getSocket_chatroom_no);
+		console.log(getSocket_division);
+		
+		if(getSocket_chatroom_no == chatroom_no){
+			if(getSocket_division == "text"){
+				if(getSocket_member_no == member_no){
+					var msgTmp = "<div>"
+						msgTmp += "<div class='chat_myLog'>"
+						msgTmp += "<div class='chat_myprofile'>"
+						msgTmp += "<div class='chat_myname'>"
+						msgTmp += getSocket_member_id;
+						msgTmp += "</div>"
+						msgTmp += "<div class='chat_myimg'>"
+						msgTmp += getSocket_member_img;
+						msgTmp += "</div>"
+						msgTmp += "</div>"
+						msgTmp += "<div class='chat_mymsg'>"
+						msgTmp += getSocket_msg;
+						msgTmp += "</div>"
+						msgTmp += "<div class='chat_myTime'>"
+						msgTmp += "time : < "
+						msgTmp += getSocket_nowTimes;
+						msgTmp += " >"
+						msgTmp += "</div>"
+						msgTmp += "</div>"
+						
+					$("#chat_form").append(msgTmp);
+					
+				}else{
+					var msgTmp = "<div>"
+						msgTmp += "<div class='chat_yourLog'>"
+						msgTmp += "<div class='chat_yourprofile'>"
+						msgTmp += "<div class='chat_yourimg'>"
+						msgTmp += getSocket_member_img;
+						msgTmp += "</div>"
+						msgTmp += "<div class='chat_yourname'>"
+						msgTmp += getSocket_member_id;
+						msgTmp += "</div>"
+						msgTmp += "</div>"
+						msgTmp += "<div class='chat_mymsg'>"
+						msgTmp += getSocket_msg;
+						msgTmp += "</div>"
+						msgTmp += "<div class='chat_myTime'>"
+						msgTmp += "time : < "
+						msgTmp += getSocket_nowTimes;
+						msgTmp += " >"
+						msgTmp += "</div>"
+						msgTmp += "</div>"
+						
+					$("#chat_form").append(msgTmp);				
+				}			
+			}
+		}
 		
 	}
 
@@ -58,7 +111,7 @@ function send(){
 	var chatform_nullcheck = document.querySelector("#chat_holder");
 	
 	if(chatform_nullcheck.value != ""){
-		ws.send(member_no+","+member_id+","+member_img+","+msg+","+nowTimes+","+chatroom_no);
+		ws.send(member_no+","+member_id+","+member_img+","+msg+","+nowTimes+","+chatroom_no+","+"text");
 		document.getElementById("chat_holder").value = "";
 		
 	}
