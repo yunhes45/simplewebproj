@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.simpleweb.simpleweb.model.Chatlog;
 import com.simpleweb.simpleweb.model.Chatroom;
 import com.simpleweb.simpleweb.model.Chatroom_member;
 
@@ -19,5 +20,7 @@ public interface ChatMapper {
 	List<Chatroom_member> getChatroom_list(@Param("member_no") int member_no);
 
 	List<Chatroom_member> getChatroom_member_list(@Param("chatroom_no") int chatroom_no);
+
+	void insertLog(@Param("chatlog") Chatlog insertLog);
 
 }

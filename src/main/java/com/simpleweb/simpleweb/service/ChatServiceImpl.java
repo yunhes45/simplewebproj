@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.simpleweb.simpleweb.mapper.ChatMapper;
+import com.simpleweb.simpleweb.model.Chatlog;
 import com.simpleweb.simpleweb.model.Chatroom;
 import com.simpleweb.simpleweb.model.Chatroom_member;
 
@@ -49,6 +50,12 @@ public class ChatServiceImpl implements ChatService{
 		}
 		
 		return exceptmeList;
+	}
+
+	@Override
+	public void insertLog(Chatlog insertLog) {
+		
+		chatmapper.insertLog(insertLog);
 	}
 
 }

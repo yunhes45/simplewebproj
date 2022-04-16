@@ -13,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.simpleweb.simpleweb.model.Chatlog;
 import com.simpleweb.simpleweb.model.Chatroom;
 import com.simpleweb.simpleweb.model.Chatroom_member;
 import com.simpleweb.simpleweb.model.Member;
@@ -92,7 +94,12 @@ public class ChatController {
 	
 	@RequestMapping("/chat/m/{chatroom_no}")
 	public String chatroom(Model model, HttpServletRequest request,
-			@PathVariable String chatroom_no) {
+			@PathVariable String chatroom_no,
+			@RequestParam(value = "member_no", required=false) String socket_member_no,
+			@RequestParam(value = "chatroom_no", required=false) String socket_chatroom_no,
+			@RequestParam(value = "msg", required=false) String socket_msg,
+			@RequestParam(value = "division", required=false) String socket_division,
+			@RequestParam(value = "nowTimes", required=false) String socket_nowTimes) {
 		
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
@@ -111,6 +118,26 @@ public class ChatController {
 				// get chatroom_member(except me)
 				List<Chatroom_member> chatroom_member_list = chatservice.getChatroom_member_list(session_info.get().getMember_no(), Integer.parseInt(chatroom_no));
 				model.addAttribute("chatroom_member_list", chatroom_member_list);
+				
+				// log insert Text
+				Chatlog insertLog = new Chatlog();
+				
+				System.out.println("socket_msg : " + socket_msg);
+				
+				try {
+					
+					if(!socket_msg.equals("") && socket_msg != null) {
+						insertLog.setMember_no(Integer.parseInt(socket_member_no));
+						insertLog.setChatroom_no(Integer.parseInt(socket_chatroom_no));
+						insertLog.setChatlog_log(socket_msg);
+						insertLog.setChatlog_division(socket_division);
+						insertLog.setChatlog_date(socket_nowTimes);
+						
+						chatservice.insertLog(insertLog);
+					}
+				}catch(NullPointerException e) {
+					
+				}
 			
 			return "chat";
 		
@@ -118,4 +145,5 @@ public class ChatController {
 			return "redirect:/";
 		}
 	}
+	
 }

@@ -82,4 +82,14 @@
 		where m.chatroom_no = #{chatroom_no}
 	</select>
 	
+	<insert id="insertLog" parameterType="com.simpleweb.simpleweb.model.Chatlog">
+		insert into chatlog(member_no, chatroom_no, chatlog_log, chatlog_division, chatlog_date)
+		
+		values ( #{chatlog.member_no},
+				 #{chatlog.chatroom_no},
+				 #{chatlog.chatlog_log},
+				 #{chatlog.chatlog_division},
+				 #{chatlog.chatlog_date}   )	
+	</insert>
+	
 </mapper>

@@ -27,15 +27,19 @@ function wsEvt(){
 		var getSocket_member_id = msgarr[1];
 		var getSocket_member_img = msgarr[2];
 		var getSocket_msg = msgarr[3];
-		var getSocket_nowTimes = msgarr[4];
-		var getSocket_chatroom_no = msgarr[5];
-		var getSocket_division = msgarr[6];
+		var getSocket_chatroom_no = msgarr[4];
+		var getSocket_division = msgarr[5];
+		var getSocket_nowTimes = msgarr[6];
+		
+		var getSocket_nowTimesarr = msgarr[6].split(" ");
+		var getSocket_nowTimesdate = getSocket_nowTimesarr[0];
+		var getSocket_nowTimesTime = getSocket_nowTimesarr[1];
 		
 		console.log(getSocket_member_no);
 		console.log(getSocket_member_id);
 		console.log(getSocket_member_img);
 		console.log(getSocket_msg);
-		console.log(getSocket_nowTimes);
+		console.log(getSocket_nowTimesdate);
 		console.log(getSocket_chatroom_no);
 		console.log(getSocket_division);
 		
@@ -57,7 +61,7 @@ function wsEvt(){
 						msgTmp += "</div>"
 						msgTmp += "<div class='chat_myTime'>"
 						msgTmp += "time : < "
-						msgTmp += getSocket_nowTimes;
+						msgTmp += getSocket_nowTimesTime;
 						msgTmp += " >"
 						msgTmp += "</div>"
 						msgTmp += "</div>"
@@ -100,22 +104,48 @@ function send(){
 	var member_img = document.getElementById("my_img").value;
 	var msg = document.getElementById("chat_holder").value;
 	var chatroom_no = document.getElementById("chatroom_no").value;
+	var division = "text";
 
 	var today     =  new Date();
+	var years     =  today.getFullYear();
+	var month     =  today.getMonth();
+	var date      =  today.getDate();
 	var hours     =  today.getHours();
 	var minutes   =  today.getMinutes();
 	var seconds   =  today.getSeconds();		
-	var nowTimes = (("00"+hours.toString()).slice(-2)) + ":" + (("00"+minutes.toString()).slice(-2)) + ":" + (("00"+seconds.toString()).slice(-2));  
+	var nowTimes = years + "-" + month + "-" + date + " " + (("00"+hours.toString()).slice(-2)) + ":" + (("00"+minutes.toString()).slice(-2)) + ":" + (("00"+seconds.toString()).slice(-2));  
 
 	// 채팅 공백 시 응답 X
 	var chatform_nullcheck = document.querySelector("#chat_holder");
 	
 	if(chatform_nullcheck.value != ""){
-		ws.send(member_no+","+member_id+","+member_img+","+msg+","+nowTimes+","+chatroom_no+","+"text");
+		ws.send(member_no+","+member_id+","+member_img+","+msg+","+chatroom_no+","+division+","+nowTimes);
 		document.getElementById("chat_holder").value = "";
+		
+		AjaxInsertChatText(member_no, chatroom_no, msg, division, nowTimes);
 		
 	}
 	
-	
-	
+	function AjaxInsertChatText(member_no, chatroom_no, msg, division, nowTimes){
+		$.ajax({
+			type: 'POST',
+			url: '/chat/m/' + chatroom_no,
+			data: {
+				member_no: member_no,
+				chatroom_no: chatroom_no,
+				msg: msg,
+				division: division,
+				nowTimes: nowTimes
+			},
+			success: function(data){
+				
+			},
+			error: function(data){
+				
+			}
+		});
+	}
 }
+
+
+
