@@ -46,14 +46,14 @@ function wsEvt(){
 		if(getSocket_chatroom_no == chatroom_no){
 			if(getSocket_division == "text"){
 				if(getSocket_member_no == member_no){
-					var msgTmp = "<div>"
+					var msgTmp = "<div class='chat_msg_my_form'>"
 						msgTmp += "<div class='chat_myLog'>"
 						msgTmp += "<div class='chat_myprofile'>"
+						msgTmp += "<div class='chat_myimg'>"
+						msgTmp += "<img class='img' src='/memberimg/" + getSocket_member_img + "' >"
+						msgTmp += "</div>"
 						msgTmp += "<div class='chat_myname'>"
 						msgTmp += getSocket_member_id;
-						msgTmp += "</div>"
-						msgTmp += "<div class='chat_myimg'>"
-						msgTmp += getSocket_member_img;
 						msgTmp += "</div>"
 						msgTmp += "</div>"
 						msgTmp += "<div class='chat_mymsg'>"
@@ -69,22 +69,22 @@ function wsEvt(){
 					$("#chat_form").append(msgTmp);
 					
 				}else{
-					var msgTmp = "<div>"
+					var msgTmp = "<div class='chat_msg_your_form'>"
 						msgTmp += "<div class='chat_yourLog'>"
 						msgTmp += "<div class='chat_yourprofile'>"
 						msgTmp += "<div class='chat_yourimg'>"
-						msgTmp += getSocket_member_img;
+						msgTmp += "<img class='img' src='/memberimg/" + getSocket_member_img + "' >"
 						msgTmp += "</div>"
 						msgTmp += "<div class='chat_yourname'>"
 						msgTmp += getSocket_member_id;
 						msgTmp += "</div>"
 						msgTmp += "</div>"
-						msgTmp += "<div class='chat_mymsg'>"
+						msgTmp += "<div class='chat_yourmsg'>"
 						msgTmp += getSocket_msg;
 						msgTmp += "</div>"
-						msgTmp += "<div class='chat_myTime'>"
+						msgTmp += "<div class='chat_yourTime'>"
 						msgTmp += "time : < "
-						msgTmp += getSocket_nowTimes;
+						msgTmp += getSocket_nowTimesTime;
 						msgTmp += " >"
 						msgTmp += "</div>"
 						msgTmp += "</div>"
