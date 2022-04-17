@@ -436,8 +436,8 @@ public class BoardController {
 			return "redirect:/";
 		}
 		
-		redirectattributes.addAttribute("member", session_info.get().getMember_id());
-		return "redirect:mypage";
+//		redirectattributes.addAttribute("member", session_info.get().getMember_id());
+		return "redirect:mypage/" + session_info.get().getMember_id();
 	}
 	
 	@RequestMapping("/detailpost")

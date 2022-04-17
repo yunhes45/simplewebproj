@@ -112,6 +112,10 @@ public class ChatController {
 				
 				// chatroom_no
 				model.addAttribute("chatroom_no", chatroom_no);
+				
+				// follow my list
+				List<Member> Follow_my_list = boardservice.getFollow_my_list(session_info.get().getMember_no());
+				model.addAttribute("Follow_my_list", Follow_my_list);
 			
 				// get chatroom
 				List<Chatroom_member> chatroom_list = chatservice.getChatroom_list(session_info.get().getMember_no());
