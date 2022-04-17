@@ -137,12 +137,26 @@ function follow(id){
 						followcancel[i].innerHTML = `<a>팔로우 취소</a>`;
 					}
 					
+					let follow_list = document.querySelector(".my_follow_list_elem");
+					
+					var follow_template =  "<div id='follow_list'" + "class=' my_follow_list_" + follow_member_no[1] + " '>"
+						follow_template += "<img class='header_profileimg' src='/memberimg/" + response.follow_member_info.member_profileimg.member_profileimg_filename + "'>"
+						follow_template += "<h4 class='follow_id'>"
+						follow_template += "<a href=' /mypage/" + response.follow_member_info.member_id + "'>" + response.follow_member_info.member_id
+						follow_template += "</h4>"
+					
+					follow_list.insertAdjacentHTML("beforeend", follow_template);					
+					
 				}else{
 					var followcancel = document.querySelectorAll("#" + trim_Followstat_id);
 
 					for(var i = 0; i < followcancel.length; i++){
 						followcancel[i].innerHTML = `<a>팔로우</a>`;
 					}
+								
+					let follow_cancel_no = document.querySelector(".my_follow_list_"+follow_member_no[1]);
+					follow_cancel_no.remove();
+					console.log(follow_cancel_no);		
 				}
 				 
 			},

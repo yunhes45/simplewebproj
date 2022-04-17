@@ -28,12 +28,14 @@ layout:decorate="layout/layout">
 									<div class="col-4 col-12-medium">
 										<section id="sidebar_responsive">
 												<section id="sidebar_element">
+													<div id="sidebar_follow_list" class="sidebar_my_follow_list_elem">
 													<div th:each="follow_my_list : ${Follow_my_list}">
 														<div id="follow_list">
 															<img class="header_profileimg" th:src="| /memberimg/${follow_my_list.getMember_profileimg().getMember_profileimg_filename()} |">
 															<h4 class="follow_id"><a th:href="| /mypage/${follow_my_list.getMember_id()} |">[[ ${follow_my_list.getMember_id()} ]]</a></h4>
 														</div>
-													</div>				
+													</div>		
+													</div>		
 												</section>
 												<hr>
 										</section>
@@ -187,20 +189,24 @@ layout:decorate="layout/layout">
 												
 												<section id="sidebar_element">
 													<h4>내가 팔로우한 리스트</h4>
+													<div id="sidebar_follow_list" class="my_follow_list_elem">
 													<div th:each="follow_my_list : ${Follow_my_list}">
-														<div id="follow_list">
+														<div id="follow_list" th:class="| my_follow_list_${follow_my_list.getMember_no()} |">
 															<img class="header_profileimg" th:src="| /memberimg/${follow_my_list.getMember_profileimg().getMember_profileimg_filename()} |">
 															<h4 class="follow_id"><a th:href="| /mypage/${follow_my_list.getMember_id()} |">[[ ${follow_my_list.getMember_id()} ]]</a></h4>
 														</div>
 													</div>
+													</div>
 												</section>
 												<section id="sidebar_element">
 													<h4>나를 팔로우한 리스트</h4>
+													<div id="sidebar_follow_list">
 													<div th:each="follow_me_list : ${Follow_me_list}">
 														<div id="follow_list">
 															<img class="header_profileimg" th:src="| /memberimg/${follow_me_list.getMember_profileimg().getMember_profileimg_filename()} |">
 															<h4 class="follow_id"><a th:href="| /mypage/${follow_me_list.getMember_id()} |">[[ ${follow_me_list.getMember_id()} ]]</a></h4>
 														</div>	
+													</div>
 													</div>
 												</section>
 																																

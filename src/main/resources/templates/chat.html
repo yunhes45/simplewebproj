@@ -30,7 +30,33 @@ layout:decorate="layout/layout">
 										<section id="sidebar_responsive">
 											<hr>
 											<section id="sidebar_element">
-													<h4>채팅룸</h4>
+													<div id="sidebar_header">
+														<h4>채팅룸</h4>
+														<div id="newchatroom" class="newchatroom">
+															<div class="newchatroomimg" onclick="responsive_newchatroom()">
+																	<span></span>
+																	<span></span>
+															</div>
+															<div id="responsive_follow_list_form" class="follow_list_form">
+																<div th:each="follow_my_list : ${Follow_my_list}">
+																	<div id="follow_list">
+																		<img class="header_profileimg" th:src="| /memberimg/${follow_my_list.getMember_profileimg().getMember_profileimg_filename()} |">
+																		<h4 class="follow_id">
+																		<form method="POST" action="/chat">
+																			<input type="submit" name="member_id" th:value="${follow_my_list.getMember_id()}" >
+																		</form>
+																		</h4>
+																	</div>
+																</div>
+															</div>	
+														</div>
+													</div>
+													
+													<div id="chatroom_list">
+														<div th:each="chatroom_list : ${chatroom_list}">
+														<h4 class="chatroom_id"><a th:href="| /chat/m/${chatroom_list.getChatroom_no()} | ">[[ ${chatroom_list.getChatroom().getChatroom_name()} ]]</a></h4>
+														</div>
+													</div>
 													
 											</section>
 											<hr>
@@ -138,7 +164,7 @@ layout:decorate="layout/layout">
 													
 													<div id="chatroom_list">
 														<div th:each="chatroom_list : ${chatroom_list}">
-														<h4 class="follow_id"><a th:href="| /chat/m/${chatroom_list.getChatroom_no()} | ">[[ ${chatroom_list.getChatroom().getChatroom_name()} ]]</a></h4>
+														<h4 class="chatroom_id"><a th:href="| /chat/m/${chatroom_list.getChatroom_no()} | ">[[ ${chatroom_list.getChatroom().getChatroom_name()} ]]</a></h4>
 														</div>
 													</div>
 													
@@ -154,6 +180,9 @@ layout:decorate="layout/layout">
 						</div>												
 					<!-- script -->
 						<script>
+							function responsive_newchatroom(){
+								$("#responsive_follow_list_form").animate({width: 'toggle'}, 400);
+							}
 							function newchatroom(){
 								$("#follow_list_form").animate({width: 'toggle'}, 400);
 							}

@@ -129,6 +129,11 @@
 	padding: 20px;
 }
 
+#sidebar_element #sidebar_follow_list {
+	overflow-y: auto;
+	height: 150px;
+}
+
 #sidebar_element #follow_list {
 	display: flex;
 	margin-left: 20px;
@@ -149,6 +154,12 @@
 
 #sidebar_element #chatroom_list {
 	margin-top: 30px;
+	height: 500px;
+	overflow-y: auto;
+}
+
+#sidebar_side #chatroom_list .chatroom_id {
+	margin-left: 20px;
 }
 
 	 
@@ -766,9 +777,23 @@
 		}
 		
 		#sidebar_responsive #sidebar_element {
-			display: flex;
 			height: 100px;
 			overflow-x: auto;
+		}
+		
+		#sidebar_responsive #sidbar_follow_list {
+			display: flex;
+		}
+		
+		#sidebar_responsive #chatroom_list {
+			display: flex;
+			margin-top: 5px;
+			height: 30px;
+
+		}
+		
+		#sidebar_responsive #chatroom_list .chatroom_id {
+			margin-right: 30px;
 		}
 		
 		#sidebar_side {

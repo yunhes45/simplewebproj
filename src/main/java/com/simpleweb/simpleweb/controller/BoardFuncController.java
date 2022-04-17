@@ -87,7 +87,7 @@ public class BoardFuncController {
 		
 		Optional<Comment> commentlogic = boardfuncservice.CommentLogic(session_info.get().getMember_no(), Integer.parseInt(trim_post_no), comment_text, commonservice.nowTime());
 		model.addAttribute("commentlogic", commentlogic);
-		System.out.println(commentlogic.get().getMember_profileimg().getMember_profileimg_filename());
+
 		return "ajaxtemplates/comment_ajax";
 	}
 	
