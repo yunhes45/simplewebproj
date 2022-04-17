@@ -58,4 +58,10 @@ public class ChatServiceImpl implements ChatService{
 		chatmapper.insertLog(insertLog);
 	}
 
+	@Override
+	public List<Chatlog> getChat_log(int chatroom_no) {
+
+		return chatmapper.getChat_log(chatroom_no);
+	}
+
 }

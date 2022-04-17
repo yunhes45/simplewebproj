@@ -23,4 +23,6 @@ public interface ChatMapper {
 
 	void insertLog(@Param("chatlog") Chatlog insertLog);
 
+	List<Chatlog> getChat_log(@Param("chatroom_no") int chatroom_no);
+
 }

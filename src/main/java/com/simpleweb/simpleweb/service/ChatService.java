@@ -15,5 +15,6 @@ public interface ChatService {
 	List<Chatroom_member> getChatroom_member_list(int member_no, int chatroom_no);
 	
 	void insertLog(Chatlog insertLog);
+	List<Chatlog> getChat_log(int chatroom_no);
 
 }

@@ -51,7 +51,48 @@ layout:decorate="layout/layout">
 													</div>
 													
 													<div id="chat_form">
-														폼
+														<div th:each = "getchat_Log : ${getchat_Log}">
+															<div th:if="${getchat_Log.getMember_no()} == ${session_info.get().getMember_no()}">
+																<div class="chat_msg_my_form">
+																	<div class="chat_myLog">
+																		<div class="chat_myprofile">
+																			<div class="chat_myimg">
+																				<img class="img" th:src="| /memberimg/${getchat_Log.getMember_profileimg().getMember_profileimg_filename()} |">
+																			</div>
+																			<div class="chat_myname">
+																				[[${getchat_Log.getMember().getMember_id()}]]
+																			</div>
+																		</div>
+																		<div class="chat_mymsg">
+																			[[${getchat_Log.getChatlog_log()}]]
+																		</div>
+																		<div class="chat_myTime">
+																			time : < [[${getchat_Log.getChatlog_split_time()}]] >
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div th:unless="${getchat_Log.getMember_no()} == ${session_info.get().getMember_no()}">
+																<div class="chat_msg_your_form">
+																	<div class="chat_yourLog">
+																		<div class="chat_yourprofile">
+																			<div class="chat_yourimg">
+																				<img class="img" th:src="| /memberimg/${getchat_Log.getMember_profileimg().getMember_profileimg_filename()} |">
+																			</div>
+																			<div class="chat_yourname">
+																				[[${getchat_Log.getMember().getMember_id()}]]
+																			</div>
+																		</div>
+																		<div class="chat_yourmsg">
+																			[[${getchat_Log.getChatlog_log()}]]
+																		</div>
+																		<div class="chat_yourTime">
+																			time : < [[${getchat_Log.getChatlog_split_time()}]] >
+																		</div>
+																	</div>
+																</div>															
+															</div>
+														</div>
 													</div>
 													
 													<div id="chat_send">

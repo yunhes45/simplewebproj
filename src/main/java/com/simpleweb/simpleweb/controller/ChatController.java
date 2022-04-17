@@ -99,6 +99,8 @@ public class ChatController {
 			@RequestParam(value = "chatroom_no", required=false) String socket_chatroom_no,
 			@RequestParam(value = "msg", required=false) String socket_msg,
 			@RequestParam(value = "division", required=false) String socket_division,
+			@RequestParam(value = "nowTimesdate", required=false) String socket_nowTimesdate,
+			@RequestParam(value = "nowTimestime", required=false) String socket_nowTimestime,
 			@RequestParam(value = "nowTimes", required=false) String socket_nowTimes) {
 		
 		HttpSession session = request.getSession();
@@ -119,10 +121,12 @@ public class ChatController {
 				List<Chatroom_member> chatroom_member_list = chatservice.getChatroom_member_list(session_info.get().getMember_no(), Integer.parseInt(chatroom_no));
 				model.addAttribute("chatroom_member_list", chatroom_member_list);
 				
+				// get log
+				List<Chatlog> getchat_Log = chatservice.getChat_log(Integer.parseInt(chatroom_no));
+				model.addAttribute("getchat_Log", getchat_Log);
+				
 				// log insert Text
 				Chatlog insertLog = new Chatlog();
-				
-				System.out.println("socket_msg : " + socket_msg);
 				
 				try {
 					
@@ -131,6 +135,8 @@ public class ChatController {
 						insertLog.setChatroom_no(Integer.parseInt(socket_chatroom_no));
 						insertLog.setChatlog_log(socket_msg);
 						insertLog.setChatlog_division(socket_division);
+						insertLog.setChatlog_split_date(socket_nowTimesdate);
+						insertLog.setChatlog_split_time(socket_nowTimestime);
 						insertLog.setChatlog_date(socket_nowTimes);
 						
 						chatservice.insertLog(insertLog);

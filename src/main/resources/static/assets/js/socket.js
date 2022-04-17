@@ -108,12 +108,12 @@ function send(){
 
 	var today     =  new Date();
 	var years     =  today.getFullYear();
-	var month     =  today.getMonth();
+	var month     =  today.getMonth() + 1;
 	var date      =  today.getDate();
 	var hours     =  today.getHours();
 	var minutes   =  today.getMinutes();
 	var seconds   =  today.getSeconds();		
-	var nowTimes = years + "-" + month + "-" + date + " " + (("00"+hours.toString()).slice(-2)) + ":" + (("00"+minutes.toString()).slice(-2)) + ":" + (("00"+seconds.toString()).slice(-2));  
+	var nowTimes = years + "-" + (("00"+month.toString()).slice(-2)) + "-" + (("00"+date.toString()).slice(-2)) + " " + (("00"+hours.toString()).slice(-2)) + ":" + (("00"+minutes.toString()).slice(-2)) + ":" + (("00"+seconds.toString()).slice(-2));  
 
 	// 채팅 공백 시 응답 X
 	var chatform_nullcheck = document.querySelector("#chat_holder");
@@ -127,6 +127,11 @@ function send(){
 	}
 	
 	function AjaxInsertChatText(member_no, chatroom_no, msg, division, nowTimes){
+		
+		var nowTimesarr = nowTimes.split(" ");
+		var nowTimesdate = nowTimesarr[0];
+		var nowTimestime = nowTimesarr[1];
+		
 		$.ajax({
 			type: 'POST',
 			url: '/chat/m/' + chatroom_no,
@@ -134,6 +139,8 @@ function send(){
 				member_no: member_no,
 				chatroom_no: chatroom_no,
 				msg: msg,
+				nowTimesdate: nowTimesdate,
+				nowTimestime: nowTimestime,
 				division: division,
 				nowTimes: nowTimes
 			},
