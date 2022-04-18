@@ -140,5 +140,59 @@ public class MemberController {
 		
 		return "redirect:/";
 	}
+	
+	@RequestMapping("/modifymember")
+	public String modifymember(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
+		
+		model.addAttribute("fileDir", fileDir);
+		model.addAttribute("session_info", session_info);
+		
+		return "modifymember";
+	}
+	
+	@PostMapping("/modifymember")
+	public String post_modifymember(HttpServletRequest request, Member member_form, Member_profileimg member_profileimg_form) throws Exception {
+		HttpSession session = request.getSession();
+		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
+		
+		Member member = new Member();
+		
+		member.setMember_id          (member_form.getMember_id());
+		member.setMember_pwd         (member_form.getMember_pwd());
+		member.setMember_email       (member_form.getMember_email());
+		member.setMember_nickname    (member_form.getMember_nickname());
+		member.setMember_job         (member_form.getMember_job());
+		member.setMember_mobile      (member_form.getMember_mobile());
+		member.setMember_gender      (member_form.getMember_gender());
+		member.setMember_introduce   (member_form.getMember_introduce());
+		member.setMember_date        (commonservice.nowTime());
+
+		System.out.println("ff : " + member.getMember_id());
+		
+		try {
+			memberservice.updateMember(member);
+		}catch(IllegalStateException e) {
+			if(e.getMessage().equals("이미 존재하는 이메일 입니다.")) {
+				return "redirect:/modifymember?message=duplicateEmail";
+			}
+		}
+		
+		int memberPK = session_info.get().getMember_no();
+		Member_profileimg member_img = new Member_profileimg();
+		
+		if(member_profileimg_form.getMemberimg().getOriginalFilename().equals("")) {
+			member_img = commonservice.normalimglogic(memberPK);
+			memberservice.updateMemberimg(member_img);
+		}else {
+			member_img = commonservice.imglogic(memberPK, member_profileimg_form.getMemberimg());
+			memberservice.updateMemberimg(member_img);
+		}
+		
+		session.invalidate();
+		
+		return "redirect:/#one";
+	}
 
 }

@@ -35,9 +35,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 					<div id="slideToggle" class="slideToggle">
 							<div  class="headerprofilemenu">
-								<form method="post" action="/modifymember">
-									<input type="submit" id="headerprofilemenu_elem" value="Modify" class="headerprofilemenu_elem">
-								</form>
+									<input type="button" id="headerprofilemenu_elem" value="Modify" class="headerprofilemenu_elem" onClick="location.href='/modifymember'">
 							</div>
 							<div  class="headerprofilemenu">
 								<form method="post" action="/signout">

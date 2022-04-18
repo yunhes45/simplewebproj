@@ -512,6 +512,11 @@
 		width: 300px;
 /* 		position: fixed; */
 	}
+	
+	.sidebar_side_on {
+		width: 300px;
+/* 		position: fixed; */
+	}
 }
 
 /* chat */
@@ -781,7 +786,8 @@
 			overflow-x: auto;
 		}
 		
-		#sidebar_responsive #sidbar_follow_list {
+		#sidebar_responsive #responsive_sidebar_follow_list {
+			overflow-x: auto;
 			display: flex;
 		}
 		

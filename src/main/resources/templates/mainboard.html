@@ -28,7 +28,7 @@ layout:decorate="layout/layout">
 									<div class="col-4 col-12-medium">
 										<section id="sidebar_responsive">
 												<section id="sidebar_element">
-													<div id="sidebar_follow_list" class="sidebar_my_follow_list_elem">
+													<div id="responsive_sidebar_follow_list" class="sidebar_my_follow_list_elem">
 													<div th:each="follow_my_list : ${Follow_my_list}">
 														<div id="follow_list">
 															<img class="header_profileimg" th:src="| /memberimg/${follow_my_list.getMember_profileimg().getMember_profileimg_filename()} |">

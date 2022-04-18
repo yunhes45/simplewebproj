@@ -75,4 +75,31 @@
 		
 		where m.member_no = #{member_no} 
 	</select>
+	
+	<update id="updateMember" parameterType="com.simpleweb.simpleweb.model.Member">
+			update member
+			
+			set member_pwd = #{member.member_pwd},
+			 member_email = #{member.member_email},
+			 member_nickname = #{member.member_nickname},
+			 member_job = #{member.member_job},
+			 member_mobile = #{member.member_mobile},
+			 member_gender = #{member.member_gender},
+			 member_introduce = #{member.member_introduce},
+			 member_date = #{member.member_date}
+	
+			where member_id = #{member.member_id}
+	</update>
+	
+	<update id="updateMemberImg" parameterType="com.simpleweb.simpleweb.model.Member_profileimg">
+			update member_profileimg
+			
+			set member_profileimg_filename = #{member_profileimg.member_profileimg_filename},
+			 member_profileimg_original_filename = #{member_profileimg.member_profileimg_original_filename},
+			 member_profileimg_url = #{member_profileimg.member_profileimg_url},
+			 member_profileimg_date = #{member_profileimg.member_profileimg_date}
+			
+			where member_no = #{member_profileimg.member_no}
+
+	</update>
 </mapper>

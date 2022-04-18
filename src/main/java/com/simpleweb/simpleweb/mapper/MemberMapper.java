@@ -16,8 +16,11 @@ public interface MemberMapper {
 	Optional<Member> getById(@Param("member_id") String member_id);
 	Optional<Member> getByEmail(@Param("member_email") String member_email);
 
-	void insertMemberImg(@Param("member_profileimg") Member_profileimg memberimg);
+	void insertMemberImg(@Param("member_profileimg") Member_profileimg member_img);
 	
 	Optional<Member> getMyInfo(@Param("member_no") int member_no);
+
+	int updateMember(@Param("member") Member member);
+	void updateMemberImg(@Param("member_profileimg") Member_profileimg member_img);
 	
 }

@@ -42,9 +42,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public void insertMemberimg(Member_profileimg memberimg) {
+	public void insertMemberimg(Member_profileimg member_img) {
 		
-		membermapper.insertMemberImg(memberimg);
+		membermapper.insertMemberImg(member_img);
 	}
 	
 	@Override
@@ -77,6 +77,32 @@ public class MemberServiceImpl implements MemberService{
 		Optional<Member> session = membermapper.getMyInfo(member_no);
 		
 		return session;
+	}
+	@Override
+	public int updateMember(Member member) {
+		update_validateDuplicateMember(member);
+		int memberPK = membermapper.updateMember(member);
+		
+		return memberPK;
+		
+	}
+	private String update_validateDuplicateMember(Member member) {
+		String res = null;
+
+		membermapper.getByEmail(member.getMember_email())
+		.ifPresent(m -> {
+			throw new IllegalStateException("이미 존재하는 이메일 입니다.");
+		});
+		res = "이미 존재하는 이메일 입니다.";
+		
+		return res;
+	}
+	
+	
+	@Override
+	public void updateMemberimg(Member_profileimg member_img) {
+		
+		membermapper.updateMemberImg(member_img);
 	}
 	
 }

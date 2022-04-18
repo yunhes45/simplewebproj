@@ -12,5 +12,7 @@ public interface MemberService {
 	String getMemberLogin(Member member);
 	
 	Optional<Member> getMyInfo(int member_no);
+	int updateMember(Member member);
+	void updateMemberimg(Member_profileimg member_img);
 
 }

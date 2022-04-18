@@ -77,7 +77,6 @@ layout:decorate="layout/layout">
 									<section id="my_post_element"
 									th:each="bookmark_list, num : ${bookmark_list}">
 										<a href="#" class="pic">            <!-- post_list.get(i).getPost_img() -> post_list.getPost_img() -->
-											<a th:text="${num.count}"></a>
 											<img class="pic" th:src="| /postimg/${bookmark_list.getPost_img().getPost_img_filename()} |" alt="">
 											<h3>[[ ${bookmark_list.getPost().getPost_title()} ]]</h3>
 										</a>	
