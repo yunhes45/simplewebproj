@@ -13,10 +13,12 @@ function wsOpen(){
 
 
 function wsEvt(){
+		
 	ws.onopen = function(data){
 		//소켓 열리면 초기화 세팅	
 	}
 	ws.onmessage = function(data){
+		
 		var member_no = document.getElementById("my_no").value;
 		var chatroom_no = document.getElementById("chatroom_no").value;
 		var msg = data.data;
@@ -89,13 +91,26 @@ function wsEvt(){
 						msgTmp += "</div>"
 						msgTmp += "</div>"
 						
-					$("#chat_form").append(msgTmp);				
-				}			
+					$("#chat_form").append(msgTmp);	
+								
+				}	
+						
 			}
+			
+				// scroll bottom
+				var scrolldiv = document.getElementById("chat_form");
+				scrolldiv.scrollTop = scrolldiv.scrollHeight;
+				
+				// enter
+				document.addEventListener("keypress", function(e) {
+					if (e.keyCode == 13) { //enter press
+						send();
+					}
+				});	
+				
 		}
 		
 	}
-
 }
 
 function send(){
