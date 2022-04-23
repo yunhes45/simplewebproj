@@ -56,7 +56,7 @@
 .image.fit img {
 	width: 100%;
 }
-
+/* 
 .postvisible {
 	display:none;
 }
@@ -72,7 +72,7 @@
 .bookmarkvisible_on {
 	display: block;
 }
-
+ */
 .row > .col-4 #sidebar_responsive{
 	display: none;
 }

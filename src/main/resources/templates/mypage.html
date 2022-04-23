@@ -29,11 +29,11 @@ layout:decorate="layout/layout">
 									<div class="profile_menu">
 										<div class="top">
 											<div class="menu_elem">
-												<input type="button" id="postvisible_btn" onclick="postvisible()" value="게시물" class="menu_elem_elem">
+												<input type="button" id="postvisible_btn" th:onclick="'location.href=\''+ @{${member_info.get().getMember_id()}} + '?postpage=1\''" value="게시물" class="menu_elem_elem">
 											</div>
 											
 											<div class="menu_elem">
-												<input type="button" id="bookmarkvisible_btn" onclick="bookmarkvisible()" value="북마크" class="menu_elem_elem">
+												<input type="button" id="bookmarkvisible_btn" th:onclick="'location.href=\''+ @{${member_info.get().getMember_id()}} + '?bookmarkpage=1\''" value="북마크" class="menu_elem_elem">
 											</div>
 											
 											<div class="menu_elem">
@@ -118,7 +118,7 @@ layout:decorate="layout/layout">
 				</div>							
 		</div>
 		<!-- script -->
-		<script src="/assets/js/mypage.js"></script>	
+<!-- 		<script src="/assets/js/mypage.js"></script> -->	
 	</div>
 
 </html>
