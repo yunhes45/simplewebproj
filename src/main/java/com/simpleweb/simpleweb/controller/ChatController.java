@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -113,6 +114,12 @@ public class ChatController {
 				// chatroom_no
 				model.addAttribute("chatroom_no", chatroom_no);
 				
+				// this chatroom info
+				Optional<Chatroom> chatroom_info = chatservice.getChatroom_info(Integer.parseInt(chatroom_no));
+				model.addAttribute("chatroom_info", chatroom_info);
+				
+				System.out.println(chatroom_info.get().getChatroom_name());
+				
 				// follow my list
 				List<Member> Follow_my_list = boardservice.getFollow_my_list(session_info.get().getMember_no());
 				model.addAttribute("Follow_my_list", Follow_my_list);
@@ -154,6 +161,12 @@ public class ChatController {
 		}else {
 			return "redirect:/";
 		}
+	}
+	
+	@PostMapping("/chatinvite")
+	public String post_chatinvite() {
+		
+		return null;
 	}
 	
 }

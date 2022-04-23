@@ -64,4 +64,10 @@ public class ChatServiceImpl implements ChatService{
 		return chatmapper.getChat_log(chatroom_no);
 	}
 
+	@Override
+	public Optional<Chatroom> getChatroom_info(int chatroom_no) {
+		
+		return chatmapper.getChatroom_info(chatroom_no);
+	}
+
 }

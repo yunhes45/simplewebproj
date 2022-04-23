@@ -25,4 +25,6 @@ public interface ChatMapper {
 
 	List<Chatlog> getChat_log(@Param("chatroom_no") int chatroom_no);
 
+	Optional<Chatroom> getChatroom_info(@Param("chatroom_no") int chatroom_no);
+
 }

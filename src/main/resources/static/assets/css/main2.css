@@ -533,6 +533,123 @@
 	height: 90px;
 	border-bottom: 1px solid white;
 	padding: 20px;
+	display: flex;
+	justify-content: space-between;
+}
+
+#chat_header .chatroom_menu {
+	background: #1c1d26;
+	border: 0;
+	outline: 0;
+}
+
+.chatroom_menu .chatroom_menuimg {
+	width: 30px;
+	height: 30px;
+	border: 1px solid white;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;	
+}
+
+.chatroom_menuimg span {
+	display: block;
+	width: 1px;
+	height: 10px;
+	background: white;
+}
+
+.chatroom_menuimg span:nth-child(2) {
+	transform: rotate(90deg);
+}
+
+#chatroom_menu .chatroom_menu_form {
+	display: none;
+	width: 180px;
+	margin-left: 30px;
+	background-color: rgba(39, 40, 51, 0.965);
+	z-index: 3;
+	position: absolute;
+	transform: translateX(-100%);
+	border: 2px solid #e44c65;
+}
+
+#chatroom_menu .chatroom_menu_form:hover {
+	outline: none;
+}
+
+#chatroom_menu .chatroom_menu_form form {
+	all: unset;
+}
+
+#chatroom_menu .chatroom_menu_form input {
+	all: unset;
+}
+
+#chatroom_menu .chatroom_member_list_form {
+	padding: 10px;
+}
+
+.chatroom_menu_form .invitebtn {
+	background: #1c1d26;
+	border: 0;
+	outline: 0;	
+	display: flex;
+	cursor: pointer;
+	margin-bottom: 10px;
+}
+
+.chatroom_menu_form .memberimg {
+	width: 40px;
+	height: 40px;
+	border: 1px solid white;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;	
+}
+
+.chatroom_menu_form .memberimg span {
+	display: block;
+	width: 1px;
+	height: 20px;
+	background: white;
+}
+
+.chatroom_menu_form .memberimg span:nth-child(2) {
+	transform: rotate(90deg);
+}
+
+.chatroom_menu_form .member_id {
+	margin-top: 9px;
+	margin-left: 15px;
+	margin-right: 10px;
+	font-weight: bold;		
+}
+
+.chatroom_menu_form .chatroom_member_list_my {
+	display: flex;
+}
+
+.chatroom_member_list_my img {
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+	border: 1px solid black;
+}
+
+.chatroom_menu_form .chatroom_member_list_exep {
+	display: flex;
+}
+
+.chatroom_member_list_exep img {
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+	border: 1px solid black;
+	
 }
 
 #chat_content1 #chat_form {

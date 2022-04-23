@@ -146,4 +146,12 @@
 		where m.chatroom_no = #{chatroom_no}	
 	</select>
 	
+	<select id="getChatroom_info" resultType="com.simpleweb.simpleweb.model.Chatroom">
+		select chatroom_no, chatroom_name
+		
+		from chatroom
+		
+		where chatroom_no = #{chatroom_no}
+	</select>
+	
 </mapper>

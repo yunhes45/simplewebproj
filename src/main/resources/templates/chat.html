@@ -70,9 +70,37 @@ layout:decorate="layout/layout">
 											
 												<section id="chat_content1">
 													<div id="chat_header">
-														헤더
-														<div th:each = "chatroom_member_list : ${chatroom_member_list}">
-														<a th:id="${chatroom_member_list.getMember_no()}">[[${chatroom_member_list.getMember().getMember_id()}]]</a>
+														<div th:if="${chatroom_info} != null">
+														<a th:id="${chatroom_info.get().getChatroom_no()}">[[${chatroom_info.get().getChatroom_name()}]]</a>
+														</div>
+														
+														<div id="chatroom_menu" class="chatroom_menu">
+															<div class="chatroom_menuimg" onclick="chatroom_menu()">
+																	<span></span>
+																	<span></span>
+															</div>
+															<div id="chatroom_menu_form" class="chatroom_menu_form">
+																<div id="chatroom_member_list_form" class="chatroom_member_list_form">
+																	<button id="invitebtn" class="invitebtn" onclick="openinvite()">
+																		<div class="memberimg">
+																			<span></span>
+																			<span></span>
+																		</div>
+																		<h4 class="member_id">친구초대</h4>
+																	</button>
+																	<div id="chatroom_member_list_my" class="chatroom_member_list_my">
+																	<img class="img" th:src="| /memberimg/${session_info.get().getMember_profileimg().getMember_profileimg_filename()} |">
+																			<h4 th:id="${session_info.get().getMember_no()}" class="member_id">[[${session_info.get().getMember_id()}]]</h4>
+																	</div>
+																	<div th:each = "chatroom_member_list : ${chatroom_member_list}">
+																		<div id="chatroom_member_list_exep" class="chatroom_member_list_exep">
+																			<img class="img" th:src="| /memberimg/${chatroom_member_list.getMember_profileimg().getMember_profileimg_filename()} |">
+																			<h4 th:id="${chatroom_member_list.getMember_no()}" class="member_id">[[${chatroom_member_list.getMember().getMember_id()}]]</h4>
+																		</div>
+																	</div>
+																</div>
+																
+															</div>
 														</div>
 													</div>
 													
@@ -185,6 +213,9 @@ layout:decorate="layout/layout">
 							}
 							function newchatroom(){
 								$("#follow_list_form").animate({width: 'toggle'}, 400);
+							}
+							function chatroom_menu(){
+								$("#chatroom_menu_form").animate({width: 'toggle'}, 400);
 							}
 						</script>
 						<script type="text/javascript" th:src="@{/assets/js/socket.js}"></script>
