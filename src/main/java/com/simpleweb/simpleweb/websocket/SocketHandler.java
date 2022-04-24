@@ -1,8 +1,14 @@
 package com.simpleweb.simpleweb.websocket;
 
+import java.nio.ByteBuffer;
 import java.util.HashMap;
+import java.util.Map;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.BinaryMessage;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -17,15 +23,55 @@ public class SocketHandler extends TextWebSocketHandler{
 	public void handleTextMessage(WebSocketSession session, TextMessage message) {
 		System.out.println("session : " + session);
 		System.out.println("msg : " + message);
+		
 		String msg = message.getPayload();
+		JSONObject obj = socketInfo(msg);
+		
+		System.out.println("division : " + obj.get("division"));
+		
+		if(obj.get("division").equals("text")) {
+			for(String key : sessionMap.keySet()) {
+				WebSocketSession wss = sessionMap.get(key);
+				try {
+					wss.sendMessage(new TextMessage(msg));
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void handleBinaryMessage(WebSocketSession session, BinaryMessage message) {
+		System.out.println("session : " + session);
+		System.out.println("msg : " + message);
+		
+		ByteBuffer byteBuffer = message.getPayload();
+		byteBuffer.position(0);
+		
 		for(String key : sessionMap.keySet()) {
 			WebSocketSession wss = sessionMap.get(key);
 			try {
-				wss.sendMessage(new TextMessage(msg));
+				wss.sendMessage(new BinaryMessage(byteBuffer));
+				System.out.println("fff : " + new BinaryMessage(byteBuffer));
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
 		}
+		
+	}
+	
+	private static JSONObject socketInfo(String socketInfo) {
+		JSONParser parser = new JSONParser();
+		JSONObject obj = null;
+
+			try {
+				obj = (JSONObject) parser.parse(socketInfo);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+
+		return obj;
 	}
 	
 	@Override

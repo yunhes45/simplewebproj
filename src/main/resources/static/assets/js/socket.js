@@ -22,33 +22,39 @@ function wsEvt(){
 		
 		var member_no = document.getElementById("my_no").value;
 		var chatroom_no = document.getElementById("chatroom_no").value;
+		
+		/* 원본 소켓 메시지 */
 		var msg = data.data;
-		console.log(msg);
+		console.log("msg : " + msg);
 		
-		var msgarr = msg.split(",");
-		var getSocket_member_no = msgarr[0];
-		var getSocket_member_id = msgarr[1];
-		var getSocket_member_img = msgarr[2];
-		var getSocket_msg = msgarr[3];
-		var getSocket_chatroom_no = msgarr[4];
-		var getSocket_division = msgarr[5];
-		var getSocket_nowTimes = msgarr[6];
+		/* 원본 소켓 메시지 -> json파싱 */
+		if(msg != null && msg.type != ""){
+			var parse_msg = JSON.parse(msg);
+			console.log("parse_msg : " + parse_msg.msg);
+			
+			var getSocket_member_no = parse_msg.member_no;
+			var getSocket_member_id = parse_msg.member_id;
+			var getSocket_member_img = parse_msg.member_img;
+			var getSocket_msg = parse_msg.msg;
+			var getSocket_chatroom_no = parse_msg.chatroom_no;
+			var getSocket_division = parse_msg.division;
+			var getSocket_nowTimes = parse_msg.nowTimes;
+			
+			var getSocket_nowTimesarr = getSocket_nowTimes.split(" ");
+			var getSocket_nowTimesdate = getSocket_nowTimesarr[0];
+			var getSocket_nowTimesTime = getSocket_nowTimesarr[1];
+			
+			console.log(getSocket_member_no);
+			console.log(getSocket_member_id);
+			console.log(getSocket_member_img);
+			console.log(getSocket_msg);
+			console.log(getSocket_nowTimesdate);
+			console.log(getSocket_chatroom_no);
+			console.log(getSocket_division);
+		}
 		
-		var getSocket_nowTimesarr = msgarr[6].split(" ");
-		var getSocket_nowTimesdate = getSocket_nowTimesarr[0];
-		var getSocket_nowTimesTime = getSocket_nowTimesarr[1];
-		
-		console.log(getSocket_member_no);
-		console.log(getSocket_member_id);
-		console.log(getSocket_member_img);
-		console.log(getSocket_msg);
-		console.log(getSocket_nowTimesdate);
-		console.log(getSocket_chatroom_no);
-		console.log(getSocket_division);
-		
-		if(getSocket_chatroom_no == chatroom_no){
 			if(getSocket_division == "text"){
-				if(getSocket_member_no == member_no){
+				if(getSocket_chatroom_no == chatroom_no && getSocket_member_no == member_no){
 					var msgTmp = "<div class='chat_msg_my_form'>"
 						msgTmp += "<div class='chat_myLog'>"
 						msgTmp += "<div class='chat_myprofile'>"
@@ -96,8 +102,13 @@ function wsEvt(){
 								
 				}	
 						
-			}else if(getSocket_division == "file"){
-				console.log("file11111");
+			}else{
+				console.log("filefile");
+				
+				var url = URL.createObjectURL(new Blob([msg]));
+					$("#chat_form").append("<div class='img'><img class='msgImg' src="+url+"></div><div class='clearBoth'></div>");
+						
+					$("#chat_form").append(msgTmp);	
 			}
 			
 				// scroll bottom
@@ -110,8 +121,6 @@ function wsEvt(){
 						send();
 					}
 				});	
-				
-		}
 		
 	}
 }
@@ -137,7 +146,16 @@ function send(){
 	var chatform_nullcheck = document.querySelector("#chat_holder");
 	
 	if(chatform_nullcheck.value != ""){
-		ws.send(member_no+","+member_id+","+member_img+","+msg+","+chatroom_no+","+division+","+nowTimes);
+		var param = {
+			member_no: member_no,
+			member_id: member_id,
+			member_img: member_img,
+			msg: msg,
+			chatroom_no: chatroom_no,
+			division: division,
+			nowTimes: nowTimes
+		}
+		ws.send(JSON.stringify(param));
 		document.getElementById("chat_holder").value = "";
 		
 		AjaxInsertChatText(member_no, chatroom_no, msg, division, nowTimes);
@@ -205,10 +223,26 @@ function sendfile(){
 	var seconds   =  today.getSeconds();		
 	var nowTimes = years + "-" + (("00"+month.toString()).slice(-2)) + "-" + (("00"+date.toString()).slice(-2)) + " " + (("00"+hours.toString()).slice(-2)) + ":" + (("00"+minutes.toString()).slice(-2)) + ":" + (("00"+seconds.toString()).slice(-2));
 	
-	ws.send(member_no+","+member_id+","+member_img+","+original_file_name+","+chatroom_no+","+division+","+nowTimes);
+	var file = document.querySelector("#sendfile").files[0];
+	var fileReader = new FileReader();
+
+	fileReader.onload = function(){
+		var param = {
+			member_no: member_no,
+			member_id: member_id,
+			member_img: member_img,
+			original_file_name: original_file_name,
+			chatroom_no: chatroom_no,
+			division: division,
+			nowTimes: nowTimes
+		}
+		ws.send(JSON.stringify(param));
+		
+		arrayBuffer = this.result;
+		ws.send(arrayBuffer);
+	};
+	fileReader.readAsArrayBuffer(file);
+	
 	document.getElementById("sendfile").value = "";
 	
 }
-
-
-
