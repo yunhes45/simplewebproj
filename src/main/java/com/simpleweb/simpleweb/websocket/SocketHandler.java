@@ -15,6 +15,8 @@ public class SocketHandler extends TextWebSocketHandler{
 	
 	@Override
 	public void handleTextMessage(WebSocketSession session, TextMessage message) {
+		System.out.println("session : " + session);
+		System.out.println("msg : " + message);
 		String msg = message.getPayload();
 		for(String key : sessionMap.keySet()) {
 			WebSocketSession wss = sessionMap.get(key);

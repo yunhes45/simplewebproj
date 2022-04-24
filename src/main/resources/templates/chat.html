@@ -150,6 +150,9 @@ layout:decorate="layout/layout">
 													</div>
 													
 													<div id="chat_send">
+													<label for="sendfile">파일</label>
+													<input type="file" id="sendfile" onchange="sendfile()" />
+													
 													<input type="text" id="chat_holder" class="chat_holder" placeholder="보내기...">
 													<input type="hidden" id="my_no" th:value="${session_info.get().getMember_no()}" />
 													<input type="hidden" id="my_id" th:value="${session_info.get().getMember_id()}" />

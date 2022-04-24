@@ -1,6 +1,7 @@
 /* socket */
 
 console.log("conn");
+
 var ws;
 var scrolldiv = document.getElementById("chat_form");
 scrolldiv.scrollTop = scrolldiv.scrollHeight;
@@ -95,6 +96,8 @@ function wsEvt(){
 								
 				}	
 						
+			}else if(getSocket_division == "file"){
+				console.log("file11111");
 			}
 			
 				// scroll bottom
@@ -167,6 +170,44 @@ function send(){
 			}
 		});
 	}
+}
+
+function sendfile(){
+	var member_no = document.getElementById("my_no").value;
+	var member_id = document.getElementById("my_id").value;
+	var member_img = document.getElementById("my_img").value;
+	var path_original_file_name = document.getElementById("sendfile").value;
+	
+	/* 경로 제거 */
+	var split_original_file_name = path_original_file_name.split('\\').reverse();
+	
+	/* 파일명+확장자 */
+	var original_file_name = split_original_file_name[0];
+	console.log("split---- : " + original_file_name);
+	
+	/* 파일명 */
+	var real_original_file_name = split_original_file_name[0].split('.')[0]; 
+	console.log("파일명 : " + real_original_file_name);
+	
+	/* 확장자 */
+	var exex = split_original_file_name[0].split('.')[1];
+	console.log("확장자 : " + exex);
+	
+	var chatroom_no = document.getElementById("chatroom_no").value;
+	var division = "file";
+	
+	var today     =  new Date();
+	var years     =  today.getFullYear();
+	var month     =  today.getMonth() + 1;
+	var date      =  today.getDate();
+	var hours     =  today.getHours();
+	var minutes   =  today.getMinutes();
+	var seconds   =  today.getSeconds();		
+	var nowTimes = years + "-" + (("00"+month.toString()).slice(-2)) + "-" + (("00"+date.toString()).slice(-2)) + " " + (("00"+hours.toString()).slice(-2)) + ":" + (("00"+minutes.toString()).slice(-2)) + ":" + (("00"+seconds.toString()).slice(-2));
+	
+	ws.send(member_no+","+member_id+","+member_img+","+original_file_name+","+chatroom_no+","+division+","+nowTimes);
+	document.getElementById("sendfile").value = "";
+	
 }
 
 
