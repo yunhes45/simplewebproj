@@ -104,11 +104,30 @@ function wsEvt(){
 						
 			}else{
 				console.log("filefile");
-				
+			
+/*				var msg = data.data;*/
+				var parse_msg = JSON.stringify(msg);
 				var url = URL.createObjectURL(new Blob([msg]));
-					$("#chat_form").append("<div class='img'><img class='msgImg' src="+url+"></div><div class='clearBoth'></div>");
-						
-					$("#chat_form").append(msgTmp);	
+				
+				/*var msgTmp1 = "<div id="+ parse_msg +" class='img'>";*/
+				
+				var msgTmp1 = "<div class='chat_msg_my_form'>"
+				msgTmp1 += "<div id='chat_myLog' class='img'>"
+				msgTmp1 += "<img class='msgImg' src="+url+"></div><div class='clearBoth'></div>"
+				msgTmp1 += "<div>"
+				
+				console.log("ffffffffffff" + parse_msg);
+
+				if(msg != null && msg.type != ""){
+					$("#chat_form").append(msgTmp1);
+				}else{
+					$("#chat_form").append(msgTmp1);
+				}
+
+				
+/*				$("#chat_form").append("<div id="+ parse_msg +" class='img'><img class='msgImg' src="+url+"></div><div class='clearBoth'></div>");
+					
+				$("#chat_form").append(msgTmp);*/	
 			}
 			
 				// scroll bottom

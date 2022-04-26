@@ -29,7 +29,6 @@ public class SocketHandler extends TextWebSocketHandler{
 		
 		System.out.println("division : " + obj.get("division"));
 		
-		if(obj.get("division").equals("text")) {
 			for(String key : sessionMap.keySet()) {
 				WebSocketSession wss = sessionMap.get(key);
 				try {
@@ -38,7 +37,6 @@ public class SocketHandler extends TextWebSocketHandler{
 					e.printStackTrace();
 				}
 			}
-		}
 	}
 	
 	@Override
