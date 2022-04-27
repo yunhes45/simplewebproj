@@ -494,6 +494,9 @@ public class BoardController {
 			post.setMember_no(session_info.get().getMember_no());
 			post.setPost_date(commonservice.nowTime());
 			
+			System.out.println("post : " + post_form.getPost_contents());
+			
+			
 			boardservice.insertPost(post);
 			
 			int postPK = post.getPost_no();

@@ -53,3 +53,18 @@
 	height: 22px;
 	cursor: pointer;
 }
+
+.icon_comment_heart {
+	background: url('images/background01.png') no-repeat -323px -210px;
+	width: 18px;
+	height: 16px;
+	filter: invert(100%) brightness(150%) contrast(150%);
+	cursor: pointer;
+}
+
+.icon_comment_heart_on {
+	background: url('images/background01.png') no-repeat -323px -192px;
+	width: 18px;
+	height: 16px;
+	cursor: pointer;
+}

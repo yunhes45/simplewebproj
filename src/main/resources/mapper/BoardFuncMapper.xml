@@ -118,6 +118,37 @@
 		where m.comment_no = #{comment_no}	
 	</select>
 	
+	<select id="validcommentlikecheck" resultType="com.simpleweb.simpleweb.model.Comment_like_stat">
+		select comment_like_stat_no, member_no, comment_no, comment_like_stat_check, comment_like_stat_date
+		
+		from comment_like_stat
+		
+		where member_no = #{member_no} and comment_no = #{comment_no} and comment_like_stat_check = #{comment_like_stat_check}
+	</select>
+	
+	<insert id="insertComment_Like_stat" parameterType="com.simpleweb.simpleweb.model.Comment_like_stat">
+		insert into comment_like_stat(member_no, comment_no, comment_like_stat_check, comment_like_stat_date)
+		
+		values (  #{member_no} ,
+		          #{comment_no} ,
+		          #{comment_like_stat_check},
+		          #{comment_like_stat_date}  )		
+	</insert>
+	
+	<delete id="deleteComment_Like_stat"  parameterType="com.simpleweb.simpleweb.model.Comment_like_stat">
+		delete from comment_like_stat
+		
+		where member_no = #{member_no} and comment_no = #{comment_no} and comment_like_stat_check = #{comment_like_stat_check}
+	</delete>
+	
+	<select id="getCommentLikeCount" resultType="int">
+		select count(*) as comment_like_stat_count
+		
+		from comment_like_stat
+		
+		where comment_no = #{comment_no}
+	</select>
+	
 	<delete id="delcomment"  parameterType="com.simpleweb.simpleweb.model.Comment">
 		delete from comment
 		

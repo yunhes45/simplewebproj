@@ -87,6 +87,8 @@ public class BoardFuncController {
 		
 		Optional<Comment> commentlogic = boardfuncservice.CommentLogic(session_info.get().getMember_no(), Integer.parseInt(trim_post_no), comment_text, commonservice.nowTime());
 		model.addAttribute("commentlogic", commentlogic);
+		
+		System.out.println("commentlogic : " + commentlogic.get().getComment_no());
 
 		return "ajaxtemplates/comment_ajax";
 	}
@@ -102,6 +104,23 @@ public class BoardFuncController {
 		return comment_no;
 	}
 	
+	@ResponseBody
+	@PostMapping("/likecomment")
+	public Map post_likecomment(HttpServletRequest request,
+			@RequestParam("comment_no") String comment_no) {
+		
+		HttpSession session = request.getSession();
+		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
+		
+		String trim_comment_no = comment_no.trim();
+		Map<String, Integer> likecommentlogic = new HashMap<String, Integer>(); 
+		likecommentlogic = boardfuncservice.LikeCommentLogic(session_info.get().getMember_no(), Integer.parseInt(trim_comment_no), 1, commonservice.nowTime());
+		
+		System.out.println("lcl : " + likecommentlogic);
+		
+		return likecommentlogic;		
+	}
+		
 	@ResponseBody
 	@PostMapping("/follow")
 	public Map post_follow(Model model, HttpServletRequest request,

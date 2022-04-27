@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.simpleweb.simpleweb.mapper.BoardFuncMapper;
 import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
+import com.simpleweb.simpleweb.model.Comment_like_stat;
 import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Follow;
 
@@ -110,6 +111,40 @@ public class BoardFuncServiceImpl implements BoardFuncService{
 		
 		return boardfuncmapper.delcomment(comment_no);
 	}
+	
+	@Override
+	public Map<String, Integer> LikeCommentLogic(int member_no, int comment_no, int i, String nowTime) {
+		Optional<Comment_like_stat> validcommentlikecheck = boardfuncmapper.validcommentlikecheck(member_no, comment_no, i);
+		Map<String, Integer> likelogic = new HashMap<String, Integer>();
+		int comment_likestat = -1;
+		
+		try {
+			int excep = validcommentlikecheck.get().getComment_like_stat_no();
+			boardfuncmapper.deleteComment_Like_stat(member_no, comment_no, i);
+			
+			comment_likestat = 1;
+			if(comment_likestat == 1) {
+				likelogic.put("comment_likestat", comment_likestat);
+				likelogic.put("comment_likecount", getCommentLikeCount(comment_no));
+			}
+		}catch(NoSuchElementException e) {
+			boardfuncmapper.insertComment_Like_stat(member_no, comment_no, i, nowTime);			
+			
+			comment_likestat = 0;
+			if(comment_likestat == 0) {
+				likelogic.put("comment_likestat", comment_likestat);
+				likelogic.put("comment_likecount", getCommentLikeCount(comment_no));
+			}
+		}
+		
+		return likelogic;
+	}
+	private int getCommentLikeCount(int comment_no) {
+		int getcommentlikecount = boardfuncmapper.getCommentLikeCount(comment_no);
+		
+		return getcommentlikecount;
+	}
+	
 	@Override
 	public int FollowCheck(int member_no, int follow_member_no, String nowTime) {
 		Follow follow = new Follow();

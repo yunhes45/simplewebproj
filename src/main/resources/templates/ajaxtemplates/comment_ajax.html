@@ -6,10 +6,12 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 		<!-- Comment -->
 		<div th:id="|comment_item_${commentlogic.get().getComment_no()}|">
 			<div id="comment">
+			<!-- comment pk -->
 				<div class="comment_list">
 					<img class="header_profileimg" th:src="| /memberimg/${commentlogic.get().getMember_profileimg().getMember_profileimg_filename()} |">
-					[[| ${commentlogic.get().getMember().getMember_id()} |]]
+					<h5 class="comment_id">[[| ${commentlogic.get().getMember().getMember_id()} |]]</h5>
 					<h6 class="comment_elem">[[ ${commentlogic.get().getComment_text()} ]]</h6>
+					<div th:id="| commentLike_${commentlogic.get().getComment_no()} |" class="icon_comment_heart" onclick="likecomment(this.id)"></div>
 					<div th:id="${commentlogic.get().getComment_no()}" class="icon_comment_del_sprite" onclick="delcomment(this.id)"></div>
 				</div>
 				

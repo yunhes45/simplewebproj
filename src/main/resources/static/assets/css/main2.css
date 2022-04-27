@@ -294,9 +294,19 @@
 	margin-right: 10px;
 }
 
+.icon_comment_heart {
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+.icon_comment_heart_on {
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
 .icon_comment_del_sprite {
 	margin-top: 8px;
-	margin-left: 5px;
+	margin-left: 10px;
 }
 
 #comment .comment_date {

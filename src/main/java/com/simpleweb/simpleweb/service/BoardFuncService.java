@@ -15,6 +15,7 @@ public interface BoardFuncService {
 	Map<String, Integer> BookmarkLogic(int member_no, int post_no, int i, String nowTime);
 	Optional<Comment> CommentLogic(int member_no, int post_no, String comment_text, String nowTime);
 	int delcomment(int comment_no);
+	Map<String, Integer> LikeCommentLogic(int member_no, int comment_no, int i, String nowTime);
 	int FollowCheck(int member_no, int follow_member_no, String nowTime);
 
 }

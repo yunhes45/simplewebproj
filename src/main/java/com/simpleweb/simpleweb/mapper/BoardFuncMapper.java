@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
+import com.simpleweb.simpleweb.model.Comment_like_stat;
 import com.simpleweb.simpleweb.model.Follow;
 import com.simpleweb.simpleweb.model.Like_stat;
 
@@ -52,9 +53,24 @@ public interface BoardFuncMapper {
 	int insertComment(@Param("comment") Comment comment);
 	Optional<Comment> getComment_list(@Param("comment_no") int commentPK);
 	int delcomment(@Param("comment_no") int comment_no);
-
+	
+	Optional<Comment_like_stat> validcommentlikecheck(
+			@Param("member_no") int member_no,
+			@Param("comment_no") int comment_no,
+			@Param("comment_like_stat_check") int i);
+	
 	Optional<Follow> validfollowcheck(@Param("Follow") Follow follow);
-
+	void insertComment_Like_stat(
+			@Param("member_no") int member_no,
+			@Param("comment_no") int comment_no, 
+			@Param("comment_like_stat_check") int i,
+			@Param("comment_like_stat_date") String nowTime);
+	void deleteComment_Like_stat(
+			@Param("member_no") int member_no,
+			@Param("comment_no") int comment_no, 
+			@Param("comment_like_stat_check") int i);
+	int getCommentLikeCount(@Param("comment_no") int comment_no);
+	
 	void insertFollow(@Param("Follow") Follow follow);
 	void deleteFollow(@Param("Follow") Follow follow);
 
