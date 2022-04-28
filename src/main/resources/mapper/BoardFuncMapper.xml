@@ -119,20 +119,21 @@
 	</select>
 	
 	<select id="validcommentlikecheck" resultType="com.simpleweb.simpleweb.model.Comment_like_stat">
-		select comment_like_stat_no, member_no, comment_no, comment_like_stat_check, comment_like_stat_date
+		select comment_like_stat_no, member_no, comment_no, post_no, comment_like_stat_check, comment_like_stat_date
 		
 		from comment_like_stat
 		
-		where member_no = #{member_no} and comment_no = #{comment_no} and comment_like_stat_check = #{comment_like_stat_check}
+		where member_no = #{member_no} and comment_no = #{comment_no} and post_no = #{post_no} and comment_like_stat_check = #{comment_like_stat_check}
 	</select>
 	
 	<insert id="insertComment_Like_stat" parameterType="com.simpleweb.simpleweb.model.Comment_like_stat">
-		insert into comment_like_stat(member_no, comment_no, comment_like_stat_check, comment_like_stat_date)
+		insert into comment_like_stat(member_no, comment_no, post_no, comment_like_stat_check, comment_like_stat_date)
 		
 		values (  #{member_no} ,
 		          #{comment_no} ,
-		          #{comment_like_stat_check},
-		          #{comment_like_stat_date}  )		
+				  #{post_no} ,
+		          #{comment_like_stat_check} ,
+		          #{comment_like_stat_date}   )		
 	</insert>
 	
 	<delete id="deleteComment_Like_stat"  parameterType="com.simpleweb.simpleweb.model.Comment_like_stat">

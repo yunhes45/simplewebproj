@@ -14,6 +14,7 @@ import com.simpleweb.simpleweb.mapper.BoardMapper;
 import com.simpleweb.simpleweb.mapper.MemberMapper;
 import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
+import com.simpleweb.simpleweb.model.Comment_like_stat;
 import com.simpleweb.simpleweb.model.Follow;
 import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Member;
@@ -196,6 +197,55 @@ public class BoardServiceImpl implements BoardService{
 		}
 		
 		return Comment_cnt;
+	}
+	
+	@Override
+	public List<String> getComment_Like_check(List<Integer> comment_cnt, List<List<Comment>> post_Comment_list,
+			int member_no) {
+		List<String> comment_like_check    = new ArrayList<String>();
+		List<Integer> post_Comment_list_no = new ArrayList<Integer>();
+		
+		for(int i = 0; i < comment_cnt.size(); i++) {
+			for(int j = 0; j < post_Comment_list.get(i).size(); j++) {
+				
+				System.out.println("ddddddd : " + post_Comment_list.get(i).get(j).getComment_no());
+				post_Comment_list_no.add(post_Comment_list.get(i).get(j).getComment_no());
+				
+//				if(post_Comment_list.get(i).get(j).getMember().getMember_id().contains(member_no)) {
+//					check = "O";
+//					comment_like_check.add(check);
+//				}else {
+//					check = "X";
+//					comment_like_check.add(check);
+//				}
+			}
+		}
+		
+		System.out.println(post_Comment_list_no);
+		
+		String check = null;
+		
+		for(int i = 0; i<post_Comment_list_no.size(); i++) {
+			try {
+				Optional<Comment_like_stat> getComment_like_stat = boardmapper.getComment_like_stat(member_no, post_Comment_list_no.get(i));
+				System.out.println(getComment_like_stat);
+//				check = "O";
+//				comment_like_check.add(check);
+				if(!getComment_like_stat.isEmpty()) {
+					check = "O";
+					comment_like_check.add(check);
+				}else {
+					check = "X";
+					comment_like_check.add(check);
+				}
+			}catch(NoSuchElementException e) {
+
+			}
+		}
+		
+		System.out.println(comment_like_check);
+			
+		return comment_like_check;
 	}
 
 	@Override

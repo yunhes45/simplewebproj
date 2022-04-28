@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
+import com.simpleweb.simpleweb.model.Comment_like_stat;
 import com.simpleweb.simpleweb.model.Follow;
 import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Post;
@@ -40,6 +41,7 @@ public interface BoardMapper {
 	List<Like_stat> getLike_list(@Param("post_no") int post_no);
 	List<Bookmark> getPost_Bookmark_list(@Param("post_no") int post_no);
 	List<Comment> getComment_list(@Param("post_no") int post_no);
+	Optional<Comment_like_stat> getComment_like_stat(@Param("member_no") int member_no, @Param("comment_no") int comment_no);
 	
 	Optional<Post> getMemberPost(@Param("post_no") int post_no, @Param("member_no") int member_no);
 	Optional<Like_stat> getMemberLike_check(

@@ -57,12 +57,13 @@ public interface BoardFuncMapper {
 	Optional<Comment_like_stat> validcommentlikecheck(
 			@Param("member_no") int member_no,
 			@Param("comment_no") int comment_no,
+			@Param("post_no") int post_no,
 			@Param("comment_like_stat_check") int i);
 	
-	Optional<Follow> validfollowcheck(@Param("Follow") Follow follow);
 	void insertComment_Like_stat(
 			@Param("member_no") int member_no,
-			@Param("comment_no") int comment_no, 
+			@Param("comment_no") int comment_no,
+			@Param("post_no") int post_no,
 			@Param("comment_like_stat_check") int i,
 			@Param("comment_like_stat_date") String nowTime);
 	void deleteComment_Like_stat(
@@ -70,6 +71,8 @@ public interface BoardFuncMapper {
 			@Param("comment_no") int comment_no, 
 			@Param("comment_like_stat_check") int i);
 	int getCommentLikeCount(@Param("comment_no") int comment_no);
+	
+	Optional<Follow> validfollowcheck(@Param("Follow") Follow follow);
 	
 	void insertFollow(@Param("Follow") Follow follow);
 	void deleteFollow(@Param("Follow") Follow follow);

@@ -115,16 +115,18 @@ function delcomment(id){
 	});	
 }
 
-function likecomment(id){
+function likecomment(id, id1){
 	var comment_no = id.split('_');
 	console.log(comment_no[0]);
 	console.log("1 : " + comment_no[1]);
+	console.log("2 : " + id1);
 	
 	$.ajax({
 		type: "POST",
 		url: "/likecomment",
 		data: {
 			comment_no: comment_no[1],
+			post_no: id1,
 		},
 		dataType: "json",
 		success: function(response){

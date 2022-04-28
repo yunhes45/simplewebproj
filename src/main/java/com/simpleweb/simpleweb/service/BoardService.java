@@ -36,6 +36,8 @@ public interface BoardService {
 	
 	List<List<Comment>> getPost_Comment_list(List<Integer> post_list_no);
 	List<Integer> getComment_cnt(List<List<Comment>> Post_Comment_list);
+	List<String> getComment_Like_check(List<Integer> comment_cnt, List<List<Comment>> post_Comment_list,
+			int member_no);	
 	
 	Optional<Post> getMemberPost(int post_no, int member_no);
 	List<Like_stat> getMemberPost_Like_list(int post_no);

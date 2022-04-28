@@ -135,6 +135,14 @@ layout:decorate="layout/layout">
 																		<img class="header_profileimg" th:src="| /memberimg/${Post_Comment_list.get(num.index).get(num4-1).getMember_profileimg().getMember_profileimg_filename()} |">
 																		<h5 class="comment_id">[[| ${Post_Comment_list.get(num.index).get(num4-1).getMember().getMember_id()} |]]</h5>
 																		<h6 class="comment_elem">[[ ${Post_Comment_list.get(num.index).get(num4-1).getComment_text()} ]]</h6>
+																		
+																		<div th:if="${comment_like_check.get(num4-1)} == 'O'">
+																			<div id="| commentLike_${commentlogic.get().getComment_no()} |" class="icon_comment_heart_on" onClick="like(this.id)"></div>
+																		</div>
+																		<div th:unless="${comment_like_check.get(num4-1)} == 'O'">
+																			<div id="| commentLike_${commentlogic.get().getComment_no()} |" class="icon_comment_heart" onClick="like(this.id)"></div>
+																		</div>	
+																								
 																		<div th:if="${Post_Comment_list.get(num.index).get(num4-1).getMember_no()} == ${session.session_info.get().getMember_no()}">
 																			<div th:id="${Post_Comment_list.get(num.index).get(num4-1).getComment_no()}" class="icon_comment_del_sprite" onclick="delcomment(this.id)"></div>
 																		</div>

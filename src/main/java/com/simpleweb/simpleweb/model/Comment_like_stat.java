@@ -4,6 +4,7 @@ public class Comment_like_stat {
 	private int comment_like_stat_no;
 	private int member_no;
 	private int comment_no;
+	private int post_no;
 	private int comment_like_stat_check;
 	private String comment_like_stat_date;
 	
@@ -24,6 +25,12 @@ public class Comment_like_stat {
 	}
 	public void setComment_no(int comment_no) {
 		this.comment_no = comment_no;
+	}
+	public int getPost_no() {
+		return post_no;
+	}
+	public void setPost_no(int post_no) {
+		this.post_no = post_no;
 	}
 	public int getComment_like_stat_check() {
 		return comment_like_stat_check;

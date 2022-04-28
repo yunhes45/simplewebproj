@@ -113,8 +113,8 @@ public class BoardFuncServiceImpl implements BoardFuncService{
 	}
 	
 	@Override
-	public Map<String, Integer> LikeCommentLogic(int member_no, int comment_no, int i, String nowTime) {
-		Optional<Comment_like_stat> validcommentlikecheck = boardfuncmapper.validcommentlikecheck(member_no, comment_no, i);
+	public Map<String, Integer> LikeCommentLogic(int member_no, int comment_no, int post_no, int i, String nowTime) {
+		Optional<Comment_like_stat> validcommentlikecheck = boardfuncmapper.validcommentlikecheck(member_no, comment_no, post_no, i);
 		Map<String, Integer> likelogic = new HashMap<String, Integer>();
 		int comment_likestat = -1;
 		
@@ -128,7 +128,7 @@ public class BoardFuncServiceImpl implements BoardFuncService{
 				likelogic.put("comment_likecount", getCommentLikeCount(comment_no));
 			}
 		}catch(NoSuchElementException e) {
-			boardfuncmapper.insertComment_Like_stat(member_no, comment_no, i, nowTime);			
+			boardfuncmapper.insertComment_Like_stat(member_no, comment_no, post_no, i, nowTime);			
 			
 			comment_likestat = 0;
 			if(comment_likestat == 0) {

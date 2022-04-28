@@ -11,7 +11,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 					<img class="header_profileimg" th:src="| /memberimg/${commentlogic.get().getMember_profileimg().getMember_profileimg_filename()} |">
 					<h5 class="comment_id">[[| ${commentlogic.get().getMember().getMember_id()} |]]</h5>
 					<h6 class="comment_elem">[[ ${commentlogic.get().getComment_text()} ]]</h6>
-					<div th:id="| commentLike_${commentlogic.get().getComment_no()} |" class="icon_comment_heart" onclick="likecomment(this.id)"></div>
+					<div th:id="| commentLike_${commentlogic.get().getComment_no()} |" class="icon_comment_heart" th:onclick="likecomment(this.id, [[${commentlogic.get().getPost_no()}]] )"></div>
 					<div th:id="${commentlogic.get().getComment_no()}" class="icon_comment_del_sprite" onclick="delcomment(this.id)"></div>
 				</div>
 				

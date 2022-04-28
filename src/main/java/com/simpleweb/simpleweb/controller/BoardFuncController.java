@@ -107,14 +107,17 @@ public class BoardFuncController {
 	@ResponseBody
 	@PostMapping("/likecomment")
 	public Map post_likecomment(HttpServletRequest request,
-			@RequestParam("comment_no") String comment_no) {
+			@RequestParam("comment_no") String comment_no,
+			@RequestParam("post_no") String post_no) {
 		
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
 		String trim_comment_no = comment_no.trim();
+		String trim_post_no = post_no.trim();
+		
 		Map<String, Integer> likecommentlogic = new HashMap<String, Integer>(); 
-		likecommentlogic = boardfuncservice.LikeCommentLogic(session_info.get().getMember_no(), Integer.parseInt(trim_comment_no), 1, commonservice.nowTime());
+		likecommentlogic = boardfuncservice.LikeCommentLogic(session_info.get().getMember_no(), Integer.parseInt(trim_comment_no), Integer.parseInt(trim_post_no), 1, commonservice.nowTime());
 		
 		System.out.println("lcl : " + likecommentlogic);
 		

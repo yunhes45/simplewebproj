@@ -411,6 +411,13 @@
 		
 		where m.post_no = #{post_no}	
 	</select>
+	<select id="getComment_like_stat" resultType="com.simpleweb.simpleweb.model.Comment_like_stat">
+		select comment_like_stat_no, member_no, post_no, comment_no, comment_like_stat_check, comment_like_stat_date
+		
+		from comment_like_stat
+		
+		where member_no = #{member_no} and comment_no = #{comment_no} 	
+	</select>
 	
 	<select id="getMemberLike_check" resultType="com.simpleweb.simpleweb.model.Like_stat">
 		select like_stat_no, member_no, post_no, like_stat_check
