@@ -104,5 +104,10 @@ public class MemberServiceImpl implements MemberService{
 		
 		membermapper.updateMemberImg(member_img);
 	}
+	@Override
+	public void deleteMember(int member_no) {
+		
+		membermapper.deleteMember(member_no);
+	}
 	
 }

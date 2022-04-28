@@ -14,5 +14,6 @@ public interface MemberService {
 	Optional<Member> getMyInfo(int member_no);
 	int updateMember(Member member);
 	void updateMemberimg(Member_profileimg member_img);
+	void deleteMember(int member_no);
 
 }

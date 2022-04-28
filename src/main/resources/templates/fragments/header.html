@@ -35,11 +35,16 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 					<div id="slideToggle" class="slideToggle">
 							<div  class="headerprofilemenu">
-									<input type="button" id="headerprofilemenu_elem" value="Modify" class="headerprofilemenu_elem" onClick="location.href='/modifymember'">
+								<input type="button" id="headerprofilemenu_elem" value="Modify" class="headerprofilemenu_elem" onClick="location.href='/modifymember'">
 							</div>
 							<div  class="headerprofilemenu">
 								<form method="post" action="/signout">
 									<input type="submit" id="headerprofilemenu_elem" value="SignOut" class="headerprofilemenu_elem">
+								</form>
+							</div>
+							<div  class="headerprofilemenu">
+								<form method="post" action="/deletemember">
+									<input type="submit" id="headerprofilemenu_elem" value="회원탈퇴" class="headerprofilemenu_elem">
 								</form>
 							</div>
 					</div>

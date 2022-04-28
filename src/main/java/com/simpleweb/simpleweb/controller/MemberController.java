@@ -194,5 +194,17 @@ public class MemberController {
 		
 		return "redirect:/#one";
 	}
+	
+	@PostMapping("/deletemember")
+	public String post_deletemember(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
+		
+		memberservice.deleteMember(session_info.get().getMember_no());
+		
+		session.invalidate();
+		
+		return "redirect:/";
+	}
 
 }

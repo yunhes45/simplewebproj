@@ -102,4 +102,10 @@
 			where member_no = #{member_profileimg.member_no}
 
 	</update>
+	
+	<delete id="deleteMember" parameterType="com.simpleweb.simpleweb.model.Member">
+			delete from member
+			
+			where member_no = #{member_no}
+	</delete>
 </mapper>
