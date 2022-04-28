@@ -137,10 +137,10 @@ layout:decorate="layout/layout">
 																		<h6 class="comment_elem">[[ ${Post_Comment_list.get(num.index).get(num4-1).getComment_text()} ]]</h6>
 																		
 																		<div th:if="${comment_like_check.get(num4-1)} == 'O'">
-																			<div id="| commentLike_${commentlogic.get().getComment_no()} |" class="icon_comment_heart_on" onClick="like(this.id)"></div>
+																			<div th:id="| commentLike_${Post_Comment_list.get(num.index).get(num4-1).getComment_no()} |" class="icon_comment_heart_on" th:onclick="likecomment(this.id, [[${Post_Comment_list.get(num.index).get(num4-1).getPost_no()}]] )"></div>
 																		</div>
 																		<div th:unless="${comment_like_check.get(num4-1)} == 'O'">
-																			<div id="| commentLike_${commentlogic.get().getComment_no()} |" class="icon_comment_heart" onClick="like(this.id)"></div>
+																			<div th:id="| commentLike_${Post_Comment_list.get(num.index).get(num4-1).getComment_no()} |" class="icon_comment_heart" th:onclick="likecomment(this.id, [[${Post_Comment_list.get(num.index).get(num4-1).getPost_no()}]] )"></div>
 																		</div>	
 																								
 																		<div th:if="${Post_Comment_list.get(num.index).get(num4-1).getMember_no()} == ${session.session_info.get().getMember_no()}">
