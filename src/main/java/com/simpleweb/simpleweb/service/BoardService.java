@@ -12,13 +12,13 @@ import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Post;
 import com.simpleweb.simpleweb.model.Post_img;
-import com.simpleweb.simpleweb.model.Post_menu_hashtag;
+import com.simpleweb.simpleweb.model.Post_hashtag;
 
 public interface BoardService {
 
 	int insertPost(Post post);
 	void insertPostImg(Post_img post_img);
-	void insertPostMenuHashtag(Post_menu_hashtag post_menu_hashtag);
+	void insertPostHashtag(Post_hashtag post_menu_hashtag);
 	
 	int getTotal_fileList(int member_no);
 	List<Post> getPost_list_algo(int startPage, int onePageCnt);

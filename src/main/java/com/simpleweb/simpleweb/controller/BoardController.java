@@ -33,7 +33,7 @@ import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Post;
 import com.simpleweb.simpleweb.model.Post_img;
-import com.simpleweb.simpleweb.model.Post_menu_hashtag;
+import com.simpleweb.simpleweb.model.Post_hashtag;
 import com.simpleweb.simpleweb.service.BoardFuncService;
 import com.simpleweb.simpleweb.service.BoardService;
 import com.simpleweb.simpleweb.service.CommonService;
@@ -488,7 +488,7 @@ public class BoardController {
 	}
 	
 	@PostMapping("/writepost")
-	public String post_writepost(Post post_form, Post_img post_img_form, Post_menu_hashtag post_menu_hashtag_form,
+	public String post_writepost(Post post_form, Post_img post_img_form, Post_hashtag post_hashtag_form,
 			RedirectAttributes redirectattributes, HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
@@ -514,11 +514,12 @@ public class BoardController {
 			post_img = commonservice.post_imglogic(postPK, post_img_form.getPostimg());
 			boardservice.insertPostImg(post_img);	
 			
-			Post_menu_hashtag post_menu_hashtag = new Post_menu_hashtag();
+			Post_hashtag post_menu_hashtag = new Post_hashtag();
 			post_menu_hashtag.setPost_no(postPK);
-			post_menu_hashtag.setPost_menu_hashtag_list(post_menu_hashtag_form.getPost_menu_hashtag_list());
+			post_menu_hashtag.setPost_hashtag_list(post_hashtag_form.getPost_hashtag_list());
+			post_menu_hashtag.setPost_hashtag_division(2);
 			
-			boardservice.insertPostMenuHashtag(post_menu_hashtag);
+			boardservice.insertPostHashtag(post_menu_hashtag);
 		
 		}else {
 			return "redirect:/";

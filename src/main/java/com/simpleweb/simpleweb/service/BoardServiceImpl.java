@@ -22,7 +22,7 @@ import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Post;
 import com.simpleweb.simpleweb.model.Post_img;
-import com.simpleweb.simpleweb.model.Post_menu_hashtag;
+import com.simpleweb.simpleweb.model.Post_hashtag;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -48,11 +48,13 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
-	public void insertPostMenuHashtag(Post_menu_hashtag post_menu_hashtag) {
-		List<String> hashtag = posthashtagRegex(post_menu_hashtag.getPost_menu_hashtag_list());
-
+	public void insertPostHashtag(Post_hashtag post_hashtag) {
+		System.out.println(post_hashtag.getPost_hashtag_list());
+		
+		List<String> hashtag = posthashtagRegex(post_hashtag.getPost_hashtag_list());
+		
 		for(int i = 0; i < hashtag.size(); i++) {
-			boardmapper.insertPostMenuHashtag(post_menu_hashtag.getPost_no(), hashtag.get(i));
+			boardmapper.insertPostHashtag(post_hashtag.getPost_no(), hashtag.get(i), post_hashtag.getPost_hashtag_division());
 		}
 	}
 

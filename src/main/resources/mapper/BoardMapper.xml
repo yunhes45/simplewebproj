@@ -20,11 +20,12 @@
 		          #{post_img.post_img_date}                )
 	</insert>
 
-	<insert id="insertPostMenuHashtag" parameterType="com.simpleweb.simpleweb.model.Post_menu_hashtag">
-		insert into post_menu_hashtag(post_no, post_menu_hashtag_list) 
+	<insert id="insertPostHashtag" parameterType="com.simpleweb.simpleweb.model.Post_hashtag">
+		insert into post_hashtag(post_no, post_hashtag_list, post_hashtag_division) 
 		
 		values (  #{post_no} ,
-				  #{post_menu_hashtag_list}   )
+				  #{post_hashtag_list},
+				  #{post_hashtag_division}   )
 	</insert>
 	
 	<select id="getTotal_fileList" resultType="int">
