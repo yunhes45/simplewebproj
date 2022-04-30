@@ -19,6 +19,13 @@
 		          #{post_img.post_img_url} ,
 		          #{post_img.post_img_date}                )
 	</insert>
+
+	<insert id="insertPostMenuHashtag" parameterType="com.simpleweb.simpleweb.model.Post_menu_hashtag">
+		insert into post_menu_hashtag(post_no, post_menu_hashtag_list) 
+		
+		values (  #{post_no} ,
+				  #{post_menu_hashtag_list}   )
+	</insert>
 	
 	<select id="getTotal_fileList" resultType="int">
 		select count(*)

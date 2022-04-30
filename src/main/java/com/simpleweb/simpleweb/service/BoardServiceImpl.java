@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Post;
 import com.simpleweb.simpleweb.model.Post_img;
+import com.simpleweb.simpleweb.model.Post_menu_hashtag;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -42,6 +45,29 @@ public class BoardServiceImpl implements BoardService{
 	public void insertPostImg(Post_img post_img) {
 		boardmapper.insertPostImg(post_img);
 		
+	}
+	
+	@Override
+	public void insertPostMenuHashtag(Post_menu_hashtag post_menu_hashtag) {
+		List<String> hashtag = posthashtagRegex(post_menu_hashtag.getPost_menu_hashtag_list());
+
+		for(int i = 0; i < hashtag.size(); i++) {
+			boardmapper.insertPostMenuHashtag(post_menu_hashtag.getPost_no(), hashtag.get(i));
+		}
+	}
+
+	private List posthashtagRegex(String hashtagStr) {
+		List<String> res = new ArrayList<>();
+		
+		Pattern pattern = Pattern.compile("(#[A-Za-z0-9-_]+)(?:#[A-Za-z0-9-_]+)*\\b");
+		Matcher matcher = pattern.matcher(hashtagStr);
+		
+		while (matcher.find()){
+		    System.out.println("regex : " + matcher.group(1)); 
+		    res.add(matcher.group(1));
+		} 		
+			
+		return res;
 	}
 
 	@Override
