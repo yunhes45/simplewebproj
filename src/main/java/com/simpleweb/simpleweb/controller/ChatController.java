@@ -108,6 +108,12 @@ public class ChatController {
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
 		if(session_info != null) {
+			// 비정상적 접근 제어
+			String chatroom_member_include_check = chatservice.getChatroom_member_include_check(session_info.get().getMember_no(), Integer.parseInt(chatroom_no));
+			if(chatroom_member_include_check.equals("reject")) {
+				return "redirect:/chat";
+			}
+			
 				// my info
 				model.addAttribute("session_info", session_info);
 				
