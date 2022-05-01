@@ -621,6 +621,22 @@ public class BoardController {
 			List<Comment> memberPost_Comment_list = boardservice.getMemberPost_Comment_list(Integer.parseInt(post_no));
 			model.addAttribute("memberPost_Comment_list", memberPost_Comment_list);
 			
+			for(int i = 0; i < memberPost_Comment_list.size(); i++) {
+				System.out.println("membercmt : " + memberPost_Comment_list.get(i).getPost_no());
+			}
+			
+			// comment like check logic
+			List<String> memberComment_Like_check = boardservice.getMemberComment_Like_check(Integer.parseInt(post_no), session_info.get().getMember_no());
+			model.addAttribute("memberComment_Like_check", memberComment_Like_check);
+			
+			for(int i = 0; i < memberComment_Like_check.size(); i++) {
+				System.out.println("cntcnt : " + memberComment_Like_check.get(i));
+			}
+			
+			// follow check logic
+			List<String> memberfollow_check = boardservice.getMemberFollow_check(session_info.get().getMember_no());
+			model.addAttribute("memberfollow_check", memberfollow_check);
+			
 			return "detailpost";
 		
 		}else {

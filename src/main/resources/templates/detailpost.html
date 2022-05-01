@@ -48,8 +48,10 @@ layout:decorate="layout/layout">
 										<a class="image fit">
 										<img class="imagefit" th:src="| /postimg/${memberPost.get().getPost_img().getPost_img_filename()} |" alt="">
 										</a>
-										<h3>[[ ${memberPost.get().getPost_subtitle()} ]]</h3>
-										<p>[[ ${memberPost.get().getPost_contents()} ]]</p>
+										<div id="post_content" class="post_content">
+											<h5>[[ ${memberPost.get().getPost_subtitle()} ]]</h5>
+											<p id="post_content_text">[[ ${memberPost.get().getPost_contents()} ]]</p>
+										</div>
 									</section>
 								</div>
 							<hr>
@@ -108,13 +110,21 @@ layout:decorate="layout/layout">
 												
 												<!-- Comment -->
 
-												<div th:each="memberPost_Comment_list : ${memberPost_Comment_list}">
+												<div th:each="memberPost_Comment_list, num : ${memberPost_Comment_list}">
 													<div th:id="|comment_item_${memberPost_Comment_list.getComment_no()}|">
 														<div id="comment">
 															<div class="comment_list">
 																<img class="header_profileimg" th:src="| /memberimg/${memberPost_Comment_list.getMember_profileimg().getMember_profileimg_filename()} |">
-																[[| ${memberPost_Comment_list.getMember().getMember_id()} |]]
+																<h5 class="comment_id">[[| ${memberPost_Comment_list.getMember().getMember_id()} |]]</h5>
 																<h6 class="comment_elem">[[ ${memberPost_Comment_list.getComment_text()} ]]</h6>
+																
+																<div th:if="${memberComment_Like_check.get(num.index)} == 'O'">
+																	<div th:id="| commentLike_${memberPost_Comment_list.getComment_no()} |" class="icon_comment_heart_on" th:onclick="likecomment(this.id, [[${memberPost_Comment_list.getPost_no()}]] )"></div>
+																</div>
+																<div th:unless="${memberComment_Like_check.get(num.index)} == 'O'">
+																	<div th:id="| commentLike_${memberPost_Comment_list.getComment_no()} |" class="icon_comment_heart" th:onclick="likecomment(this.id, [[${memberPost_Comment_list.getPost_no()}]] )"></div>
+																</div>
+																
 																<div th:if="${memberPost_Comment_list.getMember_no()} == ${session.session_info.get().getMember_no()}">
 																<div th:id="${memberPost_Comment_list.getComment_no()}" class="icon_comment_del_sprite" onclick="delcomment(this.id)"></div>
 																</div>
@@ -150,6 +160,7 @@ layout:decorate="layout/layout">
 				</div>
 			<!-- script -->
 			<script src="assets/js/mainboard.js"></script>
+			<script src="assets/js/hash.js"></script>
 			<script>
 				function post_slideToggleFunc(id){
 					$("." + id).animate({width: 'toggle'}, 400);

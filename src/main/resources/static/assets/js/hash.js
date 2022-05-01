@@ -1,10 +1,10 @@
 window.addEventListener("DOMContentLoaded", function(){
 	
-	var ex = document.getElementById('post_content_text').innerText;
+	var post_content_text = document.getElementById('post_content_text').innerText;
 	
-	var regex = ex.split(/(#[^\s]+)/g)
+	var regex = post_content_text.split(/(#[^\s]+)/g)
 	
-	var ee111;
+	var regex_text;
 	
 	for(var i = 1; i < regex.length; i++){
 		var trim_regex = regex[i].trim();
@@ -14,15 +14,11 @@ window.addEventListener("DOMContentLoaded", function(){
 		}else{
 			regex[i] = regex[i];
 		}
-		console.log(i);
-		var zz = regex[i];
-		
-		console.log("zzzz : " + zz);
-		ee111 += zz;
+		var loop_text = regex[i];
+
+		regex_text += loop_text;
 	}
 	
-	console.log(zz);
-	
-	document.getElementById('post_content_text').innerHTML = ee111;
+	document.getElementById('post_content_text').innerHTML = regex_text;
 
 });

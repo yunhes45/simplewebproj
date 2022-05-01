@@ -346,6 +346,44 @@ public class BoardServiceImpl implements BoardService{
 
 		return boardmapper.getComment_list(post_no);
 	}
+	
+	@Override
+	public List<String> getMemberComment_Like_check(int post_no, int member_no) {
+		
+		List<String> membercomment_like_check    = new ArrayList<String>();
+		List<Comment> post_comment_list = boardmapper.getMemberPostComment(post_no);
+		
+		String check = null;
+		for(int i = 0; i < post_comment_list.size(); i++) {
+			try {
+					Optional<Comment_like_stat> getMemberComment_like_stat = boardmapper.getComment_like_stat(member_no, post_comment_list.get(i).getComment_no());
+				
+					if(!getMemberComment_like_stat.isEmpty()) {
+						check = "O";
+						membercomment_like_check.add(check);
+					}else {
+						check = "X";
+						membercomment_like_check.add(check);
+					}
+			}catch(NoSuchElementException e) {
+				
+			}
+		}
+		
+		return membercomment_like_check;
+	}
+	
+	@Override
+	public List<String> getMemberFollow_check(int member_no) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Post_hashtag> getMemberPostMenuHashtag(int parseInt, int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public List<Member> getFollow_my_list(int member_no) {

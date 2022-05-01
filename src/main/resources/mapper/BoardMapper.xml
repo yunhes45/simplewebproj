@@ -451,6 +451,14 @@
 		where post_no = #{post_no} and member_no = #{member_no}
 	</select>
 	
+	<select id="getMemberPostComment" resultType="com.simpleweb.simpleweb.model.Comment">
+		select comment_no, member_no, post_no, comment_text, comment_date
+		
+		from comment
+		
+		where post_no = #{post_no}
+	</select>
+	
 	<resultMap id="JoinFollowRM" type="com.simpleweb.simpleweb.model.Follow">
 		<id property="follow_no" column="follow_no" />
 		<result property="member_no" column="member_no" />

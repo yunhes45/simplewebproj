@@ -52,6 +52,11 @@ public interface BoardService {
 	String getMemberBookmark_check(int post_no, int member_no);
 	
 	List<Comment> getMemberPost_Comment_list(int post_no);
+	List<String> getMemberComment_Like_check(int post_no, int member_no);
+	
+	List<String> getMemberFollow_check(int member_no);	
+
+	List<Post_hashtag> getMemberPostMenuHashtag(int parseInt, int i);
 	
 	List<Member> getFollow_my_list(int member_no);
 	List<Member> getFollow_me_list(int member_no);
