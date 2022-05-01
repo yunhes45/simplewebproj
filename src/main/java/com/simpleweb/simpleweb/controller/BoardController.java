@@ -189,6 +189,10 @@ public class BoardController {
 				// comment cnt
 				List<Integer> Comment_cnt = boardservice.getComment_cnt(Post_Comment_list);
 				model.addAttribute("Comment_cnt", Comment_cnt);
+
+				// comment like check logic
+				List<String> Comment_Like_check = boardservice.getComment_Like_check(Comment_cnt, Post_Comment_list, session_info.get().getMember_no());
+				model.addAttribute("comment_like_check", Comment_Like_check);
 				
 				// follow check logic
 				List<String> follow_check = boardservice.getFollow_check(post_list, session_info.get().getMember_no());
@@ -236,9 +240,9 @@ public class BoardController {
 		
 		if(search == null) {
 		
-			List<Post> post_list = boardservice.getPost_list_algo(page_postlist_algo, onePageCnt);
+			List<Post> post_list = boardservice.getPost_list_algo(startPage, onePageCnt);
 			model.addAttribute("post_list", post_list);
-			
+
 			// get post_no
 			List<Integer> post_list_no = new ArrayList<Integer>();
 			for(int i = 0; i < post_list.size(); i++) {
@@ -277,6 +281,9 @@ public class BoardController {
 			List<Integer> Comment_cnt = boardservice.getComment_cnt(Post_Comment_list);
 			model.addAttribute("Comment_cnt", Comment_cnt);
 			
+			// comment like check logic
+			List<String> Comment_Like_check = boardservice.getComment_Like_check(Comment_cnt, Post_Comment_list, session_info.get().getMember_no());
+			model.addAttribute("comment_like_check", Comment_Like_check);
 			
 			// follow check logic
 			List<String> follow_check = boardservice.getFollow_check(post_list, session_info.get().getMember_no());
@@ -289,10 +296,23 @@ public class BoardController {
 			// follow me list
 			List<Member> Follow_me_list = boardservice.getFollow_me_list(session_info.get().getMember_no());
 			model.addAttribute("Follow_me_list", Follow_me_list);
+		
+			// hashtag(menu)
+			List<List<Post_hashtag>> post_menu_hashtag = boardservice.getPostMenuHashtag(post_list_no, 2);
+			model.addAttribute("post_menu_hashtag", post_menu_hashtag);
+
+			// hashtag(menu) cnt
+			List<Integer> post_menu_hashtag_cnt = boardservice.getPost_menu_hashtag_cnt(post_menu_hashtag);
+			model.addAttribute("post_menu_hashtag_cnt", post_menu_hashtag_cnt);
+			
 		}else {
-			List<Post> post_list = boardservice.getPost_list_algo_search(page_postlist_algo, onePageCnt, search);
+			List<Post> post_list = boardservice.getPost_list_algo_search(startPage, onePageCnt, search);
 			model.addAttribute("post_list", post_list);
 			
+			for(int i = 0; i < post_list.size(); i++) {
+				System.out.println(post_list.get(i).getPost_no());
+			}
+
 			// get post_no
 			List<Integer> post_list_no = new ArrayList<Integer>();
 			for(int i = 0; i < post_list.size(); i++) {
@@ -330,7 +350,10 @@ public class BoardController {
 			// comment cnt
 			List<Integer> Comment_cnt = boardservice.getComment_cnt(Post_Comment_list);
 			model.addAttribute("Comment_cnt", Comment_cnt);
-			
+
+			// comment like check logic
+			List<String> Comment_Like_check = boardservice.getComment_Like_check(Comment_cnt, Post_Comment_list, session_info.get().getMember_no());
+			model.addAttribute("comment_like_check", Comment_Like_check);
 			
 			// follow check logic
 			List<String> follow_check = boardservice.getFollow_check(post_list, session_info.get().getMember_no());
@@ -342,7 +365,16 @@ public class BoardController {
 			
 			// follow me list
 			List<Member> Follow_me_list = boardservice.getFollow_me_list(session_info.get().getMember_no());
-			model.addAttribute("Follow_me_list", Follow_me_list);
+			model.addAttribute("Follow_me_list", Follow_me_list);	
+			
+			// hashtag(menu)
+			List<List<Post_hashtag>> post_menu_hashtag = boardservice.getPostMenuHashtag(post_list_no, 2);
+			model.addAttribute("post_menu_hashtag", post_menu_hashtag);
+
+			// hashtag(menu) cnt
+			List<Integer> post_menu_hashtag_cnt = boardservice.getPost_menu_hashtag_cnt(post_menu_hashtag);
+			model.addAttribute("post_menu_hashtag_cnt", post_menu_hashtag_cnt);
+			
 		}
 			
 		return "maincontent_list_ajax";

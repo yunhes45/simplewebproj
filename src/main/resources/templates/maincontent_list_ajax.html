@@ -5,7 +5,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<meta charset="utf-8" />
 		<!-- Content -->
 			<div id="maincontent">
-
+			
 				<section id="content1"
 				th:each="post_list, num : ${post_list}">
 
@@ -29,16 +29,26 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 										
 									</div>
 								</div>
-								
-						</div>			
+						</div>
+						
 					</div>
-					
+					<!-- th:onclick="|location.href='@{| /detailpost?name=${post_list} |}'|" -->
 					<a th:href="| /detailpost?name=${post_list.getMember().getMember_id()}&post=${post_list.getPost_no()} |" class="image fit">
 						<img class="imagefit" th:src="| /postimg/${post_list.getPost_img().getPost_img_filename()} |" alt="">
 					</a>
-					<h5>[[ ${post_list.getPost_subtitle()} ]]</h5>
-					<p>[[ ${post_list.getPost_contents()} ]]</p>
-					
+					<div id="post_content" class="post_content">
+						<h5>[[ ${post_list.getPost_subtitle()} ]]</h5>
+						<p id="post_content_text">[[ ${post_list.getPost_contents()} ]]</p>
+					</div>
+					<hr class="line_unset">
+					<div id="post_hashtag" class="post_hashtag">
+					<div th:if="${ !post_menu_hashtag.get(num.index).empty }">
+						<div th:each="num4 : ${#numbers.sequence(1, post_menu_hashtag_cnt.get(num.index))}">
+							<h5>[[| ${post_menu_hashtag.get(num.index).get(num4-1).getPost_hashtag_list()} |]]</h5>
+						</div>
+					</div>
+						
+					</div>
 					<section id="bottom_menu">
 						<hr class="line_unset">
 						<div id="bottom_menu_icon">
@@ -60,11 +70,13 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 							<form method='POST' action='/downloadFile'>
 								<input type="hidden" name="post_img_original_filename" th:value="${post_list.getPost_img().getPost_img_original_filename()}" >
 								<input type="hidden" name="post_img_filename" th:value="${post_list.getPost_img().getPost_img_filename()}" >
-								<div th:id="|download_${post_list.getPost_no()}|" th:name="${post_list.getPost_no()}" class="icon_download_sprite"></div>
-								<input type="submit">
+								<div class="icon_download_sprite">
+								<input type="submit" th:id="|download_${post_list.getPost_no()}|" th:name="${post_list.getPost_no()}" value="">
+								</div>
 							</form>
 							
 						</div>
+						
 						<div id="bottom_menu_text">
 							<div th:id="like_slideToggle" th:class="| likeCount_${post_list.getPost_no()} |">
 								<!-- like_list -->
@@ -81,9 +93,9 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 							
 							<h5 th:id="|likeCount_${post_list.getPost_no()}|" class="like_count" onClick="like_listFunc(this.id)">좋아요 [[ ${post_list.getLike_stat().getLike_stat_count()} ]] 개</h5>
 							<h5 th:id="|bookmarkCount_${post_list.getPost_no()}|" class="bookmark_count" onClick="bookmark_listFunc(this.id)">북마크 [[ ${post_list.getBookmark().getBookmark_count()} ]] 개</h5>
-						
+								
 						</div>
-
+						
 						<!-- Comment -->
 
 						<div th:if="${ !Post_Comment_list.get(num.index).empty }">
@@ -92,10 +104,18 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 								<div id="comment">
 									<div class="comment_list">
 										<img class="header_profileimg" th:src="| /memberimg/${Post_Comment_list.get(num.index).get(num4-1).getMember_profileimg().getMember_profileimg_filename()} |">
-										[[| ${Post_Comment_list.get(num.index).get(num4-1).getMember().getMember_id()} |]]
+										<h5 class="comment_id">[[| ${Post_Comment_list.get(num.index).get(num4-1).getMember().getMember_id()} |]]</h5>
 										<h6 class="comment_elem">[[ ${Post_Comment_list.get(num.index).get(num4-1).getComment_text()} ]]</h6>
+										
+										<div th:if="${comment_like_check.get(num4-1)} == 'O'">
+											<div th:id="| commentLike_${Post_Comment_list.get(num.index).get(num4-1).getComment_no()} |" class="icon_comment_heart_on" th:onclick="likecomment(this.id, [[${Post_Comment_list.get(num.index).get(num4-1).getPost_no()}]] )"></div>
+										</div>
+										<div th:unless="${comment_like_check.get(num4-1)} == 'O'">
+											<div th:id="| commentLike_${Post_Comment_list.get(num.index).get(num4-1).getComment_no()} |" class="icon_comment_heart" th:onclick="likecomment(this.id, [[${Post_Comment_list.get(num.index).get(num4-1).getPost_no()}]] )"></div>
+										</div>	
+																
 										<div th:if="${Post_Comment_list.get(num.index).get(num4-1).getMember_no()} == ${session.session_info.get().getMember_no()}">
-										<div th:id="${Post_Comment_list.get(num.index).get(num4-1).getComment_no()}" class="icon_comment_del_sprite" onclick="delcomment(this.id)"></div>
+											<div th:id="${Post_Comment_list.get(num.index).get(num4-1).getComment_no()}" class="icon_comment_del_sprite" onclick="delcomment(this.id)"></div>
 										</div>
 										
 									</div>
@@ -113,17 +133,20 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						
 						<!-- comment ajax -->
 						<div th:id="|comment_${post_list.getPost_no()}|"></div>
-						
-						<div id="comment_new">
-							<hr class="line_unset">
-							<input type="text" th:id="|comment_text_${post_list.getPost_no()}|" th:name="${post_list.getPost_no()}" class="comment_new_input" placeholder="댓글달기">
-							<a  th:id="${post_list.getPost_no()}"  class="comment_btn" th:onClick="comment(this.id, comment_text_[[${post_list.getPost_no()}]] )">등록</a>
-						</div>
-						
+
+							<div id="comment_new">
+								<hr class="line_unset">
+								<input type="text" th:id="|comment_text_${post_list.getPost_no()}|" th:name="${post_list.getPost_no()}" class="comment_new_input" placeholder="댓글달기">
+								<a  th:id="${post_list.getPost_no()}"  class="comment_btn" th:onClick="comment(this.id, comment_text_[[${post_list.getPost_no()}]] )">등록</a>
+							</div>
+
 					</section>
 		
 				</section>
-						
+															
+				<div id="maincontent_list_ajax"></div>
+				<input type="hidden" id="page" value="3">
+
 			</div>
 	</div>
 	
