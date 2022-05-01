@@ -49,15 +49,12 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Override
 	public void insertPostHashtag(Post_hashtag post_hashtag) {
-		System.out.println(post_hashtag.getPost_hashtag_list());
-		
 		List<String> hashtag = posthashtagRegex(post_hashtag.getPost_hashtag_list());
 		
 		for(int i = 0; i < hashtag.size(); i++) {
 			boardmapper.insertPostHashtag(post_hashtag.getPost_no(), hashtag.get(i), post_hashtag.getPost_hashtag_division());
 		}
 	}
-
 	private List posthashtagRegex(String hashtagStr) {
 		List<String> res = new ArrayList<>();
 		
@@ -238,14 +235,6 @@ public class BoardServiceImpl implements BoardService{
 				
 				System.out.println("ddddddd : " + post_Comment_list.get(i).get(j).getComment_no());
 				post_Comment_list_no.add(post_Comment_list.get(i).get(j).getComment_no());
-				
-//				if(post_Comment_list.get(i).get(j).getMember().getMember_id().contains(member_no)) {
-//					check = "O";
-//					comment_like_check.add(check);
-//				}else {
-//					check = "X";
-//					comment_like_check.add(check);
-//				}
 			}
 		}
 		
@@ -257,8 +246,7 @@ public class BoardServiceImpl implements BoardService{
 			try {
 				Optional<Comment_like_stat> getComment_like_stat = boardmapper.getComment_like_stat(member_no, post_Comment_list_no.get(i));
 				System.out.println(getComment_like_stat);
-//				check = "O";
-//				comment_like_check.add(check);
+
 				if(!getComment_like_stat.isEmpty()) {
 					check = "O";
 					comment_like_check.add(check);
@@ -274,6 +262,33 @@ public class BoardServiceImpl implements BoardService{
 		System.out.println(comment_like_check);
 			
 		return comment_like_check;
+	}
+	
+	@Override
+	public List<List<Post_hashtag>> getPostMenuHashtag(List<Integer> post_list_no, int division) {
+		
+		List<List<Post_hashtag>> getPostMenuHashtag = new ArrayList<>();
+		try {
+			for(int i = 0; i < post_list_no.size(); i++) {
+				List<Post_hashtag> comment = boardmapper.getHashtagList(post_list_no.get(i), division);
+			
+				getPostMenuHashtag.add(comment);
+				
+			}
+		}catch(IndexOutOfBoundsException e) {
+	
+		}
+		return getPostMenuHashtag;
+	}
+
+	@Override
+	public List<Integer> getPost_menu_hashtag_cnt(List<List<Post_hashtag>> post_menu_hashtag) {
+		List<Integer> Post_menu_hashtag_cnt = new ArrayList<Integer>();
+		for(int i = 0; i < post_menu_hashtag.size(); i++) {
+			Post_menu_hashtag_cnt.add(post_menu_hashtag.get(i).size());
+		}
+		
+		return Post_menu_hashtag_cnt;
 	}
 
 	@Override

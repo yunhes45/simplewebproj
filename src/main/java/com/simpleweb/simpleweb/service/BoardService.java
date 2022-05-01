@@ -42,6 +42,9 @@ public interface BoardService {
 	List<String> getComment_Like_check(List<Integer> comment_cnt, List<List<Comment>> post_Comment_list,
 			int member_no);	
 	
+	List<List<Post_hashtag>> getPostMenuHashtag(List<Integer> post_list_no, int i);
+	List<Integer> getPost_menu_hashtag_cnt(List<List<Post_hashtag>> post_menu_hashtag);
+	
 	Optional<Post> getMemberPost(int post_no, int member_no);
 	List<Like_stat> getMemberPost_Like_list(int post_no);
 	String getMemberLike_check(int post_no, int member_no);

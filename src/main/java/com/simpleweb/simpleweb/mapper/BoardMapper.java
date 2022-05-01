@@ -12,6 +12,7 @@ import com.simpleweb.simpleweb.model.Comment_like_stat;
 import com.simpleweb.simpleweb.model.Follow;
 import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Post;
+import com.simpleweb.simpleweb.model.Post_hashtag;
 import com.simpleweb.simpleweb.model.Post_img;
 
 @Mapper
@@ -47,6 +48,7 @@ public interface BoardMapper {
 	List<Bookmark> getPost_Bookmark_list(@Param("post_no") int post_no);
 	List<Comment> getComment_list(@Param("post_no") int post_no);
 	Optional<Comment_like_stat> getComment_like_stat(@Param("member_no") int member_no, @Param("comment_no") int comment_no);
+	List<Post_hashtag> getHashtagList(@Param("post_no") int post_no, @Param("post_hashtag_division") int post_hashtag_division);
 	
 	Optional<Post> getMemberPost(@Param("post_no") int post_no, @Param("member_no") int member_no);
 	Optional<Like_stat> getMemberLike_check(

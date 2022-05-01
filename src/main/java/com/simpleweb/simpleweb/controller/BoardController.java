@@ -135,6 +135,15 @@ public class BoardController {
 				// follow me list
 				List<Member> Follow_me_list = boardservice.getFollow_me_list(session_info.get().getMember_no());
 				model.addAttribute("Follow_me_list", Follow_me_list);
+			
+				// hashtag(menu)
+				List<List<Post_hashtag>> post_menu_hashtag = boardservice.getPostMenuHashtag(post_list_no, 2);
+				model.addAttribute("post_menu_hashtag", post_menu_hashtag);
+
+				// hashtag(menu) cnt
+				List<Integer> post_menu_hashtag_cnt = boardservice.getPost_menu_hashtag_cnt(post_menu_hashtag);
+				model.addAttribute("post_menu_hashtag_cnt", post_menu_hashtag_cnt);
+				
 			}else {
 				List<Post> post_list = boardservice.getPost_list_algo_search(startPage, onePageCnt, search);
 				model.addAttribute("post_list", post_list);
@@ -514,6 +523,15 @@ public class BoardController {
 			post_img = commonservice.post_imglogic(postPK, post_img_form.getPostimg());
 			boardservice.insertPostImg(post_img);	
 			
+			// post content hashtag
+			Post_hashtag post_content_hashtag = new Post_hashtag();
+			post_content_hashtag.setPost_no(postPK);
+			post_content_hashtag.setPost_hashtag_list(post.getPost_contents());
+			post_content_hashtag.setPost_hashtag_division(0);
+			
+			boardservice.insertPostHashtag(post_content_hashtag);
+			
+			// post menu hashtag
 			Post_hashtag post_menu_hashtag = new Post_hashtag();
 			post_menu_hashtag.setPost_no(postPK);
 			post_menu_hashtag.setPost_hashtag_list(post_hashtag_form.getPost_hashtag_list());

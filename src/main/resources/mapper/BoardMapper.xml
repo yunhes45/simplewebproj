@@ -427,6 +427,14 @@
 		where member_no = #{member_no} and comment_no = #{comment_no} 	
 	</select>
 	
+	<select id="getHashtagList" resultType="com.simpleweb.simpleweb.model.Post_hashtag">
+		select post_hashtag_no, post_no, post_hashtag_list, post_hashtag_division
+		
+		from post_hashtag
+		
+		where post_no = #{post_no} and post_hashtag_division = #{post_hashtag_division} 	
+	</select>
+	
 	<select id="getMemberLike_check" resultType="com.simpleweb.simpleweb.model.Like_stat">
 		select like_stat_no, member_no, post_no, like_stat_check
 		
