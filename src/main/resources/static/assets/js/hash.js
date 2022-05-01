@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		var trim_regex = regex[i].trim();
 		
 		if(regex[i].startsWith("#")){
-			regex[i] = "<a href='#'>" + regex[i] + "</a>";
+			regex[i] = "<a href='/mainboard?search=" + regex[i] + "'>" + regex[i] + "</a>";
 		}else{
 			regex[i] = regex[i];
 		}
