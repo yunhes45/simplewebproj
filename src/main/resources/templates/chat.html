@@ -81,13 +81,20 @@ layout:decorate="layout/layout">
 															</div>
 															<div id="chatroom_menu_form" class="chatroom_menu_form">
 																<div id="chatroom_member_list_form" class="chatroom_member_list_form">
-																	<button id="invitebtn" class="invitebtn" onclick="openinvite()">
+																
+																	<div id="invitebtn" class="invitebtn" onclick="openinvite()">
 																		<div class="memberimg">
 																			<span></span>
 																			<span></span>
 																		</div>
 																		<h4 class="member_id">친구초대</h4>
-																	</button>
+																	</div>
+																	<dialog id="invite" class="invite">
+																		<form>
+																			dddd
+																		</form>
+																	</dialog>
+																	
 																	<div id="chatroom_member_list_my" class="chatroom_member_list_my">
 																	<img class="img" th:src="| /memberimg/${session_info.get().getMember_profileimg().getMember_profileimg_filename()} |">
 																			<h4 th:id="${session_info.get().getMember_no()}" class="member_id">[[${session_info.get().getMember_id()}]]</h4>
@@ -219,6 +226,17 @@ layout:decorate="layout/layout">
 							}
 							function chatroom_menu(){
 								$("#chatroom_menu_form").animate({width: 'toggle'}, 400);
+							}
+						</script>
+						<script>
+							var invite = document.getElementById('invite');
+							
+							function openinvite(){
+								if(typeof invite.showModal === "function"){
+									invite.showModal();
+								}else{
+									alert("The <dialog> API is not supported by this browser");
+								}
 							}
 						</script>
 						<script type="text/javascript" th:src="@{/assets/js/socket.js}"></script>
