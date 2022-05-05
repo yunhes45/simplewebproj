@@ -105,24 +105,11 @@ function wsEvt(){
 			}else{
 				console.log("filefile");
 			
-/*				var msg = data.data;*/
-				var parse_msg = JSON.stringify(msg);
-				var url = URL.createObjectURL(new Blob([msg]));
-				
-				/*var msgTmp1 = "<div id="+ parse_msg +" class='img'>";*/
-				
 				var msgTmp1 = "<div class='chat_msg_my_form'>"
 				msgTmp1 += "<div id='chat_myLog' class='img'>"
-				msgTmp1 += "<img class='msgImg' src="+url+"></div><div class='clearBoth'></div>"
+				msgTmp1 += "<img class='msgImg' src='/chatfile/"+getSocket_msg+"'></div><div class='clearBoth'></div>"
 				msgTmp1 += "<div>"
-				
-				console.log("ffffffffffff" + parse_msg);
-
-				if(msg != null && msg.type != ""){
-					$("#chat_form").append(msgTmp1);
-				}else{
-					$("#chat_form").append(msgTmp1);
-				}
+				$("#chat_form").append(msgTmp1);
 
 				
 /*				$("#chat_form").append("<div id="+ parse_msg +" class='img'><img class='msgImg' src="+url+"></div><div class='clearBoth'></div>");
@@ -275,12 +262,19 @@ function sendfile(){
 	    dataType: "json",
 	    success: function(response){
 			console.log(response.chat_filename);
-			
-				var msgTmp1 = "<div class='chat_msg_my_form'>"
-				msgTmp1 += "<div id='chat_myLog' class='img'>"
-				msgTmp1 += "<img class='msgImg' src='/chatfile/"+response.chat_filename+"'></div><div class='clearBoth'></div>"
-				msgTmp1 += "<div>"
-				$("#chat_form").append(msgTmp1);
+				
+				var param = {
+					member_no: member_no,
+					member_id: member_id,
+					member_img: member_img,
+					msg: response.chat_filename,
+					chatroom_no: chatroom_no,
+					division: division,
+					nowTimes: nowTimes
+				}
+				
+				ws.send(JSON.stringify(param));
+				document.getElementById("chat_holder").value = "";
 		},
 		error: function(data){
 			
