@@ -2,10 +2,12 @@ package com.simpleweb.simpleweb.service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.simpleweb.simpleweb.model.Chat_filelist;
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Member_profileimg;
 import com.simpleweb.simpleweb.model.Post_img;

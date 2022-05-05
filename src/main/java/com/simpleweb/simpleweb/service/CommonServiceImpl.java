@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.simpleweb.simpleweb.mapper.MemberMapper;
+import com.simpleweb.simpleweb.model.Chat_filelist;
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Member_profileimg;
 import com.simpleweb.simpleweb.model.Post_img;

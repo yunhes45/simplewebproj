@@ -162,4 +162,23 @@
 		where member_no = #{member_no} and chatroom_no = #{chatroom_no}
 	</select>
 	
+	<insert id="insertChatfile" parameterType="com.simpleweb.simpleweb.model.Chat_filelist" useGeneratedKeys="true" keyProperty="chat_filelist_no">
+		insert into chat_filelist(member_no, chatroom_no, chat_filelist_filename, chat_filelist_original_filename, chat_filelist_url, chat_filelist_date)
+		
+		values (  #{chat_filelist.member_no},
+				  #{chat_filelist.chatroom_no},
+				  #{chat_filelist.chat_filelist_filename},
+				  #{chat_filelist.chat_filelist_original_filename},
+				  #{chat_filelist.chat_filelist_url},
+				  #{chat_filelist.chat_filelist_date} )			
+	</insert>
+	
+	<select id="getChat_filename" resultType="com.simpleweb.simpleweb.model.Chat_filelist">
+		select chat_filelist_filename
+		
+		from chat_filelist
+		
+		where chat_filelist_no = #{chat_filelist_no}
+	</select>
+	
 </mapper>

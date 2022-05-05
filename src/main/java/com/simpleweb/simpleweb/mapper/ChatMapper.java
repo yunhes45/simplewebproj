@@ -1,11 +1,13 @@
 package com.simpleweb.simpleweb.mapper;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.simpleweb.simpleweb.model.Chat_filelist;
 import com.simpleweb.simpleweb.model.Chatlog;
 import com.simpleweb.simpleweb.model.Chatroom;
 import com.simpleweb.simpleweb.model.Chatroom_member;
@@ -28,5 +30,9 @@ public interface ChatMapper {
 	Optional<Chatroom> getChatroom_info(@Param("chatroom_no") int chatroom_no);
 
 	List<Chatroom_member> getChatroom_member_include_check(@Param("member_no") int member_no, @Param("chatroom_no") int chatroom_no);
+
+	int insertChatfile(@Param("chat_filelist") Chat_filelist chat_file);
+
+	Optional<Chat_filelist> getChat_filename(@Param("chat_filelist_no") int chatfilePK);
 
 }

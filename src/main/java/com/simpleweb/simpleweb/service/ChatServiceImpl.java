@@ -1,19 +1,31 @@
 package com.simpleweb.simpleweb.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.simpleweb.simpleweb.mapper.ChatMapper;
+import com.simpleweb.simpleweb.model.Chat_filelist;
 import com.simpleweb.simpleweb.model.Chatlog;
 import com.simpleweb.simpleweb.model.Chatroom;
 import com.simpleweb.simpleweb.model.Chatroom_member;
 
 @Service
 public class ChatServiceImpl implements ChatService{
+
+	@Value("${spring.servlet.multipart.location}")
+	private String fileDir;
 	
 	@Autowired
 	ChatMapper chatmapper;
@@ -104,6 +116,53 @@ public class ChatServiceImpl implements ChatService{
 		System.out.println("check : " + res);
 		
 		return res;
+	}
+	
+	@Override
+	public int insertChatfile(Chat_filelist chat_filelist) {
+		Chat_filelist chat_file = new Chat_filelist();
+		
+		MultipartFile files = chat_filelist.getChat_file();
+		
+		String originalfilename            = files.getOriginalFilename();
+		String originalfilenameExtension   = FilenameUtils.getExtension(originalfilename).toLowerCase();
+		File destinationfile;
+		String destinationfilename;
+		String fileurl    = "chatfile\\";
+		String savePath   = fileDir + fileurl;
+		do {
+			destinationfilename   = RandomStringUtils.randomAlphanumeric(32) + "." + originalfilenameExtension;
+			destinationfile       = new File(savePath, destinationfilename);
+		}while(destinationfile.exists());
+		
+		try {
+			files.transferTo(destinationfile);
+		}catch(IOException e) {
+			
+		}
+
+		chat_file.setChat_filelist_filename(destinationfilename);
+		chat_file.setChat_filelist_original_filename(originalfilename);
+		chat_file.setChat_filelist_url(savePath);
+		chat_file.setMember_no(chat_filelist.getMember_no());
+		chat_file.setChatroom_no(chat_filelist.getChatroom_no());
+		chat_file.setChat_filelist_date(chat_filelist.getChat_filelist_date());
+		
+		chatmapper.insertChatfile(chat_file);
+		int chatfilePK = chat_file.getChat_filelist_no();
+		
+		return chatfilePK;
+	}
+
+	@Override
+	public Map getChat_filename(int chatfilePK) {
+		Optional<Chat_filelist> filelist = chatmapper.getChat_filename(chatfilePK);
+		
+		Map<String, String> filename = new HashMap<>();
+		
+		filename.put("chat_filename", filelist.get().getChat_filelist_filename());
+		
+		return filename;
 	}
 
 }

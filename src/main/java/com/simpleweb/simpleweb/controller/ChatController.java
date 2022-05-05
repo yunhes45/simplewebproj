@@ -1,7 +1,10 @@
 package com.simpleweb.simpleweb.controller;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -9,13 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.simpleweb.simpleweb.model.Chat_filelist;
 import com.simpleweb.simpleweb.model.Chatlog;
 import com.simpleweb.simpleweb.model.Chatroom;
 import com.simpleweb.simpleweb.model.Chatroom_member;
@@ -35,6 +45,21 @@ public class ChatController {
 	
 	@Autowired
 	CommonService commonservice;
+
+	@Value("${spring.servlet.multipart.location}")
+	private String fileDir;
+	
+	public String getFullPath(String fileurl, String filename) {
+		return fileDir + fileurl + filename;
+	}
+	
+	@ResponseBody
+	@GetMapping("/chatfile/{filename}")
+	public Resource downloadImage(@PathVariable String filename) throws MalformedURLException{
+		String fileurl    = "chatfile\\";
+		return new UrlResource("file:///" + getFullPath(fileurl, filename));
+		
+	}
 	
 	@RequestMapping("/chat")
 	public String chat(Model model, HttpServletRequest request, Member member_form) {
@@ -99,6 +124,7 @@ public class ChatController {
 			@RequestParam(value = "member_no", required=false) String socket_member_no,
 			@RequestParam(value = "chatroom_no", required=false) String socket_chatroom_no,
 			@RequestParam(value = "msg", required=false) String socket_msg,
+			@RequestParam(value = "original_file_name", required=false) String socket_original_file_name,
 			@RequestParam(value = "division", required=false) String socket_division,
 			@RequestParam(value = "nowTimesdate", required=false) String socket_nowTimesdate,
 			@RequestParam(value = "nowTimestime", required=false) String socket_nowTimestime,
@@ -106,6 +132,8 @@ public class ChatController {
 		
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
+		
+		System.out.println("err : " + chatroom_no);
 		
 		if(session_info != null) {
 			// 비정상적 접근 제어
@@ -145,21 +173,46 @@ public class ChatController {
 				// log insert Text
 				Chatlog insertLog = new Chatlog();
 				
-				try {
-					
-					if(!socket_msg.equals("") && socket_msg != null) {
-						insertLog.setMember_no(Integer.parseInt(socket_member_no));
-						insertLog.setChatroom_no(Integer.parseInt(socket_chatroom_no));
-						insertLog.setChatlog_log(socket_msg);
-						insertLog.setChatlog_division(socket_division);
-						insertLog.setChatlog_split_date(socket_nowTimesdate);
-						insertLog.setChatlog_split_time(socket_nowTimestime);
-						insertLog.setChatlog_date(socket_nowTimes);
+				System.out.println("fffffffffffffff : " + socket_msg);
+				System.out.println("ffffffffffffffff : " + socket_original_file_name);
+				
+				if(socket_msg != null && socket_original_file_name == null) {
+					try {
+							insertLog.setMember_no(Integer.parseInt(socket_member_no));
+							insertLog.setChatroom_no(Integer.parseInt(socket_chatroom_no));
+							insertLog.setChatlog_log(socket_msg);
+							insertLog.setChatlog_division(socket_division);
+							insertLog.setChatlog_split_date(socket_nowTimesdate);
+							insertLog.setChatlog_split_time(socket_nowTimestime);
+							insertLog.setChatlog_date(socket_nowTimes);
+							
+							chatservice.insertLog(insertLog);
+
+					}catch(NullPointerException e) {
 						
-						chatservice.insertLog(insertLog);
 					}
-				}catch(NullPointerException e) {
-					
+				}else if(socket_msg == null && socket_original_file_name != null) {
+					System.out.println("dddddddd : " + socket_member_no);
+					System.out.println("dddddddd : " + socket_chatroom_no);
+					System.out.println("dddddddd : " + socket_original_file_name);
+					System.out.println("dddddddd : " + socket_division);
+					System.out.println("dddddddd : " + socket_nowTimesdate);
+					System.out.println("dddddddd : " + socket_nowTimestime);
+					System.out.println("dddddddd : " + socket_nowTimes);
+					try {
+							insertLog.setMember_no(Integer.parseInt(socket_member_no));
+							insertLog.setChatroom_no(Integer.parseInt(socket_chatroom_no));
+							insertLog.setChatlog_log(socket_original_file_name);
+							insertLog.setChatlog_division(socket_division);
+							insertLog.setChatlog_split_date(socket_nowTimesdate);
+							insertLog.setChatlog_split_time(socket_nowTimestime);
+							insertLog.setChatlog_date(socket_nowTimes);
+							
+							chatservice.insertLog(insertLog);
+
+					}catch(NullPointerException e) {
+						
+					}					
 				}
 			
 			return "chat";
@@ -167,6 +220,32 @@ public class ChatController {
 		}else {
 			return "redirect:/";
 		}
+	}
+	
+	@ResponseBody
+	@PostMapping("upload_chat_file")
+	public Map post_upload_chat_file(HttpServletRequest request,
+			@RequestParam("chatroom_no") String chatroom_no,
+			@RequestParam("chat_file") MultipartFile chat_file) {
+
+		String trim_chatroom_no = chatroom_no.trim();
+		
+		HttpSession session = request.getSession();
+		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
+
+		Chat_filelist chat_filelist = new Chat_filelist();
+		chat_filelist.setMember_no(session_info.get().getMember_no());
+		chat_filelist.setChatroom_no(Integer.parseInt(trim_chatroom_no));
+		chat_filelist.setChat_file(chat_file);
+		chat_filelist.setChat_filelist_date(commonservice.nowTime());
+		
+		int chatfilePK = chatservice.insertChatfile(chat_filelist);	
+		
+		Map<String, String> chat_filename = new HashMap<>();
+		chat_filename = chatservice.getChat_filename(chatfilePK);
+
+		
+		return chat_filename;
 	}
 	
 	@PostMapping("/chatinvite")
