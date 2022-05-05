@@ -160,4 +160,25 @@ public class CommonServiceImpl implements CommonService{
 		}
 	}
 	
+	@Override
+	public ResponseEntity<Object> downloadChatFormFileLogic(Chat_filelist chat_filelist) throws IOException, URISyntaxException{	
+		String fileurl    = "chatfile\\";
+		String savePath   = fileDir + fileurl + chat_filelist.getChat_filelist_filename();
+		
+		try {
+			Path filePath = Paths.get(savePath);
+			Resource resource = new InputStreamResource(Files.newInputStream(filePath));
+			
+			String original_filename = chat_filelist.getChat_filelist_original_filename();
+			
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentDisposition(ContentDisposition.builder("attachment").filename(original_filename, StandardCharsets.UTF_8).build());
+			
+			return new ResponseEntity<Object>(resource, headers, HttpStatus.OK);
+		}catch(Exception e) {
+			System.out.println("no");
+			return new ResponseEntity<Object>(null, HttpStatus.SEE_OTHER);
+		}
+	}
+	
 }

@@ -161,7 +161,7 @@ layout:decorate="layout/layout">
 													<form id="sendfile">
 													<label for="chat_file">파일</label>
 													<input type="hidden" id="chatroom_no" name="chatroom_no" th:value="${chatroom_no}" />
-													<input type="file" id="chat_file" name="chat_file" onchange="sendfile()" />
+													<input type="file" id="chat_file" class="chat_file" name="chat_file" onchange="sendfile()" />
 													</form>
 													
 													<input type="text" id="chat_holder" class="chat_holder" placeholder="보내기...">

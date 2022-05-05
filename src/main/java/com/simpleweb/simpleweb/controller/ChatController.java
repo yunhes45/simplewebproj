@@ -1,6 +1,8 @@
 package com.simpleweb.simpleweb.controller;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,12 +28,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.simpleweb.simpleweb.model.Chat_filelist;
 import com.simpleweb.simpleweb.model.Chatlog;
 import com.simpleweb.simpleweb.model.Chatroom;
 import com.simpleweb.simpleweb.model.Chatroom_member;
 import com.simpleweb.simpleweb.model.Member;
+import com.simpleweb.simpleweb.model.Post_img;
 import com.simpleweb.simpleweb.service.BoardService;
 import com.simpleweb.simpleweb.service.ChatService;
 import com.simpleweb.simpleweb.service.CommonService;
@@ -192,13 +198,6 @@ public class ChatController {
 						
 					}
 				}else if(socket_msg == null && socket_original_file_name != null) {
-					System.out.println("dddddddd : " + socket_member_no);
-					System.out.println("dddddddd : " + socket_chatroom_no);
-					System.out.println("dddddddd : " + socket_original_file_name);
-					System.out.println("dddddddd : " + socket_division);
-					System.out.println("dddddddd : " + socket_nowTimesdate);
-					System.out.println("dddddddd : " + socket_nowTimestime);
-					System.out.println("dddddddd : " + socket_nowTimes);
 					try {
 							insertLog.setMember_no(Integer.parseInt(socket_member_no));
 							insertLog.setChatroom_no(Integer.parseInt(socket_chatroom_no));
@@ -246,6 +245,20 @@ public class ChatController {
 
 		
 		return chat_filename;
+	}
+	
+	@PostMapping("/downloadChatFormFile")
+	public ResponseEntity<Object> downloadChatFormFile(Chat_filelist chat_filelist_form, RedirectAttributes redirectAttributes)
+	throws IOException, URISyntaxException {
+		
+		ResponseEntity<Object> res = new ResponseEntity<Object>(null, HttpStatus.OK);
+		Chat_filelist chat_filelist = new Chat_filelist();
+		chat_filelist.setChat_filelist_original_filename(chat_filelist_form.getChat_filelist_original_filename());
+		chat_filelist.setChat_filelist_filename(chat_filelist_form.getChat_filelist_filename());
+		
+		res = commonservice.downloadChatFormFileLogic(chat_filelist);
+		
+		return res;
 	}
 	
 	@PostMapping("/chatinvite")

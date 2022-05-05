@@ -725,6 +725,30 @@
 	 right:10px; 	
 }
 
+.chat_myLog .chat_mymsgFile {
+	margin-top: 20px;
+	min-width: 150px;
+	max-width: 300px;
+	padding: 10px;
+}
+
+.chat_myLog .chat_mymsgFile img {
+	width: 300px;
+	height: 200px;
+}
+
+.chat_yourLog .chat_yourmsgFile {
+	margin-top: 20px;
+	min-width: 150px;
+	max-width: 300px;
+	padding: 10px;
+}
+
+.chat_myLog .chat_yourmsgFile img {
+	width: 300px;
+	height: 200px;
+}
+
 #chat_form .chat_msg_your_form {
 	margin-bottom: 20px;
 	display: flex;
@@ -790,6 +814,10 @@
 	margin-left: 30px;
 	margin-right: 10px;
 	cursor: pointer;
+}
+
+#chat_send .chat_file {
+	display: none;
 }
 
 #topbar {

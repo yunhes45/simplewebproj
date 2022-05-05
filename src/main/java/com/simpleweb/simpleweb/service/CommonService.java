@@ -23,5 +23,6 @@ public interface CommonService {
 	int getMember_no(String member_id);
 
 	ResponseEntity<Object> downloadFileLogic(Post_img post_img) throws IOException, URISyntaxException;
+	ResponseEntity<Object> downloadChatFormFileLogic(Chat_filelist chat_filelist) throws IOException, URISyntaxException;
 
 }
