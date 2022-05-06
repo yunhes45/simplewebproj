@@ -23,5 +23,6 @@ public interface ChatService {
 	
 	int insertChatfile(Chat_filelist chat_filelist);
 	Map getChat_filename(int chatfilePK);
+	List<Chatroom_member> getInvite_member_list(int member_no, int parseInt);
 
 }

@@ -15,17 +15,22 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.simpleweb.simpleweb.mapper.BoardMapper;
 import com.simpleweb.simpleweb.mapper.ChatMapper;
 import com.simpleweb.simpleweb.model.Chat_filelist;
 import com.simpleweb.simpleweb.model.Chatlog;
 import com.simpleweb.simpleweb.model.Chatroom;
 import com.simpleweb.simpleweb.model.Chatroom_member;
+import com.simpleweb.simpleweb.model.Follow;
 
 @Service
 public class ChatServiceImpl implements ChatService{
 
 	@Value("${spring.servlet.multipart.location}")
 	private String fileDir;
+	
+	@Autowired
+	BoardMapper boardmapper;
 	
 	@Autowired
 	ChatMapper chatmapper;
@@ -91,7 +96,6 @@ public class ChatServiceImpl implements ChatService{
 	private String chatroom_member_include_check(int member_no, int chatroom_no) {
 		String res = null;
 		
-//		List<Chatroom_member> include_member_list = chatmapper.getChatroom_member_include_check(member_no, chatroom_no);
 		List<Chatroom_member> include_member_list = chatmapper.getChatroom_member_list(chatroom_no);
 		int member_no_list[] = new int[include_member_list.size()];
 		
@@ -163,6 +167,43 @@ public class ChatServiceImpl implements ChatService{
 		filename.put("chat_filename", filelist.get().getChat_filelist_filename());
 		
 		return filename;
+	}
+
+	@Override
+	public List<Chatroom_member> getInvite_member_list(int member_no, int chatroom_no) {
+		List<String> exceptChatroomList = new ArrayList<>();
+		
+		List<Follow> getFollow_my_list = boardmapper.getFollow_my_list(member_no);
+		List<Chatroom_member> getChatroom_member_list = chatmapper.getChatroom_member_list(chatroom_no);
+		
+		List<String> getFollow_my_list_str = new ArrayList<>();
+		List<String> getChatroom_member_list_str = new ArrayList<>();
+		
+		for(int i = 0; i < getFollow_my_list.size(); i++) {
+			getFollow_my_list_str.add(Integer.toString(getFollow_my_list.get(i).getFollow_member_no()));
+			System.out.println("1 : " + getFollow_my_list_str.get(i));
+		}
+		
+		for(int i = 0; i < getChatroom_member_list.size(); i++) {
+			getChatroom_member_list_str.add(Integer.toString(getChatroom_member_list.get(i).getMember_no()));
+			System.out.println("2 : " + getChatroom_member_list_str.get(i));
+		}
+		
+		for(int i = 0; i < getFollow_my_list_str.size(); i++) {
+			
+			for(int j = 0; j < getChatroom_member_list_str.size(); j++) {
+				if(!getFollow_my_list_str.get(i).contains(getChatroom_member_list_str.get(j))) {
+					exceptChatroomList.add(getFollow_my_list_str.get(i));
+				}
+			}
+		}
+		
+		for(int i = 0; i < exceptChatroomList.size(); i++) {
+			System.out.println("fff : " + exceptChatroomList.get(i));
+		}
+
+		
+		return null;
 	}
 
 }

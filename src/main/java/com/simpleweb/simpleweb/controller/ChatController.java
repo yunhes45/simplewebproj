@@ -179,8 +179,9 @@ public class ChatController {
 				// log insert Text
 				Chatlog insertLog = new Chatlog();
 				
-				System.out.println("fffffffffffffff : " + socket_msg);
-				System.out.println("ffffffffffffffff : " + socket_original_file_name);
+				// get chatroom_member(except chatroom member)
+				List<Chatroom_member> invite_member_list = chatservice.getInvite_member_list(session_info.get().getMember_no(), Integer.parseInt(chatroom_no));
+				model.addAttribute("invite_member_list", invite_member_list);
 				
 				if(socket_msg != null && socket_original_file_name == null) {
 					try {
