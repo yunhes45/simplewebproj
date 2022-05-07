@@ -726,10 +726,8 @@
 }
 
 .chat_myLog .chat_mymsgFile {
-	margin-top: 20px;
 	min-width: 150px;
 	max-width: 300px;
-	padding: 10px;
 }
 
 .chat_myLog .chat_mymsgFile img {
@@ -737,16 +735,35 @@
 	height: 200px;
 }
 
+.chat_myLog .chat_original_filename {
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+.chat_myLog .chat_file_bottom {
+	display: flex;
+	justify-content: space-between;
+}
+
+
 .chat_yourLog .chat_yourmsgFile {
-	margin-top: 20px;
 	min-width: 150px;
 	max-width: 300px;
-	padding: 10px;
 }
 
 .chat_yourLog .chat_yourmsgFile img {
 	width: 300px;
 	height: 200px;
+}
+
+.chat_yourLog .chat_original_filename {
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+.chat_yourLog .chat_file_bottom {
+	display: flex;
+	justify-content: space-between;
 }
 
 #chat_form .chat_msg_your_form {

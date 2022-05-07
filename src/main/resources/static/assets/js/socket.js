@@ -45,9 +45,14 @@ function wsEvt(){
 		var getSocket_nowTimesdate = getSocket_nowTimesarr[0];
 		var getSocket_nowTimesTime = getSocket_nowTimesarr[1];
 
+		console.log("1 : " + getSocket_chatroom_no);
+		console.log("1 : " + chatroom_no);
+		console.log("1 : " + getSocket_member_no);
+		console.log("1 : " + member_no);
 		
+		if(getSocket_chatroom_no == chatroom_no){
 		if(getSocket_division == "text"){
-			if(getSocket_chatroom_no == chatroom_no && getSocket_member_no == member_no){
+			if(getSocket_member_no == member_no){
 	
 				var msgTmp = "<div class='chat_msg_my_form'>"
 					msgTmp += "<div class='chat_myLog'>"
@@ -97,7 +102,7 @@ function wsEvt(){
 			}	
 					
 		}else if(getSocket_division == "file"){
-			if(getSocket_chatroom_no == chatroom_no && getSocket_member_no == member_no){
+			if(getSocket_member_no == member_no){
 			
 				var msgTmp = "<div class='chat_msg_my_form'>"
 					msgTmp += "<div class='chat_myLog'>"
@@ -109,21 +114,25 @@ function wsEvt(){
 					msgTmp += getSocket_member_id;
 					msgTmp += "</div>"
 					msgTmp += "</div>"
+					msgTmp += "<div class='chat_original_filename'>"
+					msgTmp += getSocket_original_filename
+					msgTmp += "</div>"
 					msgTmp += "<div class='chat_mymsgFile'>"
 					msgTmp += "<img class='img' src='/chatfile/"+getSocket_msg+"'>"
 					msgTmp += "</div>"
+					msgTmp += "<div class='chat_file_bottom'>"
 					msgTmp += "<div class='chat_myTime'>"
 					msgTmp += "time : < "
 					msgTmp += getSocket_nowTimesTime;
 					msgTmp += " >"
 					msgTmp += "</div>"
-					msgTmp += "</div>"				
-					
 					msgTmp += "<form method='POST' action='/downloadChatFormFile'>"
 					msgTmp += "<input type='hidden' name='chat_filelist_original_filename' value='" + getSocket_original_filename + "'>"
 					msgTmp += "<input type='hidden' name='chat_filelist_filename' value='" + getSocket_msg + "'>"
-					msgTmp += "<input type='submit' value=''>"
+					msgTmp += "<input type='submit' value='다운로드'>"
 					msgTmp += "</form>"
+					msgTmp += "</div>"
+					msgTmp += "</div>"				
 					
 				$("#chat_form").append(msgTmp);	
 				
@@ -138,19 +147,30 @@ function wsEvt(){
 					msgTmp += getSocket_member_id;
 					msgTmp += "</div>"
 					msgTmp += "</div>"
+					msgTmp += "<div class='chat_original_filename'>"
+					msgTmp += getSocket_original_filename
+					msgTmp += "</div>"
 					msgTmp += "<div class='chat_yourmsgFile'>"
 					msgTmp += "<img class='img' src='/chatfile/"+getSocket_msg+"'>"
 					msgTmp += "</div>"
+					msgTmp += "<div class='chat_file_bottom'>"
 					msgTmp += "<div class='chat_yourTime'>"
 					msgTmp += "time : < "
 					msgTmp += getSocket_nowTimesTime;
 					msgTmp += " >"
+					msgTmp += "</div>"
+					msgTmp += "<form method='POST' action='/downloadChatFormFile'>"
+					msgTmp += "<input type='hidden' name='chat_filelist_original_filename' value='" + getSocket_original_filename + "'>"
+					msgTmp += "<input type='hidden' name='chat_filelist_filename' value='" + getSocket_msg + "'>"
+					msgTmp += "<input type='submit' value='다운로드'>"
+					msgTmp += "</form>"
 					msgTmp += "</div>"
 					msgTmp += "</div>"
 					
 				$("#chat_form").append(msgTmp);		
 							
 			}
+		}
 		}
 			
 				// scroll bottom
@@ -251,6 +271,7 @@ function sendfile(){
 	    cache: false,
 	    dataType: "json",
 	    success: function(response){
+			var filepk = response.chat_filelist_no;
 			var msg = response.chat_filename;
 				
 				var param = {
@@ -293,7 +314,7 @@ function AjaxInsertChatLog(member_no, chatroom_no, msg, division, nowTimes){
 			nowTimesdate: nowTimesdate,
 			nowTimestime: nowTimestime,
 			division: division,
-			nowTimes: nowTimes
+			nowTimes: nowTimes,
 		},
 		success: function(data){
 			

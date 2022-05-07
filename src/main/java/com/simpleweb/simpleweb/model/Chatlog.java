@@ -10,6 +10,8 @@ public class Chatlog {
 	private String chatlog_split_time;
 	private String chatlog_date;
 	
+	private int chat_filelist_no;
+	
 	public int getChatlog_no() {
 		return chatlog_no;
 	}
@@ -58,9 +60,17 @@ public class Chatlog {
 	public void setChatlog_date(String chatlog_date) {
 		this.chatlog_date = chatlog_date;
 	}
-	
+	public int getChat_filelist_no() {
+		return chat_filelist_no;
+	}
+	public void setChat_filelist_no(int chat_filelist_no) {
+		this.chat_filelist_no = chat_filelist_no;
+	}
+
+
 	private Member member;
 	private Member_profileimg member_profileimg;
+	private Chat_filelist chat_filelist;
 
 	public Member getMember() {
 		return member;
@@ -73,6 +83,12 @@ public class Chatlog {
 	}
 	public void setMember_profileimg(Member_profileimg member_profileimg) {
 		this.member_profileimg = member_profileimg;
+	}
+	public Chat_filelist getChat_filelist() {
+		return chat_filelist;
+	}
+	public void setChat_filelist(Chat_filelist chat_filelist) {
+		this.chat_filelist = chat_filelist;
 	}
 	
 		

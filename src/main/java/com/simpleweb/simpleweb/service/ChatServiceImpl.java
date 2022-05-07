@@ -159,14 +159,16 @@ public class ChatServiceImpl implements ChatService{
 	}
 
 	@Override
-	public Map getChat_filename(int chatfilePK) {
-		Optional<Chat_filelist> filelist = chatmapper.getChat_filename(chatfilePK);
+	public Map getChat_fileinfo(int chatfilePK) {
+		Optional<Chat_filelist> filelist = chatmapper.getChat_fileinfo(chatfilePK);
 		
-		Map<String, String> filename = new HashMap<>();
+		Map<String, String> fileinfo = new HashMap<>();
 		
-		filename.put("chat_filename", filelist.get().getChat_filelist_filename());
+		fileinfo.put("chat_filelist_no", Integer.toString(filelist.get().getChat_filelist_no()));
+		fileinfo.put("chat_filelist_original_filename", filelist.get().getChat_filelist_original_filename());
+		fileinfo.put("chat_filename", filelist.get().getChat_filelist_filename());
 		
-		return filename;
+		return fileinfo;
 	}
 
 	@Override

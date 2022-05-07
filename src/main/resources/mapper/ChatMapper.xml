@@ -125,6 +125,16 @@
 			<result property="member_profileimg_url" column="member_profileimg_url" />
 			<result property="member_profileimg_date" column="member_profileimg_date" />		
 		</association>
+		
+		<association javaType="Chat_filelist" property="chat_filelist">
+			<id property="chat_filelist_no" column="member_profileimg_no" />
+			<result property="member_no" column="member_no" />
+			<result property="chatroom_no" column="chatroom_no" />
+			<result property="chat_filelist_filename" column="chat_filelist_filename" />
+			<result property="chat_filelist_original_filename" column="chat_filelist_original_filename" />
+			<result property="chat_filelist_url" column="chat_filelist_url" />
+			<result property="chat_filelist_date" column="chat_filelist_date" />		
+		</association>
 	</resultMap>
 	
 	<select id="getChat_log" resultMap="JoinChatlogRM">
@@ -133,7 +143,8 @@
 			   n.member_id, n.member_email, n.member_nickname, n.member_mobile, n.member_job, n.member_gender,
 			   n.member_introduce,
 			   p.member_profileimg_no, p.member_profileimg_filename, p.member_profileimg_original_filename,
-			   p.member_profileimg_url
+			   p.member_profileimg_url,
+			   l.chat_filelist_original_filename
 		
 		from chatlog as m
 		
@@ -142,6 +153,9 @@
 		
 		left join member_profileimg as p
 		on m.member_no = p.member_no
+		
+		left join chat_filelist as l
+		on m.chatlog_log = l.chat_filelist_filename
 		
 		where m.chatroom_no = #{chatroom_no}	
 	</select>
@@ -173,8 +187,8 @@
 				  #{chat_filelist.chat_filelist_date} )			
 	</insert>
 	
-	<select id="getChat_filename" resultType="com.simpleweb.simpleweb.model.Chat_filelist">
-		select chat_filelist_filename
+	<select id="getChat_fileinfo" resultType="com.simpleweb.simpleweb.model.Chat_filelist">
+		select chat_filelist_no, chat_filelist_original_filename, chat_filelist_filename
 		
 		from chat_filelist
 		

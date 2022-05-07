@@ -22,7 +22,7 @@ public interface ChatService {
 	String getChatroom_member_include_check(int member_no, int chatroom_no);
 	
 	int insertChatfile(Chat_filelist chat_filelist);
-	Map getChat_filename(int chatfilePK);
+	Map getChat_fileinfo(int chatfilePK);
 	List<Chatroom_member> getInvite_member_list(int member_no, int parseInt);
 
 }

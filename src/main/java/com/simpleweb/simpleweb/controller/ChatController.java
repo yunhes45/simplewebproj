@@ -134,7 +134,7 @@ public class ChatController {
 			@RequestParam(value = "division", required=false) String socket_division,
 			@RequestParam(value = "nowTimesdate", required=false) String socket_nowTimesdate,
 			@RequestParam(value = "nowTimestime", required=false) String socket_nowTimestime,
-			@RequestParam(value = "nowTimes", required=false) String socket_nowTimes) {
+			@RequestParam(value = "nowTimes", required=false) String socket_nowTimes  ) {
 		
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
@@ -176,6 +176,10 @@ public class ChatController {
 				List<Chatlog> getchat_Log = chatservice.getChat_log(Integer.parseInt(chatroom_no));
 				model.addAttribute("getchat_Log", getchat_Log);
 				
+				for(int i = 0; i < getchat_Log.size(); i++) {
+					System.out.println("fff : " + getchat_Log.get(i).getChat_filelist().getChat_filelist_original_filename());
+				}
+				
 				// log insert Text
 				Chatlog insertLog = new Chatlog();
 				
@@ -183,7 +187,8 @@ public class ChatController {
 				List<Chatroom_member> invite_member_list = chatservice.getInvite_member_list(session_info.get().getMember_no(), Integer.parseInt(chatroom_no));
 				model.addAttribute("invite_member_list", invite_member_list);
 				
-				if(socket_msg != null && socket_original_file_name == null) {
+				if(socket_msg != null) {
+					System.out.println("insert");
 					try {
 							insertLog.setMember_no(Integer.parseInt(socket_member_no));
 							insertLog.setChatroom_no(Integer.parseInt(socket_chatroom_no));
@@ -198,21 +203,6 @@ public class ChatController {
 					}catch(NullPointerException e) {
 						
 					}
-				}else if(socket_msg == null && socket_original_file_name != null) {
-					try {
-							insertLog.setMember_no(Integer.parseInt(socket_member_no));
-							insertLog.setChatroom_no(Integer.parseInt(socket_chatroom_no));
-							insertLog.setChatlog_log(socket_original_file_name);
-							insertLog.setChatlog_division(socket_division);
-							insertLog.setChatlog_split_date(socket_nowTimesdate);
-							insertLog.setChatlog_split_time(socket_nowTimestime);
-							insertLog.setChatlog_date(socket_nowTimes);
-							
-							chatservice.insertLog(insertLog);
-
-					}catch(NullPointerException e) {
-						
-					}					
 				}
 			
 			return "chat";
@@ -242,7 +232,7 @@ public class ChatController {
 		int chatfilePK = chatservice.insertChatfile(chat_filelist);	
 		
 		Map<String, String> chat_filename = new HashMap<>();
-		chat_filename = chatservice.getChat_filename(chatfilePK);
+		chat_filename = chatservice.getChat_fileinfo(chatfilePK);
 
 		
 		return chat_filename;

@@ -33,6 +33,6 @@ public interface ChatMapper {
 
 	int insertChatfile(@Param("chat_filelist") Chat_filelist chat_file);
 
-	Optional<Chat_filelist> getChat_filename(@Param("chat_filelist_no") int chatfilePK);
+	Optional<Chat_filelist> getChat_fileinfo(@Param("chat_filelist_no") int chatfilePK);
 
 }
