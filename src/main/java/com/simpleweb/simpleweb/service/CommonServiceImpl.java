@@ -172,6 +172,37 @@ public class CommonServiceImpl implements CommonService{
 		
 		return post_img;
 	}
+	
+	@Override
+	public Chat_filelist chat_filelogic(Chat_filelist chat_filelist) throws Exception {
+		Chat_filelist chat_file = new Chat_filelist();
+		
+		String originalfilename            = chat_filelist.getChat_file().getOriginalFilename();
+		String originalfilenameExtension   = FilenameUtils.getExtension(originalfilename).toLowerCase();
+		File destinationfile;
+		String destinationfilename;
+		String fileurl    = chat_file_path();
+		String savePath   = fileDir + fileurl;
+		do {
+			destinationfilename   = RandomStringUtils.randomAlphanumeric(32) + "." + originalfilenameExtension;
+			destinationfile       = new File(savePath, destinationfilename);
+		}while(destinationfile.exists());
+		
+		try {
+			chat_filelist.getChat_file().transferTo(destinationfile);
+		}catch(IOException e) {
+			
+		}
+		
+		chat_file.setMember_no                       (chat_filelist.getMember_no());
+		chat_file.setChatroom_no                     (chat_filelist.getChatroom_no());
+		chat_file.setChat_filelist_filename          (destinationfilename);
+		chat_file.setChat_filelist_original_filename (originalfilename);
+		chat_file.setChat_filelist_url               (savePath);
+		chat_file.setChat_filelist_date              (chat_filelist.getChat_filelist_date());
+		
+		return chat_file;		
+	}
 
 	@Override
 	public ResponseEntity<Object> downloadFileLogic(Post_img post_img) throws IOException, URISyntaxException{	

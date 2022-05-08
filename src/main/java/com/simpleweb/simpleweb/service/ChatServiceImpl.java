@@ -122,41 +122,11 @@ public class ChatServiceImpl implements ChatService{
 		return res;
 	}
 	
-	@Override
-	public int insertChatfile(Chat_filelist chat_filelist) {
-		Chat_filelist chat_file = new Chat_filelist();
-		
-		MultipartFile files = chat_filelist.getChat_file();
-		
-		String originalfilename            = files.getOriginalFilename();
-		String originalfilenameExtension   = FilenameUtils.getExtension(originalfilename).toLowerCase();
-		File destinationfile;
-		String destinationfilename;
-		 String fileurl    = "chatfile\\";
-		// String fileurl    = "chatfile/";
-		String savePath   = fileDir + fileurl;
-		do {
-			destinationfilename   = RandomStringUtils.randomAlphanumeric(32) + "." + originalfilenameExtension;
-			destinationfile       = new File(savePath, destinationfilename);
-		}while(destinationfile.exists());
-		
-		try {
-			files.transferTo(destinationfile);
-		}catch(IOException e) {
-			
-		}
 
-		chat_file.setChat_filelist_filename(destinationfilename);
-		chat_file.setChat_filelist_original_filename(originalfilename);
-		chat_file.setChat_filelist_url(savePath);
-		chat_file.setMember_no(chat_filelist.getMember_no());
-		chat_file.setChatroom_no(chat_filelist.getChatroom_no());
-		chat_file.setChat_filelist_date(chat_filelist.getChat_filelist_date());
+	@Override
+	public int insertChat_file(Chat_filelist chat_filelist) {
 		
-		chatmapper.insertChatfile(chat_file);
-		int chatfilePK = chat_file.getChat_filelist_no();
-		
-		return chatfilePK;
+		return chatmapper.insertChatfile(chat_filelist);
 	}
 
 	@Override

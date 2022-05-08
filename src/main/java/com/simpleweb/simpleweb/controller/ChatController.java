@@ -188,8 +188,6 @@ public class ChatController {
 					}catch(NullPointerException e) {
 						
 					}
-				}else if(socket_msg != null && socket_division.equals("file")) {
-					
 				}
 			
 			return "chat";
@@ -200,17 +198,10 @@ public class ChatController {
 	}
 	
 	@ResponseBody
-	@PostMapping("post_insrtChat_file_log")
-	public Map post_insertChat_file_log() {
-		
-		return null;
-	}
-	
-	@ResponseBody
 	@PostMapping("upload_chat_file")
 	public Map post_upload_chat_file(HttpServletRequest request,
 			@RequestParam("chatroom_no") String chatroom_no,
-			@RequestParam("chat_file") MultipartFile chat_file) {
+			@RequestParam("chat_file") MultipartFile chat_file) throws Exception {
 
 		String trim_chatroom_no = chatroom_no.trim();
 		
@@ -223,12 +214,14 @@ public class ChatController {
 		chat_filelist.setChat_file(chat_file);
 		chat_filelist.setChat_filelist_date(commonservice.nowTime());
 		
-		int chatfilePK = chatservice.insertChatfile(chat_filelist);	
+		chat_filelist = commonservice.chat_filelogic(chat_filelist);	
+		chatservice.insertChat_file(chat_filelist);
+		
+		int chatfilePK = chat_filelist.getChat_filelist_no();
 		
 		Map<String, String> chat_filename = new HashMap<>();
 		chat_filename = chatservice.getChat_fileinfo(chatfilePK);
 
-		
 		return chat_filename;
 	}
 	
