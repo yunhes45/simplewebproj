@@ -62,7 +62,8 @@ public class BoardController {
 	@ResponseBody
 	@GetMapping("/postimg/{filename}")
 	public Resource downloadImage(@PathVariable String filename) throws MalformedURLException{
-		String fileurl    = "postimg\\";
+		// String fileurl    = "postimg\\";
+		String fileurl    = "postimg/";
 		return new UrlResource("file:///" + getFullPath(fileurl, filename));
 		
 	}

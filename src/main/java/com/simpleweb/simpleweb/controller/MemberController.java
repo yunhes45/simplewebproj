@@ -48,7 +48,8 @@ public class MemberController {
 	@ResponseBody
 	@GetMapping("/memberimg/{filename}")
 	public Resource downloadImage(@PathVariable String filename) throws MalformedURLException{
-		String fileurl    = "memberimg\\";
+		// String fileurl    = "memberimg\\";
+		String fileurl    = "memberimg/";
 		return new UrlResource("file:///" + getFullPath(fileurl, filename));
 		
 	}

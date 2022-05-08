@@ -66,7 +66,8 @@ public class CommonServiceImpl implements CommonService{
 	public Member_profileimg normalimglogic(int memberPK) throws Exception{
 		Member_profileimg memberimg = new Member_profileimg();
 		String originalfilename   = "normal_img.png";
-		String fileurl    = "memberimg\\";
+		// String fileurl    = "memberimg\\";
+		String fileurl    = "memberimg/";
 		String savePath   = fileDir + fileurl;
 		
 		memberimg.setMember_profileimg_filename            (originalfilename);
@@ -86,7 +87,8 @@ public class CommonServiceImpl implements CommonService{
 		String originalfilenameExtension   = FilenameUtils.getExtension(originalfilename).toLowerCase();
 		File destinationfile;
 		String destinationfilename;
-		String fileurl    = "memberimg\\";
+		// String fileurl    = "memberimg\\";
+		String fileurl    = "memberimg/";
 		String savePath   = fileDir + fileurl;
 
 		do {
@@ -117,7 +119,8 @@ public class CommonServiceImpl implements CommonService{
 		String originalfilenameExtension   = FilenameUtils.getExtension(originalfilename).toLowerCase();
 		File destinationfile;
 		String destinationfilename;
-		String fileurl    = "postimg\\";
+		// String fileurl    = "postimg\\";
+		String fileurl    = "postimg/";
 		String savePath   = fileDir + fileurl;
 		do {
 			destinationfilename   = RandomStringUtils.randomAlphanumeric(32) + "." + originalfilenameExtension;
@@ -141,7 +144,8 @@ public class CommonServiceImpl implements CommonService{
 
 	@Override
 	public ResponseEntity<Object> downloadFileLogic(Post_img post_img) throws IOException, URISyntaxException{	
-		String fileurl    = "postimg\\";
+		// String fileurl    = "postimg\\";
+		String fileurl    = "postimg/";
 		String savePath   = fileDir + fileurl + post_img.getPost_img_filename();
 		
 		try {
@@ -162,7 +166,8 @@ public class CommonServiceImpl implements CommonService{
 	
 	@Override
 	public ResponseEntity<Object> downloadChatFormFileLogic(Chat_filelist chat_filelist) throws IOException, URISyntaxException{	
-		String fileurl    = "chatfile\\";
+		// String fileurl    = "chatfile\\";
+		String fileurl    = "chatfile/";
 		String savePath   = fileDir + fileurl + chat_filelist.getChat_filelist_filename();
 		
 		try {

@@ -62,7 +62,8 @@ public class ChatController {
 	@ResponseBody
 	@GetMapping("/chatfile/{filename}")
 	public Resource downloadImage(@PathVariable String filename) throws MalformedURLException{
-		String fileurl    = "chatfile\\";
+		// String fileurl    = "chatfile\\";
+		String fileurl    = "chatfile/";
 		return new UrlResource("file:///" + getFullPath(fileurl, filename));
 		
 	}
