@@ -37,22 +37,6 @@ public class MemberController {
 	
 	@Autowired
 	private CommonService commonservice;
-	
-	@Value("${spring.servlet.multipart.location}")
-	private String fileDir;
-	
-	public String getFullPath(String fileurl, String filename) {
-		return fileDir + fileurl + filename;
-	}
-	
-	@ResponseBody
-	@GetMapping("/memberimg/{filename}")
-	public Resource downloadImage(@PathVariable String filename) throws MalformedURLException{
-		// String fileurl    = "memberimg\\";
-		String fileurl    = "memberimg/";
-		return new UrlResource("file:///" + getFullPath(fileurl, filename));
-		
-	}
 
 	@RequestMapping("/")
 	public String test(HttpServletRequest request) {
@@ -147,7 +131,7 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
-		model.addAttribute("fileDir", fileDir);
+		model.addAttribute("fileDir", commonservice.fileDir_path());
 		model.addAttribute("session_info", session_info);
 		
 		return "modifymember";

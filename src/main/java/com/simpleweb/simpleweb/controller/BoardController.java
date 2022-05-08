@@ -52,22 +52,6 @@ public class BoardController {
 	@Autowired
 	CommonService commonservice;
 	
-	@Value("${spring.servlet.multipart.location}")
-	private String fileDir;
-	
-	public String getFullPath(String fileurl, String filename) {
-		return fileDir + fileurl + filename;
-	}
-	
-	@ResponseBody
-	@GetMapping("/postimg/{filename}")
-	public Resource downloadImage(@PathVariable String filename) throws MalformedURLException{
-		// String fileurl    = "postimg\\";
-		String fileurl    = "postimg/";
-		return new UrlResource("file:///" + getFullPath(fileurl, filename));
-		
-	}
-	
 	@RequestMapping("/mainboard")
 	public String mainboard(@RequestParam(value="search", required=false) String search,
 			Model model, HttpServletRequest request) {

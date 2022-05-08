@@ -132,8 +132,8 @@ public class ChatServiceImpl implements ChatService{
 		String originalfilenameExtension   = FilenameUtils.getExtension(originalfilename).toLowerCase();
 		File destinationfile;
 		String destinationfilename;
-		// String fileurl    = "chatfile\\";
-		String fileurl    = "chatfile/";
+		 String fileurl    = "chatfile\\";
+		// String fileurl    = "chatfile/";
 		String savePath   = fileDir + fileurl;
 		do {
 			destinationfilename   = RandomStringUtils.randomAlphanumeric(32) + "." + originalfilenameExtension;

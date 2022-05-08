@@ -51,22 +51,6 @@ public class ChatController {
 	
 	@Autowired
 	CommonService commonservice;
-
-	@Value("${spring.servlet.multipart.location}")
-	private String fileDir;
-	
-	public String getFullPath(String fileurl, String filename) {
-		return fileDir + fileurl + filename;
-	}
-	
-	@ResponseBody
-	@GetMapping("/chatfile/{filename}")
-	public Resource downloadImage(@PathVariable String filename) throws MalformedURLException{
-		// String fileurl    = "chatfile\\";
-		String fileurl    = "chatfile/";
-		return new UrlResource("file:///" + getFullPath(fileurl, filename));
-		
-	}
 	
 	@RequestMapping("/chat")
 	public String chat(Model model, HttpServletRequest request, Member member_form) {

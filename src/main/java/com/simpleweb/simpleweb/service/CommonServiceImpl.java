@@ -38,11 +38,45 @@ import com.simpleweb.simpleweb.model.Post_img;
 @Service
 public class CommonServiceImpl implements CommonService{
 	
+	@Autowired
+	MemberMapper membermapper;
+
 	@Value("${spring.servlet.multipart.location}")
 	private String fileDir;
 	
-	@Autowired
-	MemberMapper membermapper;
+	public Object fileDir_path() {
+
+		return fileDir;
+	}
+	
+	private String member_file_path() {
+		 String fileurl    = "memberimg\\";
+		 // String fileurl    = "memberimg/";
+		 
+		 return fileurl;
+	}
+	private String post_file_path() {
+		String fileurl    = "postimg\\";
+		// String fileurl    = "postimg/";	
+		
+		return fileurl;
+	}
+	private String chat_file_path() {
+		String fileurl    = "chatfile\\";
+		// String fileurl    = "chatfile/";
+		
+		return fileurl;
+	}
+	
+	public String getMember_file_FullPath(String filename) {
+		return fileDir + member_file_path() + filename;
+	}
+	public String getPost_file_FullPath(String filename) {
+		return fileDir + post_file_path() + filename;
+	}
+	public String getChat_file_FullPath(String filename) {
+		return fileDir + chat_file_path() + filename;
+	}
 	
 	@Override
 	public int getMember_no(String member_id) {
@@ -66,8 +100,7 @@ public class CommonServiceImpl implements CommonService{
 	public Member_profileimg normalimglogic(int memberPK) throws Exception{
 		Member_profileimg memberimg = new Member_profileimg();
 		String originalfilename   = "normal_img.png";
-		// String fileurl    = "memberimg\\";
-		String fileurl    = "memberimg/";
+		String fileurl    = member_file_path();
 		String savePath   = fileDir + fileurl;
 		
 		memberimg.setMember_profileimg_filename            (originalfilename);
@@ -87,8 +120,7 @@ public class CommonServiceImpl implements CommonService{
 		String originalfilenameExtension   = FilenameUtils.getExtension(originalfilename).toLowerCase();
 		File destinationfile;
 		String destinationfilename;
-		// String fileurl    = "memberimg\\";
-		String fileurl    = "memberimg/";
+		String fileurl    = member_file_path();
 		String savePath   = fileDir + fileurl;
 
 		do {
@@ -119,8 +151,7 @@ public class CommonServiceImpl implements CommonService{
 		String originalfilenameExtension   = FilenameUtils.getExtension(originalfilename).toLowerCase();
 		File destinationfile;
 		String destinationfilename;
-		// String fileurl    = "postimg\\";
-		String fileurl    = "postimg/";
+		String fileurl    = post_file_path();
 		String savePath   = fileDir + fileurl;
 		do {
 			destinationfilename   = RandomStringUtils.randomAlphanumeric(32) + "." + originalfilenameExtension;
@@ -144,8 +175,7 @@ public class CommonServiceImpl implements CommonService{
 
 	@Override
 	public ResponseEntity<Object> downloadFileLogic(Post_img post_img) throws IOException, URISyntaxException{	
-		// String fileurl    = "postimg\\";
-		String fileurl    = "postimg/";
+		String fileurl    = post_file_path();
 		String savePath   = fileDir + fileurl + post_img.getPost_img_filename();
 		
 		try {
@@ -166,8 +196,7 @@ public class CommonServiceImpl implements CommonService{
 	
 	@Override
 	public ResponseEntity<Object> downloadChatFormFileLogic(Chat_filelist chat_filelist) throws IOException, URISyntaxException{	
-		// String fileurl    = "chatfile\\";
-		String fileurl    = "chatfile/";
+		String fileurl    = chat_file_path();
 		String savePath   = fileDir + fileurl + chat_filelist.getChat_filelist_filename();
 		
 		try {

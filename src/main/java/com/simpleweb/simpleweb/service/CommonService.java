@@ -25,4 +25,9 @@ public interface CommonService {
 	ResponseEntity<Object> downloadFileLogic(Post_img post_img) throws IOException, URISyntaxException;
 	ResponseEntity<Object> downloadChatFormFileLogic(Chat_filelist chat_filelist) throws IOException, URISyntaxException;
 
+	Object fileDir_path();
+	String getMember_file_FullPath(String filename);
+	String getPost_file_FullPath(String filename);
+	String getChat_file_FullPath(String filename);
+
 }
