@@ -91,7 +91,7 @@
 				 #{chatlog.chatlog_division},
 				 #{chatlog.chatlog_split_date},
 				 #{chatlog.chatlog_split_time},
-				 #{chatlog.chatlog_date}        )	
+				 #{chatlog.chatlog_date}       )	
 	</insert>
 	
 	<resultMap id="JoinChatlogRM" type="com.simpleweb.simpleweb.model.Chatlog">
@@ -103,6 +103,7 @@
 		<result property="chatlog_split_date" column="chatlog_split_date" />
 		<result property="chatlog_split_time" column="chatlog_split_time" />
 		<result property="chatlog_date" column="chatlog_date" />
+		<result property="chat_filelist_no" column="chat_filelist_no" />
 		
 		<association javaType="Member" property="member">
 			<id property="member_no" column="member_no" />

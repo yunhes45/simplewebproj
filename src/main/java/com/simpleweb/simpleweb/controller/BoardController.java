@@ -536,10 +536,7 @@ public class BoardController {
 			post.setPost_subtitle(post_form.getPost_subtitle());
 			post.setPost_contents(post_form.getPost_contents());
 			post.setMember_no(session_info.get().getMember_no());
-			post.setPost_date(commonservice.nowTime());
-			
-			System.out.println("post : " + post_form.getPost_contents());
-			
+			post.setPost_date(commonservice.nowTime());	
 			
 			boardservice.insertPost(post);
 			

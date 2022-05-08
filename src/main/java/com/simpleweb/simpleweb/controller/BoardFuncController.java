@@ -145,20 +145,6 @@ public class BoardFuncController {
 		return followlogic;
 	}
 	
-	@PostMapping("/downloadFile")
-	public ResponseEntity<Object> downloadFile(Post_img post_img_form, RedirectAttributes redirectAttributes)
-	throws IOException, URISyntaxException {
-		Post_img post_img = new Post_img();
-		post_img.setPost_no(post_img_form.getPost_no());
-		post_img.setPost_img_original_filename(post_img_form.getPost_img_original_filename());
-		post_img.setPost_img_filename(post_img_form.getPost_img_filename());
-		
-		ResponseEntity<Object> res = new ResponseEntity<Object>(null, HttpStatus.OK);
-		res = commonservice.downloadFileLogic(post_img);
-		
-		return res;
-	}
-	
 	@GetMapping("/search")
 	public String post_search(HttpServletRequest request) {
 		String search = request.getParameter("search");

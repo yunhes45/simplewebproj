@@ -119,7 +119,7 @@ public class ChatController {
 			@RequestParam(value = "division", required=false) String socket_division,
 			@RequestParam(value = "nowTimesdate", required=false) String socket_nowTimesdate,
 			@RequestParam(value = "nowTimestime", required=false) String socket_nowTimestime,
-			@RequestParam(value = "nowTimes", required=false) String socket_nowTimes  ) {
+			@RequestParam(value = "nowTimes", required=false) String socket_nowTimes     ) {
 		
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
@@ -188,6 +188,8 @@ public class ChatController {
 					}catch(NullPointerException e) {
 						
 					}
+				}else if(socket_msg != null && socket_division.equals("file")) {
+					
 				}
 			
 			return "chat";
@@ -195,6 +197,13 @@ public class ChatController {
 		}else {
 			return "redirect:/";
 		}
+	}
+	
+	@ResponseBody
+	@PostMapping("post_insrtChat_file_log")
+	public Map post_insertChat_file_log() {
+		
+		return null;
 	}
 	
 	@ResponseBody
@@ -221,20 +230,6 @@ public class ChatController {
 
 		
 		return chat_filename;
-	}
-	
-	@PostMapping("/downloadChatFormFile")
-	public ResponseEntity<Object> downloadChatFormFile(Chat_filelist chat_filelist_form, RedirectAttributes redirectAttributes)
-	throws IOException, URISyntaxException {
-		
-		ResponseEntity<Object> res = new ResponseEntity<Object>(null, HttpStatus.OK);
-		Chat_filelist chat_filelist = new Chat_filelist();
-		chat_filelist.setChat_filelist_original_filename(chat_filelist_form.getChat_filelist_original_filename());
-		chat_filelist.setChat_filelist_filename(chat_filelist_form.getChat_filelist_filename());
-		
-		res = commonservice.downloadChatFormFileLogic(chat_filelist);
-		
-		return res;
 	}
 	
 	@PostMapping("/chatinvite")
