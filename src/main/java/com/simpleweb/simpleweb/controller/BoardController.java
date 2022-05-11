@@ -220,9 +220,7 @@ public class BoardController {
 		
 		int startPage   = 5;
 		int onePageCnt  = Integer.parseInt(page);
-		
-		int page_postlist_algo = (startPage * Integer.parseInt(count)) - ((Integer.parseInt(count)-1) * 2); 
-		
+
 		if(search == null) {
 		
 			List<Post> post_list = boardservice.getPost_list_algo(startPage, onePageCnt);
@@ -615,9 +613,9 @@ public class BoardController {
 				System.out.println("cntcnt : " + memberComment_Like_check.get(i));
 			}
 			
-			// follow check logic
-			List<String> memberfollow_check = boardservice.getMemberFollow_check(session_info.get().getMember_no());
-			model.addAttribute("memberfollow_check", memberfollow_check);
+//			// follow check logic
+//			List<String> memberfollow_check = boardservice.getMemberFollow_check(session_info.get().getMember_no());
+//			model.addAttribute("memberfollow_check", memberfollow_check);
 			
 			return "detailpost";
 		

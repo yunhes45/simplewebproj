@@ -20,14 +20,9 @@ public interface BoardService {
 	void insertPostImg(Post_img post_img);
 	void insertPostHashtag(Post_hashtag post_menu_hashtag);
 	
-	int getTotal_fileList(int member_no);
+	// mainboard
 	List<Post> getPost_list_algo(int startPage, int onePageCnt);
-	List<Post> getMyPost_list(int member_no, int startPage, int onePageCnt);
-	
 	List<Post> getPost_list_algo_search(int startPage, int onePageCnt, String search);
-	
-	int getTotal_bookmarkList(int member_no);
-	List<Bookmark> getBookmark_list(int member_no, int startPage, int onePageCnt);
 	
 	List<List<Like_stat>> getPost_Like_list(List<Integer> post_list_no);
 	List<Integer> getLike_cnt(List<List<Like_stat>> Post_Like_list);
@@ -45,19 +40,29 @@ public interface BoardService {
 	List<List<Post_hashtag>> getPostMenuHashtag(List<Integer> post_list_no, int i);
 	List<Integer> getPost_menu_hashtag_cnt(List<List<Post_hashtag>> post_menu_hashtag);
 	
+	// mypage
+	int getTotal_fileList(int member_no);
+	List<Post> getMyPost_list(int member_no, int startPage, int onePageCnt);	
+	int getTotal_bookmarkList(int member_no);
+	List<Bookmark> getBookmark_list(int member_no, int startPage, int onePageCnt);
+	
+	// detail page
 	Optional<Post> getMemberPost(int post_no, int member_no);
+	
 	List<Like_stat> getMemberPost_Like_list(int post_no);
 	String getMemberLike_check(int post_no, int member_no);
+	
 	List<Bookmark> getMemberPost_Bookmark_list(int post_no);
 	String getMemberBookmark_check(int post_no, int member_no);
 	
 	List<Comment> getMemberPost_Comment_list(int post_no);
 	List<String> getMemberComment_Like_check(int post_no, int member_no);
 	
-	List<String> getMemberFollow_check(int member_no);	
-
-	List<Post_hashtag> getMemberPostMenuHashtag(int parseInt, int i);
+//	List<String> getMemberFollow_check(int member_no);	
+//	List<Post_hashtag> getMemberPostMenuHashtag(int parseInt, int i);
 	
+	
+	// my follow info
 	List<Member> getFollow_my_list(int member_no);
 	List<Member> getFollow_me_list(int member_no);
 	List<String> getFollow_check(List<Post> post_list, int member_no);

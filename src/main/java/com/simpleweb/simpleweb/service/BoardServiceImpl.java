@@ -40,19 +40,23 @@ public class BoardServiceImpl implements BoardService{
 		
 		return postPK;
 	}
-
 	@Override
 	public void insertPostImg(Post_img post_img) {
 		boardmapper.insertPostImg(post_img);
 		
-	}
-	
+	}	
 	@Override
 	public void insertPostHashtag(Post_hashtag post_hashtag) {
 		List<String> hashtag = posthashtagRegex(post_hashtag.getPost_hashtag_list());
 		
+		Post_hashtag ins_post_hashtag = new Post_hashtag();
+		
 		for(int i = 0; i < hashtag.size(); i++) {
-			boardmapper.insertPostHashtag(post_hashtag.getPost_no(), hashtag.get(i), post_hashtag.getPost_hashtag_division());
+			ins_post_hashtag.setPost_no(post_hashtag.getPost_no());
+			ins_post_hashtag.setPost_hashtag_list(hashtag.get(i));
+			ins_post_hashtag.setPost_hashtag_division(post_hashtag.getPost_hashtag_division());
+			
+			boardmapper.insertPostHashtag(ins_post_hashtag);
 		}
 	}
 	private List posthashtagRegex(String hashtagStr) {
@@ -68,45 +72,18 @@ public class BoardServiceImpl implements BoardService{
 			
 		return res;
 	}
-
-	@Override
-	public int getTotal_fileList(int member_no) {
-		int getTotal_fileList = boardmapper.getTotal_fileList(member_no);
-		
-		return getTotal_fileList;
-	}
 	
 	@Override
 	public List<Post> getPost_list_algo(int startPage, int onePageCnt) {
 
 		return boardmapper.getPost_list_algo(startPage, onePageCnt);
 	}
-
-	@Override
-	public List<Post> getMyPost_list(int member_no, int startPage, int onePageCnt) {
-		
-		return boardmapper.getMyPost_list(member_no, startPage, onePageCnt);
-	}
-	
 	@Override
 	public List<Post> getPost_list_algo_search(int startPage, int onePageCnt, String search) {
 
 		return boardmapper.getPost_list_algo_search(startPage, onePageCnt, search);
 	}
 	
-	@Override
-	public int getTotal_bookmarkList(int member_no) {
-		int getTotal_bookmarkList = boardmapper.getTotal_bookmarkList(member_no);
-		
-		return getTotal_bookmarkList;
-	}
-	
-	@Override
-	public List<Bookmark> getBookmark_list(int member_no, int startPage, int onePageCnt) {
-
-		return boardmapper.getBookmark_list(member_no, startPage, onePageCnt);
-	}
-
 	@Override
 	public List<List<Like_stat>> getPost_Like_list(List<Integer> post_list_no) {
 		
@@ -177,7 +154,7 @@ public class BoardServiceImpl implements BoardService{
 		
 		return Bookmark_cnt;
 	}
-
+	
 	@Override
 	public List<String> getBookmark_check(List<Integer> bookmark_cnt, List<List<Bookmark>> post_Bookmark_list,
 			String member_id) {
@@ -196,7 +173,7 @@ public class BoardServiceImpl implements BoardService{
 			
 		return bookmark_check;
 	}
-
+	
 	@Override
 	public List<List<Comment>> getPost_Comment_list(List<Integer> post_list_no) {
 		
@@ -292,11 +269,38 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
+	public int getTotal_fileList(int member_no) {
+		int getTotal_fileList = boardmapper.getTotal_fileList(member_no);
+		
+		return getTotal_fileList;
+	}
+	
+
+	@Override
+	public List<Post> getMyPost_list(int member_no, int startPage, int onePageCnt) {
+		
+		return boardmapper.getMyPost_list(member_no, startPage, onePageCnt);
+	}
+	
+	@Override
+	public int getTotal_bookmarkList(int member_no) {
+		int getTotal_bookmarkList = boardmapper.getTotal_bookmarkList(member_no);
+		
+		return getTotal_bookmarkList;
+	}
+	
+	@Override
+	public List<Bookmark> getBookmark_list(int member_no, int startPage, int onePageCnt) {
+
+		return boardmapper.getBookmark_list(member_no, startPage, onePageCnt);
+	}
+
+	@Override
 	public Optional<Post> getMemberPost(int post_no, int member_no) {
 	
 		return boardmapper.getMemberPost(post_no, member_no);
 	}
-
+	
 	@Override
 	public List<Like_stat> getMemberPost_Like_list(int post_no) {
 
@@ -318,13 +322,13 @@ public class BoardServiceImpl implements BoardService{
 		
 		return check;
 	}
-	
+
 	@Override
 	public List<Bookmark> getMemberPost_Bookmark_list(int post_no) {
 
 		return boardmapper.getPost_Bookmark_list(post_no);
 	}
-
+	
 	@Override
 	public String getMemberBookmark_check(int post_no, int member_no) {
 		
@@ -340,7 +344,7 @@ public class BoardServiceImpl implements BoardService{
 		
 		return check;
 	}
-
+	
 	@Override
 	public List<Comment> getMemberPost_Comment_list(int post_no) {
 
@@ -373,17 +377,17 @@ public class BoardServiceImpl implements BoardService{
 		return membercomment_like_check;
 	}
 	
-	@Override
-	public List<String> getMemberFollow_check(int member_no) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public List<String> getMemberFollow_check(int member_no) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
-	@Override
-	public List<Post_hashtag> getMemberPostMenuHashtag(int parseInt, int i) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public List<Post_hashtag> getMemberPostMenuHashtag(int parseInt, int i) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	@Override
 	public List<Member> getFollow_my_list(int member_no) {
