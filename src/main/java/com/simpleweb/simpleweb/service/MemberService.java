@@ -9,11 +9,14 @@ public interface MemberService {
 
 	int insertMember(Member member);
 	void insertMemberimg(Member_profileimg memberimg);
+	
 	String getMemberLogin(Member member);
 	
 	Optional<Member> getMyInfo(int member_no);
+	
 	int updateMember(Member member);
 	void updateMemberimg(Member_profileimg member_img);
+	
 	void deleteMember(int member_no);
 
 }

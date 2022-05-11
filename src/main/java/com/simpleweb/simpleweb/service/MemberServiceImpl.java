@@ -78,6 +78,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		return session;
 	}
+	
 	@Override
 	public int updateMember(Member member) {
 		update_validateDuplicateMember(member);
@@ -97,13 +98,13 @@ public class MemberServiceImpl implements MemberService{
 		
 		return res;
 	}
-	
-	
+		
 	@Override
 	public void updateMemberimg(Member_profileimg member_img) {
 		
 		membermapper.updateMemberImg(member_img);
 	}
+	
 	@Override
 	public void deleteMember(int member_no) {
 		

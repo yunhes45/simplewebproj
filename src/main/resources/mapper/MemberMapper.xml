@@ -14,6 +14,7 @@
 			          #{member.member_introduce},
 			          #{member.member_date}       )		
 	</insert>
+	
 	<select id="getById" resultType="com.simpleweb.simpleweb.model.Member">
 			select member_no, member_id, member_pwd, member_email, member_job, member_mobile, member_gender, member_introduce, member_date
 			
@@ -80,13 +81,13 @@
 			update member
 			
 			set member_pwd = #{member.member_pwd},
-			 member_email = #{member.member_email},
-			 member_nickname = #{member.member_nickname},
-			 member_job = #{member.member_job},
-			 member_mobile = #{member.member_mobile},
-			 member_gender = #{member.member_gender},
-			 member_introduce = #{member.member_introduce},
-			 member_date = #{member.member_date}
+			    member_email = #{member.member_email},
+			    member_nickname = #{member.member_nickname},
+   		   	    member_job = #{member.member_job},
+			    member_mobile = #{member.member_mobile},
+			    member_gender = #{member.member_gender},
+			    member_introduce = #{member.member_introduce},
+			    member_date = #{member.member_date}
 	
 			where member_id = #{member.member_id}
 	</update>
@@ -95,9 +96,9 @@
 			update member_profileimg
 			
 			set member_profileimg_filename = #{member_profileimg.member_profileimg_filename},
-			 member_profileimg_original_filename = #{member_profileimg.member_profileimg_original_filename},
-			 member_profileimg_url = #{member_profileimg.member_profileimg_url},
-			 member_profileimg_date = #{member_profileimg.member_profileimg_date}
+			member_profileimg_original_filename = #{member_profileimg.member_profileimg_original_filename},
+			member_profileimg_url = #{member_profileimg.member_profileimg_url},
+			member_profileimg_date = #{member_profileimg.member_profileimg_date}
 			
 			where member_no = #{member_profileimg.member_no}
 

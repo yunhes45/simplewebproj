@@ -39,7 +39,7 @@ public class MemberController {
 	private CommonService commonservice;
 
 	@RequestMapping("/")
-	public String test(HttpServletRequest request) {
+	public String main(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
