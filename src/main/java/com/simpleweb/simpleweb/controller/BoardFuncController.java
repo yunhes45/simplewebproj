@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
+import com.simpleweb.simpleweb.model.Comment_like_stat;
 import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Post_img;
@@ -52,8 +54,13 @@ public class BoardFuncController {
 		
 		String trim_post_no = post_no.trim();
 		
+		Like_stat like_stat = new Like_stat();
+		like_stat.setMember_no(session_info.get().getMember_no());
+		like_stat.setPost_no(Integer.parseInt(trim_post_no));
+		like_stat.setLike_stat_check(1);
+		
 		Map<String, Integer> likelogic = new HashMap<String, Integer>(); 
-		likelogic = boardfuncservice.LikeLogic(session_info.get().getMember_no(), Integer.parseInt(trim_post_no), 1);
+		likelogic = boardfuncservice.LikeLogic(like_stat);
 
 		return likelogic;
 	}
@@ -68,9 +75,14 @@ public class BoardFuncController {
 		
 		String trim_post_no = post_no.trim();
 		
+		Bookmark bookmark = new Bookmark();
+		bookmark.setMember_no(session_info.get().getMember_no());
+		bookmark.setPost_no(Integer.parseInt(trim_post_no));
+		bookmark.setBookmark_check(1);
+		bookmark.setBookmark_date(commonservice.nowTime());
+		
 		Map<String, Integer> bookmarklogic = new HashMap<String, Integer>();
-		bookmarklogic = boardfuncservice.BookmarkLogic(session_info.get().getMember_no(), 
-				Integer.parseInt(trim_post_no), 1, commonservice.nowTime());
+		bookmarklogic = boardfuncservice.BookmarkLogic(bookmark);
 		
 		return bookmarklogic;
 	}
@@ -85,10 +97,14 @@ public class BoardFuncController {
 		
 		String trim_post_no = post_no.trim();
 		
-		Optional<Comment> commentlogic = boardfuncservice.CommentLogic(session_info.get().getMember_no(), Integer.parseInt(trim_post_no), comment_text, commonservice.nowTime());
-		model.addAttribute("commentlogic", commentlogic);
+		Comment comment = new Comment();
+		comment.setMember_no(session_info.get().getMember_no());
+		comment.setPost_no(Integer.parseInt(trim_post_no));
+		comment.setComment_text(comment_text);
+		comment.setComment_date(commonservice.nowTime());
 		
-		System.out.println("commentlogic : " + commentlogic.get().getComment_no());
+		Optional<Comment> commentlogic = boardfuncservice.CommentLogic(comment);
+		model.addAttribute("commentlogic", commentlogic);
 
 		return "ajaxtemplates/comment_ajax";
 	}
@@ -116,11 +132,17 @@ public class BoardFuncController {
 		String trim_comment_no = comment_no.trim();
 		String trim_post_no = post_no.trim();
 		
+		Comment_like_stat comment_like_stat = new Comment_like_stat();
+		comment_like_stat.setMember_no(session_info.get().getMember_no());
+		comment_like_stat.setPost_no(Integer.parseInt(trim_post_no));
+		comment_like_stat.setComment_no(Integer.parseInt(trim_comment_no));
+		comment_like_stat.setComment_like_stat_check(1);
+		comment_like_stat.setComment_like_stat_date(commonservice.nowTime());
+		
+		
 		Map<String, Integer> likecommentlogic = new HashMap<String, Integer>(); 
-		likecommentlogic = boardfuncservice.LikeCommentLogic(session_info.get().getMember_no(), Integer.parseInt(trim_comment_no), Integer.parseInt(trim_post_no), 1, commonservice.nowTime());
-		
-		System.out.println("lcl : " + likecommentlogic);
-		
+		likecommentlogic = boardfuncservice.LikeCommentLogic(comment_like_stat);
+
 		return likecommentlogic;		
 	}
 		

@@ -4,18 +4,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
+import com.simpleweb.simpleweb.model.Comment_like_stat;
 import com.simpleweb.simpleweb.model.Like_stat;
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Follow;
 
 public interface BoardFuncService {
 
-	Map<String, Integer> LikeLogic(int member_no, int post_no, int i);
-	Map<String, Integer> BookmarkLogic(int member_no, int post_no, int i, String nowTime);
-	Optional<Comment> CommentLogic(int member_no, int post_no, String comment_text, String nowTime);
+	Map<String, Integer> LikeLogic(Like_stat like_stat);
+	Map<String, Integer> BookmarkLogic(Bookmark bookmark);
+	Optional<Comment> CommentLogic(Comment comment);
 	int delcomment(int comment_no);
-	Map<String, Integer> LikeCommentLogic(int member_no, int comment_no, int post_no, int i, String nowTime);
+	Map<String, Integer> LikeCommentLogic(Comment_like_stat comment_like_stat);
 	int FollowCheck(int member_no, int follow_member_no, String nowTime);
 
 }

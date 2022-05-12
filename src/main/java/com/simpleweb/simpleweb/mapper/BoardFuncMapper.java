@@ -15,61 +15,24 @@ import com.simpleweb.simpleweb.model.Like_stat;
 @Mapper
 public interface BoardFuncMapper {
 
-	Optional<Like_stat> validlikecheck(
-			@Param("member_no")int member_no,
-			@Param("post_no") int post_no,
-			@Param("like_stat_check") int i);
-	
-	void insertLike_stat(
-			@Param("member_no") int member_no,
-			@Param("post_no") int post_no,
-			@Param("like_stat_check")int i);
-
-	void deleteLike_stat(
-			@Param("member_no") int member_no,
-			@Param("post_no") int post_no,
-			@Param("like_stat_check")int i);
-
+	Optional<Like_stat> validlikecheck(@Param("like_stat") Like_stat like_stat);
+	void insertLike_stat(@Param("like_stat") Like_stat like_stat);
+	void deleteLike_stat(@Param("like_stat") Like_stat like_stat);
 	int getLikeCount(@Param("post_no") int post_no);
 
-	Optional<Bookmark> validbookmarkcheck(
-			@Param("member_no") int member_no,
-			@Param("post_no") int post_no,
-			@Param("bookmark_check") int i);
-	
-	void insertBookmark(
-			@Param("member_no") int member_no,
-			@Param("post_no") int post_no,
-			@Param("bookmark_check") int i,
-			@Param("bookmark_date") String nowTime);
-	
-	void deleteBookmark(
-			@Param("member_no") int member_no,
-			@Param("post_no") int post_no,
-			@Param("bookmark_check") int i);
-	
+	Optional<Bookmark> validbookmarkcheck(@Param("bookmark") Bookmark bookmark);	
+	void insertBookmark(@Param("bookmark") Bookmark bookmark);	
+	void deleteBookmark(@Param("bookmark") Bookmark bookmark);
 	int getBookmarkCount(@Param("post_no") int post_no);
 	
 	int insertComment(@Param("comment") Comment comment);
 	Optional<Comment> getComment_list(@Param("comment_no") int commentPK);
 	int delcomment(@Param("comment_no") int comment_no);
 	
-	Optional<Comment_like_stat> validcommentlikecheck(
-			@Param("member_no") int member_no,
-			@Param("comment_no") int comment_no,
-			@Param("post_no") int post_no,
-			@Param("comment_like_stat_check") int i);
+	Optional<Comment_like_stat> validcommentlikecheck(@Param("comment_like_stat") Comment_like_stat comment_like_stat);
 	
-	void insertComment_Like_stat(
-			@Param("member_no") int member_no,
-			@Param("comment_no") int comment_no,
-			@Param("post_no") int post_no,
-			@Param("comment_like_stat_check") int i,
-			@Param("comment_like_stat_date") String nowTime);
-	void deleteComment_Like_stat(
-			@Param("member_no") int member_no,
-			@Param("comment_no") int comment_no, 
-			@Param("comment_like_stat_check") int i);
+	void insertComment_Like_stat(@Param("comment_like_stat") Comment_like_stat comment_like_stat);
+	void deleteComment_Like_stat(@Param("comment_like_stat") Comment_like_stat comment_like_stat);
 	int getCommentLikeCount(@Param("comment_no") int comment_no);
 	
 	Optional<Follow> validfollowcheck(@Param("Follow") Follow follow);

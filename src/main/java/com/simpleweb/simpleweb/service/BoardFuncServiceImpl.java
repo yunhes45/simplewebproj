@@ -24,27 +24,27 @@ public class BoardFuncServiceImpl implements BoardFuncService{
 	BoardFuncMapper boardfuncmapper;
 	
 	@Override
-	public Map LikeLogic(int member_no, int post_no, int i) {
-		Optional<Like_stat> validlikecheck = boardfuncmapper.validlikecheck(member_no, post_no, i);
+	public Map LikeLogic(Like_stat like_stat) {
+		Optional<Like_stat> validlikecheck = boardfuncmapper.validlikecheck(like_stat);
 		Map<String, Integer> likelogic = new HashMap<String, Integer>();
 		int likestat = -1;
 		
 		try {
 			int excep = validlikecheck.get().getLike_stat_no();
-			boardfuncmapper.deleteLike_stat(member_no, post_no, i);
+			boardfuncmapper.deleteLike_stat(like_stat);
 			
 			likestat = 1;
 			if(likestat == 1) {
 				likelogic.put("likestat", likestat);
-				likelogic.put("likecount", getLikeCount(post_no));
+				likelogic.put("likecount", getLikeCount(like_stat.getPost_no()));
 			}
 		}catch(NoSuchElementException e) {
-			boardfuncmapper.insertLike_stat(member_no, post_no, i);			
+			boardfuncmapper.insertLike_stat(like_stat);			
 			
 			likestat = 0;
 			if(likestat == 0) {
 				likelogic.put("likestat", likestat);
-				likelogic.put("likecount", getLikeCount(post_no));
+				likelogic.put("likecount", getLikeCount(like_stat.getPost_no()));
 			}
 		}
 		
@@ -58,27 +58,27 @@ public class BoardFuncServiceImpl implements BoardFuncService{
 	}
 	
 	@Override
-	public Map<String, Integer> BookmarkLogic(int member_no, int post_no, int i, String nowTime) {
-		Optional<Bookmark> validbookmarkcheck = boardfuncmapper.validbookmarkcheck(member_no, post_no, i);
+	public Map<String, Integer> BookmarkLogic(Bookmark bookmark) {
+		Optional<Bookmark> validbookmarkcheck = boardfuncmapper.validbookmarkcheck(bookmark);
 		Map<String, Integer> bookmarklogic = new HashMap<String, Integer>();
 		int bookmarkstat = -1;
 
 		try {
 			int excep = validbookmarkcheck.get().getBookmark_no();
-			boardfuncmapper.deleteBookmark(member_no, post_no, i);
+			boardfuncmapper.deleteBookmark(bookmark);
 			
 			bookmarkstat = 1;
 			if(bookmarkstat == 1) {
 				bookmarklogic.put("bookmarkstat", bookmarkstat);
-				bookmarklogic.put("bookmarkcount", getBookmarkCount(post_no));
+				bookmarklogic.put("bookmarkcount", getBookmarkCount(bookmark.getPost_no()));
 			}
 		}catch(NoSuchElementException e) {
-			boardfuncmapper.insertBookmark(member_no, post_no, i, nowTime);			
+			boardfuncmapper.insertBookmark(bookmark);			
 			
 			bookmarkstat = 0;
 			if(bookmarkstat == 0) {
 				bookmarklogic.put("bookmarkstat", bookmarkstat);
-				bookmarklogic.put("bookmarkcount", getBookmarkCount(post_no));
+				bookmarklogic.put("bookmarkcount", getBookmarkCount(bookmark.getPost_no()));
 			}
 		}
 		
@@ -91,12 +91,7 @@ public class BoardFuncServiceImpl implements BoardFuncService{
 	}
 	
 	@Override
-	public Optional<Comment> CommentLogic(int member_no, int post_no, String comment_text, String comment_date) {
-		Comment comment = new Comment();
-		comment.setMember_no(member_no);
-		comment.setPost_no(post_no);
-		comment.setComment_text(comment_text);
-		comment.setComment_date(comment_date);
+	public Optional<Comment> CommentLogic(Comment comment) {
 		
 		boardfuncmapper.insertComment(comment);
 
@@ -113,27 +108,27 @@ public class BoardFuncServiceImpl implements BoardFuncService{
 	}
 	
 	@Override
-	public Map<String, Integer> LikeCommentLogic(int member_no, int comment_no, int post_no, int i, String nowTime) {
-		Optional<Comment_like_stat> validcommentlikecheck = boardfuncmapper.validcommentlikecheck(member_no, comment_no, post_no, i);
+	public Map<String, Integer> LikeCommentLogic(Comment_like_stat comment_like_stat) {
+		Optional<Comment_like_stat> validcommentlikecheck = boardfuncmapper.validcommentlikecheck(comment_like_stat);
 		Map<String, Integer> likelogic = new HashMap<String, Integer>();
 		int comment_likestat = -1;
 		
 		try {
 			int excep = validcommentlikecheck.get().getComment_like_stat_no();
-			boardfuncmapper.deleteComment_Like_stat(member_no, comment_no, i);
+			boardfuncmapper.deleteComment_Like_stat(comment_like_stat);
 			
 			comment_likestat = 1;
 			if(comment_likestat == 1) {
 				likelogic.put("comment_likestat", comment_likestat);
-				likelogic.put("comment_likecount", getCommentLikeCount(comment_no));
+				likelogic.put("comment_likecount", getCommentLikeCount(comment_like_stat.getComment_no()));
 			}
 		}catch(NoSuchElementException e) {
-			boardfuncmapper.insertComment_Like_stat(member_no, comment_no, post_no, i, nowTime);			
+			boardfuncmapper.insertComment_Like_stat(comment_like_stat);			
 			
 			comment_likestat = 0;
 			if(comment_likestat == 0) {
 				likelogic.put("comment_likestat", comment_likestat);
-				likelogic.put("comment_likecount", getCommentLikeCount(comment_no));
+				likelogic.put("comment_likecount", getCommentLikeCount(comment_like_stat.getComment_no()));
 			}
 		}
 		
