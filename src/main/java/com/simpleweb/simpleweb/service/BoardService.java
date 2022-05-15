@@ -41,10 +41,10 @@ public interface BoardService {
 	List<Integer> getPost_menu_hashtag_cnt(List<List<Post_hashtag>> post_menu_hashtag);
 	
 	// mypage
-	int getTotal_fileList(int member_no);
+	int getMyTotal_fileList(int member_no);
 	List<Post> getMyPost_list(int member_no, int startPage, int onePageCnt);	
-	int getTotal_bookmarkList(int member_no);
-	List<Bookmark> getBookmark_list(int member_no, int startPage, int onePageCnt);
+	int getMyTotal_bookmarkList(int member_no);
+	List<Bookmark> getMyBookmark_list(int member_no, int startPage, int onePageCnt);
 	
 	// detail page
 	Optional<Post> getMemberPost(int post_no, int member_no);

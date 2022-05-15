@@ -6,21 +6,28 @@
 		
 		from like_stat
 		
-		where member_no = #{like_stat.member_no} and post_no = #{like_stat.post_no} and like_stat_check = #{like_stat.like_stat_check}
+		where
+		     member_no = #{like_stat.member_no}
+		 and post_no = #{like_stat.post_no}
+		 and like_stat_check = #{like_stat.like_stat_check}
 	</select>
 
 	<insert id="insertLike_stat" parameterType="com.simpleweb.simpleweb.model.Like_stat">
 		insert into like_stat(member_no, post_no, like_stat_check)
 		
-		values (  #{like_stat.member_no} ,
-		          #{like_stat.post_no} ,
-		          #{like_stat.like_stat_check}  )		
+		values
+		   #{like_stat.member_no} ,
+		   #{like_stat.post_no} ,
+		   #{like_stat.like_stat_check}  		
 	</insert>
 	
 	<delete id="deleteLike_stat"  parameterType="com.simpleweb.simpleweb.model.Like_stat">
 		delete from like_stat
 		
-		where member_no = #{like_stat.member_no} and post_no = #{like_stat.post_no} and like_stat_check = #{like_stat.like_stat_check}
+		where
+		     member_no = #{like_stat.member_no}
+		 and post_no = #{like_stat.post_no}
+		 and like_stat_check = #{like_stat.like_stat_check}
 	</delete>
 	
 	<select id="getLikeCount" resultType="int">
@@ -36,22 +43,29 @@
 		
 		from bookmark
 		
-		where member_no = #{bookmark.member_no} and post_no = #{bookmark.post_no} and bookmark_check = #{bookmark.bookmark_check}
+		where
+		     member_no = #{bookmark.member_no}
+		 and post_no = #{bookmark.post_no}
+		 and bookmark_check = #{bookmark.bookmark_check}
 	</select>
 	
 	<insert id="insertBookmark" parameterType="com.simpleweb.simpleweb.model.Bookmark">
 		insert into bookmark(member_no, post_no, bookmark_check, bookmark_date)
 		
-		values (  #{bookmark.member_no} ,
-		          #{bookmark.post_no} ,
-		          #{bookmark.bookmark_check},
-		          #{bookmark.bookmark_date}  )		
+		values
+		   #{bookmark.member_no} ,
+		   #{bookmark.post_no} ,
+		   #{bookmark.bookmark_check},
+		   #{bookmark.bookmark_date}  		
 	</insert>
 	
 	<delete id="deleteBookmark"  parameterType="com.simpleweb.simpleweb.model.Bookmark">
 		delete from bookmark
 		
-		where member_no = #{bookmark.member_no} and post_no = #{bookmark.post_no} and bookmark_check = #{bookmark.bookmark_check}
+		where
+		     member_no = #{bookmark.member_no}
+		 and post_no = #{bookmark.post_no}
+		 and bookmark_check = #{bookmark.bookmark_check}
 	</delete>
 	
 	<select id="getBookmarkCount" resultType="int">
@@ -65,10 +79,11 @@
 	<insert id="insertComment" parameterType="com.simpleweb.simpleweb.model.Comment" useGeneratedKeys="true" keyProperty="comment_no">
 		insert into comment(member_no, post_no, comment_text, comment_date)
 		
-		values (  #{comment.member_no} ,
-		          #{comment.post_no} ,
-		          #{comment.comment_text} ,
-		          #{comment.comment_date}    )			
+		values
+		   #{comment.member_no} ,
+		   #{comment.post_no} ,
+		   #{comment.comment_text} ,
+		   #{comment.comment_date}    		
 	</insert>
 	
 	<delete id="delcomment"  parameterType="com.simpleweb.simpleweb.model.Comment">
@@ -129,7 +144,8 @@
 		
 		from comment_like_stat
 		
-		where member_no = #{comment_like_stat.member_no}
+		where
+		     member_no = #{comment_like_stat.member_no}
 		 and comment_no = #{comment_like_stat.comment_no}
 		 and post_no = #{comment_like_stat.post_no}
 		 and comment_like_stat_check = #{comment_like_stat.comment_like_stat_check}
@@ -138,17 +154,19 @@
 	<insert id="insertComment_Like_stat" parameterType="com.simpleweb.simpleweb.model.Comment_like_stat">
 		insert into comment_like_stat(member_no, comment_no, post_no, comment_like_stat_check, comment_like_stat_date)
 		
-		values (  #{comment_like_stat.member_no} ,
-		          #{comment_like_stat.comment_no} ,
-				  #{comment_like_stat.post_no} ,
-		          #{comment_like_stat.comment_like_stat_check} ,
-		          #{comment_like_stat.comment_like_stat_date}   )		
+		values
+		   #{comment_like_stat.member_no} ,
+		   #{comment_like_stat.comment_no} ,
+	       #{comment_like_stat.post_no} ,
+		   #{comment_like_stat.comment_like_stat_check} ,
+		   #{comment_like_stat.comment_like_stat_date}   		
 	</insert>
 	
 	<delete id="deleteComment_Like_stat"  parameterType="com.simpleweb.simpleweb.model.Comment_like_stat">
 		delete from comment_like_stat
 		
-		where member_no = #{comment_like_stat.member_no} 
+		where
+		    member_no = #{comment_like_stat.member_no} 
 		and comment_no = #{comment_like_stat.comment_no} 
 		and comment_like_stat_check = #{comment_like_stat.comment_like_stat_check}
 	</delete>
@@ -172,9 +190,10 @@
 	<insert id="insertFollow" parameterType="com.simpleweb.simpleweb.model.Follow">
 		insert into follow(member_no, follow_member_no, follow_date)
 		
-		values (  #{Follow.member_no} ,
-		          #{Follow.follow_member_no} ,
-		          #{Follow.follow_date}   )		
+		values
+		   #{Follow.member_no} ,
+		   #{Follow.follow_member_no} ,
+		   #{Follow.follow_date}   		
 	</insert>
 	
 	<delete id="deleteFollow"  parameterType="com.simpleweb.simpleweb.model.Follow">

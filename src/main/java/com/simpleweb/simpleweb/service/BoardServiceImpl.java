@@ -214,9 +214,7 @@ public class BoardServiceImpl implements BoardService{
 				post_Comment_list_no.add(post_Comment_list.get(i).get(j).getComment_no());
 			}
 		}
-		
-		System.out.println(post_Comment_list_no);
-		
+	
 		String check = null;
 		
 		for(int i = 0; i<post_Comment_list_no.size(); i++) {
@@ -236,8 +234,6 @@ public class BoardServiceImpl implements BoardService{
 			}
 		}
 		
-		System.out.println(comment_like_check);
-			
 		return comment_like_check;
 	}
 	
@@ -269,8 +265,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int getTotal_fileList(int member_no) {
-		int getTotal_fileList = boardmapper.getTotal_fileList(member_no);
+	public int getMyTotal_fileList(int member_no) {
+		int getTotal_fileList = boardmapper.getMyTotal_fileList(member_no);
 		
 		return getTotal_fileList;
 	}
@@ -283,16 +279,16 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
-	public int getTotal_bookmarkList(int member_no) {
-		int getTotal_bookmarkList = boardmapper.getTotal_bookmarkList(member_no);
+	public int getMyTotal_bookmarkList(int member_no) {
+		int getTotal_bookmarkList = boardmapper.getMyTotal_bookmarkList(member_no);
 		
 		return getTotal_bookmarkList;
 	}
 	
 	@Override
-	public List<Bookmark> getBookmark_list(int member_no, int startPage, int onePageCnt) {
+	public List<Bookmark> getMyBookmark_list(int member_no, int startPage, int onePageCnt) {
 
-		return boardmapper.getBookmark_list(member_no, startPage, onePageCnt);
+		return boardmapper.getMyBookmark_list(member_no, startPage, onePageCnt);
 	}
 
 	@Override

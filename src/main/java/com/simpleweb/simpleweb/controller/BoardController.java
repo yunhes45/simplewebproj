@@ -375,7 +375,7 @@ public class BoardController {
 		Optional<Member> member_info = memberservice.getMyInfo(member_no); 
 		
 		if(session_info != null) {
-			int file_listtotalcount = boardservice.getTotal_fileList(member_info.get().getMember_no());
+			int file_listtotalcount = boardservice.getMyTotal_fileList(member_info.get().getMember_no());
 			int startPage   = 0;
 			int onePageCnt  = 10;
 			int count       = (int)Math.ceil((double)file_listtotalcount/(double)onePageCnt);
@@ -407,7 +407,7 @@ public class BoardController {
 			}else if(postpage == null && bookmarkpage != null) {
 			
 			// bookmark list page
-			int bookmark_listtotalcount = boardservice.getTotal_bookmarkList(member_info.get().getMember_no());
+			int bookmark_listtotalcount = boardservice.getMyTotal_bookmarkList(member_info.get().getMember_no());
 			int bookmark_startPage   = 0;
 			int bookmark_onePageCnt  = 10;
 			int bookmark_count       = (int)Math.ceil((double)bookmark_listtotalcount/(double)bookmark_onePageCnt);
@@ -423,7 +423,7 @@ public class BoardController {
 			model.addAttribute("bookmark_page_count", bookmark_page_count);
 			
 			bookmark_startPage = (Integer.parseInt(bookmarkpage) - 1)*bookmark_onePageCnt;
-			List<Bookmark> bookmark_list = boardservice.getBookmark_list(member_info.get().getMember_no(), bookmark_startPage, bookmark_onePageCnt); 
+			List<Bookmark> bookmark_list = boardservice.getMyBookmark_list(member_info.get().getMember_no(), bookmark_startPage, bookmark_onePageCnt); 
 			model.addAttribute("bookmark_list", bookmark_list);
 			
 			}

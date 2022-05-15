@@ -114,7 +114,6 @@ public class ChatServiceImpl implements ChatService{
 				break;
 			}
 		}
-		System.out.println("check : " + res);
 		
 		return res;
 	}

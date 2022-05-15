@@ -22,21 +22,21 @@ public interface BoardMapper {
 	void insertPostImg(@Param("post_img") Post_img post_img);
 	void insertPostHashtag(@Param("post_hashtag") Post_hashtag post_hashtag);
 	
-	int getTotal_fileList(@Param("member_no") int member_no);
 	List<Post> getPost_list_algo(@Param("startPage") int startPage, @Param("onePageCnt") int onePageCnt);
 	List<Post> getPost_list_algo_search(
 			@Param("startPage") int startPage,
 			@Param("onePageCnt") int onePageCnt,
 			@Param("search") String search);
-	
+
+	int getMyTotal_fileList(@Param("member_no") int member_no);
 	List<Post> getMyPost_list(
 			@Param("member_no") int member_no,
 			@Param("startPage") int startPage, 
 			@Param("onePageCnt") int onePageCnt);
 
 	
-	int getTotal_bookmarkList(@Param("member_no") int member_no);
-	List<Bookmark> getBookmark_list(
+	int getMyTotal_bookmarkList(@Param("member_no") int member_no);
+	List<Bookmark> getMyBookmark_list(
 			@Param("member_no") int member_no,
 			@Param("startPage") int startPage, 
 			@Param("onePageCnt") int onePageCnt);

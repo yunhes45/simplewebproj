@@ -4,31 +4,34 @@
 	<insert id="insertPost" parameterType="com.simpleweb.simpleweb.model.Post" useGeneratedKeys="true" keyProperty="post_no">
 		insert into post(post_title, post_subtitle, post_contents, member_no, post_date)
 		
-		values (  #{post.post_title} ,
-		          #{post.post_subtitle} ,
-		          #{post.post_contents} ,
-		          #{post.member_no} , 
-		          #{post.post_date}        )		
+		values
+		   #{post.post_title} ,
+		   #{post.post_subtitle} ,
+		   #{post.post_contents} ,
+		   #{post.member_no} , 
+		   #{post.post_date}        		
 	</insert>
 	<insert id="insertPostImg" parameterType="com.simpleweb.simpleweb.model.Post_img">
 		insert into post_img(post_no, post_img_filename, post_img_original_filename, post_img_url, post_img_date) 
 		
-		values (  #{post_img.post_no} ,
-				  #{post_img.post_img_filename} ,
-		          #{post_img.post_img_original_filename} ,
-		          #{post_img.post_img_url} ,
-		          #{post_img.post_img_date}                )
+		values
+		  #{post_img.post_no} ,
+		  #{post_img.post_img_filename} ,
+		  #{post_img.post_img_original_filename} ,
+		  #{post_img.post_img_url} ,
+		  #{post_img.post_img_date}
 	</insert>
 
 	<insert id="insertPostHashtag" parameterType="com.simpleweb.simpleweb.model.Post_hashtag">
 		insert into post_hashtag(post_no, post_hashtag_list, post_hashtag_division) 
 		
-		values (  #{post_hashtag.post_no} ,
-				  #{post_hashtag.post_hashtag_list},
-				  #{post_hashtag.post_hashtag_division}   )
+		values
+		  #{post_hashtag.post_no} ,
+	      #{post_hashtag.post_hashtag_list} ,
+		  #{post_hashtag.post_hashtag_division}   
 	</insert>
 	
-	<select id="getTotal_fileList" resultType="int">
+	<select id="getMyTotal_fileList" resultType="int">
 		select count(*)
 		
 		from post
@@ -89,35 +92,6 @@
 			
 	</resultMap>
 	
-	<select id="getMyPost_list" resultMap="JoinPostRM">
-		select m.post_no, m.member_no, m.post_title, m.post_subtitle, m.post_contents, m.post_date,
-			   n.post_img_no, n.post_img_filename, n.post_img_original_filename, n.post_img_url, n.post_img_date,
-			   count(p.post_no) as like_stat_count,
-			   count(o.post_no) as bookmark_count,
-			   l.member_id
-		       
-		from post as m 
-		
-		left join post_img as n
-		on m.post_no = n.post_no
-		
-		left join like_stat as p
-		on m.post_no = p.post_no
-		
-		left join bookmark as o
-		on m.post_no = o.post_no
-		
-		left join member as l
-		on m.member_no = l.member_no
-		
-		where m.member_no=#{member_no}
-		
-		group by m.post_no
-		
-		order by m.post_no desc
-		limit #{startPage}, #{onePageCnt}
-	</select>
-
 	<select id="getPost_list_algo" resultMap="JoinPostRM">
 		select m.post_no, m.member_no, m.post_title, m.post_subtitle, m.post_contents, m.post_date,
 			   n.post_img_no, n.post_img_filename, n.post_img_original_filename, n.post_img_url, n.post_img_date,
@@ -144,7 +118,7 @@
 		order by m.post_no desc
 		limit #{startPage}, #{onePageCnt}
 		
-	</select>
+	</select>	
 	
 	<select id="getPost_list_algo_search" resultMap="JoinPostRM">
 		select m.post_no, m.member_no, m.post_title, m.post_subtitle, m.post_contents, m.post_date,
@@ -174,6 +148,35 @@
 		order by m.post_no desc
 		limit #{startPage}, #{onePageCnt}
 		
+	</select>
+	
+	<select id="getMyPost_list" resultMap="JoinPostRM">
+		select m.post_no, m.member_no, m.post_title, m.post_subtitle, m.post_contents, m.post_date,
+			   n.post_img_no, n.post_img_filename, n.post_img_original_filename, n.post_img_url, n.post_img_date,
+			   count(p.post_no) as like_stat_count,
+			   count(o.post_no) as bookmark_count,
+			   l.member_id
+		       
+		from post as m 
+		
+		left join post_img as n
+		on m.post_no = n.post_no
+		
+		left join like_stat as p
+		on m.post_no = p.post_no
+		
+		left join bookmark as o
+		on m.post_no = o.post_no
+		
+		left join member as l
+		on m.member_no = l.member_no
+		
+		where m.member_no=#{member_no}
+		
+		group by m.post_no
+		
+		order by m.post_no desc
+		limit #{startPage}, #{onePageCnt}
 	</select>
 	
 	<select id="getMemberPost" resultMap="JoinPostRM">
@@ -265,7 +268,7 @@
 		order by m.like_stat_no desc
 	</select>	
 	
-	<select id="getTotal_bookmarkList" resultType="int">
+	<select id="getMyTotal_bookmarkList" resultType="int">
 		select count(*)
 		
 		from bookmark
@@ -323,7 +326,7 @@
 			</association>
 	</resultMap>
 	
-	<select id="getBookmark_list" resultMap="JoinPostBookmarkRM">
+	<select id="getMyBookmark_list" resultMap="JoinPostBookmarkRM">
 		select m.bookmark_no, m.member_no, m.post_no, m.bookmark_check, m.bookmark_date,
 			   n.post_title, n.post_subtitle, n.post_contents, n.post_date,
 			   o.post_img_no, o.post_img_filename, o.post_img_original_filename, o.post_img_url,
