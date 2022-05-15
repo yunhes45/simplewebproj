@@ -26,9 +26,6 @@ import com.simpleweb.simpleweb.model.Follow;
 @Service
 public class ChatServiceImpl implements ChatService{
 
-	@Value("${spring.servlet.multipart.location}")
-	private String fileDir;
-	
 	@Autowired
 	BoardMapper boardmapper;
 	

@@ -57,9 +57,7 @@ public class ChatController {
 		
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
-		
-		System.out.println(member_form.getMember_id());
-		
+
 		if(session_info != null) {
 			
 			// my info
@@ -115,7 +113,6 @@ public class ChatController {
 			@RequestParam(value = "member_no", required=false) String socket_member_no,
 			@RequestParam(value = "chatroom_no", required=false) String socket_chatroom_no,
 			@RequestParam(value = "msg", required=false) String socket_msg,
-			@RequestParam(value = "original_file_name", required=false) String socket_original_file_name,
 			@RequestParam(value = "division", required=false) String socket_division,
 			@RequestParam(value = "nowTimesdate", required=false) String socket_nowTimesdate,
 			@RequestParam(value = "nowTimestime", required=false) String socket_nowTimestime,
@@ -123,9 +120,7 @@ public class ChatController {
 		
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
-		
-		System.out.println("err : " + chatroom_no);
-		
+	
 		if(session_info != null) {
 			// 비정상적 접근 제어
 			String chatroom_member_include_check = chatservice.getChatroom_member_include_check(session_info.get().getMember_no(), Integer.parseInt(chatroom_no));
@@ -142,9 +137,7 @@ public class ChatController {
 				// this chatroom info
 				Optional<Chatroom> chatroom_info = chatservice.getChatroom_info(Integer.parseInt(chatroom_no));
 				model.addAttribute("chatroom_info", chatroom_info);
-				
-				System.out.println(chatroom_info.get().getChatroom_name());
-				
+		
 				// follow my list
 				List<Member> Follow_my_list = boardservice.getFollow_my_list(session_info.get().getMember_no());
 				model.addAttribute("Follow_my_list", Follow_my_list);
@@ -160,11 +153,7 @@ public class ChatController {
 				// get log
 				List<Chatlog> getchat_Log = chatservice.getChat_log(Integer.parseInt(chatroom_no));
 				model.addAttribute("getchat_Log", getchat_Log);
-				
-				for(int i = 0; i < getchat_Log.size(); i++) {
-					System.out.println("fff : " + getchat_Log.get(i).getChat_filelist().getChat_filelist_original_filename());
-				}
-				
+	
 				// log insert Text
 				Chatlog insertLog = new Chatlog();
 				
