@@ -64,7 +64,8 @@ public class MemberController {
 		member.setMember_pwd         (member_form.getMember_pwd());
 		member.setMember_email       (member_form.getMember_email());
 		member.setMember_nickname    (member_form.getMember_nickname());
-		member.setMember_job         (member_form.getMember_job());
+		//member.setMember_job         (member_form.getMember_job());
+		member.setMember_job("sdfsdfsdf");
 		member.setMember_mobile      (member_form.getMember_mobile());
 		member.setMember_gender      (member_form.getMember_gender());
 		member.setMember_introduce   (member_form.getMember_introduce());

@@ -5,13 +5,13 @@
 	<insert id="insertChatroom" parameterType="com.simpleweb.simpleweb.model.Chatroom" useGeneratedKeys="true" keyProperty="chatroom_no">
 		insert into chatroom(chatroom_name)
 		
-		values #{chatroom.chatroom_name} 		
+		values ( #{chatroom.chatroom_name} ); 		
 	</insert>
 	
 	<insert id="insertChatroom_member" parameterType="com.simpleweb.simpleweb.model.Chatroom_member">
 		insert into chatroom_member(chatroom_no, member_no)
 		
-		values #{chatroom_member.chatroom_no}, #{chatroom_member.member_no}    
+		values ( #{chatroom_member.chatroom_no}, #{chatroom_member.member_no} );    
 	</insert>
 	
 	<resultMap id="JoinChatroom_listRM" type="com.simpleweb.simpleweb.model.Chatroom_member">
@@ -85,13 +85,15 @@
 		insert into chatlog(member_no, chatroom_no, chatlog_log, chatlog_division, chatlog_split_date, chatlog_split_time, chatlog_date)
 		
 		values
-		  #{chatlog.member_no},
-		  #{chatlog.chatroom_no},
-		  #{chatlog.chatlog_log},
-		  #{chatlog.chatlog_division},
-		  #{chatlog.chatlog_split_date},
-		  #{chatlog.chatlog_split_time},
-		  #{chatlog.chatlog_date}       	
+			(
+			  #{chatlog.member_no},
+			  #{chatlog.chatroom_no},
+			  #{chatlog.chatlog_log},
+			  #{chatlog.chatlog_division},
+			  #{chatlog.chatlog_split_date},
+			  #{chatlog.chatlog_split_time},
+			  #{chatlog.chatlog_date}  
+			);     	
 	</insert>
 	
 	<resultMap id="JoinChatlogRM" type="com.simpleweb.simpleweb.model.Chatlog">
@@ -181,12 +183,14 @@
 		insert into chat_filelist(member_no, chatroom_no, chat_filelist_filename, chat_filelist_original_filename, chat_filelist_url, chat_filelist_date)
 		
 		values
-		   #{chat_filelist.member_no},
-		   #{chat_filelist.chatroom_no},
-		   #{chat_filelist.chat_filelist_filename},
-		   #{chat_filelist.chat_filelist_original_filename},
-		   #{chat_filelist.chat_filelist_url},
-		   #{chat_filelist.chat_filelist_date} 			
+			(
+			   #{chat_filelist.member_no},
+			   #{chat_filelist.chatroom_no},
+			   #{chat_filelist.chat_filelist_filename},
+			   #{chat_filelist.chat_filelist_original_filename},
+			   #{chat_filelist.chat_filelist_url},
+			   #{chat_filelist.chat_filelist_date} 
+			);			
 	</insert>
 	
 	<select id="getChat_fileinfo" resultType="com.simpleweb.simpleweb.model.Chat_filelist">

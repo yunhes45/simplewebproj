@@ -203,7 +203,7 @@ function send(){
 	var minutes   =  today.getMinutes();
 	var seconds   =  today.getSeconds();		
 	var nowTimes = years + "-" + (("00"+month.toString()).slice(-2)) + "-" + (("00"+date.toString()).slice(-2)) + " " + (("00"+hours.toString()).slice(-2)) + ":" + (("00"+minutes.toString()).slice(-2)) + ":" + (("00"+seconds.toString()).slice(-2));  
-
+	
 	// 채팅 공백 시 응답 X
 	var chatform_nullcheck = document.querySelector("#chat_holder");
 	

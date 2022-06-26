@@ -16,9 +16,11 @@
 		insert into like_stat(member_no, post_no, like_stat_check)
 		
 		values
-		   #{like_stat.member_no} ,
-		   #{like_stat.post_no} ,
-		   #{like_stat.like_stat_check}  		
+			(
+			   #{like_stat.member_no} ,
+			   #{like_stat.post_no} ,
+			   #{like_stat.like_stat_check}  		
+			);
 	</insert>
 	
 	<delete id="deleteLike_stat"  parameterType="com.simpleweb.simpleweb.model.Like_stat">
@@ -53,10 +55,12 @@
 		insert into bookmark(member_no, post_no, bookmark_check, bookmark_date)
 		
 		values
-		   #{bookmark.member_no} ,
-		   #{bookmark.post_no} ,
-		   #{bookmark.bookmark_check},
-		   #{bookmark.bookmark_date}  		
+			(
+			   #{bookmark.member_no} ,
+			   #{bookmark.post_no} ,
+			   #{bookmark.bookmark_check},
+			   #{bookmark.bookmark_date}
+			);  		
 	</insert>
 	
 	<delete id="deleteBookmark"  parameterType="com.simpleweb.simpleweb.model.Bookmark">
@@ -80,10 +84,12 @@
 		insert into comment(member_no, post_no, comment_text, comment_date)
 		
 		values
-		   #{comment.member_no} ,
-		   #{comment.post_no} ,
-		   #{comment.comment_text} ,
-		   #{comment.comment_date}    		
+			(
+			   #{comment.member_no} ,
+			   #{comment.post_no} ,
+			   #{comment.comment_text} ,
+			   #{comment.comment_date}  
+			);  		
 	</insert>
 	
 	<delete id="delcomment"  parameterType="com.simpleweb.simpleweb.model.Comment">
@@ -155,11 +161,13 @@
 		insert into comment_like_stat(member_no, comment_no, post_no, comment_like_stat_check, comment_like_stat_date)
 		
 		values
-		   #{comment_like_stat.member_no} ,
-		   #{comment_like_stat.comment_no} ,
-	       #{comment_like_stat.post_no} ,
-		   #{comment_like_stat.comment_like_stat_check} ,
-		   #{comment_like_stat.comment_like_stat_date}   		
+			(
+			   #{comment_like_stat.member_no} ,
+			   #{comment_like_stat.comment_no} ,
+		       #{comment_like_stat.post_no} ,
+			   #{comment_like_stat.comment_like_stat_check} ,
+			   #{comment_like_stat.comment_like_stat_date} 
+			 );  		
 	</insert>
 	
 	<delete id="deleteComment_Like_stat"  parameterType="com.simpleweb.simpleweb.model.Comment_like_stat">
@@ -191,9 +199,11 @@
 		insert into follow(member_no, follow_member_no, follow_date)
 		
 		values
-		   #{Follow.member_no} ,
-		   #{Follow.follow_member_no} ,
-		   #{Follow.follow_date}   		
+			(
+			   #{Follow.member_no} ,
+			   #{Follow.follow_member_no} ,
+			   #{Follow.follow_date}  
+			); 		
 	</insert>
 	
 	<delete id="deleteFollow"  parameterType="com.simpleweb.simpleweb.model.Follow">

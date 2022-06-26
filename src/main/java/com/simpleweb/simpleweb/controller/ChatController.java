@@ -161,6 +161,8 @@ public class ChatController {
 				List<Chatroom_member> invite_member_list = chatservice.getInvite_member_list(session_info.get().getMember_no(), Integer.parseInt(chatroom_no));
 				model.addAttribute("invite_member_list", invite_member_list);
 				
+				System.out.println("ffffffffffffffffffffffffffff" + socket_nowTimes);
+				
 				if(socket_msg != null) {
 					System.out.println("insert");
 					try {

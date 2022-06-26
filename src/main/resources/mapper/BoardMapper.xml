@@ -5,30 +5,36 @@
 		insert into post(post_title, post_subtitle, post_contents, member_no, post_date)
 		
 		values
-		   #{post.post_title} ,
-		   #{post.post_subtitle} ,
-		   #{post.post_contents} ,
-		   #{post.member_no} , 
-		   #{post.post_date}        		
+			(
+			   #{post.post_title} ,
+			   #{post.post_subtitle} ,
+			   #{post.post_contents} ,
+			   #{post.member_no} , 
+			   #{post.post_date} 
+			);       		
 	</insert>
 	<insert id="insertPostImg" parameterType="com.simpleweb.simpleweb.model.Post_img">
 		insert into post_img(post_no, post_img_filename, post_img_original_filename, post_img_url, post_img_date) 
 		
 		values
-		  #{post_img.post_no} ,
-		  #{post_img.post_img_filename} ,
-		  #{post_img.post_img_original_filename} ,
-		  #{post_img.post_img_url} ,
-		  #{post_img.post_img_date}
+			(
+			  #{post_img.post_no} ,
+			  #{post_img.post_img_filename} ,
+			  #{post_img.post_img_original_filename} ,
+			  #{post_img.post_img_url} ,
+			  #{post_img.post_img_date}
+			);
 	</insert>
 
 	<insert id="insertPostHashtag" parameterType="com.simpleweb.simpleweb.model.Post_hashtag">
 		insert into post_hashtag(post_no, post_hashtag_list, post_hashtag_division) 
 		
 		values
-		  #{post_hashtag.post_no} ,
-	      #{post_hashtag.post_hashtag_list} ,
-		  #{post_hashtag.post_hashtag_division}   
+			(
+			  #{post_hashtag.post_no} ,
+		      #{post_hashtag.post_hashtag_list} ,
+			  #{post_hashtag.post_hashtag_division}   
+			);
 	</insert>
 	
 	<select id="getMyTotal_fileList" resultType="int">

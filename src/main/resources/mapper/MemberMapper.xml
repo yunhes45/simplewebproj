@@ -5,15 +5,17 @@
 			insert into member(member_id, member_pwd, member_email, member_nickname, member_job, member_mobile, member_gender, member_introduce, member_date)
 			
 			values
-			  #{member.member_id} ,
-			  #{member.member_pwd} ,
-			  #{member.member_email} ,
-			  #{member.member_nickname} , 
-			  #{member.member_job} , 
-			  #{member.member_mobile} ,
-			  #{member.member_gender} ,
-			  #{member.member_introduce},
-			  #{member.member_date}	
+				(
+				  #{member.member_id} ,
+				  #{member.member_pwd} ,
+				  #{member.member_email} ,
+				  #{member.member_nickname} , 
+				  #{member.member_job} , 
+				  #{member.member_mobile} ,
+				  #{member.member_gender} ,
+				  #{member.member_introduce},
+				  #{member.member_date}	
+				);
 	</insert>
 	
 	<select id="getById" resultType="com.simpleweb.simpleweb.model.Member">
@@ -36,11 +38,13 @@
 			insert into member_profileimg(member_no, member_profileimg_filename, member_profileimg_original_filename, member_profileimg_url, member_profileimg_date) 
 			
 			values
-			   #{member_profileimg.member_no} ,
-			   #{member_profileimg.member_profileimg_filename} ,
-	           #{member_profileimg.member_profileimg_original_filename} ,
-	           #{member_profileimg.member_profileimg_url} ,
-	           #{member_profileimg.member_profileimg_date}        
+				(
+				   #{member_profileimg.member_no} ,
+				   #{member_profileimg.member_profileimg_filename} ,
+		           #{member_profileimg.member_profileimg_original_filename} ,
+		           #{member_profileimg.member_profileimg_url} ,
+		           #{member_profileimg.member_profileimg_date}  
+		        );      
 	</insert>
 	
 	<resultMap id="JoinMemberRM" type="com.simpleweb.simpleweb.model.Member">
