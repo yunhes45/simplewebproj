@@ -37,7 +37,9 @@ layout:decorate="layout/layout">
 											</div>
 											
 											<div class="menu_elem">
-												<input type="button" onclick="location.href='/writepost'" value="게시물 등록" class="menu_elem_elem">
+												<div th:if="${member_info.get().getMember_no()} == ${session_info.get().getMember_no()}">
+													<input type="button" onclick="location.href='/writepost'" value="게시물 등록" class="menu_elem_elem">
+												</div>
 											</div>
 											
 										</div>

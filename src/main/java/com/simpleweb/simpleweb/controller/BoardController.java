@@ -428,6 +428,7 @@ public class BoardController {
 			
 			}
 			
+			model.addAttribute("session_info", session_info);
 			model.addAttribute("member_info", member_info);
 			
 			return "mypage";
