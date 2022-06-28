@@ -43,8 +43,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 					<hr class="line_unset">
 					<div id="post_hashtag" class="post_hashtag">
 					<div th:if="${ !post_menu_hashtag.get(num.index).empty }">
-						<div th:each="num4 : ${#numbers.sequence(1, post_menu_hashtag_cnt.get(num.index))}">
-							<h5>[[| ${post_menu_hashtag.get(num.index).get(num4-1).getPost_hashtag_list()} |]]</h5>
+						<div th:each="hash_num : ${#numbers.sequence(1, post_menu_hashtag_cnt.get(num.index))}">
+							<h5>[[| ${post_menu_hashtag.get(num.index).get(hash_num-1).getPost_hashtag_list()} |]]</h5>
 						</div>
 					</div>
 						
@@ -99,29 +99,29 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						<!-- Comment -->
 
 						<div th:if="${ !Post_Comment_list.get(num.index).empty }">
-						<div th:each="num4 : ${#numbers.sequence(1, Comment_cnt.get(num.index))}">
-							<div th:id="|comment_item_${Post_Comment_list.get(num.index).get(num4-1).getComment_no()}|">
+						<div th:each="comment_num : ${#numbers.sequence(1, Comment_cnt.get(num.index))}">
+							<div th:id="|comment_item_${Post_Comment_list.get(num.index).get(comment_num-1).getComment_no()}|">
 								<div id="comment">
 									<div class="comment_list">
-										<img class="header_profileimg" th:src="| /memberimg/${Post_Comment_list.get(num.index).get(num4-1).getMember_profileimg().getMember_profileimg_filename()} |">
-										<h5 class="comment_id">[[| ${Post_Comment_list.get(num.index).get(num4-1).getMember().getMember_id()} |]]</h5>
-										<h6 class="comment_elem">[[ ${Post_Comment_list.get(num.index).get(num4-1).getComment_text()} ]]</h6>
+										<img class="header_profileimg" th:src="| /memberimg/${Post_Comment_list.get(num.index).get(comment_num-1).getMember_profileimg().getMember_profileimg_filename()} |">
+										<h5 class="comment_id">[[| ${Post_Comment_list.get(num.index).get(comment_num-1).getMember().getMember_id()} |]]</h5>
+										<h6 class="comment_elem">[[ ${Post_Comment_list.get(num.index).get(comment_num-1).getComment_text()} ]]</h6>
 										
-										<div th:if="${comment_like_check.get(num4-1)} == 'O'">
-											<div th:id="| commentLike_${Post_Comment_list.get(num.index).get(num4-1).getComment_no()} |" class="icon_comment_heart_on" th:onclick="likecomment(this.id, [[${Post_Comment_list.get(num.index).get(num4-1).getPost_no()}]] )"></div>
+										<div th:if="${comment_like_check.get(comment_num-1)} == 'O'">
+											<div th:id="| commentLike_${Post_Comment_list.get(num.index).get(comment_num-1).getComment_no()} |" class="icon_comment_heart_on" th:onclick="likecomment(this.id, [[${Post_Comment_list.get(num.index).get(comment_num-1).getPost_no()}]] )"></div>
 										</div>
-										<div th:unless="${comment_like_check.get(num4-1)} == 'O'">
-											<div th:id="| commentLike_${Post_Comment_list.get(num.index).get(num4-1).getComment_no()} |" class="icon_comment_heart" th:onclick="likecomment(this.id, [[${Post_Comment_list.get(num.index).get(num4-1).getPost_no()}]] )"></div>
+										<div th:unless="${comment_like_check.get(comment_num-1)} == 'O'">
+											<div th:id="| commentLike_${Post_Comment_list.get(num.index).get(comment_num-1).getComment_no()} |" class="icon_comment_heart" th:onclick="likecomment(this.id, [[${Post_Comment_list.get(num.index).get(comment_num-1).getPost_no()}]] )"></div>
 										</div>	
 																
-										<div th:if="${Post_Comment_list.get(num.index).get(num4-1).getMember_no()} == ${session.session_info.get().getMember_no()}">
-											<div th:id="${Post_Comment_list.get(num.index).get(num4-1).getComment_no()}" class="icon_comment_del_sprite" onclick="delcomment(this.id)"></div>
+										<div th:if="${Post_Comment_list.get(num.index).get(comment_num-1).getMember_no()} == ${session.session_info.get().getMember_no()}">
+											<div th:id="${Post_Comment_list.get(num.index).get(comment_num-1).getComment_no()}" class="icon_comment_del_sprite" onclick="delcomment(this.id)"></div>
 										</div>
 										
 									</div>
 									
 									<div class="comment_date">
-										<h6>[[ ${Post_Comment_list.get(num.index).get(num4-1).getComment_date()} ]]</h6>
+										<h6>[[ ${Post_Comment_list.get(num.index).get(comment_num-1).getComment_date()} ]]</h6>
 									</div>
 								</div>	
 							</div>
