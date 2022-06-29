@@ -22,6 +22,8 @@ public interface BoardMapper {
 	void insertPostImg(@Param("post_img") Post_img post_img);
 	void insertPostHashtag(@Param("post_hashtag") Post_hashtag post_hashtag);
 	
+	void deletePost(@Param("post_no") int post_no);
+	
 	List<Post> getPost_list_algo(@Param("startPage") int startPage, @Param("onePageCnt") int onePageCnt);
 	List<Post> getPost_list_algo_search(
 			@Param("startPage") int startPage,

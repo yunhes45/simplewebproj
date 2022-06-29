@@ -37,6 +37,12 @@
 			);
 	</insert>
 	
+	<delete id="deletePost" parameterType="com.simpleweb.simpleweb.model.Post">
+		delete from post
+			
+		where post_no = #{post_no}
+	</delete>
+	
 	<select id="getMyTotal_fileList" resultType="int">
 		select count(*)
 		

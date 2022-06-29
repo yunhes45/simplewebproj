@@ -20,6 +20,8 @@ public interface BoardService {
 	void insertPostImg(Post_img post_img);
 	void insertPostHashtag(Post_hashtag post_menu_hashtag);
 	
+	void deletePost(int post_no);
+	
 	// mainboard
 	List<Post> getPost_list_algo(int startPage, int onePageCnt);
 	List<Post> getPost_list_algo_search(int startPage, int onePageCnt, String search);

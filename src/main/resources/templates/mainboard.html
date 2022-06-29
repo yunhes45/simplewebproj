@@ -55,7 +55,14 @@ layout:decorate="layout/layout">
 																											
 																<div th:id="post_slideToggle" th:class="${post_list.getPost_no()}">
 																	<div th:if="${post_list.getMember_no()} == ${session.session_info.get().getMember_no()}">
-																		<a>같아</a>
+																		<form method='POST' action='/modifypost'>
+																			<input type="hidden" th:value="${post_list.getPost_no()}" />
+																			<input type="submit" value="게시글 수정" />
+																		</form>
+																		<form method="post" action="/deletepost">
+																			<input type="hidden" name="post_no" th:value="${post_list.getPost_no()}" />
+																			<input type="submit" value="게시글 삭제">
+																		</form>
 																	</div>
 																	<div th:unless="${post_list.getMember_no()} == ${session.session_info.get().getMember_no()}">
 																		<div th:if="${follow_check.get(num.index)} == X">

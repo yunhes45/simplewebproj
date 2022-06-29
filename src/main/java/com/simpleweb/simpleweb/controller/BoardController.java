@@ -569,6 +569,36 @@ public class BoardController {
 		return "redirect:mypage/" + session_info.get().getMember_id();
 	}
 	
+	@RequestMapping("/modifypost")
+	public String modifypost(Model model, HttpServletRequest request, Post post_form, Post_img post_img_form) {
+		HttpSession session = request.getSession();
+		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
+		
+		if(session_info != null) {
+			
+			model.addAttribute("session_info", session_info);
+		}else {
+			return "redirect:/";
+		}
+	
+		return "writepost";
+	}
+	
+	@PostMapping("/deletepost")
+	public String deletepost(Model model, HttpServletRequest request, Post post_form) {
+		HttpSession session = request.getSession();
+		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
+		
+		if(session_info != null) {
+			
+			boardservice.deletePost(post_form.getPost_no());
+		}else {
+			return "redirect:/";
+		}
+		
+		return "redirect:mainboard";
+	}
+	
 	@RequestMapping("/detailpost")
 	public String detailpost(Model model, HttpServletRequest request,
 			@RequestParam("name") String member_id,

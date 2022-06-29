@@ -74,6 +74,12 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
+	public void deletePost(int post_no) {
+		
+		boardmapper.deletePost(post_no);
+	}
+	
+	@Override
 	public List<Post> getPost_list_algo(int startPage, int onePageCnt) {
 
 		return boardmapper.getPost_list_algo(startPage, onePageCnt);

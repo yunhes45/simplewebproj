@@ -1,0 +1,72 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="layout/layout">
+	
+	<div layout:fragment="content">
+		<meta charset="utf-8" />
+		
+		<!-- Script -->
+			<script th:inline="javascript">
+				
+			</script>
+		
+			<!-- Main -->
+				<div id="main" class="wrapper style1">
+					<div class="container">
+						<header class="major">
+							<h2>게시판 작성</h2>
+						</header>
+
+						<!-- Form -->
+							<section>
+								<form method="post" action="/writepost" enctype="multipart/form-data">
+									<div class="writepost_layout">
+										<div class="writepost_form">
+											<div class="writepost_img_profile_wrap">
+												<div class="writepost_img">
+													<canvas id="writepost_imagecanvas"></canvas>
+												</div>
+											</div>
+											<div class="col-6 col-12-xsmall">
+												<input type="file" name="postimg" id="postimg" value="" placeholder="이미지파일" />
+												<div id="postimg_error" class="error"></div>
+											</div>
+											<div class="col-6 col-12-xsmall">
+												<input type="text" name="post_title" id="post_title" value="" placeholder="제목" />
+												<div id="post_title_error" class="error"></div>
+											</div>
+											<div class="col-6 col-12-xsmall">
+												<input type="text" name="post_subtitle" id="post_subtitle" value="" placeholder="소제목" />
+												<div id="post_subtitle_error" class="error"></div>
+											</div>
+											<div class="col-6 col-12-xsmall">
+												<textarea name="post_contents" id="post_contents" placeholder="내용을 입력하세요." rows="6"></textarea>
+												<div id="post_contents_error" class="error"></div>
+											</div>
+											<div class="col-6 col-12-xsmall">
+												<input type="text" name="post_hashtag_list" id="post_hashtag_list" value="" placeholder="#" />
+												<div id="#" class="error"></div>
+											</div>
+											<div class="col-6 col-12-xsmall">
+												<ul class="actions">
+													<li><a href="/" class="button primary">목록</a></li>
+													<li></li>
+													<li></li>
+													<li><input id="save_btn" type="submit" value="저장" class="primary" /></li>
+													<li><input type="reset" value="작성취소" /></li>
+												</ul>
+											</div>
+									</div>
+								</div>
+							</form>
+						</section>
+
+					</div>
+				</div>
+				
+				<!-- script -->
+				<script src="assets/js/writepost.js"></script>	
+									
+		</div>
+</html>
