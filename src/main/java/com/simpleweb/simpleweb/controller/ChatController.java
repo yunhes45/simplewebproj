@@ -150,19 +150,17 @@ public class ChatController {
 				List<Chatroom_member> chatroom_member_list = chatservice.getChatroom_member_list(session_info.get().getMember_no(), Integer.parseInt(chatroom_no));
 				model.addAttribute("chatroom_member_list", chatroom_member_list);
 				
+				// get not invite follow member
+				List<Member> not_invite_member = chatservice.getInvite_member_list(Follow_my_list, chatroom_member_list);
+				model.addAttribute("not_invite_member", not_invite_member);
+				
 				// get log
 				List<Chatlog> getchat_Log = chatservice.getChat_log(Integer.parseInt(chatroom_no));
 				model.addAttribute("getchat_Log", getchat_Log);
 	
 				// log insert Text
 				Chatlog insertLog = new Chatlog();
-				
-				// get chatroom_member(except chatroom member)
-				List<Chatroom_member> invite_member_list = chatservice.getInvite_member_list(session_info.get().getMember_no(), Integer.parseInt(chatroom_no));
-				model.addAttribute("invite_member_list", invite_member_list);
-				
-				System.out.println("ffffffffffffffffffffffffffff" + socket_nowTimes);
-				
+
 				if(socket_msg != null) {
 					System.out.println("insert");
 					try {

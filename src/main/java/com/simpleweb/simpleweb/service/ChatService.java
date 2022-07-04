@@ -8,6 +8,7 @@ import com.simpleweb.simpleweb.model.Chat_filelist;
 import com.simpleweb.simpleweb.model.Chatlog;
 import com.simpleweb.simpleweb.model.Chatroom;
 import com.simpleweb.simpleweb.model.Chatroom_member;
+import com.simpleweb.simpleweb.model.Member;
 
 public interface ChatService {
 
@@ -15,6 +16,7 @@ public interface ChatService {
 	void insertChatroom_member(Chatroom_member chatroom_member);
 	List<Chatroom_member> getChatroom_list(int member_no);
 	List<Chatroom_member> getChatroom_member_list(int member_no, int chatroom_no);
+	List<Member> getInvite_member_list(List<Member> follow_my_list, List<Chatroom_member> chatroom_member_list);
 	
 	void insertLog(Chatlog insertLog);
 	List<Chatlog> getChat_log(int chatroom_no);
@@ -24,6 +26,5 @@ public interface ChatService {
 	int insertChat_file(Chat_filelist chat_filelist);
 	
 	Map getChat_fileinfo(int chatfilePK);
-	List<Chatroom_member> getInvite_member_list(int member_no, int parseInt);
 
 }

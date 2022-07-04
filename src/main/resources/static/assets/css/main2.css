@@ -594,6 +594,11 @@
 	outline: none;
 }
 
+#chatroom_menu .chatroom_menu_form .invite {
+	width: 300px;
+	height: 500px;
+}
+
 #chatroom_menu .chatroom_menu_form form {
 	all: unset;
 }

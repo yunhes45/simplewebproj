@@ -11,6 +11,7 @@ import com.simpleweb.simpleweb.model.Chat_filelist;
 import com.simpleweb.simpleweb.model.Chatlog;
 import com.simpleweb.simpleweb.model.Chatroom;
 import com.simpleweb.simpleweb.model.Chatroom_member;
+import com.simpleweb.simpleweb.model.Member;
 
 @Mapper
 public interface ChatMapper {
@@ -23,6 +24,8 @@ public interface ChatMapper {
 
 	List<Chatroom_member> getChatroom_member_list(@Param("chatroom_no") int chatroom_no);
 
+	List<Member> getInviteMemberList(@Param("member_id") String getinvitememberlist);
+	
 	void insertLog(@Param("chatlog") Chatlog insertLog);
 
 	List<Chatlog> getChat_log(@Param("chatroom_no") int chatroom_no);
@@ -34,5 +37,6 @@ public interface ChatMapper {
 	int insertChatfile(@Param("chat_filelist") Chat_filelist chat_file);
 
 	Optional<Chat_filelist> getChat_fileinfo(@Param("chat_filelist_no") int chatfilePK);
+
 
 }

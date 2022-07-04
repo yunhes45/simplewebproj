@@ -90,8 +90,8 @@ layout:decorate="layout/layout">
 																		<h4 class="member_id">친구초대</h4>
 																	</div>
 																	<dialog id="invite" class="invite">
-																		<form>
-																			dddd
+																		<form th:each = "not_invite_member : ${not_invite_member}">
+																			[[${not_invite_member.getMember_id()}]]
 																		</form>
 																	</dialog>
 																	

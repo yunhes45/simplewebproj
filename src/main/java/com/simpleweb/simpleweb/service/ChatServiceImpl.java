@@ -22,6 +22,7 @@ import com.simpleweb.simpleweb.model.Chatlog;
 import com.simpleweb.simpleweb.model.Chatroom;
 import com.simpleweb.simpleweb.model.Chatroom_member;
 import com.simpleweb.simpleweb.model.Follow;
+import com.simpleweb.simpleweb.model.Member;
 
 @Service
 public class ChatServiceImpl implements ChatService{
@@ -65,6 +66,30 @@ public class ChatServiceImpl implements ChatService{
 		
 		return exceptmeList;
 	}
+	
+
+	@Override
+	public List<Member> getInvite_member_list(List<Member> follow_my_list, List<Chatroom_member> chatroom_member_list) {
+		List<String> getinvitememberlist = new ArrayList<>();
+		
+		for(int i = 0; i < follow_my_list.size(); i++) {
+			String follow_id = follow_my_list.get(i).getMember_id();
+			
+			for(int j = 0; j < chatroom_member_list.size(); j++) {
+				if(!chatroom_member_list.get(j).getMember().getMember_id().contains(follow_id)) {
+					getinvitememberlist.add(follow_id);
+				}
+			}
+		}
+		List<Member> getinvitememberlist_info = new ArrayList<>();
+		
+		for(int k = 0; k < getinvitememberlist.size(); k++) {
+			getinvitememberlist_info = chatmapper.getInviteMemberList(getinvitememberlist.get(k));
+		}
+
+		return getinvitememberlist_info;
+	}
+
 
 	@Override
 	public void insertLog(Chatlog insertLog) {
@@ -137,42 +162,4 @@ public class ChatServiceImpl implements ChatService{
 		
 		return fileinfo;
 	}
-
-	@Override
-	public List<Chatroom_member> getInvite_member_list(int member_no, int chatroom_no) {
-		List<String> exceptChatroomList = new ArrayList<>();
-		
-		List<Follow> getFollow_my_list = boardmapper.getFollow_my_list(member_no);
-		List<Chatroom_member> getChatroom_member_list = chatmapper.getChatroom_member_list(chatroom_no);
-		
-		List<String> getFollow_my_list_str = new ArrayList<>();
-		List<String> getChatroom_member_list_str = new ArrayList<>();
-		
-		for(int i = 0; i < getFollow_my_list.size(); i++) {
-			getFollow_my_list_str.add(Integer.toString(getFollow_my_list.get(i).getFollow_member_no()));
-			System.out.println("1 : " + getFollow_my_list_str.get(i));
-		}
-		
-		for(int i = 0; i < getChatroom_member_list.size(); i++) {
-			getChatroom_member_list_str.add(Integer.toString(getChatroom_member_list.get(i).getMember_no()));
-			System.out.println("2 : " + getChatroom_member_list_str.get(i));
-		}
-		
-		for(int i = 0; i < getFollow_my_list_str.size(); i++) {
-			
-			for(int j = 0; j < getChatroom_member_list_str.size(); j++) {
-				if(!getFollow_my_list_str.get(i).contains(getChatroom_member_list_str.get(j))) {
-					exceptChatroomList.add(getFollow_my_list_str.get(i));
-				}
-			}
-		}
-		
-		for(int i = 0; i < exceptChatroomList.size(); i++) {
-			System.out.println("fff : " + exceptChatroomList.get(i));
-		}
-
-		
-		return null;
-	}
-
 }
