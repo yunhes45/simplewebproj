@@ -90,8 +90,15 @@ layout:decorate="layout/layout">
 																		<h4 class="member_id">친구초대</h4>
 																	</div>
 																	<dialog id="invite" class="invite">
+																		<div class="invite_header">
+																				<h4>Invite</h4>
+																			
+																		</div>
 																		<form th:each = "not_invite_member : ${not_invite_member}">
-																			[[${not_invite_member.getMember_id()}]]
+																			<div id="not_invite_member_list" class="not_invite_member_list">
+																				<img class="img" th:src="| /memberimg/${not_invite_member.getMember_profileimg().getMember_profileimg_filename()} |" />
+																			    <h4 th:id="${not_invite_member.getMember_no()}" class="member_id">[[${not_invite_member.getMember_id()}]]</h4>
+																			</div>
 																		</form>
 																	</dialog>
 																	
