@@ -437,5 +437,21 @@ public class BoardServiceImpl implements BoardService{
 			
 		return follow_check;
 	}
+	
+	// mypage_follow_check
+	@Override
+	public String follow_check_mypage(int member_no, int mypage_follow_check_no) {
+		String res = null;
+		
+		Optional<Follow> check = boardmapper.followcheck(member_no, mypage_follow_check_no);
+		
+		if(check.isEmpty()) {
+			res = "X";
+		}else {
+			res = "O";
+		}
+		
+		return res;
+	}
 
 }

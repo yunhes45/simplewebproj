@@ -428,6 +428,12 @@ public class BoardController {
 			
 			}
 			
+			// follow check
+			int mypage_follow_check_no = commonservice.getMember_no(member_id);
+			
+			String follow_check = boardservice.follow_check_mypage(session_info.get().getMember_no() ,mypage_follow_check_no);
+			model.addAttribute("follow_check", follow_check);
+			
 			model.addAttribute("session_info", session_info);
 			model.addAttribute("member_info", member_info);
 			
