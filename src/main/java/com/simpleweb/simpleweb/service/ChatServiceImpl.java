@@ -84,7 +84,7 @@ public class ChatServiceImpl implements ChatService{
 		List<Member> getinvitememberlist_info = new ArrayList<>();
 		
 		for(int k = 0; k < getinvitememberlist.size(); k++) {
-			getinvitememberlist_info = chatmapper.getInviteMemberList(getinvitememberlist.get(k));
+			getinvitememberlist_info.addAll(chatmapper.getInviteMemberList(getinvitememberlist.get(k)));
 		}
 
 		return getinvitememberlist_info;

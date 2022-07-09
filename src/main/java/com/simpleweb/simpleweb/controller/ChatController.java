@@ -154,17 +154,17 @@ public class ChatController {
 				List<Member> not_invite_member = chatservice.getInvite_member_list(Follow_my_list, chatroom_member_list);
 				model.addAttribute("not_invite_member", not_invite_member);
 				
-//				for(int i = 0; i < not_invite_member.size(); i++) {
-//					System.out.println("fff" + not_invite_member.get(i).getMember_id());
-//				}
-//				
-//				for(int i = 0; i < Follow_my_list.size(); i++) {
-//					System.out.println("ddd" + Follow_my_list.get(i).getMember_id());
-//				}
-//				
-//				for(int i = 0; i < chatroom_member_list.size(); i++) {
-//					System.out.println("eee" + chatroom_member_list.get(i).getMember().getMember_id());
-//				}
+				for(int i = 0; i < not_invite_member.size(); i++) {
+					System.out.println("fff" + not_invite_member.get(i).getMember_id());
+				}
+				
+				for(int i = 0; i < Follow_my_list.size(); i++) {
+					System.out.println("ddd" + Follow_my_list.get(i).getMember_id());
+				}
+				
+				for(int i = 0; i < chatroom_member_list.size(); i++) {
+					System.out.println("eee" + chatroom_member_list.get(i).getMember().getMember_id());
+				}
 				
 				// get log
 				List<Chatlog> getchat_Log = chatservice.getChat_log(Integer.parseInt(chatroom_no));
