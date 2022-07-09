@@ -92,24 +92,27 @@ layout:decorate="layout/layout">
 																	<dialog id="invite" class="invite">
 																		<div class="invite_header">
 																				<h4>Invite</h4>
-																			
+																				<input type="text" value="dfsfds" />
 																		</div>
 																		<form th:each = "not_invite_member : ${not_invite_member}">
 																			<div id="not_invite_member_list" class="not_invite_member_list">
 																				<img class="img" th:src="| /memberimg/${not_invite_member.getMember_profileimg().getMember_profileimg_filename()} |" />
-																			    <h4 th:id="${not_invite_member.getMember_no()}" class="member_id">[[${not_invite_member.getMember_id()}]]</h4>
+																			    <h4 class="member_id">[[${not_invite_member.getMember_id()} ]]</h4>
 																			</div>
 																		</form>
+																		<div class="invite_submit">
+																			<input type="submit" name="invite_submit_btn" onClick="" value="확인" />
+																		</div>
 																	</dialog>
 																	
 																	<div id="chatroom_member_list_my" class="chatroom_member_list_my">
 																	<img class="img" th:src="| /memberimg/${session_info.get().getMember_profileimg().getMember_profileimg_filename()} |">
-																			<h4 th:id="${session_info.get().getMember_no()}" class="member_id">[[${session_info.get().getMember_id()}]]</h4>
+																			<h4 class="member_id"><a th:href="| /mypage/${session_info.get().getMember_id()} |">[[ ${session_info.get().getMember_id()} ]]</a></h4>
 																	</div>
 																	<div th:each = "chatroom_member_list : ${chatroom_member_list}">
 																		<div id="chatroom_member_list_exep" class="chatroom_member_list_exep">
 																			<img class="img" th:src="| /memberimg/${chatroom_member_list.getMember_profileimg().getMember_profileimg_filename()} |">
-																			<h4 th:id="${chatroom_member_list.getMember_no()}" class="member_id">[[${chatroom_member_list.getMember().getMember_id()}]]</h4>
+																			<h4 class="member_id"><a th:href="| /mypage/${chatroom_member_list.getMember().getMember_id()} |">[[ ${chatroom_member_list.getMember().getMember_id()} ]]</a></h4>
 																		</div>
 																	</div>
 																</div>

@@ -605,6 +605,12 @@
 	justify-content: center;
 }
 
+.invite .ivite_member_checkbox {
+	all: unset;
+	width: 100px;
+	height: 100px;
+}
+
 .invite .not_invite_member_list {
 	display: flex;
 }
@@ -621,7 +627,7 @@
 }
 
 #chatroom_menu .chatroom_menu_form input {
-	all: unset;
+
 }
 
 #chatroom_menu .chatroom_member_list_form {
