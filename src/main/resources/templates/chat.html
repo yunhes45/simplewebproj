@@ -218,7 +218,7 @@ layout:decorate="layout/layout">
 																					time : < [[${getchat_Log.getChatlog_split_time()}]] >
 																				</div>
 																				<form method='POST' action="/downloadChatFormFile">
-																					<input type='hidden' name='chat_filelist_original_filename' th:value="getchat_Log.getChat_filelist().getChat_filelist_original_filename()">
+																					<input type='hidden' name='chat_filelist_original_filename' th:value="${getchat_Log.getChat_filelist().getChat_filelist_original_filename()}">
 																					<input type='hidden' name='chat_filelist_filename' th:value="${getchat_Log.getChatlog_log}" />
 																					<input type='submit' value='다운로드' />
 																				</form>

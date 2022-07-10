@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
@@ -49,6 +50,15 @@ public class CommonServiceImpl implements CommonService{
 		return fileDir;
 	}
 	
+	private String dateFoler() {
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		 Date date = new Date();
+		 String str = sdf.format(date);
+		 
+		 return str.replace("-", File.separator) + "\\";
+		 // return str.replace("-", File.separator) + "/";
+	}
+	
 	private String member_file_path() {
 		 String fileurl    = "memberimg\\";
 		 // String fileurl    = "memberimg/";
@@ -69,13 +79,13 @@ public class CommonServiceImpl implements CommonService{
 	}
 	
 	public String getMember_file_FullPath(String filename) {
-		return fileDir + member_file_path() + filename;
+		return fileDir + member_file_path() + dateFoler() + filename;
 	}
 	public String getPost_file_FullPath(String filename) {
-		return fileDir + post_file_path() + filename;
+		return fileDir + post_file_path() + dateFoler() + filename;
 	}
 	public String getChat_file_FullPath(String filename) {
-		return fileDir + chat_file_path() + filename;
+		return fileDir + chat_file_path() + dateFoler() + filename;
 	}
 	
 	@Override
@@ -99,11 +109,31 @@ public class CommonServiceImpl implements CommonService{
 	@Override
 	public Member_profileimg normalimglogic(int memberPK) throws Exception{
 		Member_profileimg memberimg = new Member_profileimg();
-		String originalfilename   = "normal_img.png";
-		String fileurl    = member_file_path();
-		String savePath   = fileDir + fileurl;
 		
-		memberimg.setMember_profileimg_filename            (originalfilename);
+		String originalfilename   = "normal_img.png";
+		String originalfilenameExtension   = FilenameUtils.getExtension(originalfilename).toLowerCase();
+		File destinationfile;
+		String destinationfilename;
+		String fileurl    = member_file_path();
+		String savePath   = fileDir + fileurl + dateFoler();
+		
+		File files = new File(fileDir + member_file_path() + originalfilename);
+		
+		do {
+			destinationfilename   = RandomStringUtils.randomAlphanumeric(32) + "." + originalfilenameExtension;
+			destinationfile       = new File(savePath, destinationfilename);
+			
+		}while(destinationfile.exists());
+			if(destinationfile.exists() == false) {
+				destinationfile.mkdirs();
+			}
+		try {
+			Files.copy(files.toPath(), destinationfile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		}catch(IOException e) {
+			
+		}
+		
+		memberimg.setMember_profileimg_filename            (destinationfilename);
 		memberimg.setMember_profileimg_original_filename   (originalfilename);
 		memberimg.setMember_profileimg_url                 (savePath);
 		memberimg.setMember_no                             (memberPK);
@@ -121,13 +151,16 @@ public class CommonServiceImpl implements CommonService{
 		File destinationfile;
 		String destinationfilename;
 		String fileurl    = member_file_path();
-		String savePath   = fileDir + fileurl;
+		String savePath   = fileDir + fileurl + dateFoler();
 
 		do {
 			destinationfilename   = RandomStringUtils.randomAlphanumeric(32) + "." + originalfilenameExtension;
 			destinationfile       = new File(savePath, destinationfilename);
+			
 		}while(destinationfile.exists());
-		
+			if(destinationfile.exists() == false) {
+				destinationfile.mkdirs();
+			}
 		try {
 			files.transferTo(destinationfile);
 		}catch(IOException e) {
@@ -152,12 +185,14 @@ public class CommonServiceImpl implements CommonService{
 		File destinationfile;
 		String destinationfilename;
 		String fileurl    = post_file_path();
-		String savePath   = fileDir + fileurl;
+		String savePath   = fileDir + fileurl + dateFoler();
 		do {
 			destinationfilename   = RandomStringUtils.randomAlphanumeric(32) + "." + originalfilenameExtension;
 			destinationfile       = new File(savePath, destinationfilename);
 		}while(destinationfile.exists());
-		
+			if(destinationfile.exists() == false) {
+				destinationfile.mkdirs();
+			}		
 		try {
 			files.transferTo(destinationfile);
 		}catch(IOException e) {
@@ -182,12 +217,14 @@ public class CommonServiceImpl implements CommonService{
 		File destinationfile;
 		String destinationfilename;
 		String fileurl    = chat_file_path();
-		String savePath   = fileDir + fileurl;
+		String savePath   = fileDir + fileurl + dateFoler();
 		do {
 			destinationfilename   = RandomStringUtils.randomAlphanumeric(32) + "." + originalfilenameExtension;
 			destinationfile       = new File(savePath, destinationfilename);
 		}while(destinationfile.exists());
-		
+			if(destinationfile.exists() == false) {
+				destinationfile.mkdirs();
+			}		
 		try {
 			chat_filelist.getChat_file().transferTo(destinationfile);
 		}catch(IOException e) {
@@ -207,7 +244,7 @@ public class CommonServiceImpl implements CommonService{
 	@Override
 	public ResponseEntity<Object> downloadFileLogic(Post_img post_img) throws IOException, URISyntaxException{	
 		String fileurl    = post_file_path();
-		String savePath   = fileDir + fileurl + post_img.getPost_img_filename();
+		String savePath   = fileDir + fileurl + dateFoler() + post_img.getPost_img_filename();
 		
 		try {
 			Path filePath = Paths.get(savePath);
@@ -228,7 +265,7 @@ public class CommonServiceImpl implements CommonService{
 	@Override
 	public ResponseEntity<Object> downloadChatFormFileLogic(Chat_filelist chat_filelist) throws IOException, URISyntaxException{	
 		String fileurl    = chat_file_path();
-		String savePath   = fileDir + fileurl + chat_filelist.getChat_filelist_filename();
+		String savePath   = fileDir + fileurl + dateFoler() + chat_filelist.getChat_filelist_filename();
 		
 		try {
 			Path filePath = Paths.get(savePath);
