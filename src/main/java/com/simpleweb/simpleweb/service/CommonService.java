@@ -31,4 +31,8 @@ public interface CommonService {
 	String getPost_file_FullPath(String filename);
 	String getChat_file_FullPath(String filename);
 
+	String getMember_file_LoadPath(String filename);
+	String getPost_file_LoadPath(String filename);
+	String getChat_file_LoadPath(String filename);
+
 }

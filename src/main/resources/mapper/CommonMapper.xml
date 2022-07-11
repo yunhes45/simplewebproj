@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.simpleweb.simpleweb.mapper.CommonMapper">
+	<select id="getMember_file_LoadPath" resultType="com.simpleweb.simpleweb.model.Member_profileimg">
+			select member_profileimg_url
+			
+			from member_profileimg
+			
+			where member_profileimg_filename = #{filename}
+	</select>	
+	
+	<select id="getPost_file_LoadPath" resultType="com.simpleweb.simpleweb.model.Post_img">
+			select post_img_url
+			
+			from post_img
+			
+			where post_img_filename = #{filename}
+	</select>
+
+	<select id="getChat_file_LoadPath" resultType="com.simpleweb.simpleweb.model.Chat_filelist">
+			select chat_filelist_url
+			
+			from chat_filelist
+			
+			where chat_filelist_filename = #{filename}
+	</select>
+</mapper>	

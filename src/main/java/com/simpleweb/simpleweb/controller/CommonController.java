@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.simpleweb.simpleweb.model.Chat_filelist;
+import com.simpleweb.simpleweb.model.Member_profileimg;
 import com.simpleweb.simpleweb.model.Post_img;
 import com.simpleweb.simpleweb.service.CommonService;
 
@@ -29,24 +30,27 @@ public class CommonController {
 	@ResponseBody
 	@GetMapping("/memberimg/{filename}")
 	public Resource member_downloadImage(@PathVariable String filename) throws MalformedURLException{
+		String filepath = commonservice.getMember_file_LoadPath(filename);
 
-		return new UrlResource("file:///" + commonservice.getMember_file_FullPath(filename));
+		return new UrlResource("file:///" + filepath);
 		
 	}
 	
 	@ResponseBody
 	@GetMapping("/postimg/{filename}")
 	public Resource downloadImage(@PathVariable String filename) throws MalformedURLException{
-
-		return new UrlResource("file:///" + commonservice.getPost_file_FullPath(filename));
+		String filepath = commonservice.getPost_file_LoadPath(filename);
+		
+		return new UrlResource("file:///" + filepath);
 		
 	}
 	
 	@ResponseBody
 	@GetMapping("/chatfile/{filename}")
 	public Resource chat_downloadImage(@PathVariable String filename) throws MalformedURLException{
+		String filepath = commonservice.getChat_file_LoadPath(filename);
 		
-		return new UrlResource("file:///" + commonservice.getChat_file_FullPath(filename));
+		return new UrlResource("file:///" + filepath);
 		
 	}
 	
@@ -67,12 +71,11 @@ public class CommonController {
 	@PostMapping("/downloadChatFormFile")
 	public ResponseEntity<Object> downloadChatFormFile(Chat_filelist chat_filelist_form, RedirectAttributes redirectAttributes)
 	throws IOException, URISyntaxException {
-		
-		ResponseEntity<Object> res = new ResponseEntity<Object>(null, HttpStatus.OK);
 		Chat_filelist chat_filelist = new Chat_filelist();
 		chat_filelist.setChat_filelist_original_filename(chat_filelist_form.getChat_filelist_original_filename());
 		chat_filelist.setChat_filelist_filename(chat_filelist_form.getChat_filelist_filename());
 		
+		ResponseEntity<Object> res = new ResponseEntity<Object>(null, HttpStatus.OK);
 		res = commonservice.downloadChatFormFileLogic(chat_filelist);
 		
 		return res;

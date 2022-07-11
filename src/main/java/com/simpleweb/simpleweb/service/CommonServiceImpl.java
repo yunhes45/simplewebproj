@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.simpleweb.simpleweb.mapper.CommonMapper;
 import com.simpleweb.simpleweb.mapper.MemberMapper;
 import com.simpleweb.simpleweb.model.Chat_filelist;
 import com.simpleweb.simpleweb.model.Member;
@@ -41,6 +42,9 @@ public class CommonServiceImpl implements CommonService{
 	
 	@Autowired
 	MemberMapper membermapper;
+	
+	@Autowired
+	CommonMapper commonmapper;
 
 	@Value("${spring.servlet.multipart.location}")
 	private String fileDir;
@@ -87,6 +91,28 @@ public class CommonServiceImpl implements CommonService{
 	public String getChat_file_FullPath(String filename) {
 		return fileDir + chat_file_path() + dateFoler() + filename;
 	}
+	
+	@Override
+	public String getMember_file_LoadPath(String filename) {
+		Member_profileimg filepath = commonmapper.getMember_file_LoadPath(filename);
+		
+		return filepath.getMember_profileimg_url() + filename;
+	}
+	
+	@Override
+	public String getPost_file_LoadPath(String filename) {
+		Post_img filepath = commonmapper.getPost_file_LoadPath(filename);
+		
+		return filepath.getPost_img_url() + filename;
+	}
+	
+	@Override
+	public String getChat_file_LoadPath(String filename) {
+		Chat_filelist filepath = commonmapper.getChat_file_LoadPath(filename);
+		
+		return filepath.getChat_filelist_url() + filename;
+	}
+
 	
 	@Override
 	public int getMember_no(String member_id) {
