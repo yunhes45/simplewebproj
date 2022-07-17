@@ -38,12 +38,13 @@ layout:decorate="layout/layout">
 											
 											<div class="menu_elem">
 												<input type="hidden" id="member_no" th:value="${member_info.get().getMember_no()}" />
-											
-												<div th:if="${follow_check} == X">
-													<input type="button" id="follow_check" onclick="follow()" value="팔로우" class="menu_elem_elem">
-												</div>
-												<div th:unless="${follow_check} == X">
-													<input type="button" id="follow_check" onclick="follow()" value="팔로우 해제" class="menu_elem_elem">											
+												<div th:if="${member_info.get().getMember_no()} != ${session_info.get().getMember_no()}">
+													<div th:if="${follow_check} == X">
+														<input type="button" id="follow_check" onclick="follow()" value="팔로우" class="menu_elem_elem">
+													</div>
+													<div th:unless="${follow_check} == X">
+														<input type="button" id="follow_check" onclick="follow()" value="팔로우 해제" class="menu_elem_elem">											
+													</div>
 												</div>
 											</div>
 											
