@@ -4,6 +4,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.simpleweb.simpleweb.mapper.MemberMapper;
@@ -15,6 +16,9 @@ public class MemberServiceImpl implements MemberService{
 
 	@Autowired
 	private MemberMapper membermapper;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Override
 	public int insertMember(Member member) {
@@ -58,8 +62,9 @@ public class MemberServiceImpl implements MemberService{
 		String res = null;
 		
 		try {
-			if(member.getMember_id().equals(checkId.get().getMember_id()) && 
-			   member.getMember_pwd().equals(checkId.get().getMember_pwd())) {
+			if(member.getMember_id().equals(checkId.get().getMember_id()) &&
+			   passwordEncoder.matches(member.getMember_pwd(), checkId.get().getMember_pwd())){
+			 //  member.getMember_pwd().equals(checkId.get().getMember_pwd())) {
 				res = "success";
 			}else {
 				res = "fail";

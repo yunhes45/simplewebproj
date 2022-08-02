@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,9 @@ public class MemberController {
 	
 	@Autowired
 	private CommonService commonservice;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@RequestMapping("/")
 	public String main(HttpServletRequest request) {
@@ -61,7 +65,8 @@ public class MemberController {
 		Member member = new Member();
 		
 		member.setMember_id          (member_form.getMember_id());
-		member.setMember_pwd         (member_form.getMember_pwd());
+		// member.setMember_pwd         (member_form.getMember_pwd());
+		member.setMember_pwd         (passwordEncoder.encode(member_form.getMember_pwd()));
 		member.setMember_email       (member_form.getMember_email());
 		member.setMember_nickname    (member_form.getMember_nickname());
 		//member.setMember_job         (member_form.getMember_job());
