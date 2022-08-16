@@ -151,7 +151,8 @@ public class MemberController {
 		Member member = new Member();
 		
 		member.setMember_id          (member_form.getMember_id());
-		member.setMember_pwd         (member_form.getMember_pwd());
+		member.setMember_pwd         (passwordEncoder.encode(member_form.getMember_pwd()));
+		// member.setMember_pwd         (member_form.getMember_pwd());
 		member.setMember_email       (member_form.getMember_email());
 		member.setMember_nickname    (member_form.getMember_nickname());
 		member.setMember_job         (member_form.getMember_job());

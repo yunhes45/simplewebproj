@@ -1,6 +1,10 @@
 window.addEventListener("DOMContentLoaded", function(){
-
-	var img = document.getElementById('memimg').value;
+	
+	var oriimg = document.getElementById('memimg').value;
+	
+	var imgsplit = oriimg.split('/');
+	
+	img = imgsplit[2];
 	
 	/* canvas */
 	const canvas   = document.getElementById('imagecanvas');

@@ -37,7 +37,7 @@ layout:decorate="layout/layout">
 									<div class="profile_menu">
 										<div class="top">
 											<div class="menu_elem">
-												<input type="hidden" id="memimg"  th:value="${session_info.get().getMember_profileimg().getMember_profileimg_filename()}">
+												<input type="hidden" id="memimg" th:value="| /memberimg/${session_info.get().getMember_profileimg().getMember_profileimg_filename()} |">
 												<input type="file" name="memberimg" id="memberimg" maxlength="40">
 											</div>
 											

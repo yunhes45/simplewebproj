@@ -146,7 +146,7 @@ public class CommonServiceImpl implements CommonService{
 		File files = new File(fileDir + member_file_path() + originalfilename);
 		
 		do {
-			destinationfilename   = RandomStringUtils.randomAlphanumeric(32) + "." + originalfilenameExtension;
+			destinationfilename   = "_normalimg_" + RandomStringUtils.randomAlphanumeric(32) + "." + originalfilenameExtension;
 			destinationfile       = new File(savePath, destinationfilename);
 			
 		}while(destinationfile.exists());
