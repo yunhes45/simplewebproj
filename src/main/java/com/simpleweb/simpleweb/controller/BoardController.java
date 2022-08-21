@@ -582,13 +582,23 @@ public class BoardController {
 		
 		if(session_info != null) {
 			
+			Optional<Post> post_info = boardservice.getMemberPost(post_form.getPost_no(), session_info.get().getMember_no());
+			model.addAttribute("fileDir", commonservice.fileDir_path());
 			model.addAttribute("session_info", session_info);
+			model.addAttribute("post_info", post_info);
+			
 		}else {
 			return "redirect:/";
 		}
 	
-		return "writepost";
+		return "modifypost";
 	}
+	
+//	@PostMapping("/modifypost")
+//	public String post_modifypost() {
+//		
+//		return "redirect:mainboard";
+//	}
 	
 	@PostMapping("/deletepost")
 	public String deletepost(Model model, HttpServletRequest request, Post post_form) {
