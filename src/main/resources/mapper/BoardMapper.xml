@@ -37,6 +37,28 @@
 			);
 	</insert>
 	
+	<update id="updatePost" parameterType="com.simpleweb.simpleweb.model.Post">
+		update post
+		
+		set post_title = #{post.post_title} ,
+		    post_subtitle = #{post.post_subtitle},
+		    post_contents = #{post.post_contents},
+		    post_date = #{post.post_date}
+
+		where post_no = #{post.post_no}
+	</update>
+	
+	<update id="updatePostImg" parameterType="com.simpleweb.simpleweb.model.Post_img">
+	update post_img
+	
+	set post_img_filename = #{post_img.post_img_filename} ,
+	    post_img_original_filename = #{post_img.post_img_original_filename},
+	    post_img_url = #{post_img.post_img_url},
+	    post_img_date = #{post_img.post_img_date}
+
+	where post_no = #{post_img.post_no}
+	</update>
+	
 	<delete id="deletePost" parameterType="com.simpleweb.simpleweb.model.Post">
 		delete from post
 			

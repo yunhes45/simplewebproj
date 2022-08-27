@@ -20,7 +20,7 @@ layout:decorate="layout/layout">
 
 						<!-- Form -->
 							<section>
-								<form method="post" action="/modifypost" enctype="multipart/form-data">
+								<form method="post" action="/modifypost_back" enctype="multipart/form-data">
 									<div class="writepost_layout">
 										<div class="writepost_form">
 											<div class="writepost_img_profile_wrap">
@@ -28,6 +28,9 @@ layout:decorate="layout/layout">
 													<canvas id="writepost_imagecanvas"></canvas>
 												</div>
 											</div>
+											
+											<input type="hidden" name="post_no" th:value="| ${post_info.get().getPost_no()} |" />
+											
 											<div class="col-6 col-12-xsmall">
 												<input type="hidden" id="poimg" th:value="| /postimg/${post_info.get().getPost_img().getPost_img_filename()} |">
 												<input type="file" name="postimg" id="postimg" value="" placeholder="이미지파일" />

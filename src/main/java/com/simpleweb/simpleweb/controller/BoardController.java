@@ -594,11 +594,31 @@ public class BoardController {
 		return "modifypost";
 	}
 	
-//	@PostMapping("/modifypost")
-//	public String post_modifypost() {
-//		
-//		return "redirect:mainboard";
-//	}
+	@PostMapping("/modifypost_back")
+	public String post_modifypost(HttpServletRequest request, Post post_form, Post_img post_img_form) throws Exception {
+		HttpSession session = request.getSession();
+		
+		Post post = new Post();
+		post.setPost_no(post_form.getPost_no());
+		post.setPost_title(post_form.getPost_title());
+		post.setPost_subtitle(post_form.getPost_subtitle());
+		post.setPost_contents(post_form.getPost_contents());
+		post.setPost_date(commonservice.nowTime());
+		
+		boardservice.updatePost(post);
+		
+		int postPK = post.getPost_no();
+		Post_img post_img = new Post_img();
+		
+		post_img = commonservice.post_imglogic(postPK, post_img_form.getPostimg());
+		boardservice.updatePostImg(post_img);
+
+		System.out.println(postPK);
+		System.out.println(post_form.getPost_no());
+		System.out.println(post_img_form.getPostimg());
+		
+		return "redirect:mainboard";
+	}
 	
 	@PostMapping("/deletepost")
 	public String deletepost(Model model, HttpServletRequest request, Post post_form) {

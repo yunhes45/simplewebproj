@@ -20,6 +20,8 @@ public interface BoardService {
 	void insertPostImg(Post_img post_img);
 	void insertPostHashtag(Post_hashtag post_menu_hashtag);
 	
+	int updatePost(Post post);
+	void updatePostImg(Post_img post_img);
 	void deletePost(int post_no);
 	
 	// mainboard

@@ -74,6 +74,19 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
+	public int updatePost(Post post) {
+		int post_pk = boardmapper.updatePost(post);
+	
+		return post_pk;
+	}
+	
+	@Override
+	public void updatePostImg(Post_img post_img) {
+		boardmapper.updatePostImg(post_img);
+		
+	}
+	
+	@Override
 	public void deletePost(int post_no) {
 		
 		boardmapper.deletePost(post_no);
