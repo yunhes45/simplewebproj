@@ -158,10 +158,18 @@
 	overflow-y: auto;
 }
 
+#sidebar_side #chatroom_list .chatroom_list_de {
+	display: flex;
+}
+
 #sidebar_side #chatroom_list .chatroom_id {
 	margin-left: 20px;
 }
 
+#sidebar_side #chatroom_list .chatroom_alarm {
+	margin-left: 20px;
+	color: red;
+}
 	 
 #maincontent #content1 {
 	border: 1px solid white;

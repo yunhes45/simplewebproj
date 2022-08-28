@@ -279,8 +279,9 @@ layout:decorate="layout/layout">
 													</div>
 													
 													<div id="chatroom_list">
-														<div th:each="chatroom_list : ${chatroom_list}">
+														<div class="chatroom_list_de" th:each="chatroom_list : ${chatroom_list}">
 														<h4 class="chatroom_id"><a th:href="| /chat/m/${chatroom_list.getChatroom_no()} | ">[[ ${chatroom_list.getChatroom().getChatroom_name()} ]]</a></h4>
+														<p class="chatroom_alarm">1</p>
 														</div>
 													</div>
 													

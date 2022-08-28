@@ -4,6 +4,7 @@ public class Chatroom_member {
 	private int chatroom_member_no;
 	private int chatroom_no;
 	private int member_no;
+	private int chatroom_alarm;
 	
 	public int getChatroom_member_no() {
 		return chatroom_member_no;
@@ -23,7 +24,14 @@ public class Chatroom_member {
 	public void setMember_no(int member_no) {
 		this.member_no = member_no;
 	}
-	
+	public int getChatroom_alarm() {
+		return chatroom_alarm;
+	}
+	public void setChatroom_alarm(int chatroom_alarm) {
+		this.chatroom_alarm = chatroom_alarm;
+	}
+
+
 	private Chatroom chatroom;
 
 	public Chatroom getChatroom() {

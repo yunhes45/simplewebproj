@@ -98,7 +98,6 @@ public class ChatController {
 			List<Chatroom_member> chatroom_list = chatservice.getChatroom_list(session_info.get().getMember_no());
 			model.addAttribute("chatroom_list", chatroom_list);
 			
-			
 		}else {
 			
 			return "redirect:/";
