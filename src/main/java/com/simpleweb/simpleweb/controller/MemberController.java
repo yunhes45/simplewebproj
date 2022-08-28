@@ -198,5 +198,34 @@ public class MemberController {
 		
 		return "redirect:/";
 	}
+	
+	@RequestMapping("/findid")
+	public String findid() {
+		
+		return null;
+	}
+	
+	@PostMapping("/findid")
+	public String post_findid(Model model, HttpServletRequest request, Member member_form) {
+		HttpSession session = request.getSession();
+		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
+		
+		Member member = new Member();
+		member.setMember_nickname(member_form.getMember_nickname());
+		member.setMember_email(member_form.getMember_email());
+		
+		String findid = memberservice.findid(member);
+		
+		System.out.println("api " + findid);
+		
+		if(findid.equals("0")) {
+			
+		}else {
+			
+			model.addAttribute(findid);
+		}
+		
+		return null;
+	}
 
 }

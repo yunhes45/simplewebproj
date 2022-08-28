@@ -18,5 +18,7 @@ public interface MemberService {
 	void updateMemberimg(Member_profileimg member_img);
 	
 	void deleteMember(int member_no);
+	
+	String findid(Member member);
 
 }

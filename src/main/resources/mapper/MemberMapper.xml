@@ -115,4 +115,12 @@
 			
 			where member_no = #{member_no}
 	</delete>
+	
+	<select id="findid" resultType="com.simpleweb.simpleweb.model.Member">
+			select member_id
+			
+			from member
+			
+			where member_nickname = #{member.member_nickname} and member_email = #{member.member_email}
+	</select>
 </mapper>

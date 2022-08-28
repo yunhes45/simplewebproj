@@ -115,5 +115,18 @@ public class MemberServiceImpl implements MemberService{
 		
 		membermapper.deleteMember(member_no);
 	}
+	@Override
+	public String findid(Member member) {
+		String res = null;
+		
+		try {
+			Optional<Member> checkId = membermapper.findid(member);
+			res = checkId.get().getMember_id();
+		}catch(NoSuchElementException e) {
+			res = "0";
+		}
+		
+		return res;
+	}
 	
 }

@@ -1,0 +1,41 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="layout/layout">
+	
+	<div layout:fragment="content">
+		<meta charset="utf-8" />
+		
+			<div id="main" class="wrapper style1">
+				<div class="container">
+					<header class="major">
+						<h2>find id</h2>
+						<p>Ipsum dolor feugiat aliquam tempus sed magna lorem consequat accumsan</p>
+					</header>
+
+					<!-- Form -->
+						<section>
+							<form method="post" action="/findid" enctype="multipart/form-data">
+								<div class="row gtr-uniform gtr-50">
+									<div class="col-6 col-12-xsmall">
+										<input type="text" name="member_nickname" id="member_nickname" value="" placeholder="이름" />
+										<div id="member_nickname_error" class="error"></div>
+									</div>
+									<div class="col-6 col-12-xsmall">
+										<input type="email" name="member_email" id="member_email" value="" placeholder="이메일" />
+										<div id="member_email_error" class="error"></div>
+									</div>
+									<div class="col-12">
+										<ul class="actions">
+											<li><input id="ok_btn" type="submit" value="확인" class="primary" /></li>
+											<li><input type="reset" value="취소" /></li>
+										</ul>
+									</div>
+								</div>
+							</form>
+						</section>
+					
+					</div>	
+				</div>	
+	</div>
+</html>

@@ -24,5 +24,7 @@ public interface MemberMapper {
 	void updateMemberImg(@Param("member_profileimg") Member_profileimg member_img);
 
 	void deleteMember(@Param("member_no") int member_no);
+
+	Optional<Member> findid(@Param("member") Member member);
 	
 }
