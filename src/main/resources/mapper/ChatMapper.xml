@@ -206,6 +206,14 @@
 		where chatroom_no = #{chatroom_no}
 	</select>
 	
+	<select id="chatroom_check" resultType="com.simpleweb.simpleweb.model.Chatroom">
+		select chatroom_no
+		
+		from chatroom
+		
+		where chatroom_no = #{chatroom_no}
+	</select>
+	
 	<select id="getChatroom_member_include_check" resultType="com.simpleweb.simpleweb.model.Chatroom_member">
 		select chatroom_member_no, chatroom_no, member_no
 		

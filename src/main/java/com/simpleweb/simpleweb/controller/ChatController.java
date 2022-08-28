@@ -122,10 +122,17 @@ public class ChatController {
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 	
 		if(session_info != null) {
-			// 비정상적 접근 제어
+			// 없는 chatroom_no 에 대한 redirect
+			String chatroom_no_check = chatservice.chatroom_check(Integer.parseInt(chatroom_no));
+			System.out.println("ddddddddddddddd" + chatroom_no_check);
+			if(chatroom_no_check.equals("0")) {
+				return "redirect:/chat";
+			}
+			
+			// 비정상적 접근 제어 (채팅방 미포함 member 접근 시 redirect)
 			String chatroom_member_include_check = chatservice.getChatroom_member_include_check(session_info.get().getMember_no(), Integer.parseInt(chatroom_no));
 			if(chatroom_member_include_check.equals("reject")) {
-				return "redirect:/chat";
+				return "redirect:chat";
 			}
 			
 				// my info

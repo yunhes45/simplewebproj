@@ -21,7 +21,9 @@ public interface ChatService {
 	void insertLog(Chatlog insertLog);
 	List<Chatlog> getChat_log(int chatroom_no);
 	Optional<Chatroom> getChatroom_info(int chatroom_no);
+	String chatroom_check(int chatroom_no);
 	String getChatroom_member_include_check(int member_no, int chatroom_no);
+	
 	
 	int insertChat_file(Chat_filelist chat_filelist);
 	

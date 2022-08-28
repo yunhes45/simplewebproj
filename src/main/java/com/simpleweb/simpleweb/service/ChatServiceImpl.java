@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.apache.commons.io.FilenameUtils;
@@ -108,6 +109,24 @@ public class ChatServiceImpl implements ChatService{
 		
 		return chatmapper.getChatroom_info(chatroom_no);
 	}
+	
+
+	@Override
+	public String chatroom_check(int chatroom_no) {
+		String res = null;
+		Optional<Chatroom> chatroom_check = chatmapper.chatroom_check(chatroom_no);
+		
+		try {
+			System.out.println(chatroom_check.get().getChatroom_no());
+			res = "1";
+		}catch(NoSuchElementException e) {
+			res = "0";
+		}	
+		
+		System.out.println("rrrrrrrrrrrrrrr" + res);
+		
+		return res;
+	}
 
 	@Override
 	public String getChatroom_member_include_check(int member_no, int chatroom_no) {
@@ -162,4 +181,5 @@ public class ChatServiceImpl implements ChatService{
 		
 		return fileinfo;
 	}
+
 }
