@@ -243,6 +243,7 @@ layout:decorate="layout/layout">
 													<input type="hidden" id="my_id" th:value="${session_info.get().getMember_id()}" />
 													<input type="hidden" id="my_img" th:value="${session_info.get().getMember_profileimg().getMember_profileimg_filename()}" />
 													<input type="hidden" id="chatroom_no" th:value="${chatroom_no}" />
+	
 													<a class="chat_btn" onclick="send()">전송</a>
 													</div>
 										
@@ -281,7 +282,7 @@ layout:decorate="layout/layout">
 													<div id="chatroom_list">
 														<div class="chatroom_list_de" th:each="chatroom_list : ${chatroom_list}">
 														<h4 class="chatroom_id"><a th:href="| /chat/m/${chatroom_list.getChatroom_no()} | ">[[ ${chatroom_list.getChatroom().getChatroom_name()} ]]</a></h4>
-														<p class="chatroom_alarm">[[ ${chatroom_list.getChatroom_alarm()} ]]</p>
+														<p th:id="|chatroom_alarm_${chatroom_list.getChatroom_no()}|" class="chatroom_alarm">[[ ${chatroom_list.getChatroom_alarm()} ]]</p>
 														</div>
 													</div>
 													
@@ -318,6 +319,7 @@ layout:decorate="layout/layout">
 								}
 							}
 						</script>
-						<script type="text/javascript" th:src="@{/assets/js/socket.js}"></script>
+					<!-- <script type="text/javascript" th:src="@{/assets/js/socket.js}"></script> -->
+					<script type="text/javascript" th:src="@{/assets/js/chat.js}"></script>	
 					</div>							
 </html>

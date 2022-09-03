@@ -28,5 +28,6 @@ public interface ChatService {
 	int insertChat_file(Chat_filelist chat_filelist);
 	
 	Map getChat_fileinfo(int chatfilePK);
+	void updateAlarm(String my_id, Chatroom_member chatroom_member);
 
 }

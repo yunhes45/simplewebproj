@@ -1,7 +1,9 @@
 package com.simpleweb.simpleweb.websocket;
 
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
@@ -17,6 +19,8 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 @Component
 public class SocketHandler extends TextWebSocketHandler{
 	
+	List<WebSocketSession> loginsession = new ArrayList<WebSocketSession>();
+	
 	HashMap<String, WebSocketSession> sessionMap = new HashMap<>();
 	
 	@Override
@@ -26,8 +30,6 @@ public class SocketHandler extends TextWebSocketHandler{
 		
 		String msg = message.getPayload();
 		JSONObject obj = socketInfo(msg);
-		
-		System.out.println("division : " + obj.get("division"));
 		
 			for(String key : sessionMap.keySet()) {
 				WebSocketSession wss = sessionMap.get(key);
@@ -51,7 +53,7 @@ public class SocketHandler extends TextWebSocketHandler{
 			WebSocketSession wss = sessionMap.get(key);
 			try {
 				wss.sendMessage(new BinaryMessage(byteBuffer));
-				System.out.println("fff : " + new BinaryMessage(byteBuffer));
+
 			}catch(Exception e) {
 				e.printStackTrace();
 			}

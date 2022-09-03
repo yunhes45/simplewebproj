@@ -245,4 +245,17 @@
 		where chat_filelist_no = #{chat_filelist_no}
 	</select>
 	
+	<update id="updateAlarm" parameterType="com.simpleweb.simpleweb.model.Chatroom_member">
+		update chatroom_member
+		
+		<if test="chatroom_alarm == null">
+			set chatroom_alarm = 1
+		</if>
+		<if test="chatroom_alarm != null">
+			set chatroom_alarm = chatroom_alarm + 1
+		</if>
+		
+		where chatroom_no = #{chatroom_no} and member_no = #{member_no}	
+	</update>
+	
 </mapper>

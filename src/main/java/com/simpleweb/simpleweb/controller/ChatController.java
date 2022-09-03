@@ -115,7 +115,8 @@ public class ChatController {
 			@RequestParam(value = "division", required=false) String socket_division,
 			@RequestParam(value = "nowTimesdate", required=false) String socket_nowTimesdate,
 			@RequestParam(value = "nowTimestime", required=false) String socket_nowTimestime,
-			@RequestParam(value = "nowTimes", required=false) String socket_nowTimes     ) {
+			@RequestParam(value = "nowTimes", required=false) String socket_nowTimes,
+			@RequestParam(value = "chat_alarm_cnt", required=false) String socket_chat_alarm_cnt  ) {
 		
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
@@ -160,18 +161,6 @@ public class ChatController {
 				List<Member> not_invite_member = chatservice.getInvite_member_list(Follow_my_list, chatroom_member_list);
 				model.addAttribute("not_invite_member", not_invite_member);
 				
-				for(int i = 0; i < not_invite_member.size(); i++) {
-					System.out.println("fff" + not_invite_member.get(i).getMember_id());
-				}
-				
-				for(int i = 0; i < Follow_my_list.size(); i++) {
-					System.out.println("ddd" + Follow_my_list.get(i).getMember_id());
-				}
-				
-				for(int i = 0; i < chatroom_member_list.size(); i++) {
-					System.out.println("eee" + chatroom_member_list.get(i).getMember().getMember_id());
-				}
-				
 				// get log
 				List<Chatlog> getchat_Log = chatservice.getChat_log(Integer.parseInt(chatroom_no));
 				model.addAttribute("getchat_Log", getchat_Log);
@@ -195,6 +184,19 @@ public class ChatController {
 					}catch(NullPointerException e) {
 						
 					}
+				}
+				
+				// alarm insert
+				try {
+					Chatroom_member chatroom_member = new Chatroom_member();
+					chatroom_member.setMember_no(Integer.parseInt(socket_member_no));
+					chatroom_member.setChatroom_no(Integer.parseInt(socket_chatroom_no));
+					chatroom_member.setChatroom_alarm(Integer.parseInt(socket_chat_alarm_cnt));
+					
+					chatservice.updateAlarm(session_info.get().getMember_id() ,chatroom_member);
+				
+				}catch(NumberFormatException e){
+					
 				}
 			
 			return "chat";
