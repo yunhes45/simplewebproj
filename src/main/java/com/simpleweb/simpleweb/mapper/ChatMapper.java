@@ -40,7 +40,7 @@ public interface ChatMapper {
 
 	Optional<Chat_filelist> getChat_fileinfo(@Param("chat_filelist_no") int chatfilePK);
 
-	void updateAlarm(@Param("chatroom_no") int chatroom_no, @Param("member_no") int member_no);
+	void updateAlarm(@Param("chatroom_alarm") int chatroom_alarm, @Param("chatroom_no") int chatroom_no, @Param("member_no") int member_no);
 
 
 

@@ -122,9 +122,7 @@ public class ChatServiceImpl implements ChatService{
 		}catch(NoSuchElementException e) {
 			res = "0";
 		}	
-		
-		System.out.println("rrrrrrrrrrrrrrr" + res);
-		
+	
 		return res;
 	}
 
@@ -192,11 +190,20 @@ public class ChatServiceImpl implements ChatService{
 				include_chatroom_member.add(get_chatroom_member.get(i).getMember_no());
 			}
 		}
-		
-		for(int j = 0; j < include_chatroom_member.size(); j++) {
-			chatmapper.updateAlarm(chatroom_member.getChatroom_no(), include_chatroom_member.get(j));
-		}
-		
-	}
 
+		for(int j = 0; j < include_chatroom_member.size(); j++) {
+			List<Chatroom_member> alarm_nullcheck = chatmapper.getChatroom_member_include_check(include_chatroom_member.get(j), chatroom_member.getChatroom_no());
+		
+			try {
+
+				chatmapper.updateAlarm(alarm_nullcheck.get(j).getChatroom_alarm()+1, chatroom_member.getChatroom_no(), include_chatroom_member.get(j));
+			}catch(IndexOutOfBoundsException e) {
+				chatmapper.updateAlarm(1, chatroom_member.getChatroom_no(), include_chatroom_member.get(j));
+			}
+
+			
+			
+		}
+		}
+	
 }

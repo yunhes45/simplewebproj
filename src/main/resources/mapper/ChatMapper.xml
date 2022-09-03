@@ -216,7 +216,7 @@
 	</select>
 	
 	<select id="getChatroom_member_include_check" resultType="com.simpleweb.simpleweb.model.Chatroom_member">
-		select chatroom_member_no, chatroom_no, member_no
+		select chatroom_member_no, chatroom_no, member_no, chatroom_alarm
 		
 		from chatroom_member
 		
@@ -248,12 +248,7 @@
 	<update id="updateAlarm" parameterType="com.simpleweb.simpleweb.model.Chatroom_member">
 		update chatroom_member
 		
-		<if test="chatroom_alarm == null">
-			set chatroom_alarm = 1
-		</if>
-		<if test="chatroom_alarm != null">
-			set chatroom_alarm = chatroom_alarm + 1
-		</if>
+		set chatroom_alarm = #{chatroom_alarm}
 		
 		where chatroom_no = #{chatroom_no} and member_no = #{member_no}	
 	</update>
