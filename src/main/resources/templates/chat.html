@@ -71,7 +71,7 @@ layout:decorate="layout/layout">
 												<section id="chat_content1">
 													<div id="chat_header">
 														<div th:if="${chatroom_info} != null">
-														<a th:id="${chatroom_info.get().getChatroom_no()}">[[${chatroom_info.get().getChatroom_name()}]]</a>
+														<a class="chatin" th:id="${chatroom_info.get().getChatroom_no()}">[[${chatroom_info.get().getChatroom_name()}]]</a>
 														</div>
 														
 														<div id="chatroom_menu" class="chatroom_menu">
@@ -320,6 +320,7 @@ layout:decorate="layout/layout">
 							}
 						</script>
 					<!-- <script type="text/javascript" th:src="@{/assets/js/socket.js}"></script> -->
-					<script type="text/javascript" th:src="@{/assets/js/chat.js}"></script>	
+					<script type="text/javascript" th:src="@{/assets/js/chat.js}"></script>
+					<script type="text/javascript" th:src="@{/assets/js/chatin.js}"></script>	
 					</div>							
 </html>

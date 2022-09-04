@@ -195,15 +195,22 @@ public class ChatServiceImpl implements ChatService{
 			List<Chatroom_member> alarm_nullcheck = chatmapper.getChatroom_member_include_check(include_chatroom_member.get(j), chatroom_member.getChatroom_no());
 		
 			try {
-
-				chatmapper.updateAlarm(alarm_nullcheck.get(j).getChatroom_alarm()+1, chatroom_member.getChatroom_no(), include_chatroom_member.get(j));
+				if(chatroom_member.getChatroom_alarm() == 1) {
+					chatmapper.updateAlarm(alarm_nullcheck.get(j).getChatroom_alarm()+1, chatroom_member.getChatroom_no(), include_chatroom_member.get(j));
+				}else {
+					chatmapper.updateAlarm(0, chatroom_member.getChatroom_no(), chatroom_member.getMember_no());
+				}
+				
 			}catch(IndexOutOfBoundsException e) {
-				chatmapper.updateAlarm(1, chatroom_member.getChatroom_no(), include_chatroom_member.get(j));
+				if(chatroom_member.getChatroom_alarm() == 1) {
+					chatmapper.updateAlarm(1, chatroom_member.getChatroom_no(), include_chatroom_member.get(j));
+				}else {
+					chatmapper.updateAlarm(0, chatroom_member.getChatroom_no(), chatroom_member.getMember_no());
+				}
+				
 			}
-
-			
-			
 		}
-		}
+		
+	}
 	
 }

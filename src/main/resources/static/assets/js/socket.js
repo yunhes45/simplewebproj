@@ -49,6 +49,7 @@ function wsEvt(){
 
 		if(getSocket_division == "text"){
 			if(getSocket_member_no == member_no){
+				
 			}else{		
 				var alarm_chatroom_no = 'chatroom_alarm_' + getSocket_chatroom_no;	
 				var trim_alarm_chatroom_no = alarm_chatroom_no.trim();
@@ -177,13 +178,6 @@ function wsEvt(){
 					msgTmp += "</div>"
 					
 				$("#chat_form").append(msgTmp);		
-				
-				var alarm_chatroom_no = 'chatroom_alarm_' + getSocket_chatroom_no;	
-				var trim_alarm_chatroom_no = alarm_chatroom_no.trim();
-
-				var cnt = document.getElementById(trim_alarm_chatroom_no).innerText;
-				var parsecnt = parseInt(cnt);
-				document.getElementById(trim_alarm_chatroom_no).innerText = 0;
 							
 			}
 		}

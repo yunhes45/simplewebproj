@@ -186,7 +186,7 @@ public class ChatController {
 					}
 				}
 				
-				// alarm insert
+				// chat alarm update
 				try {
 					Chatroom_member chatroom_member = new Chatroom_member();
 					chatroom_member.setMember_no(Integer.parseInt(socket_member_no));
