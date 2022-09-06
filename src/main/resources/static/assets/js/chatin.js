@@ -4,6 +4,9 @@ console.log("chatin");
 
 var ws;
 
+var member_no = document.getElementById("my_no").value;
+var chatroom_no = document.getElementById("chatroom_no").value;
+
 wsOpen();
 function wsOpen(){
 	ws = new WebSocket("ws://" + location.host + "/chatin");
@@ -12,13 +15,6 @@ function wsOpen(){
 }
 
 function wsEvt(){
-	var member_no = document.getElementById("my_no").value;
-	var chatroom_no = document.getElementById("chatroom_no").value;
-/*	
-	var chatin = $('.chatin').attr('id');
-	
-	console.log(chatin);
-*/
 
 	if(chatroom_no == ""){
 		console.log("default");
@@ -45,6 +41,33 @@ function wsEvt(){
 			}
 		});
 		
+	}
+	
+}
+
+ws.onmessage = function(data){	
+	
+	console.log("chatroom_no : ", chatroom_no);
+	
+	/* 원본 소켓 내용 */
+	var msg = data.data;
+	console.log("msg chatin : " + msg); 
+	
+	/* 원본 소켓 메시지 -> json파싱(Text) */
+	var parse_msg = JSON.parse(msg);
+	console.log("parse_msg chatin : " + parse_msg.msg);
+	
+    var getSocket_chatroom_no = parse_msg.chatroom_no;
+   	var alarm_chatroom_no = 'chatroom_alarm_' + getSocket_chatroom_no;	
+	var trim_alarm_chatroom_no = alarm_chatroom_no.trim();	
+	
+	if(parse_msg != null){
+		if(chatroom_no == getSocket_chatroom_no){
+		
+			console.log("dfsfs", trim_alarm_chatroom_no);
+			
+			document.getElementById(trim_alarm_chatroom_no).innerText = "0";	
+		}
 	}
 	
 }
