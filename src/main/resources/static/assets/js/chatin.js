@@ -66,8 +66,28 @@ ws.onmessage = function(data){
 		
 			console.log("dfsfs", trim_alarm_chatroom_no);
 			
-			document.getElementById(trim_alarm_chatroom_no).innerText = "0";	
+			document.getElementById(trim_alarm_chatroom_no).innerText = "0";
+			
+			AjaxDeleteChatAlarm();	
 		}
 	}
 	
+}
+
+function AjaxDeleteChatAlarm(){
+	$.ajax({
+		type: 'POST',
+		url: '/chat/m/' + chatroom_no,
+		data: {
+			member_no: member_no,
+			chatroom_no: chatroom_no,
+			chat_alarm_cnt: "0",
+		},
+		success: function(data){
+			
+		},
+		error: function(data){
+			
+		}
+	});	
 }
