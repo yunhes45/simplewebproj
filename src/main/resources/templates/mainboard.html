@@ -135,6 +135,18 @@ layout:decorate="layout/layout">
 																	X
 																</div>																	
 															</div>
+															<div th:id="bookmark_slideToggle" th:class="| bookmarkCount_${post_list.getPost_no()} |">
+																<!-- like_list -->
+																<div th:if="${ !Post_Bookmark_list.get(num.index).empty }">
+																<div th:each="num3 : ${#numbers.sequence(1, Bookmark_cnt.get(num.index))}">
+																	<img class="header_profileimg" th:src="| /memberimg/${Post_Bookmark_list.get(num.index).get(num3-1).getMember_profileimg().getMember_profileimg_filename()} |">
+																	[[| ${Post_Bookmark_list.get(num.index).get(num3-1).getMember().getMember_id()} |]]
+																</div>
+																</div>
+																<div th:unless="${ !Post_Bookmark_list.get(num.index).empty }">                                                               
+																	X
+																</div>																	
+															</div>
 															
 															<h5 th:id="|likeCount_${post_list.getPost_no()}|" class="like_count" onClick="like_listFunc(this.id)">좋아요 [[ ${post_list.getLike_stat().getLike_stat_count()} ]] 개</h5>
 															<h5 th:id="|bookmarkCount_${post_list.getPost_no()}|" class="bookmark_count" onClick="bookmark_listFunc(this.id)">북마크 [[ ${post_list.getBookmark().getBookmark_count()} ]] 개</h5>
@@ -244,9 +256,16 @@ layout:decorate="layout/layout">
 					$("." + id).animate({width: 'toggle'}, 400);
 				}
 			</script>	
+						<script>
+				function bookmark_listFunc(id){
+					$("." + id).animate({width: 'toggle'}, 400);
+					console.log("." + id)
+				}
+			</script>
 			<script>
 				function like_listFunc(id){
 					$("." + id).animate({width: 'toggle'}, 400);
+					console.log("."+id)
 				}
 			</script>	
 		</div>

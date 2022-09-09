@@ -32,8 +32,6 @@ function wsEvt(){
 				var alarm_chatroom_no = 'chatroom_alarm_' + chatroom_no;	
 				var trim_alarm_chatroom_no = alarm_chatroom_no.trim();
 
-				var cnt = document.getElementById(trim_alarm_chatroom_no).innerText;
-				var parsecnt = parseInt(cnt);
 				document.getElementById(trim_alarm_chatroom_no).innerText = 0;				
 			},
 			error: function(data){
@@ -63,11 +61,7 @@ ws.onmessage = function(data){
 	
 	if(parse_msg != null){
 		if(chatroom_no == getSocket_chatroom_no){
-		
-			console.log("dfsfs", trim_alarm_chatroom_no);
-			
 			document.getElementById(trim_alarm_chatroom_no).innerText = "0";
-			
 			AjaxDeleteChatAlarm();	
 		}
 	}

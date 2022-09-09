@@ -526,7 +526,35 @@
 #like_slideToggle .headerprofilemenu {
 	margin: 0px;
 	padding: 0px;		
-} 
+}
+
+#bookmark_slideToggle {
+	display: none;
+	width: 200px;
+	margin-left: 120px;
+	background-color: rgba(39, 40, 51, 0.965);
+	z-index: 3;
+	position: absolute;
+	transform: translateY(-100%);
+	border: 2px solid #e44c65;
+}
+
+#bookmark_slideToggle:hover {
+	outline: none;
+}
+
+#bookmark_slideToggle form {
+	all: unset;
+}
+
+#bookmark_slideToggle input {
+	all: unset;
+}
+
+#bookmark_slideToggle .headerprofilemenu {
+	margin: 0px;
+	padding: 0px;		
+}
 
 
 @media screen and (max-width: 1680px) {
