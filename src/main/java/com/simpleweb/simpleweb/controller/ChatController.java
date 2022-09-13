@@ -30,12 +30,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.simpleweb.simpleweb.model.Alarm;
 import com.simpleweb.simpleweb.model.Chat_filelist;
 import com.simpleweb.simpleweb.model.Chatlog;
 import com.simpleweb.simpleweb.model.Chatroom;
 import com.simpleweb.simpleweb.model.Chatroom_member;
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Post_img;
+import com.simpleweb.simpleweb.service.AlarmService;
 import com.simpleweb.simpleweb.service.BoardService;
 import com.simpleweb.simpleweb.service.ChatService;
 import com.simpleweb.simpleweb.service.CommonService;
@@ -51,6 +53,9 @@ public class ChatController {
 	
 	@Autowired
 	CommonService commonservice;
+	
+	@Autowired
+	AlarmService alarmservice;
 	
 	@RequestMapping("/chat")
 	public String chat(Model model, HttpServletRequest request, Member member_form) {
@@ -184,6 +189,23 @@ public class ChatController {
 					}catch(NullPointerException e) {
 						
 					}
+					
+					// chat header alarm insert
+					Alarm alarm = new Alarm();
+					
+					try {
+						alarm.setAlarm_member_no(Integer.parseInt(socket_member_no));
+						alarm.setAlarm_division("chat");
+						alarm.setAlarm_contents_pk(insertLog.getChatlog_no());
+						
+						alarmservice.insertAlarm_chat(alarm, Integer.parseInt(socket_chatroom_no), session_info.get().getMember_id());
+						
+						System.out.println("chat header alarm");
+
+					}catch(NumberFormatException e) {
+						
+					}
+					
 				}
 				
 				// chat alarm update

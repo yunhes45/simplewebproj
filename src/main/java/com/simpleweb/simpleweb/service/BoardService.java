@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.simpleweb.simpleweb.model.Follow;
+import com.simpleweb.simpleweb.model.Alarm;
 import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
 import com.simpleweb.simpleweb.model.Like_stat;

@@ -2,7 +2,7 @@ package com.simpleweb.simpleweb.model;
 
 public class Alarm {
 	private int alarm_no;
-	private int member_no;
+	private int alarm_member_no;
 	private String alarm_division;
 	private int alarm_contents_pk;
 	
@@ -12,11 +12,11 @@ public class Alarm {
 	public void setAlarm_no(int alarm_no) {
 		this.alarm_no = alarm_no;
 	}
-	public int getMember_no() {
-		return member_no;
+	public int getAlarm_member_no() {
+		return alarm_member_no;
 	}
-	public void setMember_no(int member_no) {
-		this.member_no = member_no;
+	public void setAlarm_member_no(int alarm_member_no) {
+		this.alarm_member_no = alarm_member_no;
 	}
 	public String getAlarm_division() {
 		return alarm_division;

@@ -117,7 +117,7 @@
 		where m.member_id = #{member_id} 
 	</select>
 	
-	<insert id="insertLog" parameterType="com.simpleweb.simpleweb.model.Chatlog">
+	<insert id="insertLog" parameterType="com.simpleweb.simpleweb.model.Chatlog" useGeneratedKeys="true" keyProperty="chatlog_no">
 		insert into chatlog(member_no, chatroom_no, chatlog_log, chatlog_division, chatlog_split_date, chatlog_split_time, chatlog_date)
 		
 		values

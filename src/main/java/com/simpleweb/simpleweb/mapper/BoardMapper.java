@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.simpleweb.simpleweb.model.Alarm;
 import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
 import com.simpleweb.simpleweb.model.Comment_like_stat;

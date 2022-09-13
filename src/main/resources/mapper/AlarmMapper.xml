@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.simpleweb.simpleweb.mapper.AlarmMapper">
+
+	<insert id="insertAlarm_chat" parameterType="com.simpleweb.simpleweb.model.Alarm">
+		insert into alarm(alarm_member_no, alarm_division, alarm_contents_pk)
+		
+		values
+			(
+			   #{member_no},
+			   #{alarm.alarm_division},
+			   #{alarm.alarm_contents_pk}
+			);			
+	</insert>
+
+	<resultMap id="JoinAlarmRM" type="com.simpleweb.simpleweb.model.Alarm">
+		<id property="alarm_no" column="post_no" />
+		<result property="alarm_member_no" column="alarm_member_no" />
+		<result property="alarm_division" column="post_title" />
+		<result property="alarm_contents_pk" column="post_subtitle" />
+		
+		<!-- 1 : 1 -->
+			<association javaType="Chatlog" property="chatlog">
+				<id property="chatlog_no" column="chatlog_no" />
+				<result property="member_no" column="member_no" />
+				<result property="chatroom_no" column="chatroom_no" />
+				<result property="chatlog_log" column="chatlog_log" />
+				<result property="chatlog_division" column="chatlog_division" />
+				<result property="chatlog_date" column="chatlog_date" />
+			</association>		
+	</resultMap>
+
+	<select id="getAlarm" resultMap="JoinAlarmRM">
+		select m.alarm_no, m.alarm_member_no, m.alarm_division, m.alarm_contents_pk,
+		       n.chatlog_no, n.member_no, n.chatroom_no, n.chatlog_log, n.chatlog_division,
+		       n.chatlog_date
+		
+		from alarm as m
+		
+		left join chatlog as n
+		on m.alarm_contents_pk = n.chatlog_no
+		
+		where m.alarm_member_no=#{member_no}
+	</select>
+	
+</mapper>

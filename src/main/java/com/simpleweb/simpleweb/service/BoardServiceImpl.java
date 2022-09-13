@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.simpleweb.simpleweb.mapper.BoardMapper;
 import com.simpleweb.simpleweb.mapper.MemberMapper;
+import com.simpleweb.simpleweb.model.Alarm;
 import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
 import com.simpleweb.simpleweb.model.Comment_like_stat;
