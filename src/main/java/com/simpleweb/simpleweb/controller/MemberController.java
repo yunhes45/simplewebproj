@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.ServletContext;
@@ -25,8 +26,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.simpleweb.simpleweb.model.Alarm;
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Member_profileimg;
+import com.simpleweb.simpleweb.service.AlarmService;
 import com.simpleweb.simpleweb.service.CommonService;
 import com.simpleweb.simpleweb.service.MemberService;
 
@@ -38,6 +41,9 @@ public class MemberController {
 	
 	@Autowired
 	private CommonService commonservice;
+	
+	@Autowired
+	private AlarmService alarmservice;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -53,6 +59,29 @@ public class MemberController {
 
 			return "index";
 		}
+	}
+	
+	@RequestMapping("/{}")
+	public String main2(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
+		
+		if(session_info != null) {
+			// header alarm
+			List<Alarm> alarm = alarmservice.getAlarm(session_info.get().getMember_no());
+			
+			for(int i = 0; i < alarm.size(); i++) {
+				System.out.println("1 : " + alarm.get(i).getAlarm_no());
+				System.out.println("2 : " + alarm.get(i).getAlarm_member_no());
+				System.out.println("3 : " + alarm.get(i).getChatlog().getMember_no());
+				System.out.println("4 : " + alarm.get(i).getChatlog().getChatlog_log());
+			}
+			
+			return "redirect:mainboard";
+		}else {
+
+			return "index";
+		}		
 	}
 
 	@RequestMapping("/signup")

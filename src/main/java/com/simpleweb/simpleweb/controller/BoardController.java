@@ -133,15 +133,15 @@ public class BoardController {
 				List<Integer> post_menu_hashtag_cnt = boardservice.getPost_menu_hashtag_cnt(post_menu_hashtag);
 				model.addAttribute("post_menu_hashtag_cnt", post_menu_hashtag_cnt);
 				
-				// header alarm
-				List<Alarm> alarm = alarmservice.getAlarm(session_info.get().getMember_no());
-				
-				for(int i = 0; i < alarm.size(); i++) {
-					System.out.println("1 : " + alarm.get(i).getAlarm_no());
-					System.out.println("2 : " + alarm.get(i).getAlarm_member_no());
-					System.out.println("3 : " + alarm.get(i).getChatlog().getMember_no());
-					System.out.println("4 : " + alarm.get(i).getChatlog().getChatlog_log());
-				}
+//				// header alarm
+//				List<Alarm> alarm = alarmservice.getAlarm(session_info.get().getMember_no());
+//				
+//				for(int i = 0; i < alarm.size(); i++) {
+//					System.out.println("1 : " + alarm.get(i).getAlarm_no());
+//					System.out.println("2 : " + alarm.get(i).getAlarm_member_no());
+//					System.out.println("3 : " + alarm.get(i).getChatlog().getMember_no());
+//					System.out.println("4 : " + alarm.get(i).getChatlog().getChatlog_log());
+//				}
 				
 			}else {
 				List<Post> post_list = boardservice.getPost_list_algo_search(startPage, onePageCnt, search);
