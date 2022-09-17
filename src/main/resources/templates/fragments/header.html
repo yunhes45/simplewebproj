@@ -26,6 +26,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						<li></li>
 					</ul>
 					<ul th:unless="${session.session_info == null}">	
+						<li>[[ ${alarm} ]]</li>
 						<li><img class="header_profileimg" th:src="| /memberimg/${session.session_info.get().getMember_profileimg().getMember_profileimg_filename()} |"></li>
 						<li><a id="myPanel" href="">[[ ${session.session_info.get().getMember_nickname()} ]] 님 반갑습니다.&nbsp;&nbsp;▼</a></li>
 						<li><a href="/mainboard">Home</a></li>

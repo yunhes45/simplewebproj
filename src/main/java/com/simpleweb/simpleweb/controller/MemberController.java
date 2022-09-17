@@ -48,18 +48,18 @@ public class MemberController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@RequestMapping("/")
-	public String main(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
-		
-		if(session_info != null) {
-			return "redirect:mainboard";
-		}else {
-
-			return "index";
-		}
-	}
+//	@RequestMapping("/")
+//	public String main(HttpServletRequest request) {
+//		HttpSession session = request.getSession();
+//		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
+//		
+//		if(session_info != null) {
+//			return "redirect:mainboard";
+//		}else {
+//
+//			return "index";
+//		}
+//	}
 	
 	@RequestMapping("/{}")
 	public String main2(HttpServletRequest request) {

@@ -9,7 +9,7 @@ var chatroom_no = document.getElementById("chatroom_no").value;
 
 wsOpen();
 function wsOpen(){
-	ws = new WebSocket("ws://" + location.host + "/chatin");
+	ws = new WebSocket("ws://" + location.host + "/{}/chatin");
 
 	wsEvt();
 }

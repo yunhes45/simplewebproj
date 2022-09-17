@@ -7,7 +7,7 @@ var ws;
 
 wsOpen();
 function wsOpen(){
-	ws = new WebSocket("ws://" + location.host + "/chating");
+	ws = new WebSocket("ws://" + location.host + "/{}/chating");
 
 	wsEvt();
 }
