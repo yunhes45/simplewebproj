@@ -9,4 +9,6 @@ public interface AlarmService {
 	void insertAlarm_chat(Alarm alarm, int chatroom_no, String my_id);
 
 	List<Alarm> getAlarm(int member_no);
+
+	int getAlarm_count(int member_no);
 }

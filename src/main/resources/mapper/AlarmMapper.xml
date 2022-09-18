@@ -14,10 +14,11 @@
 	</insert>
 
 	<resultMap id="JoinAlarmRM" type="com.simpleweb.simpleweb.model.Alarm">
-		<id property="alarm_no" column="post_no" />
+		<id property="alarm_no" column="alarm_no" />
 		<result property="alarm_member_no" column="alarm_member_no" />
 		<result property="alarm_division" column="post_title" />
 		<result property="alarm_contents_pk" column="post_subtitle" />
+		<result property="alarm_count" column="alarm_count" />
 		
 		<!-- 1 : 1 -->
 			<association javaType="Chatlog" property="chatlog">
@@ -27,20 +28,45 @@
 				<result property="chatlog_log" column="chatlog_log" />
 				<result property="chatlog_division" column="chatlog_division" />
 				<result property="chatlog_date" column="chatlog_date" />
-			</association>		
+			</association>	
+			
+		<!-- 1 : 1 -->
+			<association javaType="Member" property="member">
+				<id property="member_no" column="member_no" />
+				<result property="member_id" column="member_id" />
+				<result property="member_email" column="member_email" />
+				<result property="member_nickname" column="member_nickname" />
+				<result property="member_mobile" column="member_mobile" />
+				<result property="member_job" column="member_job" />
+				<result property="member_gender" column="member_gender" />
+				<result property="member_introduce" column="member_introduce" />
+				<result property="member_date" column="member_date" />
+			</association>	
 	</resultMap>
 
 	<select id="getAlarm" resultMap="JoinAlarmRM">
 		select m.alarm_no, m.alarm_member_no, m.alarm_division, m.alarm_contents_pk,
 		       n.chatlog_no, n.member_no, n.chatroom_no, n.chatlog_log, n.chatlog_division,
-		       n.chatlog_date
+		       n.chatlog_date,
+		       p.member_id
 		
 		from alarm as m
 		
 		left join chatlog as n
 		on m.alarm_contents_pk = n.chatlog_no
 		
+		left join member as p
+		on n.member_no = p.member_no
+		
 		where m.alarm_member_no=#{member_no}
+	</select>
+	
+	<select id="getAlarm_count" resultType="int">
+		select count(alarm_member_no) as alarm_count
+		
+		from alarm
+		
+		where alarm_member_no=#{member_no}
 	</select>
 	
 </mapper>

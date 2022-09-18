@@ -40,4 +40,11 @@ public class AlarmServiceImpl implements AlarmService{
 
 		return alarmmapper.getAlarm(member_no);
 	}
+
+	@Override
+	public int getAlarm_count(int member_no) {
+
+		return alarmmapper.getAlarm_count(member_no);
+	}
+	
 }

@@ -5,6 +5,7 @@ public class Alarm {
 	private int alarm_member_no;
 	private String alarm_division;
 	private int alarm_contents_pk;
+	private int alarm_count;
 	
 	public int getAlarm_no() {
 		return alarm_no;
@@ -29,6 +30,12 @@ public class Alarm {
 	}
 	public void setAlarm_contents_pk(int alarm_contents_pk) {
 		this.alarm_contents_pk = alarm_contents_pk;
+	}
+	public int getAlarm_count() {
+		return alarm_count;
+	}
+	public void setAlarm_count(int alarm_count) {
+		this.alarm_count = alarm_count;
 	}
 
 

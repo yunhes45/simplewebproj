@@ -26,32 +26,47 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						<li></li>
 					</ul>
 					<ul th:unless="${session.session_info == null}">	
-						<li>[[ ${alarm} ]]</li>
+						<li><a id="myPanel_alarm" href="">[[ ${alarm_count} ]]</a></li>
 						<li><img class="header_profileimg" th:src="| /memberimg/${session.session_info.get().getMember_profileimg().getMember_profileimg_filename()} |"></li>
 						<li><a id="myPanel" href="">[[ ${session.session_info.get().getMember_nickname()} ]] 님 반갑습니다.&nbsp;&nbsp;▼</a></li>
 						<li><a href="/mainboard">Home</a></li>
 						<li><a th:href="| /mypage/${session.session_info.get().getMember_id()} |">MyPage</a></li>
 						<li><a href="/chat" class="button primary">Chat</a></li>				
 					</ul>
+					
+					<div id="slideToggle_alarm" class="slideToggle_alarm">
+						<div class="alarm_list">
+							<div th:each="alarm, num : ${alarm}">
+								[[ ${alarm.getMember().getMember_id()} ]]
+							</div>
+						</div>
+					</div>
 
 					<div id="slideToggle" class="slideToggle">
-							<div  class="headerprofilemenu">
-								<input type="button" id="headerprofilemenu_elem" value="Modify" class="headerprofilemenu_elem" onClick="location.href='/modifymember'">
-							</div>
-							<div  class="headerprofilemenu">
-								<form method="post" action="/signout">
-									<input type="submit" id="headerprofilemenu_elem" value="SignOut" class="headerprofilemenu_elem">
-								</form>
-							</div>
-							<div  class="headerprofilemenu">
-								<form method="post" action="/deletemember">
-									<input type="submit" id="headerprofilemenu_elem" value="회원탈퇴" class="headerprofilemenu_elem">
-								</form>
-							</div>
+						<div  class="headerprofilemenu">
+							<input type="button" id="headerprofilemenu_elem" value="Modify" class="headerprofilemenu_elem" onClick="location.href='/modifymember'">
+						</div>
+						<div  class="headerprofilemenu">
+							<form method="post" action="/signout">
+								<input type="submit" id="headerprofilemenu_elem" value="SignOut" class="headerprofilemenu_elem">
+							</form>
+						</div>
+						<div  class="headerprofilemenu">
+							<form method="post" action="/deletemember">
+								<input type="submit" id="headerprofilemenu_elem" value="회원탈퇴" class="headerprofilemenu_elem">
+							</form>
+						</div>
 					</div>
 
 				</nav>
 
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$("#myPanel_alarm").click(function(){
+						$("#slideToggle_alarm").animate({width: 'toggle'}, 400);
+					})
+				})
+			</script>
 				
 			<script type="text/javascript">
 				$(document).ready(function(){

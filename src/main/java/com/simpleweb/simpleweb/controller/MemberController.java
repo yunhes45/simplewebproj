@@ -62,22 +62,24 @@ public class MemberController {
 //	}
 	
 	@RequestMapping("/{}")
-	public String main2(HttpServletRequest request) {
+	public String main2(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
 		if(session_info != null) {
-			// header alarm
-			List<Alarm> alarm = alarmservice.getAlarm(session_info.get().getMember_no());
+//			// header alarm
+//			List<Alarm> alarm = alarmservice.getAlarm(session_info.get().getMember_no());
+//			
+//			for(int i = 0; i < alarm.size(); i++) {
+//				System.out.println("1 : " + alarm.get(i).getAlarm_no());
+//				System.out.println("2 : " + alarm.get(i).getAlarm_member_no());
+//				System.out.println("3 : " + alarm.get(i).getChatlog().getMember_no());
+//				System.out.println("4 : " + alarm.get(i).getChatlog().getChatlog_log());
+//			}
+//			
+//			model.addAttribute("alarm", alarm);
 			
-			for(int i = 0; i < alarm.size(); i++) {
-				System.out.println("1 : " + alarm.get(i).getAlarm_no());
-				System.out.println("2 : " + alarm.get(i).getAlarm_member_no());
-				System.out.println("3 : " + alarm.get(i).getChatlog().getMember_no());
-				System.out.println("4 : " + alarm.get(i).getChatlog().getChatlog_log());
-			}
-			
-			return "redirect:mainboard";
+			return "redirect:/";
 		}else {
 
 			return "index";

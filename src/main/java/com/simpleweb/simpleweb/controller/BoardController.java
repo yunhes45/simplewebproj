@@ -68,6 +68,24 @@ public class BoardController {
 			int onePageCnt  = 5;
 			
 			if(search == null) {
+				
+				// header alarm
+				List<Alarm> alarm = alarmservice.getAlarm(session_info.get().getMember_no());
+				
+				for(int i = 0; i < alarm.size(); i++) {
+					System.out.println("1 : " + alarm.get(i).getAlarm_no());
+					System.out.println("2 : " + alarm.get(i).getAlarm_member_no());
+					System.out.println("3_id : " + alarm.get(i).getMember().getMember_id());
+					System.out.println("4 : " + alarm.get(i).getChatlog().getChatlog_log());
+				}
+				
+				int alarm_count = alarmservice.getAlarm_count(session_info.get().getMember_no());
+				
+				// int alarm_count = alarm.get(0).getAlarm_count();
+				
+				model.addAttribute("alarm", alarm);
+				model.addAttribute("alarm_count", alarm_count);
+				
 				List<Post> post_list = boardservice.getPost_list_algo(startPage, onePageCnt);
 				model.addAttribute("post_list", post_list);
 
@@ -132,16 +150,6 @@ public class BoardController {
 				// hashtag(menu) cnt
 				List<Integer> post_menu_hashtag_cnt = boardservice.getPost_menu_hashtag_cnt(post_menu_hashtag);
 				model.addAttribute("post_menu_hashtag_cnt", post_menu_hashtag_cnt);
-				
-//				// header alarm
-//				List<Alarm> alarm = alarmservice.getAlarm(session_info.get().getMember_no());
-//				
-//				for(int i = 0; i < alarm.size(); i++) {
-//					System.out.println("1 : " + alarm.get(i).getAlarm_no());
-//					System.out.println("2 : " + alarm.get(i).getAlarm_member_no());
-//					System.out.println("3 : " + alarm.get(i).getChatlog().getMember_no());
-//					System.out.println("4 : " + alarm.get(i).getChatlog().getChatlog_log());
-//				}
 				
 			}else {
 				List<Post> post_list = boardservice.getPost_list_algo_search(startPage, onePageCnt, search);

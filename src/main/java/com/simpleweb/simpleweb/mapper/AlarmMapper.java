@@ -12,5 +12,7 @@ public interface AlarmMapper {
 	void insertAlarm_chat(@Param("alarm") Alarm alarm, @Param("member_no") int member_no);
 
 	List<Alarm> getAlarm(@Param("member_no") int member_no);
+
+	int getAlarm_count(@Param("member_no") int member_no);
 	
 }
