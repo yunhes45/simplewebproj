@@ -33,14 +33,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						<li><a th:href="| /mypage/${session.session_info.get().getMember_id()} |">MyPage</a></li>
 						<li><a href="/chat" class="button primary">Chat</a></li>				
 					</ul>
-					
-					<div id="slideToggle_alarm" class="slideToggle_alarm">
-						<div class="alarm_list">
-							<div th:each="alarm, num : ${alarm}">
-								[[ ${alarm.getMember().getMember_id()} ]]
-							</div>
-						</div>
-					</div>
 
 					<div id="slideToggle" class="slideToggle">
 						<div  class="headerprofilemenu">
@@ -55,6 +47,28 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 							<form method="post" action="/deletemember">
 								<input type="submit" id="headerprofilemenu_elem" value="회원탈퇴" class="headerprofilemenu_elem">
 							</form>
+						</div>
+					</div>
+					
+					<div id="slideToggle_alarm" class="slideToggle_alarm">
+						<div th:each="alarm, num : ${alarm}">
+							<div class="alarm_list">
+								<div th:if="${alarm.alarm_division} == 'chat'">
+									<form method="post" action="move_detail">
+										<input type="text" th:value="${alarm.getChatlog().getChatroom_no}" />
+											<div th:if="${alarm.getChatlog().getChatlog_division == 'text'}" >
+										[[ ${alarm.alarm_division} ]]
+										[[ ${alarm.getMember().getMember_id()} ]]
+										[[ ${alarm.getChatlog().getChatlog_log} ]]
+											</div>
+											<div th:if="${alarm.getChatlog().getChatlog_division == 'file'}" >
+										[[ ${alarm.alarm_division} ]]
+										[[ ${alarm.getMember().getMember_id()} ]]
+										사진을 등록하였습니다.										
+											</div>
+									</form>
+								</div>
+							</div>
 						</div>
 					</div>
 

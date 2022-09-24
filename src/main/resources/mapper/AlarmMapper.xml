@@ -16,8 +16,8 @@
 	<resultMap id="JoinAlarmRM" type="com.simpleweb.simpleweb.model.Alarm">
 		<id property="alarm_no" column="alarm_no" />
 		<result property="alarm_member_no" column="alarm_member_no" />
-		<result property="alarm_division" column="post_title" />
-		<result property="alarm_contents_pk" column="post_subtitle" />
+		<result property="alarm_division" column="alarm_division" />
+		<result property="alarm_contents_pk" column="alarm_contents_pk" />
 		<result property="alarm_count" column="alarm_count" />
 		
 		<!-- 1 : 1 -->
@@ -59,6 +59,11 @@
 		on n.member_no = p.member_no
 		
 		where m.alarm_member_no=#{member_no}
+		
+		order by m.alarm_no desc
+		
+		limit 1;
+		
 	</select>
 	
 	<select id="getAlarm_count" resultType="int">

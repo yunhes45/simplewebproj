@@ -73,6 +73,7 @@ public class BoardController {
 				List<Alarm> alarm = alarmservice.getAlarm(session_info.get().getMember_no());
 				
 				for(int i = 0; i < alarm.size(); i++) {
+					System.out.println("0 : " + alarm.get(i).getAlarm_division());
 					System.out.println("1 : " + alarm.get(i).getAlarm_no());
 					System.out.println("2 : " + alarm.get(i).getAlarm_member_no());
 					System.out.println("3_id : " + alarm.get(i).getMember().getMember_id());

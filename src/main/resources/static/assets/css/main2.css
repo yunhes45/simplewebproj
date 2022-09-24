@@ -459,6 +459,40 @@
 	margin-left: 20px;
 }
 
+/* alarm_headerToggle */
+
+#slideToggle_alarm {
+	width: 180px;
+	margin-left: 600px;
+	background-color: rgba(39, 40, 51, 0.965);
+	z-index: 1;
+	position: absolute;
+	display: none;
+	transform: translateX(-100%);
+	border: 2px solid #e44c65;
+}
+
+#slideToggle_alarm:hover {
+	outline: none;
+}
+
+#slideToggle_alarm form {
+	all: unset;
+}
+
+#slideToggle_alarm input {
+	all: unset;
+}
+
+#slideToggle_alarm .alarm_list {
+	margin: 0px;
+	padding: 0px;		
+} 
+
+.alarm_list:hover {
+	background: #4e4e4f;
+}
+
 /* post_slideToggle */
 
 #post_slideToggle {

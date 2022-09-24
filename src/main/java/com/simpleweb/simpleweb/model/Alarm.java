@@ -38,7 +38,6 @@ public class Alarm {
 		this.alarm_count = alarm_count;
 	}
 
-
 	private Member member;
 	private Chatlog chatlog;
 	private Like_stat like_stat;
