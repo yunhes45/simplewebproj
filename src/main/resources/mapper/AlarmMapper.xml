@@ -45,24 +45,32 @@
 	</resultMap>
 
 	<select id="getAlarm" resultMap="JoinAlarmRM">
-		select m.alarm_no, m.alarm_member_no, m.alarm_division, m.alarm_contents_pk,
-		       n.chatlog_no, n.member_no, n.chatroom_no, n.chatlog_log, n.chatlog_division,
-		       n.chatlog_date,
-		       p.member_id
+		select *
 		
-		from alarm as m
+		from(
+			   select m.alarm_no, m.alarm_member_no, m.alarm_division, m.alarm_contents_pk,
+			          n.chatlog_no, n.member_no, n.chatroom_no, n.chatlog_log, n.chatlog_division,
+			          n.chatlog_date,
+			          p.member_id 	
+			          
+			   from alarm as m
+			   
+		       left join chatlog as n
+		       on m.alarm_contents_pk = n.chatlog_no
 		
-		left join chatlog as n
-		on m.alarm_contents_pk = n.chatlog_no
+		       left join member as p
+		       on n.member_no = p.member_no
 		
-		left join member as p
-		on n.member_no = p.member_no
+		       where m.alarm_member_no=#{member_no}
 		
-		where m.alarm_member_no=#{member_no}
+		       order by m.alarm_no desc	
+		       
+		       limit 18446744073709551615		   
 		
-		order by m.alarm_no desc
+		) as A
 		
-		limit 1;
+		group by chatroom_no;
+
 		
 	</select>
 	
