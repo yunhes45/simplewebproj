@@ -14,5 +14,9 @@ public interface AlarmMapper {
 	List<Alarm> getAlarm(@Param("member_no") int member_no);
 
 	int getAlarm_count(@Param("member_no") int member_no);
+
+	Alarm getAlarm_info(@Param("alarm_no") int alarm_no);
+
+	void deleteAlarm(@Param("alarm_no") int alarm_no);
 	
 }

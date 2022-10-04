@@ -82,4 +82,27 @@
 		where alarm_member_no=#{member_no}
 	</select>
 	
+	<select id="getAlarm_info" resultMap="JoinAlarmRM">
+	   select m.alarm_no, m.alarm_member_no, m.alarm_division, m.alarm_contents_pk,
+	          n.chatlog_no, n.member_no, n.chatroom_no, n.chatlog_log, n.chatlog_division,
+	          n.chatlog_date,
+	          p.member_id 	
+	          
+	   from alarm as m
+	   
+       left join chatlog as n
+       on m.alarm_contents_pk = n.chatlog_no
+
+       left join member as p
+       on n.member_no = p.member_no
+
+       where m.alarm_no=#{alarm_no}
+	</select>
+	
+	<delete id="deleteAlarm" parameterType="com.simpleweb.simpleweb.model.Alarm">
+			delete from alarm
+			
+			where alarm_no = #{alarm_no}
+	</delete>
+	
 </mapper>

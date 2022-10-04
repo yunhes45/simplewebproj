@@ -262,4 +262,14 @@ public class ChatController {
 		return null;
 	}
 	
+	@PostMapping("/move_detail_chat")
+	public String post_move_detail_chat(Alarm alarm_form) {
+		
+		Alarm move_chatroom_no = alarmservice.getAlarm_info(alarm_form.getAlarm_no());
+		alarmservice.deleteAlarm(alarm_form.getAlarm_no());
+		
+		
+		return "redirect:chat/m/"+move_chatroom_no.getChatlog().getChatroom_no();
+	}
+	
 }

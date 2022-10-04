@@ -11,4 +11,8 @@ public interface AlarmService {
 	List<Alarm> getAlarm(int member_no);
 
 	int getAlarm_count(int member_no);
+
+	Alarm getAlarm_info(int alarm_no);
+
+	void deleteAlarm(int alarm_no);
 }

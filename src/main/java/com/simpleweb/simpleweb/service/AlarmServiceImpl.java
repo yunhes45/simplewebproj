@@ -46,5 +46,17 @@ public class AlarmServiceImpl implements AlarmService{
 
 		return alarmmapper.getAlarm_count(member_no);
 	}
+
+	@Override
+	public Alarm getAlarm_info(int alarm_no) {
+		
+		return alarmmapper.getAlarm_info(alarm_no);
+	}
+
+	@Override
+	public void deleteAlarm(int alarm_no) {
+		
+		alarmmapper.deleteAlarm(alarm_no);
+	}
 	
 }
