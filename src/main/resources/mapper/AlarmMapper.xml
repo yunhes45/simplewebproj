@@ -18,6 +18,7 @@
 		<result property="alarm_member_no" column="alarm_member_no" />
 		<result property="alarm_division" column="alarm_division" />
 		<result property="alarm_contents_pk" column="alarm_contents_pk" />
+		<result property="alarm_group_count" column="alarm_group_count" />
 		<result property="alarm_count" column="alarm_count" />
 		
 		<!-- 1 : 1 -->
@@ -45,7 +46,7 @@
 	</resultMap>
 
 	<select id="getAlarm" resultMap="JoinAlarmRM">
-		select *
+		select *, count(*) as alarm_group_count
 		
 		from(
 			   select m.alarm_no, m.alarm_member_no, m.alarm_division, m.alarm_contents_pk,

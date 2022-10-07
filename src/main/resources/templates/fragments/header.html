@@ -26,11 +26,11 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						<li></li>
 					</ul>
 					<ul th:unless="${session.session_info == null}">	
-						<li><a id="myPanel_alarm" href="">[[ ${alarm_count} ]]</a></li>
 						<li><img class="header_profileimg" th:src="| /memberimg/${session.session_info.get().getMember_profileimg().getMember_profileimg_filename()} |"></li>
 						<li><a id="myPanel" href="">[[ ${session.session_info.get().getMember_nickname()} ]] 님 반갑습니다.&nbsp;&nbsp;▼</a></li>
 						<li><a href="/mainboard">Home</a></li>
 						<li><a th:href="| /mypage/${session.session_info.get().getMember_id()} |">MyPage</a></li>
+						<li><a id="myPanel_alarm" href="">[[ ${alarm_count} ]]</a></li>
 						<li><a href="/chat" class="button primary">Chat</a></li>				
 					</ul>
 
@@ -57,10 +57,12 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 									<form method="post" action="/move_detail_chat">
 										<input type="hidden" name="alarm_no" th:value="${alarm.getAlarm_no()}" />
 											<div th:if="${alarm.getChatlog().getChatlog_division == 'text'}" >
+										<div>[[${alarm.alarm_group_count}]]</div>
 										<div>[[ ${alarm.getMember().getMember_id()} ]]</div>
 										<div>[[ ${alarm.getChatlog().getChatlog_log} ]]</div>
 											</div>
 											<div th:if="${alarm.getChatlog().getChatlog_division == 'file'}" >
+											<div>[[${alarm.alarm_group_count}]]</div>
 										[[ ${alarm.getMember().getMember_id()} ]] 님이 사진을 전송하였습니다.
 											</div>
 									<input type="submit">
