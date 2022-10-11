@@ -54,9 +54,9 @@ public class AlarmServiceImpl implements AlarmService{
 	}
 
 	@Override
-	public void deleteAlarm(int chatroom_no) {
+	public void deleteAlarm(Alarm_chat alarm_chat) {
 		
-		alarmmapper.deleteAlarm(chatroom_no);
+		alarmmapper.deleteAlarm(alarm_chat);
 	}
 	
 }

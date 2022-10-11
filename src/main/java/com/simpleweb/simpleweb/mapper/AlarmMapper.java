@@ -17,6 +17,6 @@ public interface AlarmMapper {
 
 	Alarm_chat getAlarm_info(@Param("alarm_no") int alarm_no);
 
-	void deleteAlarm(@Param("chatroom_no") int chatroom_no);
+	void deleteAlarm(@Param("alarm_chat") Alarm_chat alarm_chat);
 	
 }

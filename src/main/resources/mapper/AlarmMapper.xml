@@ -105,7 +105,7 @@
 	<delete id="deleteAlarm" parameterType="com.simpleweb.simpleweb.model.Alarm_chat">
 			delete from alarm_chat
 			
-			where chatroom_no = #{chatroom_no}
+			where alarm_member_no = #{alarm_chat.alarm_member_no} and chatroom_no = #{alarm_chat.chatroom_no}
 	</delete>
 	
 </mapper>

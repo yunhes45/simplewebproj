@@ -14,5 +14,5 @@ public interface AlarmService {
 
 	Alarm_chat getAlarm_info(int alarm_no);
 
-	void deleteAlarm(int alarm_no);
+	void deleteAlarm(Alarm_chat alarm_chat);
 }

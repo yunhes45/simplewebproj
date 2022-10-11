@@ -221,7 +221,19 @@ public class ChatController {
 				}catch(NumberFormatException e){
 					
 				}
-			
+				
+				// alarm delete
+  				try {
+					Alarm_chat alarm_chat = new Alarm_chat();
+					alarm_chat.setAlarm_member_no(session_info.get().getMember_no());
+					alarm_chat.setChatroom_no(Integer.parseInt(socket_chatroom_no));
+					
+					alarmservice.deleteAlarm(alarm_chat);
+					
+				}catch(NumberFormatException e) {
+					
+				}
+				
 			return "chat";
 		
 		}else {
@@ -264,9 +276,15 @@ public class ChatController {
 	}
 	
 	@PostMapping("/move_detail_chat")
-	public String post_move_detail_chat(Alarm_chat alarm_form) {
+	public String post_move_detail_chat(HttpServletRequest request, Alarm_chat alarm_form) {
+		HttpSession session = request.getSession();
+		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
-		alarmservice.deleteAlarm(alarm_form.getChatroom_no());
+		Alarm_chat alarm_chat = new Alarm_chat();
+		alarm_chat.setAlarm_member_no(session_info.get().getMember_no());
+		alarm_chat.setChatroom_no(alarm_form.getChatroom_no());
+		
+		alarmservice.deleteAlarm(alarm_chat);
 		
 		
 		return "redirect:chat/m/"+alarm_form.getChatroom_no();
