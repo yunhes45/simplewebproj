@@ -56,6 +56,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 								<div th:if="${alarm.alarm_division} == 'chat'">
 									<form method="post" action="/move_detail_chat">
 										<input type="hidden" name="alarm_no" th:value="${alarm.getAlarm_no()}" />
+										<input type="hidden" name="chatroom_no" th:value="${alarm.getChatroom_no()}" />
 											<div th:if="${alarm.getChatlog().getChatlog_division == 'text'}" >
 										<div>[[${alarm.alarm_group_count}]]</div>
 										<div>[[ ${alarm.getMember().getMember_id()} ]]</div>

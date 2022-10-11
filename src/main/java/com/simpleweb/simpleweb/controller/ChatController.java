@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.simpleweb.simpleweb.model.Alarm;
+import com.simpleweb.simpleweb.model.Alarm_chat;
 import com.simpleweb.simpleweb.model.Chat_filelist;
 import com.simpleweb.simpleweb.model.Chatlog;
 import com.simpleweb.simpleweb.model.Chatroom;
@@ -191,14 +191,15 @@ public class ChatController {
 					}
 					
 					// chat header alarm insert
-					Alarm alarm = new Alarm();
+					Alarm_chat alarm = new Alarm_chat();
 					
 					try {
 						alarm.setAlarm_member_no(Integer.parseInt(socket_member_no));
 						alarm.setAlarm_division("chat");
 						alarm.setAlarm_contents_pk(insertLog.getChatlog_no());
+						alarm.setChatroom_no(Integer.parseInt(socket_chatroom_no));
 						
-						alarmservice.insertAlarm_chat(alarm, Integer.parseInt(socket_chatroom_no), session_info.get().getMember_id());
+						alarmservice.insertAlarm_chat(alarm, session_info.get().getMember_id());
 						
 						System.out.println("chat header alarm");
 
@@ -263,13 +264,12 @@ public class ChatController {
 	}
 	
 	@PostMapping("/move_detail_chat")
-	public String post_move_detail_chat(Alarm alarm_form) {
+	public String post_move_detail_chat(Alarm_chat alarm_form) {
 		
-		Alarm move_chatroom_no = alarmservice.getAlarm_info(alarm_form.getAlarm_no());
-		alarmservice.deleteAlarm(alarm_form.getAlarm_no());
+		alarmservice.deleteAlarm(alarm_form.getChatroom_no());
 		
 		
-		return "redirect:chat/m/"+move_chatroom_no.getChatlog().getChatroom_no();
+		return "redirect:chat/m/"+alarm_form.getChatroom_no();
 	}
 	
 }

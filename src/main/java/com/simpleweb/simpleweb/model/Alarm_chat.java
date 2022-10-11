@@ -1,10 +1,11 @@
 package com.simpleweb.simpleweb.model;
 
-public class Alarm {
+public class Alarm_chat {
 	private int alarm_no;
 	private int alarm_member_no;
 	private String alarm_division;
 	private int alarm_contents_pk;
+	private int chatroom_no;
 	private int alarm_group_count;
 	private int alarm_count;
 	
@@ -31,6 +32,12 @@ public class Alarm {
 	}
 	public void setAlarm_contents_pk(int alarm_contents_pk) {
 		this.alarm_contents_pk = alarm_contents_pk;
+	}
+	public int getChatroom_no() {
+		return chatroom_no;
+	}
+	public void setChatroom_no(int chatroom_no) {
+		this.chatroom_no = chatroom_no;
 	}
 	public int getAlarm_group_count() {
 		return alarm_group_count;

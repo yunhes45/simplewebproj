@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.simpleweb.simpleweb.mapper.AlarmMapper;
 import com.simpleweb.simpleweb.mapper.ChatMapper;
-import com.simpleweb.simpleweb.model.Alarm;
+import com.simpleweb.simpleweb.model.Alarm_chat;
 import com.simpleweb.simpleweb.model.Chatroom_member;
 
 @Service
@@ -19,9 +19,9 @@ public class AlarmServiceImpl implements AlarmService{
 	ChatMapper chatmapper;
 	
 	@Override
-	public void insertAlarm_chat(Alarm alarm, int chatroom_no, String my_id) {
+	public void insertAlarm_chat(Alarm_chat alarm, String my_id) {
 		List<Integer> include_chatroom_member = new ArrayList<>();
-		List<Chatroom_member> get_chatroom_member = chatmapper.getChatroom_member_list(chatroom_no);
+		List<Chatroom_member> get_chatroom_member = chatmapper.getChatroom_member_list(alarm.getChatroom_no());
 		
 		for(int i = 0; i < get_chatroom_member.size(); i++) {
 			if(!get_chatroom_member.get(i).getMember().getMember_id().contains(my_id)) {
@@ -36,7 +36,7 @@ public class AlarmServiceImpl implements AlarmService{
 	}
 
 	@Override
-	public List<Alarm> getAlarm(int member_no) {
+	public List<Alarm_chat> getAlarm(int member_no) {
 
 		return alarmmapper.getAlarm(member_no);
 	}
@@ -48,15 +48,15 @@ public class AlarmServiceImpl implements AlarmService{
 	}
 
 	@Override
-	public Alarm getAlarm_info(int alarm_no) {
+	public Alarm_chat getAlarm_info(int alarm_no) {
 		
 		return alarmmapper.getAlarm_info(alarm_no);
 	}
 
 	@Override
-	public void deleteAlarm(int alarm_no) {
+	public void deleteAlarm(int chatroom_no) {
 		
-		alarmmapper.deleteAlarm(alarm_no);
+		alarmmapper.deleteAlarm(chatroom_no);
 	}
 	
 }

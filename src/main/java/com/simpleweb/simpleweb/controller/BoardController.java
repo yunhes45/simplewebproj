@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.simpleweb.simpleweb.model.Alarm;
+import com.simpleweb.simpleweb.model.Alarm_chat;
 import com.simpleweb.simpleweb.model.Bookmark;
 import com.simpleweb.simpleweb.model.Comment;
 import com.simpleweb.simpleweb.model.Follow;
@@ -70,7 +70,7 @@ public class BoardController {
 			if(search == null) {
 				
 				// header alarm
-				List<Alarm> alarm = alarmservice.getAlarm(session_info.get().getMember_no());
+				List<Alarm_chat> alarm = alarmservice.getAlarm(session_info.get().getMember_no());
 				
 				for(int i = 0; i < alarm.size(); i++) {
 					System.out.println("0 : " + alarm.get(i).getAlarm_division());

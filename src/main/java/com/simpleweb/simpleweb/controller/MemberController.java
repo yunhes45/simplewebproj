@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.simpleweb.simpleweb.model.Alarm;
+import com.simpleweb.simpleweb.model.Alarm_chat;
 import com.simpleweb.simpleweb.model.Member;
 import com.simpleweb.simpleweb.model.Member_profileimg;
 import com.simpleweb.simpleweb.service.AlarmService;
