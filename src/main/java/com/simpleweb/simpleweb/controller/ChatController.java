@@ -228,7 +228,7 @@ public class ChatController {
 					alarm_chat.setAlarm_member_no(session_info.get().getMember_no());
 					alarm_chat.setChatroom_no(Integer.parseInt(socket_chatroom_no));
 					
-					alarmservice.deleteAlarm(alarm_chat);
+					alarmservice.deleteAlarm_chat(alarm_chat);
 					
 				}catch(NumberFormatException e) {
 					
@@ -284,7 +284,7 @@ public class ChatController {
 		alarm_chat.setAlarm_member_no(session_info.get().getMember_no());
 		alarm_chat.setChatroom_no(alarm_form.getChatroom_no());
 		
-		alarmservice.deleteAlarm(alarm_chat);
+		alarmservice.deleteAlarm_chat(alarm_chat);
 		
 		
 		return "redirect:chat/m/"+alarm_form.getChatroom_no();

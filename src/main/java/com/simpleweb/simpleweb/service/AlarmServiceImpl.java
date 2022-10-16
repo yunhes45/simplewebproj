@@ -36,27 +36,27 @@ public class AlarmServiceImpl implements AlarmService{
 	}
 
 	@Override
-	public List<Alarm_chat> getAlarm(int member_no) {
+	public List<Alarm_chat> getAlarm_chat(int member_no) {
 
-		return alarmmapper.getAlarm(member_no);
+		return alarmmapper.getAlarm_chat(member_no);
 	}
 
 	@Override
-	public int getAlarm_count(int member_no) {
+	public int getAlarm_chat_count(int member_no) {
 
-		return alarmmapper.getAlarm_count(member_no);
+		return alarmmapper.getAlarm_chat_count(member_no);
 	}
 
 	@Override
-	public Alarm_chat getAlarm_info(int alarm_no) {
+	public Alarm_chat getAlarm_chat_info(int alarm_no) {
 		
-		return alarmmapper.getAlarm_info(alarm_no);
+		return alarmmapper.getAlarm_chat_info(alarm_no);
 	}
 
 	@Override
-	public void deleteAlarm(Alarm_chat alarm_chat) {
+	public void deleteAlarm_chat(Alarm_chat alarm_chat) {
 		
-		alarmmapper.deleteAlarm(alarm_chat);
+		alarmmapper.deleteAlarm_chat(alarm_chat);
 	}
 	
 }

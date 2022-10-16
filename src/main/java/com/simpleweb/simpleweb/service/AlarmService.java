@@ -8,11 +8,11 @@ public interface AlarmService {
 	// alarm chat
 	void insertAlarm_chat(Alarm_chat alarm, String my_id);
 
-	List<Alarm_chat> getAlarm(int member_no);
+	List<Alarm_chat> getAlarm_chat(int member_no);
 
-	int getAlarm_count(int member_no);
+	int getAlarm_chat_count(int member_no);
 
-	Alarm_chat getAlarm_info(int alarm_no);
+	Alarm_chat getAlarm_chat_info(int alarm_no);
 
-	void deleteAlarm(Alarm_chat alarm_chat);
+	void deleteAlarm_chat(Alarm_chat alarm_chat);
 }

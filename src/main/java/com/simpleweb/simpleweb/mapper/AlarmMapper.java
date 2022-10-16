@@ -11,12 +11,12 @@ import com.simpleweb.simpleweb.model.Alarm_chat;
 public interface AlarmMapper {
 	void insertAlarm_chat(@Param("alarm") Alarm_chat alarm, @Param("member_no") int member_no);
 
-	List<Alarm_chat> getAlarm(@Param("member_no") int member_no);
+	List<Alarm_chat> getAlarm_chat(@Param("member_no") int member_no);
 
-	int getAlarm_count(@Param("member_no") int member_no);
+	int getAlarm_chat_count(@Param("member_no") int member_no);
 
-	Alarm_chat getAlarm_info(@Param("alarm_no") int alarm_no);
+	Alarm_chat getAlarm_chat_info(@Param("alarm_no") int alarm_no);
 
-	void deleteAlarm(@Param("alarm_chat") Alarm_chat alarm_chat);
+	void deleteAlarm_chat(@Param("alarm_chat") Alarm_chat alarm_chat);
 	
 }

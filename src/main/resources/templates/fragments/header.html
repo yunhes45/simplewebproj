@@ -25,7 +25,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						<li><a href="/signup" class="button primary">SignUp</a></li>
 						<li></li>
 					</ul>
-					<ul th:unless="${session.session_info == null}">	
+					<ul th:unless="${session.session_info == null}">
+						<li>alarm_cnt</li>	
 						<li><img class="header_profileimg" th:src="| /memberimg/${session.session_info.get().getMember_profileimg().getMember_profileimg_filename()} |"></li>
 						<li><a id="myPanel" href="">[[ ${session.session_info.get().getMember_nickname()} ]] 님 반갑습니다.&nbsp;&nbsp;▼</a></li>
 						<li><a href="/mainboard">Home</a></li>
@@ -51,10 +52,11 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 					</div>
 					
 					<div id="slideToggle_alarm" class="slideToggle_alarm">
+			
 						<div th:each="alarm, num : ${alarm}">
 							<div class="alarm_list">
 								<div th:if="${alarm.alarm_division} == 'chat'">
-									<form method="post" action="/move_detail_chat">
+									<form id="header_chat_alarm" method="post" action="/move_detail_chat">
 										<input type="hidden" name="alarm_no" th:value="${alarm.getAlarm_no()}" />
 										<input type="hidden" name="chatroom_no" th:value="${alarm.getChatroom_no()}" />
 											<div th:if="${alarm.getChatlog().getChatlog_division == 'text'}" >

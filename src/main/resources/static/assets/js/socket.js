@@ -108,7 +108,8 @@ function wsEvt(){
 					msgTmp += "</div>"
 					msgTmp += "</div>"
 					
-				$("#chat_form").append(msgTmp);				
+				$("#chat_form").append(msgTmp);		
+	
 			}	
 					
 		}else if(getSocket_division == "file"){

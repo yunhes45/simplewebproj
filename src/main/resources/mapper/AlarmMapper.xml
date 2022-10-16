@@ -47,7 +47,7 @@
 			</association>	
 	</resultMap>
 
-	<select id="getAlarm" resultMap="JoinAlarmRM">
+	<select id="getAlarm_chat" resultMap="JoinAlarmRM">
 		select *, count(*) as alarm_group_count
 		
 		from(
@@ -77,7 +77,7 @@
 		
 	</select>
 	
-	<select id="getAlarm_count" resultType="int">
+	<select id="getAlarm_chat_count" resultType="int">
 		select count(alarm_member_no) as alarm_count
 		
 		from alarm_chat
@@ -85,7 +85,7 @@
 		where alarm_member_no=#{member_no}
 	</select>
 	
-	<select id="getAlarm_info" resultMap="JoinAlarmRM">
+	<select id="getAlarm_chat_info" resultMap="JoinAlarmRM">
 	   select m.alarm_no, m.alarm_member_no, m.alarm_division, m.alarm_contents_pk,
 	          n.chatlog_no, n.member_no, n.chatroom_no, n.chatlog_log, n.chatlog_division,
 	          n.chatlog_date,
@@ -102,7 +102,7 @@
        where m.alarm_no=#{alarm_no}
 	</select>
 	
-	<delete id="deleteAlarm" parameterType="com.simpleweb.simpleweb.model.Alarm_chat">
+	<delete id="deleteAlarm_chat" parameterType="com.simpleweb.simpleweb.model.Alarm_chat">
 			delete from alarm_chat
 			
 			where alarm_member_no = #{alarm_chat.alarm_member_no} and chatroom_no = #{alarm_chat.chatroom_no}
