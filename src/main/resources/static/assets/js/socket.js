@@ -44,7 +44,7 @@ function wsEvt(){
 
 		var getSocket_nowTimesarr = getSocket_nowTimes.split(" ");
 		var getSocket_nowTimesdate = getSocket_nowTimesarr[0];
-		var getSocket_nowTimesTime = getSocket_nowTimesarr[1];;
+		var getSocket_nowTimesTime = getSocket_nowTimesarr[1];
 		
 
 		if(getSocket_division == "text"){
@@ -87,6 +87,8 @@ function wsEvt(){
 					
 				$("#chat_form").append(msgTmp);
 				
+					
+				
 			}else{				
 				var msgTmp = "<div class='chat_msg_your_form'>"
 					msgTmp += "<div class='chat_yourLog'>"
@@ -108,7 +110,8 @@ function wsEvt(){
 					msgTmp += "</div>"
 					msgTmp += "</div>"
 					
-				$("#chat_form").append(msgTmp);		
+				$("#chat_form").append(msgTmp);	
+					
 	
 			}	
 					

@@ -28,6 +28,9 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 					<ul th:unless="${session.session_info == null}">
 						<li>alarm_cnt</li>	
 						<li><img class="header_profileimg" th:src="| /memberimg/${session.session_info.get().getMember_profileimg().getMember_profileimg_filename()} |"></li>
+						
+						<input id="my_no" type="hidden" th:value="${session.session_info.get().getMember_no()}" />
+						
 						<li><a id="myPanel" href="">[[ ${session.session_info.get().getMember_nickname()} ]] 님 반갑습니다.&nbsp;&nbsp;▼</a></li>
 						<li><a href="/mainboard">Home</a></li>
 						<li><a th:href="| /mypage/${session.session_info.get().getMember_id()} |">MyPage</a></li>
@@ -54,13 +57,13 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 					<div id="slideToggle_alarm" class="slideToggle_alarm">
 			
 						<div th:each="alarm, num : ${alarm}">
-							<div class="alarm_list">
+							<div id="header_chat_alarm" class="alarm_list">
 								<div th:if="${alarm.alarm_division} == 'chat'">
-									<form id="header_chat_alarm" method="post" action="/move_detail_chat">
+									<form th:id="| chat_alarm_no_${alarm.getChatroom_no()} |" method="post" action="/move_detail_chat">
 										<input type="hidden" name="alarm_no" th:value="${alarm.getAlarm_no()}" />
 										<input type="hidden" name="chatroom_no" th:value="${alarm.getChatroom_no()}" />
 											<div th:if="${alarm.getChatlog().getChatlog_division == 'text'}" >
-										<div>[[${alarm.alarm_group_count}]]</div>
+										<div th:id="| chat_alarm_group_cnt_${alarm.getChatroom_no()} |">[[${alarm.alarm_group_count}]]</div>
 										<div>[[ ${alarm.getMember().getMember_id()} ]]</div>
 										<div>[[ ${alarm.getChatlog().getChatlog_log} ]]</div>
 											</div>
@@ -94,7 +97,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 			</script>				
 			</header>
 
-	<script type="text/javascript" th:src="@{/assets/js/socket.js}"></script>
+	<!-- <script type="text/javascript" th:src="@{/assets/js/socket.js}"></script> -->
+		 <script type="text/javascript" th:src="@{/assets/js/alarm.js}"></script>
 
 	</header>
 	
