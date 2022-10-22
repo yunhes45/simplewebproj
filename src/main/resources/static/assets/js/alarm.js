@@ -54,7 +54,8 @@ function wsEvt(){
 				
 				document.getElementById(" chat_alarm_no_" + getSocket_chatroom_no + " ").remove();
 				
-				var msg = "<form id=' chat_alarm_no_" + getSocket_chatroom_no + " '" + ">";
+				var msg = "<form id=' chat_alarm_no_" + getSocket_chatroom_no + " '" + "method='post' action='/move_detail_chat'>";
+					msg += "<input type='hidden' name='chatroom_no' value='" + getSocket_chatroom_no + "' />"
 				    if(getSocket_division == "text"){
 					    msg += "<div id=' chat_alarm_group_cnt_" + getSocket_chatroom_no + " '" + ">" + parsecnt + "</div>";
 					    msg += "<div>" + getSocket_member_id + "</div>";
@@ -72,7 +73,29 @@ function wsEvt(){
 				    $("#header_chat_alarm").append(msg);
 				
 			}else{
-				console.log("nnnnnnnnnnnnnnnnnnnnnnnn");
+				
+				console.log("no");
+				
+				var parsecnt = 1;
+				
+				var msg = "<form id=' chat_alarm_no_" + getSocket_chatroom_no + " '" + "method='post' action='/move_detail_chat'>";
+					msg += "<input type='hidden' name='chatroom_no' value='" + getSocket_chatroom_no + "' />"
+				    if(getSocket_division == "text"){
+					    msg += "<div id=' chat_alarm_group_cnt_" + getSocket_chatroom_no + " '" + ">" + parsecnt + "</div>";
+					    msg += "<div>" + getSocket_member_id + "</div>";
+					    msg += "<div>" + getSocket_msg + "</div>"
+				    }
+				    
+				    if(getSocket_division == "file"){
+				    	msg += "<div id=' chat_alarm_group_cnt_" + getSocket_chatroom_no + " '" + ">" + parsecnt + "</div>";
+				    	msg += getSocket_member_id + "님이 사진을 전송하였습니다.";
+				    }
+				    
+				    	msg += "<input type='submit'>";
+			        	msg += "</form>"
+				    
+				    $("#header_chat_alarm").append(msg);
+				    
 			}
 			
 		}

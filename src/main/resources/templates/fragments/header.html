@@ -56,8 +56,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 					
 					<div id="slideToggle_alarm" class="slideToggle_alarm">
 			
-						<div th:each="alarm, num : ${alarm}">
-							<div id="header_chat_alarm" class="alarm_list">
+						<div id="header_chat_alarm" class="alarm_list">
+							<div th:each="alarm, num : ${alarm}">
 								<div th:if="${alarm.alarm_division} == 'chat'">
 									<form th:id="| chat_alarm_no_${alarm.getChatroom_no()} |" method="post" action="/move_detail_chat">
 										<input type="hidden" name="alarm_no" th:value="${alarm.getAlarm_no()}" />
