@@ -51,20 +51,21 @@ function wsEvt(){
 				
 				var chat_alarm_groupt_cnt = document.getElementById(" chat_alarm_group_cnt_" + getSocket_chatroom_no + " ").innerText;
 				var parsecnt = parseInt(chat_alarm_groupt_cnt) + 1;
+				console.log("parsecnt : " + parsecnt)
 				
 				document.getElementById(" chat_alarm_no_" + getSocket_chatroom_no + " ").remove();
 				
 				var msg = "<form id=' chat_alarm_no_" + getSocket_chatroom_no + " '" + "method='post' action='/move_detail_chat'>";
 					msg += "<input type='hidden' name='chatroom_no' value='" + getSocket_chatroom_no + "' />"
 				    if(getSocket_division == "text"){
-					    msg += "<div id=' chat_alarm_group_cnt_" + getSocket_chatroom_no + " '" + ">" + parsecnt + "</div>";
-					    msg += "<div>" + getSocket_member_id + "</div>";
-					    msg += "<div>" + getSocket_msg + "</div>"
+					    msg += "<div class= 'header_alarm_layout1' id=' chat_alarm_group_cnt_" + getSocket_chatroom_no + " '" + ">" + parsecnt + "</div>";
+					    msg += "<div class=''>" + getSocket_member_id + "</div>";
+					    msg += "<div id='header_chat_log'>" + getSocket_msg + "</div>";
 				    }
 				    
 				    if(getSocket_division == "file"){
-				    msg += "<div id=' chat_alarm_group_cnt_" + getSocket_chatroom_no + " '" + ">" + parsecnt + "</div>";
-				    msg += getSocket_member_id + "님이 사진을 전송하였습니다.";
+				    msg += "<div class= 'header_alarm_layout1' id=' chat_alarm_group_cnt_" + getSocket_chatroom_no + " '" + ">" + parsecnt + "</div>";
+				    msg += "<div class=''> " + getSocket_member_id + "님이 사진을 전송하였습니다." + "</div>";
 				    }
 				    
 				    msg += "<input type='submit'>";
