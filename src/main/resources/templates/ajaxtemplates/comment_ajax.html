@@ -5,7 +5,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<meta charset="utf-8" />
 		<!-- Comment -->
 		<div th:id="|comment_item_${commentlogic.get().getComment_no()}|">
-			<div id="comment">
+			<div class="detail_comment" id="comment">
 			<!-- comment pk -->
 				<div class="comment_list">
 					<img class="header_profileimg" th:src="| /memberimg/${commentlogic.get().getMember_profileimg().getMember_profileimg_filename()} |">

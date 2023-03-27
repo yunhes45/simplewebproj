@@ -331,6 +331,15 @@
 	margin-top: 20px;
 }
 
+.detail_comment {
+	padding: 0px !important;
+	margin: 0px !important;
+}
+
+.detail_comment_new_input {
+	width: 60% !important;
+}
+
 #comment_new .comment_btn {
 	width: 50px;
 	margin-top: 10px;

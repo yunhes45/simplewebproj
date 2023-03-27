@@ -119,7 +119,7 @@ layout:decorate="layout/layout">
 
 												<div th:each="memberPost_Comment_list, num : ${memberPost_Comment_list}">
 													<div th:id="|comment_item_${memberPost_Comment_list.getComment_no()}|">
-														<div id="comment">
+														<div class="detail_comment" id="comment">
 															<div class="comment_list">
 																<img class="header_profileimg" th:src="| /memberimg/${memberPost_Comment_list.getMember_profileimg().getMember_profileimg_filename()} |">
 																<h5 class="comment_id">[[| ${memberPost_Comment_list.getMember().getMember_id()} |]]</h5>
@@ -146,12 +146,12 @@ layout:decorate="layout/layout">
 												</div>
 												
 												<!-- comment ajax -->
-											    <div th:id="|comment_${memberPost.get().getPost_no()}|"></div>
+											    <div class="detail_comment" th:id="|comment_${memberPost.get().getPost_no()}|"></div>
  
 												<div id="comment_new">
 													<hr class="line_unset">
-													<input type="text" th:id="|comment_text_${memberPost.get().getPost_no()}|" th:name="${memberPost.get().getPost_no()}" class="comment_new_input" placeholder="댓글달기">
-													<a  th:id="${memberPost.get().getPost_no()}"  class="" th:onClick="comment(this.id, comment_text_[[${memberPost.get().getPost_no()}]] )">등록</a>
+													<input type="text" th:id="|comment_text_${memberPost.get().getPost_no()}|" th:name="${memberPost.get().getPost_no()}" class="detail_comment_new_input" placeholder="댓글달기">
+													<a  th:id="${memberPost.get().getPost_no()}"  class="comment_btn" th:onClick="comment(this.id, comment_text_[[${memberPost.get().getPost_no()}]] )">등록</a>
 												</div> 
 
 											</section>

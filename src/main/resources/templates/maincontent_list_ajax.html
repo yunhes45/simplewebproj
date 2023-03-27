@@ -101,7 +101,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 						<div th:if="${ !Post_Comment_list.get(num.index).empty }">
 						<div th:each="comment_num : ${#numbers.sequence(1, Comment_cnt.get(num.index))}">
 							<div th:id="|comment_item_${Post_Comment_list.get(num.index).get(comment_num-1).getComment_no()}|">
-								<div id="comment">
+								<div class="" id="comment">
 									<div class="comment_list">
 										<img class="header_profileimg" th:src="| /memberimg/${Post_Comment_list.get(num.index).get(comment_num-1).getMember_profileimg().getMember_profileimg_filename()} |">
 										<h5 class="comment_id">[[| ${Post_Comment_list.get(num.index).get(comment_num-1).getMember().getMember_id()} |]]</h5>
