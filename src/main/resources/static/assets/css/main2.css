@@ -462,7 +462,7 @@
 /* alarm_headerToggle */
 
 #slideToggle_alarm {
-	width: 180px;
+	width: 300px;
 	margin-left: 600px;
 	background-color: rgba(39, 40, 51, 0.965);
 	z-index: 1;
@@ -470,6 +470,17 @@
 	display: none;
 	transform: translateX(-100%);
 	border: 2px solid #e44c65;
+}
+
+.header_alarm_layout1 {
+	float: left;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.header_alarm_layout2 {
+	float: left;
+	margin-left: 25px;
 }
 
 #slideToggle_alarm:hover {
