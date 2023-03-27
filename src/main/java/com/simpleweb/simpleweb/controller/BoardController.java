@@ -387,25 +387,16 @@ public class BoardController {
 			int file_listtotalcount = boardservice.getMyTotal_fileList(member_info.get().getMember_no());
 			int startPage   = 0;
 			int onePageCnt  = 10;
+			
+			// 페이징 이전,다음
 			int count       = (int)Math.ceil((double)file_listtotalcount/(double)onePageCnt);
 			model.addAttribute("maxcount", count);
 			model.addAttribute("mincount", count-3);
+			
 			// file list page
-			model.addAttribute("file_listtotalcount", file_listtotalcount);
-
-//			List<Integer> page_count = new ArrayList<>();
-//			
-//			for(int i=1; i<=count; i++) {
-//				page_count.add(i);
-//			}		
+			model.addAttribute("file_listtotalcount", file_listtotalcount);	
 
 			if(postpage == null && bookmarkpage == null) {		
-				// 페이징 처리
-				int endPaging = (int)(Math.ceil((Integer.parseInt(postpage))) / 3.0) * 3;
-				int startPaging = endPaging - 2;
-				
-				//model.addAttribute("page_count", page_count);
-					
 				List<Post> post_list = boardservice.getMyPost_list(member_info.get().getMember_no(), startPage, onePageCnt); 
 				model.addAttribute("post_list", post_list);
 				
@@ -421,8 +412,6 @@ public class BoardController {
 						paging.add(i);
 					}
 				}else if(Integer.parseInt(postpage) >= 4){
-//					int endPaging = (int)(Math.ceil((Integer.parseInt(postpage))) * 3.0) / 3;
-//					int startPaging = endPaging - 2;
 					int startPaging = Integer.parseInt(postpage);
 					int endPaging = startPaging + 2;
 					
@@ -433,37 +422,49 @@ public class BoardController {
 								break;
 							}
 						}
-						
-						for(int i = 0; i < paging.size(); i++) {
-							System.out.println("gggggggggggggggg : " + paging.get(i));
-						}
 				}
 				model.addAttribute("page_count", paging);
-				
-				//model.addAttribute("page_count", page_count);
-				
+
 				startPage = (Integer.parseInt(postpage) - 1)*onePageCnt;
 				List<Post> post_list = boardservice.getMyPost_list(member_info.get().getMember_no(), startPage, onePageCnt); 
 				model.addAttribute("post_list", post_list);
 
 			}else if(postpage == null && bookmarkpage != null) {
-			
+				
 			// bookmark list page
 			int bookmark_listtotalcount = boardservice.getMyTotal_bookmarkList(member_info.get().getMember_no());
 			int bookmark_startPage   = 0;
 			int bookmark_onePageCnt  = 10;
 			int bookmark_count       = (int)Math.ceil((double)bookmark_listtotalcount/(double)bookmark_onePageCnt);
 			
-			model.addAttribute("bookmark_listtotalcount", bookmark_listtotalcount);
+			// 북마크페이징 이전,다음
+			model.addAttribute("bookmark_maxcount", bookmark_count);
+			model.addAttribute("bookmark_mincount", bookmark_count-3);
+			
+			// 페이징 처리
+			List<Integer> paging = new ArrayList<>();
 
-			List<Integer> bookmark_page_count = new ArrayList<>();
-			
-			for(int i=1; i<=bookmark_count; i++) {
-				bookmark_page_count.add(i);
-			}		
-			
-			model.addAttribute("bookmark_page_count", bookmark_page_count);
-			
+			if(Integer.parseInt(bookmarkpage) <= 0) {
+					return "redirect:/mypage/" + member_id + "?bookmarkpage=1";
+				
+			}else if(Integer.parseInt(bookmarkpage) <= 3 && Integer.parseInt(bookmarkpage) >= 1) {
+				for(int i = 1; i <= 3; i++) {
+					paging.add(i);
+				}
+			}else if(Integer.parseInt(bookmarkpage) >= 4){
+				int startPaging = Integer.parseInt(bookmarkpage);
+				int endPaging = startPaging + 2;
+				
+					for(int i = startPaging; i <= endPaging; i++) {
+						if(i <= count) {
+							paging.add(i);
+						}else {
+							break;
+						}
+					}
+			}
+			model.addAttribute("bookmark_page_count", paging);
+
 			bookmark_startPage = (Integer.parseInt(bookmarkpage) - 1)*bookmark_onePageCnt;
 			List<Bookmark> bookmark_list = boardservice.getMyBookmark_list(member_info.get().getMember_no(), bookmark_startPage, bookmark_onePageCnt); 
 			model.addAttribute("bookmark_list", bookmark_list);

@@ -29,11 +29,13 @@ layout:decorate="layout/layout">
 									<div class="profile_menu">
 										<div class="top">
 											<div class="menu_elem">
-												<input type="button" id="postvisible_btn" th:onclick="'location.href=\''+ @{${member_info.get().getMember_id()}} + '?postpage=1\''" value="게시물" class="menu_elem_elem">
+											    <input type="button" id="postvisible_btn" th:onclick="'location.href=\''+ @{${member_info.get().getMember_id()}} + '?postpage=1\''" value="게시물" class="menu_elem_elem"> 
+												<!-- <input type="button" id="postvisible_btn" th:onclick="postvisible()" value="게시물" class="menu_elem_elem"> -->
 											</div>
 											
 											<div class="menu_elem">
-												<input type="button" id="bookmarkvisible_btn" th:onclick="'location.href=\''+ @{${member_info.get().getMember_id()}} + '?bookmarkpage=1\''" value="북마크" class="menu_elem_elem">
+											    <input type="button" id="bookmarkvisible_btn" th:onclick="'location.href=\''+ @{${member_info.get().getMember_id()}} + '?bookmarkpage=1\''" value="북마크" class="menu_elem_elem"> 
+												<!-- <input type="button" id="postvisible_btn" th:onclick="bookmarkvisible()" value="북마크" class="menu_elem_elem"> -->
 											</div>
 											
 											<div class="menu_elem">
@@ -59,7 +61,7 @@ layout:decorate="layout/layout">
 								</section>
 								
 							<!-- my_post -->	
-							<div id="postvisible" class="postvisible_on">							
+							<div id="postvisible" class="postvisible">							
 								<div class="col-4 col-12-medium">
 										<div style="text-align: center" class="my_post_page">
 											<a th:href="| ${member_info.get().getMember_id()}?postpage=${mincount} |">&nbsp;◀&nbsp;</a>
@@ -84,7 +86,9 @@ layout:decorate="layout/layout">
 							<div id="bookmarkvisible" class="bookmarkvisible">								
 								<div class="col-4 col-12-medium">
 										<div style="text-align: center" class="my_post_page">
+											<a th:href="| ${member_info.get().getMember_id()}?bookmarkpage=${bookmark_mincount} |">&nbsp;◀&nbsp;</a>
 											<a th:each="bookmark_page_count : ${bookmark_page_count}" th:href="| ${member_info.get().getMember_id()}?bookmarkpage=${bookmark_page_count} |">[[ ${bookmark_page_count} ]]&nbsp;&nbsp;&nbsp;</a>
+											<a th:href="| ${member_info.get().getMember_id()}?bookmarkpage=${bookmark_maxcount} |">&nbsp;▶&nbsp;</a>
 										</div>
 								</div>
 
