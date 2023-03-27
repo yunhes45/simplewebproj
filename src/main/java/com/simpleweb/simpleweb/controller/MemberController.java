@@ -192,8 +192,6 @@ public class MemberController {
 		member.setMember_introduce   (member_form.getMember_introduce());
 		member.setMember_date        (commonservice.nowTime());
 
-		System.out.println("ff : " + member.getMember_id());
-		
 		try {
 			memberservice.updateMember(member);
 		}catch(IllegalStateException e) {
@@ -246,9 +244,7 @@ public class MemberController {
 		member.setMember_email(member_form.getMember_email());
 		
 		String findid = memberservice.findid(member);
-		
-		System.out.println("api " + findid);
-		
+
 		if(findid.equals("0")) {
 			
 		}else {

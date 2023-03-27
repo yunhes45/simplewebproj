@@ -129,7 +129,7 @@ public class ChatController {
 		if(session_info != null) {
 			// 없는 chatroom_no 에 대한 redirect
 			String chatroom_no_check = chatservice.chatroom_check(Integer.parseInt(chatroom_no));
-			System.out.println("ddddddddddddddd" + chatroom_no_check);
+
 			if(chatroom_no_check.equals("0")) {
 				return "redirect:/chat";
 			}
@@ -174,7 +174,7 @@ public class ChatController {
 				Chatlog insertLog = new Chatlog();
 
 				if(socket_msg != null) {
-					System.out.println("insert");
+
 					try {
 							insertLog.setMember_no(Integer.parseInt(socket_member_no));
 							insertLog.setChatroom_no(Integer.parseInt(socket_chatroom_no));
@@ -200,8 +200,6 @@ public class ChatController {
 						alarm.setChatroom_no(Integer.parseInt(socket_chatroom_no));
 						
 						alarmservice.insertAlarm_chat(alarm, session_info.get().getMember_id());
-						
-						System.out.println("chat header alarm");
 
 					}catch(NumberFormatException e) {
 						

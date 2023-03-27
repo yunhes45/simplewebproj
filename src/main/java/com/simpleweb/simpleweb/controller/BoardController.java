@@ -88,6 +88,10 @@ public class BoardController {
 					post_list_no.add(post_list.get(i).getPost_no());
 				}
 				
+				for(int i = 0; i < post_list.size(); i++) {
+					System.out.println("fsfsdcsdfsd : " + post_list.get(i).getPost_contents());
+				}
+				
 				// like logic
 				List<List<Like_stat>> Post_Like_list = boardservice.getPost_Like_list(post_list_no);
 				model.addAttribute("Post_Like_list", Post_Like_list);
@@ -147,10 +151,6 @@ public class BoardController {
 			}else {
 				List<Post> post_list = boardservice.getPost_list_algo_search(startPage, onePageCnt, search);
 				model.addAttribute("post_list", post_list);
-				
-				for(int i = 0; i < post_list.size(); i++) {
-					System.out.println(post_list.get(i).getPost_no());
-				}
 
 				// get post_no
 				List<Integer> post_list_no = new ArrayList<Integer>();
@@ -227,9 +227,7 @@ public class BoardController {
 			@RequestParam(value="param", required=false) String search,
 			@RequestParam(value="page", required=false) String page,
 			@RequestParam(value="count", required=false) String count) {
-		
-		System.out.println("search : " + search);
-		
+
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
@@ -306,10 +304,6 @@ public class BoardController {
 		}else {
 			List<Post> post_list = boardservice.getPost_list_algo_search(startPage, onePageCnt, search);
 			model.addAttribute("post_list", post_list);
-			
-			for(int i = 0; i < post_list.size(); i++) {
-				System.out.println(post_list.get(i).getPost_no());
-			}
 
 			// get post_no
 			List<Integer> post_list_no = new ArrayList<Integer>();
@@ -402,9 +396,6 @@ public class BoardController {
 			for(int i=1; i<=count; i++) {
 				page_count.add(i);
 			}			
-			
-			System.out.println("postpage : " + postpage);
-			System.out.println("bookmarkpage : " + bookmarkpage);
 
 			if(postpage == null && bookmarkpage == null) {			
 				model.addAttribute("page_count", page_count);
@@ -627,10 +618,6 @@ public class BoardController {
 		
 		post_img = commonservice.post_imglogic(postPK, post_img_form.getPostimg());
 		boardservice.updatePostImg(post_img);
-
-		System.out.println(postPK);
-		System.out.println(post_form.getPost_no());
-		System.out.println(post_img_form.getPostimg());
 		
 		return "redirect:mainboard";
 	}
@@ -683,17 +670,9 @@ public class BoardController {
 			List<Comment> memberPost_Comment_list = boardservice.getMemberPost_Comment_list(Integer.parseInt(post_no));
 			model.addAttribute("memberPost_Comment_list", memberPost_Comment_list);
 			
-			for(int i = 0; i < memberPost_Comment_list.size(); i++) {
-				System.out.println("membercmt : " + memberPost_Comment_list.get(i).getPost_no());
-			}
-			
 			// comment like check logic
 			List<String> memberComment_Like_check = boardservice.getMemberComment_Like_check(Integer.parseInt(post_no), session_info.get().getMember_no());
 			model.addAttribute("memberComment_Like_check", memberComment_Like_check);
-			
-			for(int i = 0; i < memberComment_Like_check.size(); i++) {
-				System.out.println("cntcnt : " + memberComment_Like_check.get(i));
-			}
 			
 //			// follow check logic
 //			List<String> memberfollow_check = boardservice.getMemberFollow_check(session_info.get().getMember_no());

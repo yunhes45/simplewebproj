@@ -59,25 +59,25 @@ public class CommonServiceImpl implements CommonService{
 		 Date date = new Date();
 		 String str = sdf.format(date);
 		 
-		 // return str.replace("-", File.separator) + "\\";
-		 return str.replace("-", File.separator) + "/";
+		  return str.replace("-", File.separator) + "\\";
+		 // return str.replace("-", File.separator) + "/";
 	}
 	
 	private String member_file_path() {
-		 // String fileurl    = "memberimg\\";
-		 String fileurl    = "memberimg/";
+		  String fileurl    = "memberimg\\";
+		 // String fileurl    = "memberimg/";
 		 
 		 return fileurl;
 	}
 	private String post_file_path() {
-		// String fileurl    = "postimg\\";
-		 String fileurl    = "postimg/";	
+		 String fileurl    = "postimg\\";
+		// String fileurl    = "postimg/";	
 		
 		return fileurl;
 	}
 	private String chat_file_path() {
-		// String fileurl    = "chatfile\\";
-		 String fileurl    = "chatfile/";
+		 String fileurl    = "chatfile\\";
+		// String fileurl    = "chatfile/";
 		
 		return fileurl;
 	}

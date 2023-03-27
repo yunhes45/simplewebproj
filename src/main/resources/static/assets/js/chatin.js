@@ -62,6 +62,7 @@ ws.onmessage = function(data){
 	if(parse_msg != null){
 		if(chatroom_no == getSocket_chatroom_no){
 			document.getElementById(trim_alarm_chatroom_no).innerText = "0";
+			console.log("delete");
 			AjaxDeleteChatAlarm();	
 		}
 	}

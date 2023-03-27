@@ -1,4 +1,4 @@
-window.addEventListener("DOMContentLoaded", function(){
+/*window.addEventListener("DOMContentLoaded", function(){
 	
 	var post_content_text = document.getElementById('post_content_text').innerText;
 	
@@ -21,4 +21,4 @@ window.addEventListener("DOMContentLoaded", function(){
 	
 	document.getElementById('post_content_text').innerHTML = regex_text;
 
-});
+});*/
