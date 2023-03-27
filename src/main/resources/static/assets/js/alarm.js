@@ -72,6 +72,16 @@ function wsEvt(){
 			        msg += "</form>"
 				    
 				    $("#header_chat_alarm").append(msg);
+				    		    
+				    var group_alarm_cnt1 = document.getElementsByClassName('header_alarm_layout1');			    
+				    var cnt = 0;
+				    
+				    for(var i = 0; i < group_alarm_cnt1.length; i++){
+						cnt += parseInt(group_alarm_cnt1[i].innerHTML)
+						console.log(cnt);
+					}
+					console.log("dd : " + cnt);
+					var fullcnt = document.getElementById('myPanel_alarm').innerText = cnt;
 				
 			}else{
 				
@@ -98,7 +108,7 @@ function wsEvt(){
 				    $("#header_chat_alarm").append(msg);
 				    
 			}
-			
+
 		}
 		
 	}
