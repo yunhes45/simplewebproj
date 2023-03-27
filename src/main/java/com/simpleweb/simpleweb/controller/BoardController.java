@@ -388,23 +388,59 @@ public class BoardController {
 			int startPage   = 0;
 			int onePageCnt  = 10;
 			int count       = (int)Math.ceil((double)file_listtotalcount/(double)onePageCnt);
+			model.addAttribute("maxcount", count);
+			model.addAttribute("mincount", count-3);
 			// file list page
 			model.addAttribute("file_listtotalcount", file_listtotalcount);
 
-			List<Integer> page_count = new ArrayList<>();
-			
-			for(int i=1; i<=count; i++) {
-				page_count.add(i);
-			}			
+//			List<Integer> page_count = new ArrayList<>();
+//			
+//			for(int i=1; i<=count; i++) {
+//				page_count.add(i);
+//			}		
 
-			if(postpage == null && bookmarkpage == null) {			
-				model.addAttribute("page_count", page_count);
+			if(postpage == null && bookmarkpage == null) {		
+				// 其捞隆 贸府
+				int endPaging = (int)(Math.ceil((Integer.parseInt(postpage))) / 3.0) * 3;
+				int startPaging = endPaging - 2;
+				
+				//model.addAttribute("page_count", page_count);
 					
 				List<Post> post_list = boardservice.getMyPost_list(member_info.get().getMember_no(), startPage, onePageCnt); 
 				model.addAttribute("post_list", post_list);
 				
 			}else if(postpage != null && bookmarkpage == null){
-				model.addAttribute("page_count", page_count);
+				// 其捞隆 贸府
+				List<Integer> paging = new ArrayList<>();
+
+				if(Integer.parseInt(postpage) <= 0) {
+						return "redirect:/mypage/" + member_id + "?postpage=1";
+					
+				}else if(Integer.parseInt(postpage) <= 3 && Integer.parseInt(postpage) >= 1) {
+					for(int i = 1; i <= 3; i++) {
+						paging.add(i);
+					}
+				}else if(Integer.parseInt(postpage) >= 4){
+//					int endPaging = (int)(Math.ceil((Integer.parseInt(postpage))) * 3.0) / 3;
+//					int startPaging = endPaging - 2;
+					int startPaging = Integer.parseInt(postpage);
+					int endPaging = startPaging + 2;
+					
+						for(int i = startPaging; i <= endPaging; i++) {
+							if(i <= count) {
+								paging.add(i);
+							}else {
+								break;
+							}
+						}
+						
+						for(int i = 0; i < paging.size(); i++) {
+							System.out.println("gggggggggggggggg : " + paging.get(i));
+						}
+				}
+				model.addAttribute("page_count", paging);
+				
+				//model.addAttribute("page_count", page_count);
 				
 				startPage = (Integer.parseInt(postpage) - 1)*onePageCnt;
 				List<Post> post_list = boardservice.getMyPost_list(member_info.get().getMember_no(), startPage, onePageCnt); 

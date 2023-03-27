@@ -62,7 +62,9 @@ layout:decorate="layout/layout">
 							<div id="postvisible" class="postvisible_on">							
 								<div class="col-4 col-12-medium">
 										<div style="text-align: center" class="my_post_page">
-											<a th:each="page_count : ${page_count}" th:href="| ${member_info.get().getMember_id()}?postpage=${page_count} |">[[ ${page_count} ]]&nbsp;&nbsp;&nbsp;</a>
+											<a th:href="| ${member_info.get().getMember_id()}?postpage=${mincount} |">&nbsp;◀&nbsp;</a>
+											<a th:each="page_count : ${page_count}" th:href="| ${member_info.get().getMember_id()}?postpage=${page_count} |">&nbsp;[[ ${page_count} ]]&nbsp;</a>
+											<a th:href="| ${member_info.get().getMember_id()}?postpage=${maxcount} |">&nbsp;▶&nbsp;</a>
 										</div>
 								</div>
 
