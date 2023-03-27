@@ -78,11 +78,15 @@ function wsEvt(){
 				    
 				    for(var i = 0; i < group_alarm_cnt1.length; i++){
 						cnt += parseInt(group_alarm_cnt1[i].innerHTML)
-						console.log(cnt);
 					}
-					console.log("dd : " + cnt);
 					var fullcnt = document.getElementById('myPanel_alarm').innerText = cnt;
-				
+					
+					var header_chat_log = document.getElementById('header_chat_log').innerText;
+					console.log(header_chat_log.length);
+					if(header_chat_log.length >= 11) {
+						document.getElementById('header_chat_log').innerText = header_chat_log.substr(0,11) + " ...";
+					}
+					
 			}else{
 				
 				console.log("no");
@@ -106,6 +110,14 @@ function wsEvt(){
 			        	msg += "</form>"
 				    
 				    $("#header_chat_alarm").append(msg);
+				    
+				    var fullcnt = document.getElementById('myPanel_alarm').innerText = parsecnt;
+				    
+					var header_chat_log = document.getElementById('header_chat_log').innerText;
+					console.log(header_chat_log.length);
+					if(header_chat_log.length >= 11) {
+						document.getElementById('header_chat_log').innerText = header_chat_log.substr(0,11) + " ...";
+					}
 				    
 			}
 
