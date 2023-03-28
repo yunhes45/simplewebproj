@@ -6,6 +6,7 @@ import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+// ¾ÏÈ£È­
 @Configuration
 public class JasyptConfig {
 	
