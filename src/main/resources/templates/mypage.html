@@ -87,7 +87,7 @@ layout:decorate="layout/layout">
 								<div class="col-4 col-12-medium">
 										<div style="text-align: center" class="my_post_page">
 											<a th:href="| ${member_info.get().getMember_id()}?bookmarkpage=${bookmark_mincount} |">&nbsp;◀&nbsp;</a>
-											<a th:each="bookmark_page_count : ${bookmark_page_count}" th:href="| ${member_info.get().getMember_id()}?bookmarkpage=${bookmark_page_count} |">[[ ${bookmark_page_count} ]]&nbsp;&nbsp;&nbsp;</a>
+											<a th:each="bookmark_page_count : ${bookmark_page_count}" th:href="| ${member_info.get().getMember_id()}?bookmarkpage=${bookmark_page_count} |">&nbsp;[[ ${bookmark_page_count} ]]&nbsp;</a>
 											<a th:href="| ${member_info.get().getMember_id()}?bookmarkpage=${bookmark_maxcount} |">&nbsp;▶&nbsp;</a>
 										</div>
 								</div>

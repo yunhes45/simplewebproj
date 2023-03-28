@@ -409,7 +409,11 @@ public class BoardController {
 					
 				}else if(Integer.parseInt(postpage) <= 3 && Integer.parseInt(postpage) >= 1) {
 					for(int i = 1; i <= 3; i++) {
-						paging.add(i);
+						if(i <= count) {
+							paging.add(i);
+						}else {
+							break;
+						}
 					}
 				}else if(Integer.parseInt(postpage) >= 4){
 					int startPaging = Integer.parseInt(postpage);
@@ -449,14 +453,18 @@ public class BoardController {
 				
 			}else if(Integer.parseInt(bookmarkpage) <= 3 && Integer.parseInt(bookmarkpage) >= 1) {
 				for(int i = 1; i <= 3; i++) {
-					paging.add(i);
+					if(i <= bookmark_count) {
+						paging.add(i);
+					}else {
+						break;
+					}
 				}
 			}else if(Integer.parseInt(bookmarkpage) >= 4){
 				int startPaging = Integer.parseInt(bookmarkpage);
 				int endPaging = startPaging + 2;
 				
 					for(int i = startPaging; i <= endPaging; i++) {
-						if(i <= count) {
+						if(i <= bookmark_count) {
 							paging.add(i);
 						}else {
 							break;
