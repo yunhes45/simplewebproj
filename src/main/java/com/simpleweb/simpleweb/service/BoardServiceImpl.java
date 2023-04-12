@@ -230,7 +230,6 @@ public class BoardServiceImpl implements BoardService{
 		for(int i = 0; i < comment_cnt.size(); i++) {
 			for(int j = 0; j < post_Comment_list.get(i).size(); j++) {
 				
-				System.out.println("ddddddd : " + post_Comment_list.get(i).get(j).getComment_no());
 				post_Comment_list_no.add(post_Comment_list.get(i).get(j).getComment_no());
 			}
 		}
@@ -425,7 +424,6 @@ public class BoardServiceImpl implements BoardService{
 		List<Member> follow_me_list = new ArrayList<Member>();
 	
 		for(int i = 0; i < follow_me_list_no.size(); i++) {
-			System.out.println(follow_me_list_no.get(i).getMember_no());
 			Optional<Member> follow_me_list_info = membermapper.getMyInfo(follow_me_list_no.get(i).getMember_no());
 			
 			follow_me_list.add(follow_me_list_info.get());

@@ -8,8 +8,6 @@ window.addEventListener('scroll', function(){
 
 function like(id){
 	var post_no = id.split('_');
-	console.log(post_no[0]);
-	console.log("1 : " + post_no[1]);
 	
 		$.ajax({
 			type: "POST",
@@ -166,7 +164,6 @@ function follow(id){
 				var trim_Followstat_id  = Followstat_id.trim(); 
 
 				if(response.followcheck == 0){
-			//		document.getElementById(trim_Followstat_id).innerHTML = `<a>팔로우 취소</a>`;
 					var followcancel = document.querySelectorAll("#" + trim_Followstat_id);
 
 					for(var i = 0; i < followcancel.length; i++){

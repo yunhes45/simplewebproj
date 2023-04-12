@@ -87,11 +87,7 @@ public class BoardController {
 				for(int i = 0; i < post_list.size(); i++) {
 					post_list_no.add(post_list.get(i).getPost_no());
 				}
-				
-				for(int i = 0; i < post_list.size(); i++) {
-					System.out.println("fsfsdcsdfsd : " + post_list.get(i).getPost_contents());
-				}
-				
+
 				// like logic
 				List<List<Like_stat>> Post_Like_list = boardservice.getPost_Like_list(post_list_no);
 				model.addAttribute("Post_Like_list", Post_Like_list);
@@ -223,15 +219,18 @@ public class BoardController {
 		return "mainboard";
 	}
 	@PostMapping("/mainboard")
-	public String post_mainboard(Model model, HttpServletRequest request,
+	public String infinite_scroll_post_mainboard(Model model, HttpServletRequest request,
 			@RequestParam(value="param", required=false) String search,
 			@RequestParam(value="page", required=false) String page,
 			@RequestParam(value="count", required=false) String count) {
-
+		
 		HttpSession session = request.getSession();
 		Optional<Member> session_info = (Optional<Member>) session.getAttribute("session_info");
 		
-		int startPage   = 5;
+		System.out.println("page : " + page);
+		System.out.println("couont : " + count);
+		
+		int startPage   = (5 * Integer.parseInt(count)) - (Integer.parseInt(count)*2) + 2 ;
 		int onePageCnt  = Integer.parseInt(page);
 
 		if(search == null) {
@@ -300,6 +299,7 @@ public class BoardController {
 			// hashtag(menu) cnt
 			List<Integer> post_menu_hashtag_cnt = boardservice.getPost_menu_hashtag_cnt(post_menu_hashtag);
 			model.addAttribute("post_menu_hashtag_cnt", post_menu_hashtag_cnt);
+			
 			
 		}else {
 			List<Post> post_list = boardservice.getPost_list_algo_search(startPage, onePageCnt, search);
