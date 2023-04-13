@@ -471,6 +471,11 @@
 
 /* alarm_headerToggle */
 
+#alarmbtn {
+	margin-left: 70%;
+	
+}
+
 #slideToggle_alarm {
 	width: 300px;
 	margin-left: 600px;
@@ -491,6 +496,7 @@
 .header_alarm_layout2 {
 	float: left;
 	margin-left: 25px;
+	width: 100%;
 }
 
 #slideToggle_alarm:hover {

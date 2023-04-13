@@ -68,8 +68,10 @@ function wsEvt(){
 				    msg += "<div class=''> " + getSocket_member_id + "님이 사진을 전송하였습니다." + "</div>";
 				    }
 				    
-				    msg += "<input type='submit'>";
-			        msg += "</form>"
+				    msg += "<div id='alarmbtn'>"
+			    	msg += "<input type='submit' value='확인'>";
+		        	msg += "</div>"
+		        	msg += "</form>"
 				    
 				    $("#header_chat_alarm").append(msg);
 				    		    
@@ -105,9 +107,11 @@ function wsEvt(){
 				    	msg += "<div class= 'header_alarm_layout1' id=' chat_alarm_group_cnt_" + getSocket_chatroom_no + " '" + ">" + parsecnt + "</div>";
 				    	msg += "<div class=''> " + getSocket_member_id + "님이 사진을 전송하였습니다." + "</div>";
 				    }
-				    
-				    	msg += "<input type='submit'>";
-			        	msg += "</form>"
+				    	
+			    	msg += "<div id='alarmbtn'>"
+			    	msg += "<input type='submit' value='확인'>";
+		        	msg += "</div>"
+		        	msg += "</form>"
 				    
 				    $("#header_chat_alarm").append(msg);
 				    

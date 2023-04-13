@@ -115,9 +115,6 @@ function delcomment(id){
 
 function likecomment(id, id1){
 	var comment_no = id.split('_');
-	console.log(comment_no[0]);
-	console.log("1 : " + comment_no[1]);
-	console.log("2 : " + id1);
 	
 	$.ajax({
 		type: "POST",
@@ -131,16 +128,12 @@ function likecomment(id, id1){
 			console.log(id);
 			var commentlikeCount_id       = 'commentLike_'+comment_no[1];
 			var trim_commentlikeCount_id  = commentlikeCount_id.trim(); 
-			
-			console.log("rrr : " + response.likecommentlogic);
-			
+
 			if(response.comment_likestat == 0){
 				document.getElementById(id).className = 'icon_comment_heart_on';
-//				document.getElementById(trim_commentlikeCount_id).innerText = "좋아요 " + response.likecount + " 개";
 
 			}else{
 				document.getElementById(id).className = 'icon_comment_heart';
-//				document.getElementById(trim_commentlikeCount_id).innerText = "좋아요 " + response.likecount + " 개";
 			}			
 		},
 		error: function(data){

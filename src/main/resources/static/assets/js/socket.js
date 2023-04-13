@@ -47,7 +47,6 @@ function wsEvt(){
 		var getSocket_nowTimesTime = getSocket_nowTimesarr[1];
 		
 
-		if(getSocket_division == "text"){
 			if(getSocket_member_no == member_no){
 				
 			}else{		
@@ -58,7 +57,6 @@ function wsEvt(){
 				var parsecnt = parseInt(cnt);
 				document.getElementById(trim_alarm_chatroom_no).innerText = parsecnt + 1;					
 				}
-			}
 
 		
 		if(getSocket_chatroom_no == chatroom_no){

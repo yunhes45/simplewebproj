@@ -69,9 +69,11 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 									</div>
 									<div th:if="${alarm.getChatlog().getChatlog_division == 'file'}" >
 										<div class="header_alarm_layout1">[[${alarm.alarm_group_count}]]</div>
-										<div class="">[[ ${alarm.getMember().getMember_id()} ]] 님이 사진을 전송하였습니다.</div>
+										<div class="">[[ ${alarm.getMember().getMember_id()} ]] 님이</div> <div class="header_alarm_layout1">사진을 전송하였습니다.</div>
 									</div>
-									<input type="submit" value="제출">
+									<div id="alarmbtn">
+									<input type="submit" value="확인">
+									</div>
 									</form>
 								</div>
 							</div>

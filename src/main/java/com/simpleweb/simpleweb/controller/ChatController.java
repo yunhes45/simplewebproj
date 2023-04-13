@@ -221,16 +221,16 @@ public class ChatController {
 				}
 				
 				// alarm delete
-  				try {
-					Alarm_chat alarm_chat = new Alarm_chat();
-					alarm_chat.setAlarm_member_no(session_info.get().getMember_no());
-					alarm_chat.setChatroom_no(Integer.parseInt(socket_chatroom_no));
-					
-					alarmservice.deleteAlarm_chat(alarm_chat);
-					
-				}catch(NumberFormatException e) {
-					
-				}
+//  				try {
+//					Alarm_chat alarm_chat = new Alarm_chat();
+//					alarm_chat.setAlarm_member_no(session_info.get().getMember_no());
+//					alarm_chat.setChatroom_no(Integer.parseInt(socket_chatroom_no));
+//					
+//					alarmservice.deleteAlarm_chat(alarm_chat);
+//					
+//				}catch(NumberFormatException e) {
+//					
+//				}
 				
 			return "chat";
 		
